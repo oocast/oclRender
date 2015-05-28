@@ -2,8 +2,8 @@
 #include "ellipse.h"
 
 Ellipse::
-Ellipse(double a, double b, double c,
-			double d, double e, double f,
+Ellipse(double a = 1.0, double b = 1.0, double c = 0.0,
+			double d = 0.0, double e = 0.0, double f = -1.0,
 			const Color *color = null_ptr):
 Shape(color), a(a), b(a), c(c),
 d(d), e(e), f(f)
@@ -23,7 +23,7 @@ d(d), e(e), f(f)
 		Vector(x[0], -(e + c*x[0])/(2*b)),
 		Vector(x[1], -(e + c*x[1])/(2*b))
 	};
-	bound = AABox.from_vectors(boundVectors, 4);
+	bound = AABox::from_vectors(boundVectors, 4);
 	if (!contains(center)) {
 		throw std::logic_error("Internal error, center not inside ellipse");
 	}
@@ -48,8 +48,8 @@ transform(const Transform &transform)
 	Transform i = transform.inverse();
 	double aa, bb, cc, dd, ee, ff;
 	double m00, m01, m02, m10, m11, m12;
-	m00 = m[0][0]; m01 = m[0][1]; m02 = m[0][2];
-	m10 = m[1][0]; m11 = m[1][1]; m12 = m[1][2];
+	m00 = i.m[0][0]; m01 = i.m[0][1]; m02 = i.m[0][2];
+	m10 = i.m[1][0]; m11 = i.m[1][1]; m12 = i.m[1][2];
 	aa = a*m00*m00 + b*m10*m10 + c*m00*m10;
 	bb = a*m01*m01 + b*m11*m11 + c*m01*m11;
 	cc = 2*a*m00*m01 + 2*b*m10*m11 + c*(m00*m11 + m01*m10);
@@ -71,11 +71,11 @@ intersections(const Vector &c, const Vector &p, Vector *inter_ps)
     // this simply solves the quadratic equation f(x(u), y(u)) = 0
 	Vector pc = p - c;
 	double u2, u1, u0;
-	u2 = a*pc.x*pc.x + b*pc.y*pc.y + c*pc.x*pc.y;
+	u2 = a*pc.x*pc.x + b*pc.y*pc.y + this->c*pc.x*pc.y;
 	u1 = 2* a*c.x*pc.x + 2* b*c.y*pc.y 
-        + c*c.y*pc.x + c*c.x*pc.y + d*pc.x 
+        + this->c*c.y*pc.x + this->c*c.x*pc.y + d*pc.x 
         + e*pc.y;
-    u0 =  a*c.x*c.x + b*c.y*c.y + c*c.x*c.y 
+  u0 =  a*c.x*c.x + b*c.y*c.y + this->c*c.x*c.y 
         + d*c.x + e*c.y + f;
 	/*
 	// try catch block for imaginary solutions
@@ -124,7 +124,7 @@ signed_distance_bound(const Vector &p)
 			surface_index = 1;
 		}
 		// n is normal at surface_pt
-		n = gradient * crossings[surface_index];
+		Vector n = gradient * crossings[surface_index];
 		n = n * (1.0 / n.length());
 		// returns the length of the projection of p - surface_pt
 		// along the normal
@@ -135,7 +135,7 @@ signed_distance_bound(const Vector &p)
 Ellipse 
 Circle(const Vector &center, double radius, const Color *color = null_ptr)
 {
-	return Ellipse(color).transform(
+	return Ellipse(1.0, 1.0, 0.0, 0.0, 0.0, -1.0, color).transform(
 		scale(radius, radius)).transform(
 		translate(center.x, center.y));
 }

@@ -26,38 +26,38 @@ Vector(double x_in, double y_in):
 x(x_in), y(y_in)
 {}
 
-const Vector Vector::
-operator+(const Vector &o)
+Vector Vector::
+operator+(const Vector &o) const
 {
 	return Vector(x + o.x, y + o.y);
 }
 
-const Vector Vector::
-operator-(const Vector &o)
+Vector Vector::
+operator-(const Vector &o) const
 {
 	return Vector(x - o.x, y - o.y);
 }
 
-const Vector Vector::
-operator*(double k)
+Vector Vector::
+operator*(double k) const
 {
 	return Vector(x * k, y * k);
 }
 
 double Vector::
-dot(const Vector &o)
+dot(const Vector &o) const
 {
 	return x * o.x + y * o.y;
 }
 
 Vector Vector::
-min(const Vector &o)
+min(const Vector &o) const
 {
 	return Vector(fmin(x, o.x), fmin(y, o.y));
 }
 
 Vector Vector::
-max(const Vector &o)
+max(const Vector &o) const
 {
 	return Vector(fmax(x, o.x), fmax(y, o.y));
 }
@@ -74,19 +74,19 @@ low(p1.min(p2)), high(p2.max(p2))
 {}
 
 Vector AABox::
-midpoint()
+midpoint() const
 {
 	return (low + high) * 0.5;
 }
 
 Vector AABox::
-size()
+size() const
 {
 	return high - low;
 }
 
 bool AABox::
-contains(const Vector &p)
+contains(const Vector &p) const
 {
 	return (low.x <= p.x) &&
 			(p.x <= high.x) &&
@@ -95,7 +95,7 @@ contains(const Vector &p)
 }
 
 bool AABox::
-overlaps(const AABox &r)
+overlaps(const AABox &r) const
 {
 	return !((r.low.x >= high.x) ||
 			(r.high.x <= low.x) ||
@@ -104,12 +104,12 @@ overlaps(const AABox &r)
 }
 
 AABox AABox::
-intersection(const AABox &other)
+intersection(const AABox &other) const
 {
 	return AABox(low.max(other.low), high.min(other.high));
 }
 
-static AABox AABox::
+AABox AABox::
 from_vectors(const Vector *vcts, const int vnum)
 {
 	Vector tmp_low = vcts[0], tmp_high = vcts[0];
@@ -130,22 +130,22 @@ v(Vector(-p2.y + p1.y, p2.x - p1.x))
 }
 
 double HalfPlane::
-signed_distance(const Vector p)
+signed_distance(const Vector p) const
 {
 	return v.dot(p) + c;
 }
 
 Transform::
 Transform(double m11, double m12, double tx, 
- 			double m21, double m22, double ty)
+ 			double m21, double m22, double ty) :
+			m{ { m11, m12, tx },
+			{ m21, m22, ty },
+			{ 0.0, 0.0, 1.0 } }
 {
-	m = {{m11, m12, tx},
-		{m21, m22, ty},
-		{0.0, 0.0, 1.0}};
 }
 
 const Transform Transform::
-operator*(const Transform &other)
+operator*(const Transform &other) const
 {
 	double t[2][3] = {{0.0, 0.0, 0.0},
 					{0.0, 0.0, 0.0}};	
@@ -161,7 +161,7 @@ operator*(const Transform &other)
 }
 
 const Vector Transform::
-operator*(const Vector &other)
+operator*(const Vector &other) const
 {
 	double nx = m[0][0] * other.x + m[0][1] * other.y + m[0][2];
 	double ny = m[1][0] * other.x + m[1][1] * other.y + m[1][2];
@@ -169,13 +169,13 @@ operator*(const Vector &other)
 }
 
 double Transform::
-det()
+det() const
 {
 	return m[0][0] * m[1][1] - m[0][1] * m[1][0];
 }
 
 Transform Transform::
-inverse()
+inverse() const
 {
 	double d = 1.0 / det();
 	Transform t = Transform(d * m[1][1], -d * m[0][1], 0, 
@@ -186,13 +186,13 @@ inverse()
 	return t;
 }
 
-Transform
+const Transform
 identity()
 {
 	return Transform(1.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 }
 
-Transform
+const Transform
 rotate(double theta)
 {
 	double s = sin(theta);
@@ -200,19 +200,20 @@ rotate(double theta)
 	return Transform(c, -s, 0.0, s, c, 0.0);
 }
 
-Transform
+const Transform
 translate(double tx, double ty)
 {
 	return Transform(1, 0, tx, 0, 1, ty);
 }
 
-Transform
+const Transform
 scale(double x, double y)
 {
 	return Transform(x, 0.0, 0.0, 0.0, y, 0.0);
 }
 
-Transform around(const Vector &v, const Transform &t)
+const Transform 
+around(const Vector &v, const Transform &t)
 {
 	return translate(v.x, v.y) * t * translate(-v.x, -v.y);
 }

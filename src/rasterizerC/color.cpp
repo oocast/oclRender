@@ -4,8 +4,10 @@
 
 Color::
 Color(double r = 0.0, double g = 0.0, double b = 0.0, double a = 1.0):
-rgb({r, g, b}), a(a)
-{}
+a(a)
+{
+	rgb[0] = r; rgb[1] = g; rgb[2] = b;
+}
 
 void Color::
 draw(const Color &o)

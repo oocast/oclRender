@@ -7,9 +7,9 @@ add(const Shape &node)
 }
 
 void Scene::
-draw(const PPMImage &image)
+draw(PPMImage &image, int super_sampling = 6)
 {
 	for (size_t i = 0; i < nodes.size(); i++) {
-		nodes[i].draw(image);
+		nodes[i].draw(image, super_sampling);
 	}
 }

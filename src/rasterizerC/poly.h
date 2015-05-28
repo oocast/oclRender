@@ -4,14 +4,14 @@
 #include "shape.h"
 #include "geometry.h"
 
-class ConvexPoly : public shape
+class ConvexPoly : public Shape
 {
 	std::vector<Vector> vs;
 	AABox bound;
 	std::vector<HalfPlane> half_planes;
 public:
 	// vertex should be counter-clockwise order
-	ConvexPoly(const std::vector<Vector> &ps, const Color *color);
+	ConvexPoly(const std::vector<Vector> &ps, const Color *color = null_ptr);
 	double signed_distance_bound(const Vector &p);
 	bool contains(const Vector &p);
 	ConvexPoly transform(const Transform &xform);

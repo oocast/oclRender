@@ -2,7 +2,7 @@
 #include <vector>
 #include <cmath>
 #include "color.h"
-#include "geometry"
+#include "geometry.h"
 #include "shape.h"
 
 Shape::
@@ -14,7 +14,7 @@ Shape(const Color *o_color = null_ptr)
 }
 
 void Shape::
-draw(const PPMImage &image, int super_sampling)
+draw(PPMImage &image, int super_sampling)
 {
 	if (!bound.overlaps(image.bounds())) {
 		return;
@@ -44,8 +44,8 @@ draw(const PPMImage &image, int super_sampling)
 			if (b > pixel_diameter) {
 				int steps = (int)(r * (b - pixel_diameter + 1.0 / r));
 				int xend = (int)fmin(x + steps, h_x + 1);
-				for (int x_ = x; x < xend; x_++) {
-					image.pixels[y][x_].draw(color);
+				for (int x_ = x; x_ < xend; x_++) {
+					image.pixels[y * image.resolution + x_].draw(color);
 				}
 				x += steps;
 			}
@@ -60,7 +60,7 @@ draw(const PPMImage &image, int super_sampling)
 						coverage += 1.0;
 					}
 				}
-				image.pixels[y][x].draw(color.fainter(coverage / lj));
+				image.pixels[y * image.resolution + x].draw(color.fainter(coverage / lj));
 				x++;
 			}
 		}

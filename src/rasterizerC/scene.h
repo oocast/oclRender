@@ -11,7 +11,7 @@ public:
 public:
 	Scene();
 	void add(const Shape &node);
-	void draw(const PPMImage &image);
+	virtual void draw(PPMImage &image, int super_sampling = 6);
 };
 
 #endif //__SCENE_H__

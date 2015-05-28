@@ -5,16 +5,16 @@
 #include "color.h"
 #include "geometry.h"
 
-class Ellipse : public shape
+class Ellipse : public Shape
 {
 	double a, b, c, d, e, f;
 	Transform gradient;
 	Vector center;
 	AABox bound;
 public:
-	Ellipse(double a, double b, double c,
-			double d, double e, double f,
-			const Color *color = null_ptr);
+	Ellipse(double a = 1.0, double b = 1.0, double c = 0.0,
+		double d = 0.0, double e = 0.0, double f = -1.0,
+		const Color *color = null_ptr);
 	double value(const Vector &p);
 	bool contains(const Vector &p);
 	Ellipse transform(const Transform &transform);
