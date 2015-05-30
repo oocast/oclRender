@@ -6,12 +6,12 @@
 class Scene : public SceneObject
 {
 public:
-	std::deque<Shape> nodes;
-	// Transform transform;
+  std::deque<Shape*> nodes;
+  // Transform transform;
 public:
-	Scene();
-	void add(const Shape &node);
-	virtual void draw(PPMImage &image, int super_sampling = 6);
+	Scene(){}
+  void add(Shape *node);
+  virtual void draw(PPMImage &image, int super_sampling = 6);
 };
 
 #endif //__SCENE_H__
