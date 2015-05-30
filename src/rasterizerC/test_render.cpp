@@ -17,6 +17,10 @@ void test_picture()
 	scene.add(new ConvexPoly(LineSegment(Vector(0.3, 0), Vector(0.3, 1), 0.01, &lscolor)));
 	scene.add(new ConvexPoly(LineSegment(Vector(0.4, 0), Vector(0.4, 1), 0.01, &lscolor)));
 
+	//ConvexPoly some(LineSegment(Vector(0.4, 0), Vector(0.4, 1), 0.01, &lscolor));
+	Color blue(0, 0, 1, 0.5);
+	ConvexPoly tri(Triangle({ Vector(0.5, 1), Vector(0, 0), Vector(1, 0) }, &blue));
+	scene.add(&tri);
 	scene.draw(image);
 	image.write_ppm(f);
 	f.close();

@@ -13,7 +13,7 @@ public:
   // vertex should be counter-clockwise order
 	//ConvexPoly(){}
   ConvexPoly(const std::vector<Vector> &ps, const Color *color = nullptr);
-	ConvexPoly(const ConvexPoly &&poly);
+	ConvexPoly(ConvexPoly &&poly);
   double signed_distance_bound(const Vector &p) const;
   bool contains(const Vector &p) const;
   ConvexPoly transform(const Transform &xform);

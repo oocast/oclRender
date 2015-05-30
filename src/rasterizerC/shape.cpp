@@ -39,13 +39,13 @@ draw(PPMImage &image, int super_sampling)
   l_y = (int)fmax(bound.low.y * r, 0);
   h_x = (int)fmin(bound.high.x * r, r-1);
   h_y = (int)fmin(bound.high.y * r, r-1);
-  for (int y = l_y; y < h_y; y++) {
+  for (int y = l_y; y <= h_y; y++) {
     int x = l_x;
     while (x <= h_x) {
       Vector corner = Vector((double)x / r, (double)y / r);
       double b = signed_distance_bound(corner);
       double pixel_diameter = sqrt(2.0) / r;
-      if (b > pixel_diameter) {
+      if (b >= pixel_diameter) {
         int steps = (int)(r * (b - pixel_diameter + 1.0 / r));
         int xend = (int)fmin(x + steps, h_x + 1);
         for (int x_ = x; x_ < xend; x_++) {
@@ -53,7 +53,7 @@ draw(PPMImage &image, int super_sampling)
         }
         x += steps;
       }
-      else if (b < -pixel_diameter) {
+      else if (b <= -pixel_diameter) {
         int steps = (int)(r * (-b - pixel_diameter + 1.0 / r));
         x += steps;
       }

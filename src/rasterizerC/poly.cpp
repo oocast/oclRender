@@ -11,6 +11,15 @@ Shape(color), vs(ps)
   }
 }
 
+ConvexPoly::
+ConvexPoly(ConvexPoly &&poly):
+Shape(&poly.color), vs(poly.vs), half_planes(poly.half_planes)
+{
+	bound = poly.bound;
+	poly.vs.clear();
+	poly.half_planes.clear();
+}
+
 double ConvexPoly::
 signed_distance_bound(const Vector &p) const
 {
@@ -84,7 +93,7 @@ LineSegment(const Vector &v1, const Vector &v2,
   Vector d = v2 - v1;
   double tmp = d.x;
   d.x = -d.y;
-  d.y = d.x;
+  d.y = tmp;
   d = d * (thickness / d.length() / 2);
   std::vector<Vector> vs;
   vs.push_back(v1 + d);

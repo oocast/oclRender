@@ -29,6 +29,9 @@ d(d), e(e), f(f)
   }
 }
 
+Ellipse::
+Ellipse(const Ellipse &&ellipse){}
+
 double Ellipse::
 value(const Vector &p) const
 {
