@@ -7,10 +7,10 @@
 
 class Ellipse : public Shape
 {
+protected:
   double a, b, c, d, e, f;
   Transform gradient;
   Vector center;
-  AABox bound;
 public:
   Ellipse(double a = 1.0, double b = 1.0, double c = 0.0,
     double d = 0.0, double e = 0.0, double f = -1.0,

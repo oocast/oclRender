@@ -8,7 +8,6 @@ class ConvexPoly : public Shape
 {
 protected:
   std::vector<Vector> vs;
-  AABox bound;
   std::vector<HalfPlane> half_planes;
 public:
   // vertex should be counter-clockwise order

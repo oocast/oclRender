@@ -24,7 +24,7 @@ draw(PPMImage &image, int super_sampling)
     return;
   }
   float r = (float)image.resolution;
-  std::vector<Vector> jitter;
+  std::vector<Vector> jitter(super_sampling*super_sampling, Vector());
   std::default_random_engine gen;
   std::uniform_real_distribution<double> distri(0.0, 1.0);
   for (int x = 0; x < super_sampling; x++) {
