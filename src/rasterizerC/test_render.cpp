@@ -4,9 +4,15 @@
 using namespace std;
 void test_picture()
 {
-	fstream f;
+	fstream f, fbg;
 	f.open("test_picture.ppm", fstream::out | fstream::binary);
-	PPMImage image = PPMImage(512, Color(1, 1, 1, 1));
+	fbg.open("../../pic/50608556_p0.ppm", fstream::in | fstream::binary);
+	if (!fbg.is_open()) {
+		exit(1);
+	}
+	PPMImage image(512, Color(1, 1, 1, 1));
+	PPMImage bg(fbg);
+	fbg.close();
 	Scene scene;
 
 	// add shapes
@@ -29,7 +35,8 @@ void test_picture()
 	Ellipse ellip(circle.transform(around(Vector(0.5, 0.5), sca)));
 	scene.add(&ellip);
 	scene.draw(image);
-	image.write_ppm(f);
+	image.write_ppm(f, &bg);
+	//bg.write_ppm(f, &bg);
 	f.close();
 }
 
