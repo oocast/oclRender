@@ -11,6 +11,7 @@ Shape(color), vs(ps)
   }
 }
 
+/*
 ConvexPoly::
 ConvexPoly(ConvexPoly &&poly):
 Shape(&poly.color), vs(poly.vs), half_planes(poly.half_planes)
@@ -19,6 +20,7 @@ Shape(&poly.color), vs(poly.vs), half_planes(poly.half_planes)
 	poly.vs.clear();
 	poly.half_planes.clear();
 }
+*/
 
 double ConvexPoly::
 signed_distance_bound(const Vector &p) const

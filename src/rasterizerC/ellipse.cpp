@@ -5,7 +5,7 @@ Ellipse::
 Ellipse(double a, double b, double c,
       double d, double e, double f,
       const Color *color):
-Shape(color), a(a), b(a), c(c),
+Shape(color), a(a), b(b), c(c),
 d(d), e(e), f(f)
 {
   if (c*c - 4*a*b >= 0) {
@@ -29,8 +29,7 @@ d(d), e(e), f(f)
   }
 }
 
-Ellipse::
-Ellipse(const Ellipse &&ellipse){}
+//Ellipse::Ellipse(const Ellipse &&ellipse){}
 
 double Ellipse::
 value(const Vector &p) const
@@ -48,7 +47,7 @@ contains(const Vector &p) const
 Ellipse Ellipse::
 transform(const Transform &transform)
 {
-  Transform i = transform.inverse();
+  Transform i(transform.inverse());
   double aa, bb, cc, dd, ee, ff;
   double m00, m01, m02, m10, m11, m12;
   m00 = i.m[0][0]; m01 = i.m[0][1]; m02 = i.m[0][2];
@@ -60,7 +59,7 @@ transform(const Transform &transform)
     c*(m00*m12 + m02*m10) + d*m00 + e*m10;
   ee = 2*a*m01*m02 + 2*b*m11*m12 +
           c*(m01*m12 + m02*m11) + d*m01 + e*m11;
-    ff = a*m02*m02 + b*m12*m12 + c*m02*m12 +
+  ff = a*m02*m02 + b*m12*m12 + c*m02*m12 +
         d*m02 + e*m12 + f;
   return Ellipse(aa, bb, cc, dd, ee, ff, &color);
 }
@@ -90,7 +89,7 @@ intersections(const Vector &c, const Vector &p, Vector *inter_ps) const
   double sols[2];
   quadratic(u2, u1, u0, sols);
   inter_ps[0] = c+pc*sols[0];
-  inter_ps[1] = c+pc+sols[1];
+  inter_ps[1] = c+pc*sols[1];
 }
 
 double Ellipse::
@@ -104,7 +103,7 @@ signed_distance_bound(const Vector &p) const
             // that contains the given point and use the minimum distance
             // from the point to the quadrilateral as a bound. Since
             // the quadrilateral lies entirely inside the ellipse, the
-            // distance from the point to the ellipse must be smaller.
+            // distance from the point to the ellipse must be larger.
       Vector v02[2], v13[2];
       intersections(p, p + Vector(1.0, 0.0), v02);
       intersections(p, p + Vector(0.0, 1.0), v13);
