@@ -1,4 +1,4 @@
-filename = '50608556_p0';
-pic = imread([filename  '.png']);
-pic = imresize(pic, [512 512]);
+filename = '50650833_p0';
+pic = imread([filename  '.jpg']);
+pic = imresize(pic, 1);
 imwrite(pic, [filename '.ppm'], 'ppm');
