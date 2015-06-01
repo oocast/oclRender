@@ -1,4 +1,5 @@
 #include "oclrender.h"
+#include <cstdlib>
 #include <fstream>
 
 using namespace std;
@@ -10,7 +11,7 @@ void test_picture()
 	if (!fbg.is_open()) {
 		exit(1);
 	}
-	PPMImage image(512, Color(1, 1, 1, 1));
+	PPMImage image(512, Color(0, 0, 0, 1));
 	PPMImage bg(fbg);
 	fbg.close();
 	Scene scene;
@@ -28,15 +29,15 @@ void test_picture()
 	//ConvexPoly tri(Triangle({ Vector(0.5, 1), Vector(0, 0), Vector(1, 0) }, &blue));
 	//scene.add(&tri);
 	Color green(0, 1, 0, 1);
-	Ellipse circle(Circle(Vector(0.5, 0.5), 0.5, &green));
+	Ellipse circle(Circle(Vector(0.6, 0.3), 0.5, &green));
 
-	Transform rot(rotate(3.14159 / 4));
-	Transform sca(scale(1, 0.4));
-	Ellipse ellip(circle.transform(around(Vector(0.5, 0.5), sca)));
+	Transform rot(rotate(3.14159 * (1.0 / 2.0 + 1.0 / 8.0)));
+	Transform sca(scale(1, 0.2));
+	Ellipse ellip(circle.transform(around(Vector(0.6, 0.3), rot * sca)));
 	scene.add(&ellip);
-	scene.draw(image);
-	image.write_ppm(f, &bg);
-	//bg.write_ppm(f, &bg);
+	scene.draw(bg);
+	//image.write_ppm(f, &bg);
+	bg.write_ppm(f);
 	f.close();
 }
 

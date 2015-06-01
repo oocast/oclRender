@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <cmath>
 #include "ellipse.h"
 
 Ellipse::
@@ -112,7 +113,7 @@ signed_distance_bound(const Vector &p) const
       polyVertices.push_back(v13[0]);
       polyVertices.push_back(v02[1]);
       polyVertices.push_back(v13[1]);
-      return abs(ConvexPoly(polyVertices).signed_distance_bound(p));
+      return std::abs(ConvexPoly(polyVertices).signed_distance_bound(p));
   }
   else {
     Vector c = center;
@@ -130,7 +131,7 @@ signed_distance_bound(const Vector &p) const
     n = n * (1.0 / n.length());
     // returns the length of the projection of p - surface_pt
     // along the normal
-    return -abs(n.dot(p - crossings[surface_index]));
+    return -std::abs(n.dot(p - crossings[surface_index]));
   }
 }
 

@@ -4,7 +4,7 @@
 
 Color::
 Color(double r, double g, double b, double a) :
-a(a), transparent(true)
+a(a)
 {
   rgb[0] = r; rgb[1] = g; rgb[2] = b;
 }
@@ -14,20 +14,11 @@ draw(const Color &o)
 {
   if (a == o.a && a == 0.0)
     return;
-  if (o.a == 1.0) {
-    rgb[0] = o.rgb[0];
-    rgb[1] = o.rgb[1];
-    rgb[2] = o.rgb[2];
-    a = 1.0;
-  }
-  else {
-    double u = 1.0 - o.a;
-    rgb[0] = u * rgb[0] + o.a * o.rgb[0];
-    rgb[1] = u * rgb[1] + o.a * o.rgb[1];
-    rgb[2] = u * rgb[2] + o.a * o.rgb[2];
-    a = 1.0 - (1.0 - a) * (1.0 - o.a);
-  }
-	transparent = false;
+  double u = 1.0 - o.a;
+  rgb[0] = u * rgb[0] + o.a * o.rgb[0];
+  rgb[1] = u * rgb[1] + o.a * o.rgb[1];
+  rgb[2] = u * rgb[2] + o.a * o.rgb[2];
+  a = 1.0 - (1.0 - a) * (1.0 - o.a);
 }
 
 void Color::
@@ -37,6 +28,7 @@ fill(double r, double g, double b)
 	rgb[1] = g;
 	rgb[2] = b;
 }
+
 Color Color::
 fainter(double k)
 {

@@ -8,7 +8,7 @@ class Color
   double a;
 public:
 	// if this pixel has been drawn
-	bool transparent;
+	//bool transparent;
 public:
   Color(double r = 0.0, double g = 0.0, double b = 0.0, double a = 1.0);
   void draw(const Color &o);

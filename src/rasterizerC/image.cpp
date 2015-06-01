@@ -46,7 +46,7 @@ bounds() const
 }
 
 void PPMImage::
-write_ppm(std::fstream &out, PPMImage *bg)
+write_ppm(std::fstream &out)
 {
   std::ostringstream oss;
   oss << "P6 " << resolution << ' '
@@ -56,10 +56,6 @@ write_ppm(std::fstream &out, PPMImage *bg)
     for (size_t x = 0; x < resolution; x++) {
 			std::string str;
 			unsigned char buf[3];
-			if (x == resolution - 1) {
-				x++;
-				x--;
-			}
 			/*
 			if (pixels[y * resolution + x].transparent && bg != nullptr) {
 				str = bg->pixels[y * resolution + x].as_ppm();
@@ -69,12 +65,7 @@ write_ppm(std::fstream &out, PPMImage *bg)
 			}
 			out << str;
 			*/
-			if (pixels[y * resolution + x].transparent && bg != nullptr) {
-				bg->pixels[y * resolution + x].as_ppm(buf);
-			}
-			else {
-				pixels[y * resolution + x].as_ppm(buf);
-			}
+			pixels[y * resolution + x].as_ppm(buf);
 			//out.put(buf[0]);
 			//out.put(buf[1]);
 			//out.put(buf[2]);
