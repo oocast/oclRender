@@ -2,6 +2,7 @@
 #define __COLOR_H__
 #include <string>
 
+/*
 class Color
 {
   double rgb[3];
@@ -19,4 +20,20 @@ public:
   // __repr__ operator<<
   // hex constructor
 };
+*/
+
+struct Color
+{
+	// {r, g, b} from 0.0 to 1.0
+	double rgb[3];
+	// alpha value, from 0.0 to 1.0
+	double a;
+};
+
+void init_Color(Color *color, double r = 0.0, double g = 0.0, double b = 0.0, double a = 1.0);
+Color init_Color(double r = 0.0, double g = 0.0, double b = 0.0, double a = 1.0);
+void draw_Color(Color *dst, const Color *src);
+Color faint_Color(const Color *color, double k);
+unsigned char *as_ppm(const Color *color, unsigned char *rgbbuf);
+
 #endif //__COLOR_H__

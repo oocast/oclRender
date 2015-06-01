@@ -49,7 +49,8 @@ draw(PPMImage &image, int super_sampling)
         int steps = (int)(r * (b - pixel_diameter + 1.0 / r));
         int xend = (int)fmin(x + steps, h_x + 1);
         for (int x_ = x; x_ < xend; x_++) {
-          image.pixels[y * image.resolution + x_].draw(color);
+          //image.pixels[y * image.resolution + x_].draw(color);
+					draw_Color(&image.pixels[y * image.resolution + x_], &color);
         }
         x += steps;
       }
@@ -64,7 +65,8 @@ draw(PPMImage &image, int super_sampling)
             coverage += 1.0;
           }
         }
-        image.pixels[y * image.resolution + x].draw(color.fainter(coverage / lj));
+				Color fainted = faint_Color(&color, coverage / lj);
+        draw_Color(&image.pixels[y * image.resolution + x], &fainted);
         x++;
       }
     }

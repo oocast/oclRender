@@ -26,11 +26,7 @@ PPMImage(std::fstream &in)
 			r = (double)rgbbuf[0] / 255.0;
 			g = (double)rgbbuf[1] / 255.0;
 			b = (double)rgbbuf[2] / 255.0;
-			pixels[y * resolution + x].fill(r, g, b);
-			if (x == 0) {
-				x++;
-				x--;
-			}
+			init_Color(&pixels[y * resolution + x], r, g, b);
 			if (in.eof()) {
 				//in.close();
 				//exit(1);
@@ -65,7 +61,7 @@ write_ppm(std::fstream &out)
 			}
 			out << str;
 			*/
-			pixels[y * resolution + x].as_ppm(buf);
+			as_ppm(&pixels[y * resolution + x], buf);
 			//out.put(buf[0]);
 			//out.put(buf[1]);
 			//out.put(buf[2]);

@@ -1,7 +1,9 @@
 #include "color.h"
 #include <string>
 #include <cmath>
+#include <cstring>
 
+/*
 Color::
 Color(double r, double g, double b, double a) :
 a(a)
@@ -70,6 +72,59 @@ as_ppm(unsigned char *rgbbuf)
 		g = (unsigned char)(sqrt(rgb[1] * a) * 255);
 		b = (unsigned char)(sqrt(rgb[2] * a) * 255);
 	}
+	rgbbuf[0] = r; rgbbuf[1] = g; rgbbuf[2] = b;
+	return rgbbuf;
+}
+*/
+
+void
+init_Color(Color *color, double r, double g, double b, double a)
+{
+	color->rgb[0] = r;
+	color->rgb[1] = g;
+	color->rgb[2] = b;
+	color->a = a;
+}
+
+Color
+init_Color(double r, double g, double b, double a)
+{
+	Color result;
+	result.rgb[0] = r;
+	result.rgb[1] = g;
+	result.rgb[2] = b;
+	result.a = a;
+	return result;
+}
+
+void
+draw_Color(Color *dst, const Color *src)
+{
+	if (dst->a == src->a && dst->a == 0.0)
+		return;
+	double u = 1.0 - src->a;
+	dst->rgb[0] = u * dst->rgb[0] + src->a * src->rgb[0];
+	dst->rgb[1] = u * dst->rgb[1] + src->a * src->rgb[1];
+	dst->rgb[2] = u * dst->rgb[2] + src->a * src->rgb[2];
+	dst->a = 1.0 - (1.0 - dst->a) * (1.0 - src->a);
+}
+
+Color
+faint_Color(const Color *color, double k)
+{
+	Color result;
+	memcpy(&result, color, sizeof(Color));
+	result.a *= k;
+	return result;
+}
+
+unsigned char *
+as_ppm(const Color *color, unsigned char *rgbbuf)
+{
+	unsigned char r, g, b;
+	r = (unsigned char)(color->rgb[0] * color->a * 255);
+	g = (unsigned char)(color->rgb[1] * color->a * 255);
+	b = (unsigned char)(color->rgb[2] * color->a * 255);
 	rgbbuf[0] = r; rgbbuf[1] = g; rgbbuf[2] = b;
 	return rgbbuf;
 }
