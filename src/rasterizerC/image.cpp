@@ -2,8 +2,8 @@
 #include "image.h"
 
 PPMImage::
-PPMImage(size_t resolution, const Color &bg):
-resolution(resolution), pixels(resolution*resolution, bg)
+PPMImage(size_t width, size_t height, const Color &bg):
+width(width), height(height), pixels(width*height, bg)
 {
 }
 
@@ -13,20 +13,20 @@ PPMImage(std::fstream &in)
 	char _cdump;
 	int _idump;
 	in >> _cdump >> _cdump; // magic words, "P6" or "P3"
-	in >> resolution >> resolution; //TODO: non-square
+	in >> width >> height; //TODO: non-square
 	in >> _idump; // max color value
 	in.get(_cdump);
-	pixels = std::vector<Color>(resolution*resolution, Color());
-	for (int y = resolution - 1; y > -1; y--) {
-		for (size_t x = 0; x < resolution; x++) {
+	pixels = std::vector<Color>(width*height, Color());
+	for (int y = height - 1; y > -1; y--) {
+		for (size_t x = 0; x < width; x++) {
 			unsigned char rgbbuf[3];
-			double r, g, b;
+			float r, g, b;
 			//in >> rc >> gc >> bc;
 			in.read((char *)rgbbuf, 3);
-			r = (double)rgbbuf[0] / 255.0;
-			g = (double)rgbbuf[1] / 255.0;
-			b = (double)rgbbuf[2] / 255.0;
-			init_Color(&pixels[y * resolution + x], r, g, b);
+			r = (float)rgbbuf[0] / 255.0F;
+			g = (float)rgbbuf[1] / 255.0F;
+			b = (float)rgbbuf[2] / 255.0F;
+			init_Color(&pixels[y * width + x], r, g, b);
 			if (in.eof()) {
 				//in.close();
 				//exit(1);
@@ -45,11 +45,11 @@ void PPMImage::
 write_ppm(std::fstream &out)
 {
   std::ostringstream oss;
-  oss << "P6 " << resolution << ' '
-    << resolution << " 255\n";
+  oss << "P6 " << width << ' '
+    << height << " 255\n";
   out << oss.str();
-  for (int y = resolution - 1; y > -1; y--) {
-    for (size_t x = 0; x < resolution; x++) {
+  for (int y = height - 1; y > -1; y--) {
+    for (size_t x = 0; x < width; x++) {
 			std::string str;
 			unsigned char buf[3];
 			/*
@@ -61,7 +61,7 @@ write_ppm(std::fstream &out)
 			}
 			out << str;
 			*/
-			as_ppm(&pixels[y * resolution + x], buf);
+			as_ppm(&pixels[y * width + x], buf);
 			//out.put(buf[0]);
 			//out.put(buf[1]);
 			//out.put(buf[2]);

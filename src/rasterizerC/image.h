@@ -8,10 +8,10 @@
 class PPMImage
 {
 public:
-  size_t resolution;
+  size_t width, height;
   std::vector<Color> pixels;
 public:
-  PPMImage(size_t resolution, const Color &bg = Color());
+  PPMImage(size_t width, size_t height, const Color &bg = Color());
 	// TODO: support non-square input PPM image
 	PPMImage(std::fstream &in);
   AABox bounds() const;

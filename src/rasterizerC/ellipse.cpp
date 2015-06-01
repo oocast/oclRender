@@ -3,8 +3,8 @@
 #include "ellipse.h"
 
 Ellipse::
-Ellipse(double a, double b, double c,
-      double d, double e, double f,
+Ellipse(float a, float b, float c,
+      float d, float e, float f,
       const Color *color):
 Shape(color), a(a), b(b), c(c),
 d(d), e(e), f(f)
@@ -14,7 +14,7 @@ d(d), e(e), f(f)
   }
   gradient = Transform(2*a, c, d, c, 2*b, e);
   center = gradient.inverse() * Vector(0.0, 0.0);
-  double x[2], y[2];
+  float x[2], y[2];
   quadratic(b-c*c/(4*a), e-c*d/(2*a), f-d*d/(4*a), y);
   quadratic(a-c*c/(4*b), d-c*e/(2*b), f-e*e/(4*b), x);
   // y bounds: dv/dx(x, y) = 0, v(x,y) = 0
@@ -32,7 +32,7 @@ d(d), e(e), f(f)
 
 //Ellipse::Ellipse(const Ellipse &&ellipse){}
 
-double Ellipse::
+float Ellipse::
 value(const Vector &p) const
 {
   return (a*p.x*p.x + b*p.y*p.y + c*p.x*p.y +
@@ -49,8 +49,8 @@ Ellipse Ellipse::
 transform(const Transform &transform)
 {
   Transform i(transform.inverse());
-  double aa, bb, cc, dd, ee, ff;
-  double m00, m01, m02, m10, m11, m12;
+  float aa, bb, cc, dd, ee, ff;
+  float m00, m01, m02, m10, m11, m12;
   m00 = i.m[0][0]; m01 = i.m[0][1]; m02 = i.m[0][2];
   m10 = i.m[1][0]; m11 = i.m[1][1]; m12 = i.m[1][2];
   aa = a*m00*m00 + b*m10*m10 + c*m00*m10;
@@ -73,7 +73,7 @@ intersections(const Vector &c, const Vector &p, Vector *inter_ps) const
     // parameter u, x(u) = c.x + u * (p.x - c.x), (and same for y)
     // this simply solves the quadratic equation f(x(u), y(u)) = 0
   Vector pc = p - c;
-  double u2, u1, u0;
+  float u2, u1, u0;
   u2 = a*pc.x*pc.x + b*pc.y*pc.y + this->c*pc.x*pc.y;
   u1 = 2* a*c.x*pc.x + 2* b*c.y*pc.y 
         + this->c*c.y*pc.x + this->c*c.x*pc.y + d*pc.x 
@@ -87,16 +87,16 @@ intersections(const Vector &c, const Vector &p, Vector *inter_ps) const
   catch{
   }
   */
-  double sols[2];
+  float sols[2];
   quadratic(u2, u1, u0, sols);
   inter_ps[0] = c+pc*sols[0];
   inter_ps[1] = c+pc*sols[1];
 }
 
-double Ellipse::
+float Ellipse::
 signed_distance_bound(const Vector &p) const
 {
-  double v = value(p);
+  float v = value(p);
   if (v == 0.0)
     return 0.0;
   else if (v < 0.0) {
@@ -128,7 +128,7 @@ signed_distance_bound(const Vector &p) const
     }
     // n is normal at surface_pt
     Vector n = gradient * crossings[surface_index];
-    n = n * (1.0 / n.length());
+    n = n * (1.0F / n.length());
     // returns the length of the projection of p - surface_pt
     // along the normal
     return -std::abs(n.dot(p - crossings[surface_index]));
@@ -136,7 +136,7 @@ signed_distance_bound(const Vector &p) const
 }
 
 void Ellipse::
-get_parameters(std::vector<double> &paras, ShapeType *shapeType)
+get_parameters(std::vector<float> &paras, ShapeType *shapeType)
 {
 	paras.push_back(a);
 	paras.push_back(b);
@@ -148,7 +148,7 @@ get_parameters(std::vector<double> &paras, ShapeType *shapeType)
 }
 
 Ellipse 
-Circle(const Vector &center, double radius, const Color *color)
+Circle(const Vector &center, float radius, const Color *color)
 {
   return Ellipse(1.0, 1.0, 0.0, 0.0, 0.0, -1.0, color).transform(
     scale(radius, radius)).transform(

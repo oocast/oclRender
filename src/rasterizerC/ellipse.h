@@ -8,21 +8,21 @@
 class Ellipse : public Shape
 {
 protected:
-  double a, b, c, d, e, f;
+  float a, b, c, d, e, f;
   Transform gradient;
   Vector center;
 public:
-  Ellipse(double a = 1.0, double b = 1.0, double c = 0.0,
-    double d = 0.0, double e = 0.0, double f = -1.0,
+  Ellipse(float a = 1.0, float b = 1.0, float c = 0.0,
+    float d = 0.0, float e = 0.0, float f = -1.0,
     const Color *color = nullptr);
 	Ellipse(const Ellipse &&ellipse);
-  double value(const Vector &p) const;
+  float value(const Vector &p) const;
   bool contains(const Vector &p) const;
   Ellipse transform(const Transform &transform);
   void intersections(const Vector &c, const Vector &p, Vector *inter_ps) const;
-  double signed_distance_bound(const Vector &p) const;
-	void get_parameters(std::vector<double> &paras, ShapeType *shapeType);
+  float signed_distance_bound(const Vector &p) const;
+	void get_parameters(std::vector<float> &paras, ShapeType *shapeType);
 };
 
-Ellipse Circle(const Vector &center, double radius, const Color *color = nullptr);
+Ellipse Circle(const Vector &center, float radius, const Color *color = nullptr);
 #endif //__ELLIPSE_H__
