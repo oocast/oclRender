@@ -30,6 +30,13 @@ void test_picture()
 	//ConvexPoly tri(Triangle({ Vector(0.5, 1), Vector(0, 0), Vector(1, 0) }, &blue));
 	//scene.add(&tri);
 	Color green = init_Color(.0, 1.0, .0, 1.0);
+	Color black = init_Color(.0, .0, .0, 1.0);
+	Vector LL(185.0 / 512.0, 1.0 - 205.0 / 512.0);
+	Vector CC(294.0 / 512.0, 1.0 - 183.0 / 512.0);
+	Vector HH(403.0 / 512.0, 1.0 - 163.0 / 512.0);
+	ConvexPoly blackbar(Rectangle(LL, HH, &black));
+	ConvexPoly leanbar(blackbar.transform(around(CC, rotate(3.14159 / 13.0))));
+	scene.add(&leanbar);
 	Ellipse circle(Circle(Vector(0.75, 0.1), 0.5, &green));
 
 	Transform rot(rotate(3.14159 * (1.0 / 2.0 + 1.0 / 8.0)));

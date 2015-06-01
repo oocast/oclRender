@@ -21,6 +21,7 @@ public:
   Ellipse transform(const Transform &transform);
   void intersections(const Vector &c, const Vector &p, Vector *inter_ps) const;
   double signed_distance_bound(const Vector &p) const;
+	void get_parameters(std::vector<double> &paras, ShapeType *shapeType);
 };
 
 Ellipse Circle(const Vector &center, double radius, const Color *color = nullptr);

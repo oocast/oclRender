@@ -135,6 +135,18 @@ signed_distance_bound(const Vector &p) const
   }
 }
 
+void Ellipse::
+get_parameters(std::vector<double> &paras, ShapeType *shapeType)
+{
+	paras.push_back(a);
+	paras.push_back(b);
+	paras.push_back(c);
+	paras.push_back(d);
+	paras.push_back(e);
+	paras.push_back(f);
+	*shapeType = ELLIPSE;
+}
+
 Ellipse 
 Circle(const Vector &center, double radius, const Color *color)
 {

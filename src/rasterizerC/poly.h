@@ -18,6 +18,7 @@ public:
 	double signed_distance_bound(const Vector &p) const;
   bool contains(const Vector &p) const;
   ConvexPoly transform(const Transform &xform);
+	void get_parameters(std::vector<double> &paras, ShapeType *shapeType);
 };
 
 ConvexPoly Triangle(const std::vector<Vector> &ps, const Color *color = nullptr);
