@@ -16,13 +16,13 @@ public:
 
 class Shape : public SceneObject
 {
-protected:
+public:
   Color color;
   AABox bound;
 public:
   Shape(const Color *o_color = nullptr);
   virtual bool contains(const Vector &p) const = 0;
-  virtual float signed_distance_bound(const Vector &p) const = 0;
+  //virtual float signed_distance_bound(const Vector &p) const = 0;
   void draw(PPMImage &image, int super_sampling);
 	virtual void get_parameters(std::vector<float> &paras, ShapeType *shapeType) = 0;
 	// TODO: transform return true caller (derived) class obj

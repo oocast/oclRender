@@ -22,6 +22,7 @@ Shape(&poly.color), vs(poly.vs), half_planes(poly.half_planes)
 }
 */
 
+/*
 float ConvexPoly::
 signed_distance_bound(const Vector &p) const
 {
@@ -46,6 +47,7 @@ signed_distance_bound(const Vector &p) const
     return min_inside;
   }
 }
+*/
 
 bool ConvexPoly::
 contains(const Vector &p) const

@@ -43,6 +43,13 @@ void test_picture()
 	Transform sca(scale(1.0F, 0.2F));
 	Ellipse ellip(circle.transform(around(Vector(0.75F, 0.1F), rot * sca)));
 	scene.add(&ellip);
+
+	
+	ConvexPoly tri1(Triangle({ Vector(0.25, 0.75), Vector(0.25, 0.5), Vector(0.5, 0.75) }, &green));
+	ConvexPoly tri2(Triangle({ Vector(0.5, 0.5), Vector(0.5, 0.75), Vector(0.25, 0.5) }, &green));
+	scene.add(&tri1);
+	scene.add(&tri2);
+
 	scene.draw(bg);
 	//image.write_ppm(f, &bg);
 	bg.write_ppm(f);

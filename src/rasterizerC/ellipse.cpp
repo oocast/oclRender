@@ -93,6 +93,7 @@ intersections(const Vector &c, const Vector &p, Vector *inter_ps) const
   inter_ps[1] = c+pc*sols[1];
 }
 
+/*
 float Ellipse::
 signed_distance_bound(const Vector &p) const
 {
@@ -134,6 +135,7 @@ signed_distance_bound(const Vector &p) const
     return -std::abs(n.dot(p - crossings[surface_index]));
   }
 }
+*/
 
 void Ellipse::
 get_parameters(std::vector<float> &paras, ShapeType *shapeType)

@@ -22,6 +22,7 @@ contains(const Vector &p) const
 	return v1->contains(p) || v2->contains(p);
 }
 
+/*
 double Union::
 signed_distance_bound(const Vector &p) const
 {
@@ -30,6 +31,7 @@ signed_distance_bound(const Vector &p) const
 	b2 = v2->signed_distance_bound(p);
 	return fmax(b1, b2);
 }
+*/
 
 Union Union::
 transform(const Transform &t)

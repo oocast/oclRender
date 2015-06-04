@@ -14,8 +14,7 @@ public:
 	//ConvexPoly(){}
   ConvexPoly(const std::vector<Vector> &ps, const Color *color = nullptr);
 	ConvexPoly(ConvexPoly &&poly);
-	// ConvexPoly(const ConvexPoly &poly);
-	float signed_distance_bound(const Vector &p) const;
+	//float signed_distance_bound(const Vector &p) const;
   bool contains(const Vector &p) const;
   ConvexPoly transform(const Transform &xform);
 	void get_parameters(std::vector<float> &paras, ShapeType *shapeType);
