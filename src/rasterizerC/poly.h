@@ -1,6 +1,7 @@
 #ifndef __POLY_H__
 #define __POLY_H__
 #include <vector>
+#include <memory>
 #include "shape.h"
 #include "geometry.h"
 
@@ -17,6 +18,7 @@ public:
 	//float signed_distance_bound(const Vector &p) const;
   bool contains(const Vector &p) const;
   ConvexPoly transform(const Transform &xform);
+	std::shared_ptr<Shape> transformp(const Transform &xform);
 	void get_parameters(std::vector<float> &paras, ShapeType *shapeType);
 };
 

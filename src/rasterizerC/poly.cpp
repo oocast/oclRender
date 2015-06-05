@@ -72,10 +72,21 @@ transform(const Transform &xform)
   return ConvexPoly(xvs, &color);
 }
 
+std::shared_ptr<Shape> ConvexPoly::
+transformp(const Transform &xform)
+{
+	std::shared_ptr<Shape> result(new ConvexPoly(transform(xform)));
+}
+
 void ConvexPoly::
 get_parameters(std::vector<float> &paras, ShapeType *shapeType)
 {
-
+	*shapeType = CONVEXPOLY;
+	for (auto it = half_planes.begin(); it != half_planes.end(); it++) {
+		paras.push_back(it->v.x);
+		paras.push_back(it->v.y);
+		paras.push_back(it->c);
+	}
 }
 
 ConvexPoly 

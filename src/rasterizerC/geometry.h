@@ -39,9 +39,10 @@ public:
 
 class HalfPlane
 {
+public:
   Vector v;
   float c;
- public:
+public:
   HalfPlane(const Vector &p1, const Vector &p2);
   float signed_distance(const Vector p) const;
 };
