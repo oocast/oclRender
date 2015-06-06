@@ -9,9 +9,10 @@ class CSG : public Shape
 protected:
 	std::shared_ptr<Shape> v1, v2;
 public:
-	CSG(const Shape *v1, const Shape *v2, const Color *color = nullptr);
+	CSG(Shape *v1, Shape *v2, const Color *color = nullptr);
 };
 
+/*
 class Union : public CSG
 {
 public:
@@ -38,5 +39,6 @@ public:
 	bool contains(const Vector &p) const;
 	//float signed_distance_bound(const Vector &p) const;
 };
+*/
 
 #endif //__CSG_H__

@@ -1,5 +1,6 @@
 #ifndef __ELLIPSE_H__
 #define __ELLIPSE_H__
+#include <memory>
 #include "poly.h"
 #include "shape.h"
 #include "color.h"
@@ -19,6 +20,7 @@ public:
   float value(const Vector &p) const;
   bool contains(const Vector &p) const;
   Ellipse transform(const Transform &transform);
+	std::shared_ptr<Shape> transformp(const Transform &xform);
   void intersections(const Vector &c, const Vector &p, Vector *inter_ps) const;
   //float signed_distance_bound(const Vector &p) const;
 	void get_parameters(std::vector<float> &paras, ShapeType *shapeType);

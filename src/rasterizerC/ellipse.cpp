@@ -65,6 +65,13 @@ transform(const Transform &transform)
   return Ellipse(aa, bb, cc, dd, ee, ff, &color);
 }
 
+std::shared_ptr<Shape> Ellipse::
+transformp(const Transform &xform)
+{
+	std::shared_ptr<Shape> result(new Ellipse(transform(xform)));
+	return result;
+}
+
 void Ellipse::
 intersections(const Vector &c, const Vector &p, Vector *inter_ps) const
 {

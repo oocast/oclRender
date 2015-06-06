@@ -36,19 +36,19 @@ void test_picture()
 	Vector HH(403.0F / 512.0F, 1.0F - 163.0F / 512.0F);
 	ConvexPoly blackbar(Rectangle(LL, HH, &black));
 	ConvexPoly leanbar(blackbar.transform(around(CC, rotate(3.14159F / 13.0F))));
-	scene.add(&leanbar);
+	scene.add(new ConvexPoly(blackbar.transform(around(CC, rotate(3.14159F / 13.0F)))));
 	Ellipse circle(Circle(Vector(0.75F, 0.1F), 0.5F, &green));
 
 	Transform rot(rotate(3.14159F * (1.0F / 2.0F + 1.0F / 8.0F)));
 	Transform sca(scale(1.0F, 0.2F));
-	Ellipse ellip(circle.transform(around(Vector(0.75F, 0.1F), rot * sca)));
-	scene.add(&ellip);
+	//Ellipse ellip(circle.transform(around(Vector(0.75F, 0.1F), rot * sca)));
+	scene.add(new Ellipse(circle.transform(around(Vector(0.75F, 0.1F), rot * sca))));
 
 	
-	ConvexPoly tri1(Triangle({ Vector(0.25, 0.75), Vector(0.25, 0.5), Vector(0.5, 0.75) }, &green));
-	ConvexPoly tri2(Triangle({ Vector(0.5, 0.5), Vector(0.5, 0.75), Vector(0.25, 0.5) }, &green));
-	scene.add(&tri1);
-	scene.add(&tri2);
+	//ConvexPoly tri1(Triangle({ Vector(0.25, 0.75), Vector(0.25, 0.5), Vector(0.5, 0.75) }, &green));
+	//ConvexPoly tri2(Triangle({ Vector(0.5, 0.5), Vector(0.5, 0.75), Vector(0.25, 0.5) }, &green));
+	//scene.add(new ConvexPoly(tri1));
+	//scene.add(new ConvexPoly(tri2));
 
 	scene.draw(bg);
 	//image.write_ppm(f, &bg);

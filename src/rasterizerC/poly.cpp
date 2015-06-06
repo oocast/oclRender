@@ -76,6 +76,7 @@ std::shared_ptr<Shape> ConvexPoly::
 transformp(const Transform &xform)
 {
 	std::shared_ptr<Shape> result(new ConvexPoly(transform(xform)));
+	return result;
 }
 
 void ConvexPoly::

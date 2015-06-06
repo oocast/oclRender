@@ -3,7 +3,7 @@
 void Scene::
 add(Shape *node)
 {
-  nodes.push_back(node);
+  nodes.push_back(std::shared_ptr<Shape>(node));
 }
 
 void Scene::
