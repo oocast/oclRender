@@ -3,14 +3,14 @@
 #include "geometry.h"
 
 void 
-quadratic(double a, double b, double c,
-        double *x)
+quadratic(float a, float b, float c,
+        float *x)
 {
   if (a == 0.0) {
     x[0] = -c/b;
     x[1] = -c/b;
   }
-  double d = sqrt(b * b - 4 * a * c);	
+  float d = sqrt(b * b - 4 * a * c);	
   if (b >= 0) {
     x[0] = (-b - d) / (2 * a);
     x[1] = (2 * c) / (-b - d);
@@ -22,7 +22,7 @@ quadratic(double a, double b, double c,
 }
 
 Vector::
-Vector(double x_in, double y_in):
+Vector(float x_in, float y_in):
 x(x_in), y(y_in)
 {}
 
@@ -39,12 +39,12 @@ operator-(const Vector &o) const
 }
 
 Vector Vector::
-operator*(double k) const
+operator*(float k) const
 {
   return Vector(x * k, y * k);
 }
 
-double Vector::
+float Vector::
 dot(const Vector &o) const
 {
   return x * o.x + y * o.y;
@@ -62,7 +62,7 @@ max(const Vector &o) const
   return Vector(fmax(x, o.x), fmax(y, o.y));
 }
 
-double Vector::
+float Vector::
 length()
 {
   return sqrt(x * x + y * y);
@@ -124,20 +124,20 @@ HalfPlane::
 HalfPlane(const Vector &p1, const Vector &p2):
 v(-p2.y + p1.y, p2.x - p1.x)
 {
-  double l = v.length();
+  float l = v.length();
   c = -v.dot(p1) / l;
-  v = v * (1.0 / l);
+  v = v * (1.0F/ l);
 }
 
-double HalfPlane::
+float HalfPlane::
 signed_distance(const Vector p) const
 {
   return v.dot(p) + c;
 }
 
 Transform::
-Transform(double m11, double m12, double tx,
-      double m21, double m22, double ty) 
+Transform(float m11, float m12, float tx,
+      float m21, float m22, float ty) 
 {
 	m[0][0] = m11; m[0][1] = m12; m[0][2] = tx;
 	m[1][0] = m21; m[1][1] = m22; m[1][2] = ty;
@@ -147,7 +147,7 @@ Transform(double m11, double m12, double tx,
 const Transform Transform::
 operator*(const Transform &other) const
 {
-  double t[2][3] = {{0.0, 0.0, 0.0},
+  float t[2][3] = {{0.0, 0.0, 0.0},
           {0.0, 0.0, 0.0}};	
   for (int i = 0; i < 2; i++) {
     for (int j = 0; j < 3; j++) {
@@ -163,12 +163,12 @@ operator*(const Transform &other) const
 const Vector Transform::
 operator*(const Vector &other) const
 {
-  double nx = m[0][0] * other.x + m[0][1] * other.y + m[0][2];
-  double ny = m[1][0] * other.x + m[1][1] * other.y + m[1][2];
+  float nx = m[0][0] * other.x + m[0][1] * other.y + m[0][2];
+  float ny = m[1][0] * other.x + m[1][1] * other.y + m[1][2];
   return Vector(nx, ny);
 }
 
-double Transform::
+float Transform::
 det() const
 {
   return m[0][0] * m[1][1] - m[0][1] * m[1][0];
@@ -177,7 +177,7 @@ det() const
 Transform Transform::
 inverse() const
 {
-  double d = 1.0 / det();
+  float d = 1.0F / det();
   Transform t = Transform(d * m[1][1], -d * m[0][1], 0, 
               -d * m[1][0], d * m[0][0], 0);
   Vector v = t * Vector(m[0][2], m[1][2]);
@@ -193,21 +193,21 @@ identity()
 }
 
 const Transform
-rotate(double theta)
+rotate(float theta)
 {
-  double s = sin(theta);
-  double c = cos(theta);
+  float s = sin(theta);
+  float c = cos(theta);
   return Transform(c, -s, 0.0, s, c, 0.0);
 }
 
 const Transform
-translate(double tx, double ty)
+translate(float tx, float ty)
 {
   return Transform(1, 0, tx, 0, 1, ty);
 }
 
 const Transform
-scale(double x, double y)
+scale(float x, float y)
 {
   return Transform(x, 0.0, 0.0, 0.0, y, 0.0);
 }

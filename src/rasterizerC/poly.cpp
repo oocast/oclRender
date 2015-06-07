@@ -22,16 +22,17 @@ Shape(&poly.color), vs(poly.vs), half_planes(poly.half_planes)
 }
 */
 
-double ConvexPoly::
+/*
+float ConvexPoly::
 signed_distance_bound(const Vector &p) const
 {
   const HalfPlane *plane = &half_planes[0];
-  double min_inside, max_outside;
-  min_inside = 1e30;
-  max_outside = -1e30;
+  float min_inside, max_outside;
+  min_inside = 1e15F;
+  max_outside = -1e15F;
   for (size_t i = 0; i < half_planes.size(); i++) {
     plane = &half_planes[i];
-    double d = plane->signed_distance(p);
+    float d = plane->signed_distance(p);
     if (d <= 0 && d > max_outside) {
       max_outside = d;
     }
@@ -46,6 +47,7 @@ signed_distance_bound(const Vector &p) const
     return min_inside;
   }
 }
+*/
 
 bool ConvexPoly::
 contains(const Vector &p) const
@@ -70,6 +72,24 @@ transform(const Transform &xform)
   return ConvexPoly(xvs, &color);
 }
 
+std::shared_ptr<Shape> ConvexPoly::
+transformp(const Transform &xform)
+{
+	std::shared_ptr<Shape> result(new ConvexPoly(transform(xform)));
+	return result;
+}
+
+void ConvexPoly::
+get_parameters(std::vector<float> &paras, ShapeType *shapeType)
+{
+	*shapeType = CONVEXPOLY;
+	for (auto it = half_planes.begin(); it != half_planes.end(); it++) {
+		paras.push_back(it->v.x);
+		paras.push_back(it->v.y);
+		paras.push_back(it->c);
+	}
+}
+
 ConvexPoly 
 Triangle(const std::vector<Vector> &ps, const Color *color)
 {
@@ -90,10 +110,10 @@ const Color *color)
 
 ConvexPoly
 LineSegment(const Vector &v1, const Vector &v2, 
-      double thickness, const Color *color)
+      float thickness, const Color *color)
 {
   Vector d = v2 - v1;
-  double tmp = d.x;
+  float tmp = d.x;
   d.x = -d.y;
   d.y = tmp;
   d = d * (thickness / d.length() / 2);

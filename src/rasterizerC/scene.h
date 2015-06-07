@@ -1,12 +1,13 @@
 #ifndef __SCENE_H__
 #define __SCENE_H__
 #include <deque>
+#include <memory>
 #include "shape.h"
 
 class Scene : public SceneObject
 {
 public:
-  std::deque<Shape*> nodes;
+  std::deque<std::shared_ptr<Shape>> nodes;
   // Transform transform;
 public:
 	Scene(){}

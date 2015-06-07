@@ -5,7 +5,7 @@
 
 /*
 Color::
-Color(double r, double g, double b, double a) :
+Color(float r, float g, float b, float a) :
 a(a)
 {
   rgb[0] = r; rgb[1] = g; rgb[2] = b;
@@ -16,7 +16,7 @@ draw(const Color &o)
 {
   if (a == o.a && a == 0.0)
     return;
-  double u = 1.0 - o.a;
+  float u = 1.0 - o.a;
   rgb[0] = u * rgb[0] + o.a * o.rgb[0];
   rgb[1] = u * rgb[1] + o.a * o.rgb[1];
   rgb[2] = u * rgb[2] + o.a * o.rgb[2];
@@ -24,7 +24,7 @@ draw(const Color &o)
 }
 
 void Color::
-fill(double r, double g, double b)
+fill(float r, float g, float b)
 {
 	rgb[0] = r;
 	rgb[1] = g;
@@ -32,7 +32,7 @@ fill(double r, double g, double b)
 }
 
 Color Color::
-fainter(double k)
+fainter(float k)
 {
   return Color(rgb[0], rgb[1], rgb[2], a*k);
 }
@@ -78,7 +78,7 @@ as_ppm(unsigned char *rgbbuf)
 */
 
 void
-init_Color(Color *color, double r, double g, double b, double a)
+init_Color(Color *color, float r, float g, float b, float a)
 {
 	color->rgb[0] = r;
 	color->rgb[1] = g;
@@ -87,7 +87,7 @@ init_Color(Color *color, double r, double g, double b, double a)
 }
 
 Color
-init_Color(double r, double g, double b, double a)
+init_Color(float r, float g, float b, float a)
 {
 	Color result;
 	result.rgb[0] = r;
@@ -102,15 +102,15 @@ draw_Color(Color *dst, const Color *src)
 {
 	if (dst->a == src->a && dst->a == 0.0)
 		return;
-	double u = 1.0 - src->a;
+	float u = 1.0F - src->a;
 	dst->rgb[0] = u * dst->rgb[0] + src->a * src->rgb[0];
 	dst->rgb[1] = u * dst->rgb[1] + src->a * src->rgb[1];
 	dst->rgb[2] = u * dst->rgb[2] + src->a * src->rgb[2];
-	dst->a = 1.0 - (1.0 - dst->a) * (1.0 - src->a);
+	dst->a = 1.0F - (1.0F - dst->a) * (1.0F - src->a);
 }
 
 Color
-faint_Color(const Color *color, double k)
+faint_Color(const Color *color, float k)
 {
 	Color result;
 	memcpy(&result, color, sizeof(Color));

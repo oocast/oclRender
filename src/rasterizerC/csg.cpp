@@ -2,11 +2,12 @@
 #include "csg.h"
 
 CSG::
-CSG(const Shape *v1, const Shape *v2, const Color *color) :
+CSG(Shape *v1, Shape *v2, const Color *color) :
 Shape(color), v1(v1), v2(v2)
 {	
 }
 
+/*
 Union::
 Union(const Shape *v1, const Shape *v2, const Color *color) :
 CSG(v1, v2, color)
@@ -21,7 +22,9 @@ contains(const Vector &p) const
 {
 	return v1->contains(p) || v2->contains(p);
 }
+*/
 
+/*
 double Union::
 signed_distance_bound(const Vector &p) const
 {
@@ -30,9 +33,12 @@ signed_distance_bound(const Vector &p) const
 	b2 = v2->signed_distance_bound(p);
 	return fmax(b1, b2);
 }
+*/
 
+/*
 Union Union::
 transform(const Transform &t)
 {
 	//return Union(v1->transform(t))
 }
+*/

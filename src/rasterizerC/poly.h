@@ -1,6 +1,7 @@
 #ifndef __POLY_H__
 #define __POLY_H__
 #include <vector>
+#include <memory>
 #include "shape.h"
 #include "geometry.h"
 
@@ -14,11 +15,11 @@ public:
 	//ConvexPoly(){}
   ConvexPoly(const std::vector<Vector> &ps, const Color *color = nullptr);
 	ConvexPoly(ConvexPoly &&poly);
-	// ConvexPoly(const ConvexPoly &poly);
-	double signed_distance_bound(const Vector &p) const;
+	//float signed_distance_bound(const Vector &p) const;
   bool contains(const Vector &p) const;
   ConvexPoly transform(const Transform &xform);
-	void get_parameters(std::vector<double> &paras, ShapeType *shapeType);
+	std::shared_ptr<Shape> transformp(const Transform &xform);
+	void get_parameters(std::vector<float> &paras, ShapeType *shapeType);
 };
 
 ConvexPoly Triangle(const std::vector<Vector> &ps, const Color *color = nullptr);
@@ -27,6 +28,6 @@ ConvexPoly Rectangle(const Vector &v1, const Vector &v2,
 				const Color *color = nullptr);
 
 ConvexPoly LineSegment(const Vector &v1, const Vector &v2, 
-				double thickness, const Color *color = nullptr);
+				float thickness, const Color *color = nullptr);
 
 #endif //__POLY_H__
