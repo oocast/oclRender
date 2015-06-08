@@ -57,12 +57,15 @@ void test_picture()
 	
 	init(fileName, kernelName);
 
+	image_modifyio(scene, bg);
+	/*
 	int size=bg.width*bg.height*sizeof(Color);
 	memObj[0]=clCreateBuffer(context, CL_MEM_READ_WRITE|CL_MEM_COPY_HOST_PTR, size, &bg.pixels[0],NULL);
 
 	scene.draw(bg);
 
 	err=clEnqueueReadBuffer(cmd_queue, memObj[0], CL_TRUE, 0, size, &bg.pixels[0], 0, NULL, NULL);
+	*/
 
 	release();
 	//image.write_ppm(f, &bg);
