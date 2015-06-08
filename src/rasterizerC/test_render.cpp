@@ -1,6 +1,9 @@
 #include "oclrender.h"
+#include "cl_helper.h"
 #include <cstdlib>
+#include <stdio.h>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 void test_picture()
@@ -44,13 +47,24 @@ void test_picture()
 	//Ellipse ellip(circle.transform(around(Vector(0.75F, 0.1F), rot * sca)));
 	scene.add(new Ellipse(circle.transform(around(Vector(0.75F, 0.1F), rot * sca))));
 
-	
 	//ConvexPoly tri1(Triangle({ Vector(0.25, 0.75), Vector(0.25, 0.5), Vector(0.5, 0.75) }, &green));
 	//ConvexPoly tri2(Triangle({ Vector(0.5, 0.5), Vector(0.5, 0.75), Vector(0.25, 0.5) }, &green));
 	//scene.add(new ConvexPoly(tri1));
 	//scene.add(new ConvexPoly(tri2));
 
+	char fileName[]="kernel.cl";
+	char kernelName[]="drawKernel";
+	
+	init(fileName, kernelName);
+
+	int size=bg.width*bg.height*sizeof(Color);
+	memObj[0]=clCreateBuffer(context, CL_MEM_READ_WRITE|CL_MEM_COPY_HOST_PTR, size, &bg.pixels[0],NULL);
+
 	scene.draw(bg);
+
+	err=clEnqueueReadBuffer(cmd_queue, memObj[0], CL_TRUE, 0, size, &bg.pixels[0], 0, NULL, NULL);
+
+	release();
 	//image.write_ppm(f, &bg);
 	bg.write_ppm(f);
 	f.close();
