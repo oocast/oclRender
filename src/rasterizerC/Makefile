@@ -1,10 +1,11 @@
 CC = g++
-CFLAGS = -g -Wall -std=c++11
+CFLAGS = -g -Wall -std=c++11 -l OpenCL
 
 BINS = test_render
 HDRS = color.h ellipse.h geometry.h image.h oclrender.h poly.h scene.h shape.h
 SRCS = color.cpp ellipse.cpp geometry.cpp image.cpp poly.cpp scene.cpp shape.cpp test_render.cpp
-OBJS = $(SRCS:.cpp=.o)
+ABCC = libcl.so
+OBJS = $(SRCS:.cpp=.o) $(ABCC)
 
 all: test_render
 
