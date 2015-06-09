@@ -1,15 +1,15 @@
 #include "scene.h"
 
 void Scene::
-add(Shape *Node)
+Add(Shape * node)
 {
-  Nodes.push_back(std::shared_ptr<Shape>(Node));
+    nodes.push_back(std::shared_ptr<Shape>(node));
 }
 
 void Scene::
-draw(PPMImage &Image, int SuperSampling)
+Draw(PPMImage & image, int superSampling)
 {
-  for (size_t i = 0; i < Nodes.size(); i++) {
-    Nodes[i]->draw(Image, SuperSampling);
-  }
+    for (size_t i = 0; i < nodes.size(); i++) {
+        nodes[i]->Draw(image, superSampling);
+    }
 }

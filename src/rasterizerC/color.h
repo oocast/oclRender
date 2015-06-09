@@ -1,6 +1,7 @@
 #ifndef __COLOR_H__
 #define __COLOR_H__
-#include <string>
+//#include <cstdlib>
+//#include <string>
 
 /*
 class Color
@@ -24,16 +25,16 @@ public:
 
 struct Color
 {
-  // {r, g, b} from 0.0 to 1.0
-  float rgb[3];
-  // alpha value, from 0.0 to 1.0
-  float a;
+    // {r, g, b} from 0.0 to 1.0
+    float rgb[3];
+    // alpha value, from 0.0 to 1.0
+    float a;
 };
 
-void initColor(Color *color, float r = 0.0, float g = 0.0, float b = 0.0, float a = 1.0);
-Color initColor(float r = 0.0, float g = 0.0, float b = 0.0, float a = 1.0);
-void drawColor(Color *dst, const Color *src);
-Color faintColor(const Color *color, float k);
-unsigned char *asPPM(const Color *color, unsigned char *rgbbuf);
+void InitColor(Color *, float r = 0.0, float g = 0.0, float b = 0.0, float a = 1.0);
+Color InitColor(float r = 0.0, float g = 0.0, float b = 0.0, float a = 1.0);
+void DrawColor(Color *, const Color *);
+Color FaintColor(const Color *, float);
+unsigned char *AsPPM(const Color *, unsigned char *);
 
 #endif //__COLOR_H__

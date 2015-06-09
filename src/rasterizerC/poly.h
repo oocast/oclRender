@@ -1,33 +1,29 @@
 #ifndef __POLY_H__
 #define __POLY_H__
-#include <vector>
-#include <memory>
+
 #include "shape.h"
-#include "geometry.h"
 
 class ConvexPoly : public Shape
 {
 protected:
-  std::vector<Vector> Vertices;
-  std::vector<HalfPlane> HalfPlanes;
+    std::vector<Vector> vertices;
+    std::vector<HalfPlane> halfPlanes;
 public:
-  // vertex should be counter-clockwise order
-  //ConvexPoly(){}
-  ConvexPoly(const std::vector<Vector> &Points, const Color *InputColorPointer = nullptr);
-  ConvexPoly(ConvexPoly &&OtherPolygon);
-  //float signed_distance_bound(const Vector &p) const;
-  bool contains(const Vector &Point) const;
-  ConvexPoly transform(const Transform &Xform);
-  std::shared_ptr<Shape> transformPointer(const Transform &Xform);
-  void getParameters(std::vector<float> &Parameters, ShapeType *ShapeType);
+    // vertex should be counter-clockwise order
+    //ConvexPoly(){}
+    ConvexPoly(const std::vector<Vector> &, const Color * inputColorPointer = nullptr);
+    ConvexPoly(ConvexPoly &&);
+    //float signed_distance_bound(const Vector &p) const;
+    bool Contains(const Vector &) const;
+    ConvexPoly Transformation(const Transform &);
+    std::shared_ptr<Shape> TransformPointer(const Transform &);
+    void GetParameters(std::vector<float> &, ShapeType &);
 };
 
-ConvexPoly Triangle(const std::vector<Vector> &Vertices, const Color *InputColorPointer = nullptr);
+ConvexPoly Triangle(const std::vector<Vector> &, const Color * inputColorPointer = nullptr);
 
-ConvexPoly Rectangle(const Vector &Vertex1, const Vector &Vertex2, 
-        const Color *color = nullptr);
+ConvexPoly Rectangle(const Vector &, const Vector &, const Color * color = nullptr);
 
-ConvexPoly LineSegment(const Vector &Vertex1, const Vector &Vertex2, 
-        float Thickness, const Color *InputColorPointer = nullptr);
+ConvexPoly LineSegment(const Vector &, const Vector &, float, const Color * inputColorPointer = nullptr);
 
 #endif //__POLY_H__

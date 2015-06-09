@@ -1,4 +1,4 @@
-inline bool contain(float xt, float yt, __global float * paras)
+inline bool ContainEll(float xt, float yt, __global float * paras)
 {
     float3 a=vload3(0, paras);
     float3 b=vload3(1, paras);
@@ -6,28 +6,29 @@ inline bool contain(float xt, float yt, __global float * paras)
     return temp<0;
 }
 
-inline bool containPOL(float xt, float yt, __global float * paras, int id)
+inline bool ContainPol(float xt, float yt, __global float * paras, int id)
 {
     int temp=1;
-    for (int ii=0; ii<id; ii++)
+    for (int it=0; it<id; it++)
     {
-        float3 a=vload3(ii, paras);
+        float3 a=vload3(it, paras);
         temp*=((a.x*xt+a.y*yt+a.z))>0;
     }
     return temp;
 }
 
-__kernel void drawKernel(__global float * image,
+__kernel void ShapeDraw(__global float * image,
                          __global float * paras,
                          __global float * jitPos,
                          int s,
                          int w,
                          int h,
+//                         float4 color;
                          float r,
                          float g,
                          float b,
+                         float a,
                          int id)
-//                         __global float * out)
 {
     int i=get_global_id(0);
 
@@ -43,19 +44,17 @@ __kernel void drawKernel(__global float * image,
             float2 jit=vload2(k, jitPos);
             xt=x+jit.x;
             yt=y+jit.y;
-            //count+=(id==0)*contain(xt, yt, paras);
-            //count+=(id!=0)*containPOL(xt, yt, paras, id);
-            if (id==0) count+=contain(xt, yt, paras);
-            else count+=containPOL(xt, yt, paras, id);
+            if (id==0) count+=ContainEll(xt, yt, paras);
+            else count+=ContainPol(xt, yt, paras, id);
         }
-        count=count/s;
+        count=count*a/s;
 
         float4 pix=vload4((i*w+j), image);
         float ft=1.0f-count;
         pix.x=pix.x*ft+r*count;
         pix.y=pix.y*ft+g*count;
         pix.z=pix.z*ft+b*count;
-        pix.w=1;
+        pix.w=1.0f-ft*(1-pix.w);
         vstore4(pix, ((i*w)+j), image);
     }
 }

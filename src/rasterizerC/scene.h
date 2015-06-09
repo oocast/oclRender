@@ -1,18 +1,18 @@
 #ifndef __SCENE_H__
 #define __SCENE_H__
 #include <deque>
-#include <memory>
+
 #include "shape.h"
 
 class Scene : public SceneObject
 {
 public:
-  std::deque<std::shared_ptr<Shape>> Nodes;
-  // Transform transform;
+    std::deque<std::shared_ptr<Shape>> nodes;
+    // Transform transform;
 public:
-  Scene(){}
-  void add(Shape *Node);
-  virtual void draw(PPMImage &Image, int SuperSampling = 6);
+	Scene(){}
+    void Add(Shape *);
+    virtual void Draw(PPMImage &, int superSampling = 6);
 };
 
 #endif //__SCENE_H__
