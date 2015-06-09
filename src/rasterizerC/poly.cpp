@@ -2,12 +2,12 @@
 #include <cmath>
 
 ConvexPoly::
-ConvexPoly(const std::vector<Vector> &ps, const Color *color):
-Shape(color), vs(ps)
+ConvexPoly(const std::vector<Vector> &Points, const Color *InputColorPointer):
+Shape(InputColorPointer), Vertices(Points)
 {
-  bound = AABox::from_vectors(&vs[0], vs.size());
-  for (size_t i = 0; i < vs.size(); i++) {
-    half_planes.push_back(HalfPlane(vs[i], vs[(i+1) % vs.size()]));
+  Bound = AABox::fromVectors(&Vertices[0], Vertices.size());
+  for (size_t i = 0; i < Vertices.size(); i++) {
+    HalfPlanes.push_back(HalfPlane(Vertices[i], Vertices[(i+1) % Vertices.size()]));
   }
 }
 
@@ -16,9 +16,9 @@ ConvexPoly::
 ConvexPoly(ConvexPoly &&poly):
 Shape(&poly.color), vs(poly.vs), half_planes(poly.half_planes)
 {
-	bound = poly.bound;
-	poly.vs.clear();
-	poly.half_planes.clear();
+  bound = poly.bound;
+  poly.vs.clear();
+  poly.half_planes.clear();
 }
 */
 
@@ -50,12 +50,12 @@ signed_distance_bound(const Vector &p) const
 */
 
 bool ConvexPoly::
-contains(const Vector &p) const
+contains(const Vector &Point) const
 {
   const HalfPlane *plane;
-  for (size_t i = 0; i < half_planes.size(); i++) {
-    plane = &half_planes[i];
-    if (plane->signed_distance(p) < 0) {
+  for (size_t i = 0; i < HalfPlanes.size(); i++) {
+    plane = &HalfPlanes[i];
+    if (plane->signedDistance(Point) < 0) {
       return false;
     }
   }
@@ -63,64 +63,64 @@ contains(const Vector &p) const
 }
 
 ConvexPoly ConvexPoly::
-transform(const Transform &xform)
+transform(const Transform &Xform)
 {
-  std::vector<Vector> xvs;
-  for (size_t i = 0; i < vs.size(); i++) {
-    xvs.push_back(xform * vs[i]);
+  std::vector<Vector> xformedVertices;
+  for (size_t i = 0; i < Vertices.size(); i++) {
+    xformedVertices.push_back(Xform * Vertices[i]);
   }
-  return ConvexPoly(xvs, &color);
+  return ConvexPoly(xformedVertices, &ShapeColor);
 }
 
 std::shared_ptr<Shape> ConvexPoly::
-transformp(const Transform &xform)
+transformPointer(const Transform &Xform)
 {
-	std::shared_ptr<Shape> result(new ConvexPoly(transform(xform)));
-	return result;
+  std::shared_ptr<Shape> result(new ConvexPoly(transform(Xform)));
+  return result;
 }
 
 void ConvexPoly::
-get_parameters(std::vector<float> &paras, ShapeType *shapeType)
+getParameters(std::vector<float> &Parameters, ShapeType *ShapeType)
 {
-	*shapeType = CONVEXPOLY;
-	for (auto it = half_planes.begin(); it != half_planes.end(); it++) {
-		paras.push_back(it->v.x);
-		paras.push_back(it->v.y);
-		paras.push_back(it->c);
-	}
+  *ShapeType = CONVEXPOLY;
+  for (auto it = HalfPlanes.begin(); it != HalfPlanes.end(); it++) {
+    Parameters.push_back(it->ab.x); // a
+    Parameters.push_back(it->ab.y); // b
+    Parameters.push_back(it->c);
+  }
 }
 
 ConvexPoly 
-Triangle(const std::vector<Vector> &ps, const Color *color)
+Triangle(const std::vector<Vector> &Vertices, const Color *InputColorPointer)
 {
-	return ConvexPoly(ps, color);
+  return ConvexPoly(Vertices, InputColorPointer);
 }
 
 ConvexPoly
-Rectangle(const Vector &v1, const Vector &v2, 
-const Color *color)
+Rectangle(const Vector &Vertex1, const Vector &Vertex2, 
+const Color *InputColorPointer)
 {
-  std::vector<Vector> vs;
-  vs.push_back(Vector(fmin(v1.x, v2.x), fmin(v1.y, v2.y)));
-  vs.push_back(Vector(fmax(v1.x, v2.x), fmin(v1.y, v2.y)));
-  vs.push_back(Vector(fmax(v1.x, v2.x), fmax(v1.y, v2.y)));
-  vs.push_back(Vector(fmin(v1.x, v2.x), fmax(v1.y, v2.y)));
-  return ConvexPoly(vs, color);
+  std::vector<Vector> Vertices;
+  Vertices.push_back(Vector(fmin(Vertex1.x, Vertex2.x), fmin(Vertex1.y, Vertex2.y)));
+  Vertices.push_back(Vector(fmax(Vertex1.x, Vertex2.x), fmin(Vertex1.y, Vertex2.y)));
+  Vertices.push_back(Vector(fmax(Vertex1.x, Vertex2.x), fmax(Vertex1.y, Vertex2.y)));
+  Vertices.push_back(Vector(fmin(Vertex1.x, Vertex2.x), fmax(Vertex1.y, Vertex2.y)));
+  return ConvexPoly(Vertices, InputColorPointer);
 }
 
 ConvexPoly
-LineSegment(const Vector &v1, const Vector &v2, 
-      float thickness, const Color *color)
+LineSegment(const Vector &Vertex1, const Vector &Vertex2, 
+      float Thickness, const Color *InputColorPointer)
 {
-  Vector d = v2 - v1;
+  Vector d = Vertex2 - Vertex1;
   float tmp = d.x;
   d.x = -d.y;
   d.y = tmp;
-  d = d * (thickness / d.length() / 2);
-  std::vector<Vector> vs;
-  vs.push_back(v1 + d);
-  vs.push_back(v1 - d);
-  vs.push_back(v2 - d);
-  vs.push_back(v2 + d);
-  return ConvexPoly(vs, color);
+  d = d * (Thickness / d.length() / 2);
+  std::vector<Vector> Vertices;
+  Vertices.push_back(Vertex1 + d);
+  Vertices.push_back(Vertex1 - d);
+  Vertices.push_back(Vertex2 - d);
+  Vertices.push_back(Vertex2 + d);
+  return ConvexPoly(Vertices, InputColorPointer);
 }

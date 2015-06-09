@@ -10,21 +10,21 @@ class Ellipse : public Shape
 {
 protected:
   float a, b, c, d, e, f;
-  Transform gradient;
-  Vector center;
+  Transform Gradient;
+  Vector Center;
 public:
   Ellipse(float a = 1.0, float b = 1.0, float c = 0.0,
     float d = 0.0, float e = 0.0, float f = -1.0,
-    const Color *color = nullptr);
-	Ellipse(const Ellipse &&ellipse);
-  float value(const Vector &p) const;
-  bool contains(const Vector &p) const;
-  Ellipse transform(const Transform &transform);
-	std::shared_ptr<Shape> transformp(const Transform &xform);
-  void intersections(const Vector &c, const Vector &p, Vector *inter_ps) const;
+		const Color *ColorInputPointer = nullptr);
+	Ellipse(const Ellipse &&OtherEllipse);
+  float value(const Vector &Point) const;
+  bool contains(const Vector &Point) const;
+  Ellipse transform(const Transform &Xform);
+	std::shared_ptr<Shape> transformPointer(const Transform &Xform);
+  void intersections(const Vector &Point1, const Vector &Point2, Vector *IntersectionPoints) const;
   //float signed_distance_bound(const Vector &p) const;
-	void get_parameters(std::vector<float> &paras, ShapeType *shapeType);
+	void getParameters(std::vector<float> &Parameters, ShapeType *ShapeType);
 };
 
-Ellipse Circle(const Vector &center, float radius, const Color *color = nullptr);
+Ellipse Circle(const Vector &Center, float Radius, const Color *InputColorPointer = nullptr);
 #endif //__ELLIPSE_H__

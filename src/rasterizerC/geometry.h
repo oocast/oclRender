@@ -26,25 +26,25 @@ public:
 class AABox
 {
 public:
-  Vector low, high; // use Vector to represent points
+  Vector Low, High; // use Vector to represent points
 public:
-  AABox(const Vector &p1 = Vector(), const Vector &p2 = Vector());
+  AABox(const Vector &Point1 = Vector(), const Vector &Point2 = Vector());
   Vector midpoint() const;
   Vector size() const;
-  bool contains(const Vector &p) const;
-  bool overlaps(const AABox &r) const;
-  AABox intersection(const AABox &other) const;
-  static AABox from_vectors(const Vector *vcts, const int vnum);
+  bool contains(const Vector &Point) const;
+  bool overlaps(const AABox &Other) const;
+  AABox intersection(const AABox &Other) const;
+  static AABox fromVectors(const Vector *Vectors, const int VectorNum);
 };
 
 class HalfPlane
 {
 public:
-  Vector v;
+  Vector ab;
   float c;
 public:
-  HalfPlane(const Vector &p1, const Vector &p2);
-  float signed_distance(const Vector p) const;
+  HalfPlane(const Vector &Point1, const Vector &Point2);
+  float signedDistance(const Vector &Point) const;
 };
 
 // Transform represents an affine transformation
@@ -64,7 +64,7 @@ public:
 };
 
 const Transform identity();
-const Transform rotate(float theta);
+const Transform rotate(float Theta);
 const Transform translate(float tx, float ty);
 const Transform scale(float x, float y);
 const Transform around(const Vector &v, const Transform &t);

@@ -70,78 +70,78 @@ length()
 
 AABox::
 AABox(const Vector &p1, const Vector &p2):
-low(p1.min(p2)), high(p2.max(p2))
+Low(p1.min(p2)), High(p2.max(p2))
 {}
 
 Vector AABox::
 midpoint() const
 {
-  return (low + high) * 0.5;
+  return (Low + High) * 0.5;
 }
 
 Vector AABox::
 size() const
 {
-  return high - low;
+  return High - Low;
 }
 
 bool AABox::
-contains(const Vector &p) const
+contains(const Vector &Point) const
 {
-  return (low.x <= p.x) &&
-      (p.x <= high.x) &&
-      (low.y <= p.y) &&
-      (p.y <= high.y);
+  return (Low.x <= Point.x) &&
+      (Point.x <= High.x) &&
+      (Low.y <= Point.y) &&
+      (Point.y <= High.y);
 }
 
 bool AABox::
-overlaps(const AABox &r) const
+overlaps(const AABox &Other) const
 {
-  return !((r.low.x >= high.x) ||
-      (r.high.x <= low.x) ||
-      (r.low.y >= high.y) ||
-      (r.high.y <= low.y));
+  return !((Other.Low.x >= High.x) ||
+      (Other.High.x <= Low.x) ||
+      (Other.Low.y >= High.y) ||
+      (Other.High.y <= Low.y));
 }
 
 AABox AABox::
-intersection(const AABox &other) const
+intersection(const AABox &Other) const
 {
-  return AABox(low.max(other.low), high.min(other.high));
+  return AABox(Low.max(Other.Low), High.min(Other.High));
 }
 
 AABox AABox::
-from_vectors(const Vector *vcts, const int vnum)
+fromVectors(const Vector *Vectors, const int VectorNum)
 {
-  Vector tmp_low = vcts[0], tmp_high = vcts[0];
-  for (int i = 1; i < vnum; i++) {
-    tmp_low = tmp_low.min(vcts[i]);
-    tmp_high = tmp_high.max(vcts[i]);
+  Vector tmp_low = Vectors[0], tmp_high = Vectors[0];
+  for (int i = 1; i < VectorNum; i++) {
+    tmp_low = tmp_low.min(Vectors[i]);
+    tmp_high = tmp_high.max(Vectors[i]);
   }
   return AABox(tmp_low, tmp_high);
 }
 
 HalfPlane::
-HalfPlane(const Vector &p1, const Vector &p2):
-v(-p2.y + p1.y, p2.x - p1.x)
+HalfPlane(const Vector &Point1, const Vector &Point2):
+ab(-Point2.y + Point1.y, Point2.x - Point1.x)
 {
-  float l = v.length();
-  c = -v.dot(p1) / l;
-  v = v * (1.0F/ l);
+  float l = ab.length();
+  c = -ab.dot(Point1) / l;
+  ab = ab * (1.0F/ l);
 }
 
 float HalfPlane::
-signed_distance(const Vector p) const
+signedDistance(const Vector &Point) const
 {
-  return v.dot(p) + c;
+  return ab.dot(Point) + c;
 }
 
 Transform::
 Transform(float m11, float m12, float tx,
       float m21, float m22, float ty) 
 {
-	m[0][0] = m11; m[0][1] = m12; m[0][2] = tx;
-	m[1][0] = m21; m[1][1] = m22; m[1][2] = ty;
-	m[2][0] = 0.0; m[2][1] = 0.0; m[2][2] = 1.0;
+  m[0][0] = m11; m[0][1] = m12; m[0][2] = tx;
+  m[1][0] = m21; m[1][1] = m22; m[1][2] = ty;
+  m[2][0] = 0.0; m[2][1] = 0.0; m[2][2] = 1.0;
 }
 
 const Transform Transform::
@@ -193,10 +193,10 @@ identity()
 }
 
 const Transform
-rotate(float theta)
+rotate(float Theta)
 {
-  float s = sin(theta);
-  float c = cos(theta);
+  float s = sin(Theta);
+  float c = cos(Theta);
   return Transform(c, -s, 0.0, s, c, 0.0);
 }
 

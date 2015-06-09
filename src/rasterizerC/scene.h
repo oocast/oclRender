@@ -7,12 +7,12 @@
 class Scene : public SceneObject
 {
 public:
-  std::deque<std::shared_ptr<Shape>> nodes;
+  std::deque<std::shared_ptr<Shape>> Nodes;
   // Transform transform;
 public:
-	Scene(){}
-  void add(Shape *node);
-  virtual void draw(PPMImage &image, int super_sampling = 6);
+  Scene(){}
+  void add(Shape *Node);
+  virtual void draw(PPMImage &Image, int SuperSampling = 6);
 };
 
 #endif //__SCENE_H__

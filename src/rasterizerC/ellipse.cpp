@@ -5,15 +5,15 @@
 Ellipse::
 Ellipse(float a, float b, float c,
       float d, float e, float f,
-      const Color *color):
-Shape(color), a(a), b(b), c(c),
+      const Color *ColorInputPointer) :
+Shape(ColorInputPointer), a(a), b(b), c(c),
 d(d), e(e), f(f)
 {
   if (c*c - 4*a*b >= 0) {
     throw std::invalid_argument("Not an ellipse");
   }
-  gradient = Transform(2*a, c, d, c, 2*b, e);
-  center = gradient.inverse() * Vector(0.0, 0.0);
+  Gradient = Transform(2*a, c, d, c, 2*b, e);
+  Center = Gradient.inverse() * Vector(0.0, 0.0);
   float x[2], y[2];
   quadratic(b-c*c/(4*a), e-c*d/(2*a), f-d*d/(4*a), y);
   quadratic(a-c*c/(4*b), d-c*e/(2*b), f-e*e/(4*b), x);
@@ -24,8 +24,8 @@ d(d), e(e), f(f)
     Vector(x[0], -(e + c*x[0])/(2*b)),
     Vector(x[1], -(e + c*x[1])/(2*b))
   };
-  bound = AABox::from_vectors(boundVectors, 4);
-  if (!contains(center)) {
+  Bound = AABox::fromVectors(boundVectors, 4);
+  if (!contains(Center)) {
     throw std::logic_error("Internal error, center not inside ellipse");
   }
 }
@@ -33,22 +33,22 @@ d(d), e(e), f(f)
 //Ellipse::Ellipse(const Ellipse &&ellipse){}
 
 float Ellipse::
-value(const Vector &p) const
+value(const Vector &Point) const
 {
-  return (a*p.x*p.x + b*p.y*p.y + c*p.x*p.y +
-      d*p.x + e*p.y + f);
+  return (a*Point.x*Point.x + b*Point.y*Point.y + c*Point.x*Point.y +
+      d*Point.x + e*Point.y + f);
 }
 
 bool Ellipse::
-contains(const Vector &p) const
+contains(const Vector &Point) const
 {
-  return value(p) < 0;
+  return value(Point) < 0;
 }
 
 Ellipse Ellipse::
-transform(const Transform &transform)
+transform(const Transform &Xform)
 {
-  Transform i(transform.inverse());
+  Transform i(Xform.inverse());
   float aa, bb, cc, dd, ee, ff;
   float m00, m01, m02, m10, m11, m12;
   m00 = i.m[0][0]; m01 = i.m[0][1]; m02 = i.m[0][2];
@@ -62,31 +62,31 @@ transform(const Transform &transform)
           c*(m01*m12 + m02*m11) + d*m01 + e*m11;
   ff = a*m02*m02 + b*m12*m12 + c*m02*m12 +
         d*m02 + e*m12 + f;
-  return Ellipse(aa, bb, cc, dd, ee, ff, &color);
+  return Ellipse(aa, bb, cc, dd, ee, ff, &ShapeColor);
 }
 
 std::shared_ptr<Shape> Ellipse::
-transformp(const Transform &xform)
+transformPointer(const Transform &Xform)
 {
-	std::shared_ptr<Shape> result(new Ellipse(transform(xform)));
-	return result;
+  std::shared_ptr<Shape> result(new Ellipse(transform(Xform)));
+  return result;
 }
 
 void Ellipse::
-intersections(const Vector &c, const Vector &p, Vector *inter_ps) const
+intersections(const Vector &Point1, const Vector &Point2, Vector *IntersectionPoints) const
 {
-  // returns the two intersections of the line through c and p
+  // returns the two intersections of the line through Point1 and Point2
     // and the ellipse. Defining a line as a function of a single
-    // parameter u, x(u) = c.x + u * (p.x - c.x), (and same for y)
+    // parameter u, x(u) = Point1.x + u * (Point2.x - Point1.x), (and same for y)
     // this simply solves the quadratic equation f(x(u), y(u)) = 0
-  Vector pc = p - c;
+  Vector pc = Point2 - Point1;
   float u2, u1, u0;
-  u2 = a*pc.x*pc.x + b*pc.y*pc.y + this->c*pc.x*pc.y;
-  u1 = 2* a*c.x*pc.x + 2* b*c.y*pc.y 
-        + this->c*c.y*pc.x + this->c*c.x*pc.y + d*pc.x 
-        + e*pc.y;
-  u0 =  a*c.x*c.x + b*c.y*c.y + this->c*c.x*c.y 
-        + d*c.x + e*c.y + f;
+  u2 = a*pc.x*pc.x + b*pc.y*pc.y + c*pc.x*pc.y;
+  u1 = 2*a*Point1.x*pc.x + 2*b*Point1.y*pc.y 
+       + c*Point1.y*pc.x + c*Point1.x*pc.y + d*pc.x 
+       + e*pc.y;
+  u0 = a*Point1.x*Point1.x + b*Point1.y*Point1.y + c*Point1.x*Point1.y 
+       + d*Point1.x + e*Point1.y + f;
   /*
   // try catch block for imaginary solutions
   try{
@@ -96,8 +96,8 @@ intersections(const Vector &c, const Vector &p, Vector *inter_ps) const
   */
   float sols[2];
   quadratic(u2, u1, u0, sols);
-  inter_ps[0] = c+pc*sols[0];
-  inter_ps[1] = c+pc*sols[1];
+  IntersectionPoints[0] = Point1+pc*sols[0];
+  IntersectionPoints[1] = Point1 + pc*sols[1];
 }
 
 /*
@@ -145,21 +145,21 @@ signed_distance_bound(const Vector &p) const
 */
 
 void Ellipse::
-get_parameters(std::vector<float> &paras, ShapeType *shapeType)
+getParameters(std::vector<float> &Parameters, ShapeType *ShapeType)
 {
-	paras.push_back(a);
-	paras.push_back(b);
-	paras.push_back(c);
-	paras.push_back(d);
-	paras.push_back(e);
-	paras.push_back(f);
-	*shapeType = ELLIPSE;
+  Parameters.push_back(a);
+  Parameters.push_back(b);
+  Parameters.push_back(c);
+  Parameters.push_back(d);
+  Parameters.push_back(e);
+  Parameters.push_back(f);
+  *ShapeType = ELLIPSE;
 }
 
 Ellipse 
-Circle(const Vector &center, float radius, const Color *color)
+Circle(const Vector &Center, float Radius, const Color *InputColorPointer)
 {
-  return Ellipse(1.0, 1.0, 0.0, 0.0, 0.0, -1.0, color).transform(
-    scale(radius, radius)).transform(
-    translate(center.x, center.y));
+  return Ellipse(1.0, 1.0, 0.0, 0.0, 0.0, -1.0, InputColorPointer).transform(
+    scale(Radius, Radius)).transform(
+    translate(Center.x, Center.y));
 }
