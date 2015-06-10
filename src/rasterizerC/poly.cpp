@@ -54,7 +54,7 @@ Contains(const Vector & point) const
 {
     const HalfPlane * plane;
     for (size_t i = 0; i < halfPlanes.size(); i++) 
-	{
+    {
         plane = &halfPlanes[i];
         if (plane->SignedDistance(point) < 0)
             return false;
@@ -83,7 +83,7 @@ GetParameters(std::vector<float> & parameters, ShapeType & shapeType)
 {
     shapeType = CONVEXPOLY;
     for (auto it = halfPlanes.begin(); it != halfPlanes.end(); it++) 
-	{
+    {
         parameters.push_back(it->ab.x); // a
         parameters.push_back(it->ab.y); // b
         parameters.push_back(it->c);
