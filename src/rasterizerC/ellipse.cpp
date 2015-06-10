@@ -9,9 +9,9 @@ Ellipse(float a, float b, float c,
 Shape(colorInputPointer), a(a), b(b), c(c),
 d(d), e(e), f(f)
 {
-    if (c*c - 4*a*b >= 0) {
+    if (c*c - 4*a*b >= 0)
         throw std::invalid_argument("Not an ellipse");
-    }
+
     gradient = Transform(2*a, c, d, c, 2*b, e);
     center = gradient.Inverse() * Vector(0.0, 0.0);
     float x[2], y[2];
@@ -25,9 +25,8 @@ d(d), e(e), f(f)
         Vector(x[1], -(e + c*x[1])/(2*b))
     };
     bound = AABox::FromVectors(boundVectors, 4);
-    if (!Contains(center)) {
+    if (!Contains(center))
         throw std::logic_error("Internal error, center not inside ellipse");
-    }
 }
 
 //Ellipse::Ellipse(const Ellipse &&ellipse){}

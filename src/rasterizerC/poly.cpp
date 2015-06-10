@@ -7,9 +7,8 @@ ConvexPoly(const std::vector<Vector> & points, const Color * inputColorPointer):
 Shape(inputColorPointer), vertices(points)
 {
     bound = AABox::FromVectors(&vertices[0], vertices.size());
-    for (size_t i = 0; i < vertices.size(); i++) {
+    for (size_t i = 0; i < vertices.size(); i++)
         halfPlanes.push_back(HalfPlane(vertices[i], vertices[(i+1) % vertices.size()]));
-    }
 }
 
 /*
@@ -54,11 +53,11 @@ bool ConvexPoly::
 Contains(const Vector & point) const
 {
     const HalfPlane * plane;
-    for (size_t i = 0; i < halfPlanes.size(); i++) {
+    for (size_t i = 0; i < halfPlanes.size(); i++) 
+	{
         plane = &halfPlanes[i];
-        if (plane->SignedDistance(point) < 0) {
+        if (plane->SignedDistance(point) < 0)
             return false;
-        }
     }
     return true;
 }
@@ -67,9 +66,8 @@ ConvexPoly ConvexPoly::
 Transformation(const Transform & xform)
 {
     std::vector<Vector> xformedVertices;
-    for (size_t i = 0; i < vertices.size(); i++) {
+    for (size_t i = 0; i < vertices.size(); i++)
         xformedVertices.push_back(xform * vertices[i]);
-    }
     return ConvexPoly(xformedVertices, &shapeColor);
 }
 
@@ -84,7 +82,8 @@ void ConvexPoly::
 GetParameters(std::vector<float> & parameters, ShapeType & shapeType)
 {
     shapeType = CONVEXPOLY;
-    for (auto it = halfPlanes.begin(); it != halfPlanes.end(); it++) {
+    for (auto it = halfPlanes.begin(); it != halfPlanes.end(); it++) 
+	{
         parameters.push_back(it->ab.x); // a
         parameters.push_back(it->ab.y); // b
         parameters.push_back(it->c);

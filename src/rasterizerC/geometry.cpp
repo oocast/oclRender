@@ -5,16 +5,19 @@
 void 
 Quadratic(float a, float b, float c, float * x)
 {
-    if (a == 0.0) {
+    if (a == 0.0) 
+    {
         x[0] = -c/b;
         x[1] = -c/b;
     }
     float d = sqrt(b * b - 4 * a * c);    
-    if (b >= 0) {
+    if (b >= 0)
+    {
         x[0] = (-b - d) / (2 * a);
         x[1] = (2 * c) / (-b - d);
     }
-    else {
+    else 
+    {
         x[0] = (2 * c) / (-b + d);
         x[1] = (-b + d) / (2 * a);
     }
@@ -112,7 +115,8 @@ AABox AABox::
 FromVectors(const Vector * vectors, const int vectorNum)
 {
     Vector tmpLow = vectors[0], tmpHigh = vectors[0];
-    for (int i = 1; i < vectorNum; i++) {
+    for (int i = 1; i < vectorNum; i++) 
+    {
         tmpLow = tmpLow.Min(vectors[i]);
         tmpHigh = tmpHigh.Max(vectors[i]);
     }
@@ -148,13 +152,11 @@ operator * (const Transform & other) const
 {
     float t[2][3] = {{0.0, 0.0, 0.0},
                      {0.0, 0.0, 0.0}};    
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 3; j++) {
-            for (int k = 0; k < 3; k++) {
+    for (int i = 0; i < 2; i++)
+        for (int j = 0; j < 3; j++)
+            for (int k = 0; k < 3; k++)
                 t[i][j] += m[i][k] * other.m[k][j];
-            }
-        }
-    }
+
     return Transform(t[0][0], t[0][1], t[0][2],
                      t[1][0], t[1][1], t[1][2]);
 }

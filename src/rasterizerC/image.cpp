@@ -18,8 +18,10 @@ PPMImage(std::fstream & fileIn)
     fileIn >> _idump; // max color value
     fileIn.get(_cdump);
     pixels = std::vector<Color>(width*height, Color());
-    for (int y = height - 1; y > -1; y--) {
-        for (size_t x = 0; x < width; x++) {
+    for (int y = height - 1; y > -1; y--) 
+    {
+        for (size_t x = 0; x < width; x++) 
+        {
             unsigned char rgbBuff[3];
             float r, g, b;
             //in >> rc >> gc >> bc;
@@ -28,10 +30,11 @@ PPMImage(std::fstream & fileIn)
             g = (float)rgbBuff[1] / 255.0F;
             b = (float)rgbBuff[2] / 255.0F;
             InitColor(&pixels[y * width + x], r, g, b);
-            if (fileIn.eof()) {
+            //if (fileIn.eof()) 
+            //{
                 //in.close();
                 //exit(1);
-            }
+            //}
         }
     }
 }
@@ -49,8 +52,10 @@ WritePPM(std::fstream & fileOut)
     oss << "P6 " << width << ' '
         << height << " 255\n";
     fileOut << oss.str();
-    for (int y = height - 1; y > -1; y--) {
-        for (size_t x = 0; x < width; x++) {
+    for (int y = height - 1; y > -1; y--) 
+    {
+        for (size_t x = 0; x < width; x++) 
+        {
             std::string str;
             unsigned char buf[3];
             /*

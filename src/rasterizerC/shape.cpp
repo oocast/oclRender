@@ -14,12 +14,10 @@ cl_program program;
 Shape::
 Shape(const Color * oColor)
 {
-    if (oColor != nullptr) {
+    if (oColor != nullptr)
         shapeColor = *oColor;
-    }
-    else {
+    else
         shapeColor = Color();
-    }
 }
 
 /*
@@ -83,25 +81,23 @@ draw(PPMImage &image, int superSampling)
 void Shape::
 Draw(PPMImage & image, int superSampling)
 {
-    if (!bound.Overlaps(image.Bounds())) {
+    if (!bound.Overlaps(image.Bounds()))
         return;
-    }
     float r = (float)image.width;
     std::vector<Vector> jitter(superSampling*superSampling, Vector());
     std::default_random_engine gen;
     std::uniform_real_distribution<float> distri(0.0, 1.0);
-    for (int x = 0; x < superSampling; x++) {
-        for (int y = 0; y < superSampling; y++) {
+    for (int x = 0; x < superSampling; x++)
+        for (int y = 0; y < superSampling; y++)
             jitter[x * superSampling + y] = Vector(((float)x + distri(gen)) / superSampling / r,
                 ((float)y + distri(gen)) / superSampling / r);
-        }
-    }
 
     std::vector<float> fv;
     ShapeType shapeType;
     GetParameters(fv, shapeType);
     int identifier=0;
-    if (shapeType==CONVEXPOLY) identifier=fv.size()/3;
+    if (shapeType==CONVEXPOLY) 
+        identifier=fv.size()/3;
 
     size_t jitterSize = jitter.size();
 ///*

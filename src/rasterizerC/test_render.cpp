@@ -8,9 +8,8 @@ void TestPicture()
     fstream f, fbg;
     f.open("test_picture.ppm", fstream::out | fstream::binary);
     fbg.open("../../pic/50608556_p0.ppm", fstream::in | fstream::binary);
-    if (!fbg.is_open()) {
+    if (!fbg.is_open())
         exit(1);
-    }
     //PPMImage image(512, InitColor(0.0, 0.0, 0.0, 1.0));
     PPMImage bg(fbg);
     fbg.close();
