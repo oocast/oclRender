@@ -5,8 +5,9 @@
 Ellipse::
 Ellipse(float a, float b, float c,
         float d, float e, float f,
-        const Color *colorInputPointer) :
-Shape(colorInputPointer), a(a), b(b), c(c),
+        const Color *colorInputPointer,
+        bool positive) :
+Shape(colorInputPointer, positive), a(a), b(b), c(c),
 d(d), e(e), f(f)
 {
     if (c*c - 4*a*b >= 0)

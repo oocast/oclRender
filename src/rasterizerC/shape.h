@@ -20,12 +20,13 @@ class Shape : public SceneObject
 public:
     Color shapeColor;
     AABox bound;
+    bool positive;
 public:
-    Shape(const Color *colorInputPointer = nullptr);
+    Shape(const Color *colorInputPointer = nullptr, bool positive = true);
     virtual bool Contains(const Vector &) const = 0;
     //virtual float signed_distance_bound(const Vector &p) const = 0;
     void Draw(PPMImage &, int);
-    virtual void GetParameters(std::vector<float> &, ShapeType &) = 0;
+    virtual void GetParameters(std::vector<float> &, std::vector<int> &) = 0;
     virtual std::shared_ptr<Shape> TransformPointer(const Transform &) = 0;
     // TODO: transform return true caller (derived) class obj
     //template <class Shape_drv> // derived class of Shape

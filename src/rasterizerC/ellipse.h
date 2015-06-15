@@ -11,7 +11,7 @@ protected:
 public:
     Ellipse(float a = 1.0, float b = 1.0, float c = 0.0,
             float d = 0.0, float e = 0.0, float f = -1.0,
-            const Color *colorInputPointer = nullptr);
+            const Color *colorInputPointer = nullptr, bool positive = true);
     Ellipse(const Ellipse &&);
     float Value(const Vector &) const;
     bool Contains(const Vector &) const;

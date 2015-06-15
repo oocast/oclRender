@@ -2,10 +2,20 @@
 #include "csg.h"
 
 CSG::
-CSG(Shape *v1, Shape *v2, const Color *color) :
-Shape(color), v1(v1), v2(v2)
+CSG(const Color *color, bool positive) :
+Shape(color, positive)
 {	
 }
+
+CSG::
+CSG(const std::vector<std::shared_ptr<Shape>> &elements,
+	  const Color *color,
+	  bool positive) :
+Shape(color, positive), elements(elements)
+{
+}
+
+
 
 /*
 Union::

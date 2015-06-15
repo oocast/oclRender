@@ -11,7 +11,9 @@ protected:
 public:
     // vertex should be counter-clockwise order
     //ConvexPoly(){}
-    ConvexPoly(const std::vector<Vector> &, const Color * inputColorPointer = nullptr);
+    ConvexPoly(const std::vector<Vector> &, 
+							 const Color * inputColorPointer = nullptr,
+							 bool positive = true);
     ConvexPoly(ConvexPoly &&);
     //float signed_distance_bound(const Vector &p) const;
     bool Contains(const Vector &) const;

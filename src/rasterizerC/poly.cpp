@@ -3,8 +3,9 @@
 #include "poly.h"
 
 ConvexPoly::
-ConvexPoly(const std::vector<Vector> & points, const Color * inputColorPointer):
-Shape(inputColorPointer), vertices(points)
+ConvexPoly(const std::vector<Vector> & points, const Color * inputColorPointer,
+           bool positive):
+Shape(inputColorPointer, positive), vertices(points)
 {
     bound = AABox::FromVectors(&vertices[0], vertices.size());
     for (size_t i = 0; i < vertices.size(); i++)

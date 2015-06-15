@@ -17,12 +17,13 @@ cl_int err;
 cl_program program;
 
 Shape::
-Shape(const Color * oColor)
+Shape(const Color * colorInputPointer, bool positive):
+positive(positive)
 {
-    if (oColor != nullptr)
-        shapeColor = *oColor;
-    else
-        shapeColor = Color();
+	if (colorInputPointer != nullptr)
+		shapeColor = *colorInputPointer;
+  else
+    shapeColor = Color();
 }
 
 /*
