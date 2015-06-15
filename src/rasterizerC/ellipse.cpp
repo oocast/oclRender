@@ -145,7 +145,7 @@ signed_distance_bound(const Vector &p) const
 */
 
 void Ellipse::
-GetParameters(std::vector<float> &parameters, ShapeType & shapeType)
+GetParameters(std::vector<float> &parameters, std::vector<int> & structures)
 {
     parameters.push_back(a);
     parameters.push_back(b);
@@ -153,7 +153,8 @@ GetParameters(std::vector<float> &parameters, ShapeType & shapeType)
     parameters.push_back(d);
     parameters.push_back(e);
     parameters.push_back(f);
-    shapeType = ELLIPSE;
+    structures.push_back(positive);
+    structures.push_back(0);
 }
 
 Ellipse 

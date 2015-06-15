@@ -49,7 +49,7 @@ void TestPicture()
     //scene.Add(new ConvexPoly(tri1));
     //scene.Add(new ConvexPoly(tri2));
 
-    char fileName[]="shapedraw.cl";
+    char fileName[]="shapedraw2.cl";
     char kernelName[]="ShapeDraw";
 
     CLInit(fileName, kernelName);

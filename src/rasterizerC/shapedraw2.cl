@@ -1,3 +1,4 @@
+/*
 inline bool ContainEll(float xt, float yt, __global float * paras, int & offset)
 {
     float3 a=vload3(offset++, paras);
@@ -16,14 +17,14 @@ inline bool ContainPol(float xt, float yt, __global float * paras, int & offset,
     }
     return temp;
 }
-
+*/
 inline bool ContainCSG(float xt, float yt, __global float * paras, __global int * struc)
 {
     int2 level0, level1, level2;
     int offsetStruc=0;
     int offsetParas=0;
     bool res0, res1, res2;
-    res0=1;
+    res0=0;
     level0=vload2(offsetStruc++, struc);
     for (int ic=0; ic<level0.y; ic++)
     {
@@ -31,9 +32,22 @@ inline bool ContainCSG(float xt, float yt, __global float * paras, __global int 
         res1=1;
         for (int jc=0; jc<level1.y; jc++)
         {
-            level2=vload(offsetStruc++, struc);
-            if (level2.y==0) res2=ContainEll(xt, yt, paras, offsetParas);
-            else res2=ContainPol(xt, yt, paras, offsetParas, level2.y);
+            level2=vload2(offsetStruc++, struc);
+            if (level2.y==0) //res2=ContainEll(xt, yt, paras, offsetParas);
+            {
+                float3 a=vload3(offsetParas++, paras);
+                float3 b=vload3(offsetParas++, paras);
+                res2=xt*xt*a.x+yt*yt*a.y+xt*yt*a.z+xt*b.x+yt*b.y+b.z<0;
+            } 
+            else //res2=ContainPol(xt, yt, paras, offsetParas, level2.y);
+            {
+                res2=1;
+                for (int ip=0; ip<level2.y; ip++)
+                {
+                    float3 a=vload3(offsetParas++, paras);
+                    res2*=((a.x*xt+a.y*yt+a.z))>0;
+                }
+            }
             res1*=(level2.x==res2);
         }
         res0+=(level1.x==res1);

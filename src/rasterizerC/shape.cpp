@@ -9,7 +9,7 @@
 const int HSIZE=16;
 const int WSIZE=32;
 
-cl_mem memObj[3];
+cl_mem memObj[4];
 cl_kernel kernel;
 cl_command_queue cmdQueue;
 cl_context context;
@@ -99,11 +99,9 @@ Draw(PPMImage & image, int superSampling)
                 ((float)y + distri(gen)) / superSampling / r);
 
     std::vector<float> fv;
-    ShapeType shapeType;
-    GetParameters(fv, shapeType);
-    int identifier=0;
-    if (shapeType==CONVEXPOLY) 
-        identifier=fv.size()/3;
+    std::vector<int> iv;
+    for (int i=0; i<4; i++) iv.push_back(1);
+    GetParameters(fv, iv);
 
     size_t jitterSize = jitter.size();
 ///*
@@ -121,18 +119,19 @@ Draw(PPMImage & image, int superSampling)
 
     memObj[1]=clCreateBuffer(context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, fv.size()*sizeof(float), &fv[0], NULL);
     memObj[2]=clCreateBuffer(context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, 2*jitterSize*sizeof(float), &jitter[0], NULL);
+    memObj[3]=clCreateBuffer(context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, iv.size()*sizeof(int), &iv[0], NULL);
 
     err=clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *) &memObj[0]);
     err=clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *) &memObj[1]);
     err=clSetKernelArg(kernel, 2, sizeof(cl_mem), (void *) &memObj[2]);
-    err=clSetKernelArg(kernel, 3, sizeof(int), (void *) &jitterSize);
-    err=clSetKernelArg(kernel, 4, sizeof(int), (void *) &w);
-    err=clSetKernelArg(kernel, 5, sizeof(int), (void *) &h);
-    err=clSetKernelArg(kernel, 6, sizeof(float), (void *) &shapeColor.rgb[0]);
-    err=clSetKernelArg(kernel, 7, sizeof(float), (void *) &shapeColor.rgb[1]);
-    err=clSetKernelArg(kernel, 8, sizeof(float), (void *) &shapeColor.rgb[2]);
-    err=clSetKernelArg(kernel, 9, sizeof(float), (void *) &shapeColor.a);
-    err=clSetKernelArg(kernel, 10, sizeof(int), (void *) &identifier);
+    err=clSetKernelArg(kernel, 3, sizeof(cl_mem), (void *) &memObj[3]);
+    err=clSetKernelArg(kernel, 4, sizeof(int), (void *) &jitterSize);
+    err=clSetKernelArg(kernel, 5, sizeof(int), (void *) &w);
+    err=clSetKernelArg(kernel, 6, sizeof(int), (void *) &h);
+    err=clSetKernelArg(kernel, 7, sizeof(float), (void *) &shapeColor.rgb[0]);
+    err=clSetKernelArg(kernel, 8, sizeof(float), (void *) &shapeColor.rgb[1]);
+    err=clSetKernelArg(kernel, 9, sizeof(float), (void *) &shapeColor.rgb[2]);
+    err=clSetKernelArg(kernel, 10, sizeof(float), (void *) &shapeColor.a);
     err=clSetKernelArg(kernel, 11, sizeof(int), (void *) &ib);
     err=clSetKernelArg(kernel, 12, sizeof(int), (void *) &jb);
 
@@ -148,6 +147,7 @@ Draw(PPMImage & image, int superSampling)
 
     err=clReleaseMemObject(memObj[1]);
     err=clReleaseMemObject(memObj[2]);
+    err=clReleaseMemObject(memObj[3]);
 //*/
 /*
     int l_x, l_y, h_x, h_y;

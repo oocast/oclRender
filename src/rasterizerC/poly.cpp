@@ -80,16 +80,19 @@ TransformPointer(const Transform & xform)
 }
 
 void ConvexPoly::
-GetParameters(std::vector<float> & parameters, ShapeType & shapeType)
+GetParameters(std::vector<float> & parameters, std::vector<int> & structures)
 {
-    shapeType = CONVEXPOLY;
     for (auto it = halfPlanes.begin(); it != halfPlanes.end(); it++) 
     {
         parameters.push_back(it->ab.x); // a
         parameters.push_back(it->ab.y); // b
         parameters.push_back(it->c);
     }
+    structures.push_back(positive);
+    structures.push_back(vertices.size());
 }
+
+
 
 ConvexPoly 
 Triangle(const std::vector<Vector> &vertices, const Color * inputColorPointer)

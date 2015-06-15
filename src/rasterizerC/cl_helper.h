@@ -5,7 +5,7 @@
 #include <CL/cl_intel.h>
 #include "image.h"
 
-extern cl_mem memObj[3];
+extern cl_mem memObj[4];
 extern cl_kernel kernel;
 extern cl_command_queue cmdQueue;
 extern cl_context context;

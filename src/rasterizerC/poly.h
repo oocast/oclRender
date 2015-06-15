@@ -19,7 +19,7 @@ public:
     bool Contains(const Vector &) const;
     ConvexPoly Transformation(const Transform &);
     std::shared_ptr<Shape> TransformPointer(const Transform &);
-    void GetParameters(std::vector<float> &, ShapeType &);
+    void GetParameters(std::vector<float> &, std::vector<int> &);
 };
 
 ConvexPoly Triangle(const std::vector<Vector> &, const Color * inputColorPointer = nullptr);
