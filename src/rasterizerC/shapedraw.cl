@@ -58,5 +58,5 @@ __kernel void ShapeDraw(__global float * image,
     pix.z=pix.z*ft+b*count;
     pix.w=1.0f-ft*(1-pix.w);
     vstore4(pix, ((i*w)+j), image);
- }
+}
 
