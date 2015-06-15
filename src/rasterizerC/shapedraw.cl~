@@ -37,26 +37,29 @@ __kernel void ShapeDraw(__global float * image,
     int j=get_global_id(1)+jb;
     if (j>=w) return;
 
-    float y=i*1.0f/w;
-    float x=j*1.0f/w;
-    float xt, yt;
-    float count=0.0f;
-    for (int k=0; k<s; k++)
-    {
-        float2 jit=vload2(k, jitPos);
-        xt=x+jit.x;
-        yt=y+jit.y;
-        if (id==0) count+=ContainEll(xt, yt, paras);
-        else count+=ContainPol(xt, yt, paras, id);
-    }
-    count=count*a/s;
+    //for(int j=0; j<w; j++)
+    //{
+        float y=i*1.0f/w;
+        float x=j*1.0f/w;
+        float xt, yt;
+        float count=0.0f;
+        for (int k=0; k<s; k++)
+        {
+            float2 jit=vload2(k, jitPos);
+            xt=x+jit.x;
+            yt=y+jit.y;
+            if (id==0) count+=ContainEll(xt, yt, paras);
+            else count+=ContainPol(xt, yt, paras, id);
+        }
+        count=count*a/s;
 
-    float4 pix=vload4((i*w+j), image);
-    float ft=1.0f-count;
-    pix.x=pix.x*ft+r*count;
-    pix.y=pix.y*ft+g*count;
-    pix.z=pix.z*ft+b*count;
-    pix.w=1.0f-ft*(1-pix.w);
-    vstore4(pix, ((i*w)+j), image);
- }
+        float4 pix=vload4((i*w+j), image);
+        float ft=1.0f-count;
+        pix.x=pix.x*ft+r*count;
+        pix.y=pix.y*ft+g*count;
+        pix.z=pix.z*ft+b*count;
+        pix.w=1.0f-ft*(1-pix.w);
+        vstore4(pix, ((i*w)+j), image);
+    //}
+}
 
