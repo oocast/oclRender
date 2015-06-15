@@ -4,6 +4,11 @@
 #include "shape.h"
 #include "cl_helper.h"
 
+#include <iostream>
+
+const int HSIZE=16;
+const int WSIZE=32;
+
 cl_mem memObj[3];
 cl_kernel kernel;
 cl_command_queue cmdQueue;
@@ -104,6 +109,15 @@ Draw(PPMImage & image, int superSampling)
     int w=image.width;
     int h=image.height;
 
+    int ib=(int) (bound.low.y*w);
+    int jb=(int) (bound.low.x*w);
+    int ie=ceil(bound.high.y*w);
+    int je=ceil(bound.high.x*w);
+    if (ie<=0) return;
+    if (je<=0) return;
+    if (ib<0) ib=0;
+    if (jb<0) jb=0;
+
     memObj[1]=clCreateBuffer(context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, fv.size()*sizeof(float), &fv[0], NULL);
     memObj[2]=clCreateBuffer(context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, 2*jitterSize*sizeof(float), &jitter[0], NULL);
 
@@ -118,12 +132,18 @@ Draw(PPMImage & image, int superSampling)
     err=clSetKernelArg(kernel, 8, sizeof(float), (void *) &shapeColor.rgb[2]);
     err=clSetKernelArg(kernel, 9, sizeof(float), (void *) &shapeColor.a);
     err=clSetKernelArg(kernel, 10, sizeof(int), (void *) &identifier);
-    size_t globals[1];
-    size_t locals[1];
-    globals[0]=h;
-    locals[0]=h;
+    err=clSetKernelArg(kernel, 11, sizeof(int), (void *) &ib);
+    err=clSetKernelArg(kernel, 12, sizeof(int), (void *) &jb);
+
+    size_t globals[2];
+    size_t locals[2];
+
+    globals[0]=ceil((ie-ib)*1.0f/HSIZE)*HSIZE;
+    globals[1]=ceil((je-jb)*1.0f/WSIZE)*WSIZE;
+    locals[0]=HSIZE;
+    locals[1]=WSIZE;
     
-    err=clEnqueueNDRangeKernel(cmdQueue, kernel, 1, NULL, globals, locals, 0, NULL, NULL);
+    err=clEnqueueNDRangeKernel(cmdQueue, kernel, 2, NULL, globals, locals, 0, NULL, NULL);
 
     err=clReleaseMemObject(memObj[1]);
     err=clReleaseMemObject(memObj[2]);

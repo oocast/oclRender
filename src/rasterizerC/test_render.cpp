@@ -26,6 +26,7 @@ void TestPicture()
 
     //ConvexPoly some(LineSegment(Vector(0.4, 0), Vector(0.4, 1), 0.01, &lscolor));
     Color blue = InitColor(.0, .0, 1.0, 0.5);
+    for (int k=0; k<100; k++) scene.Add(new ConvexPoly(LineSegment(Vector(0.49F, 0.08F), Vector(0.49F, 0.14F), 0.06F, &blue)));
     //ConvexPoly tri(Triangle({ Vector(0.5, 1), Vector(0, 0), Vector(1, 0) }, &blue));
     //scene.Add(&tri);
     Color green = InitColor(.0F, 1.0F, .0F, 1.0F);
@@ -41,7 +42,7 @@ void TestPicture()
     Transform rot(Rotate(PI * (1.0F / 2.0F + 1.0F / 8.0F)));
     Transform sca(Scale(1.0F, 0.2F));
     //Ellipse ellip(circle.Transformation(Around(Vector(0.75F, 0.1F), rot * sca)));
-    scene.Add(new Ellipse(circle.Transformation(Around(Vector(0.75F, 0.1F), rot * sca))));
+    scene.Add(new Ellipse(circle.Transformation(Around(Vector(0.75F, 0.1F), rot * sca))));	
 
     //ConvexPoly tri1(Triangle({ Vector(0.25, 0.75), Vector(0.25, 0.5), Vector(0.5, 0.75) }, &green));
     //ConvexPoly tri2(Triangle({ Vector(0.5, 0.5), Vector(0.5, 0.75), Vector(0.25, 0.5) }, &green));
@@ -50,7 +51,7 @@ void TestPicture()
 
     char fileName[]="shapedraw.cl";
     char kernelName[]="ShapeDraw";
-    
+
     CLInit(fileName, kernelName);
 
     scene.Draw(bg);
@@ -59,6 +60,7 @@ void TestPicture()
     //image.write_ppm(f, &bg);
     bg.WritePPM(f);
     f.close();
+
 }
 
 int main()

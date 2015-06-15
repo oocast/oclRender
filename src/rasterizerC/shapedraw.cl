@@ -28,13 +28,17 @@ __kernel void ShapeDraw(__global float * image,
                          float g,
                          float b,
                          float a,
-                         int id)
+                         int id,
+                         int ib,
+                         int jb)
 {
-    int i=get_global_id(0);
+    int i=get_global_id(0)+ib;
+    if (i>=h) return;
+    int j=get_global_id(1)+jb;
+    if (j>=w) return;
 
-    for(int j=0; j<w; j++)
-    {
-        
+    //for(int j=0; j<w; j++)
+    //{
         float y=i*1.0f/w;
         float x=j*1.0f/w;
         float xt, yt;
@@ -56,6 +60,6 @@ __kernel void ShapeDraw(__global float * image,
         pix.z=pix.z*ft+b*count;
         pix.w=1.0f-ft*(1-pix.w);
         vstore4(pix, ((i*w)+j), image);
-    }
+    //}
 }
 
