@@ -35,9 +35,6 @@ public:
   Union(const std::vector<std::shared_ptr<Shape>> &,
         const Color *color = nullptr,
         bool positive = true);
-	Union(const std::shared_ptr<Shape> &,
-				const Color *color = nullptr,
-				bool positive = true);
   Union(const Union &&);
   bool Contains(const Vector &) const;
   void GetParameters(std::vector<float> &, std::vector<int> &);
@@ -57,6 +54,9 @@ public:
                bool positive = true);
 	// single element constructor
 	Intersection(const std::shared_ptr<Shape> &,
+							 const Color *color = nullptr,
+							 bool positive = true);
+	Intersection(Shape*,
 							 const Color *color = nullptr,
 							 bool positive = true);
 	// move constructor
