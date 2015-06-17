@@ -10,5 +10,6 @@
 #include "scene.h"
 #include "shape.h"
 #include "cl_helper.h"
+#include "csg.h"
 
 #endif // __OCLRENDER_H__
