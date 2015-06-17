@@ -104,10 +104,10 @@ Draw(PPMImage & image, int superSampling)
     GetParameters(fv, iv);
 
     size_t jitterSize = jitter.size();
-///*
+
     int w=image.width;
     int h=image.height;
-
+///*
     int ib=(int) (bound.low.y*w);
     int jb=(int) (bound.low.x*w);
     int ie=ceil(bound.high.y*w);

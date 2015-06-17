@@ -4,7 +4,7 @@
 CSG::
 CSG(const Color *color, bool positive) :
 Shape(color, positive)
-{	
+{    
 }
 
 CSG::
@@ -18,16 +18,16 @@ Shape(color, positive), elements(elements)
 void CSG::
 AddElement(const std::shared_ptr<Shape> &element)
 {
-	elements.push_back(element);
-	if (elements.size() == 1)
-	{
-		// the first element of this CSG
-		bound = element->bound;
-	}
+    elements.push_back(element);
+    if (elements.size() == 1)
+    {
+        // the first element of this CSG
+        bound = element->bound;
+    }
 }
 
 Union::
-Union(const Color *color = nullptr, bool positive = true):
+Union(const Color *color, bool positive):
 CSG(color, positive)
 {
 }
@@ -38,47 +38,47 @@ Union(const std::vector<std::shared_ptr<Shape>> &elements,
       bool positive) :
 CSG(elements, color, positive)
 {
-	std::vector<Vector> boundVertices;
-	for (int i = 0; i < elements.size(); i++)
-	{
-		boundVertices.push_back(elements[i]->bound.low);
-		boundVertices.push_back(elements[i]->bound.high);
-	}
-	bound = AABox::FromVectors(&boundVertices[0], boundVertices.size());
+    std::vector<Vector> boundVertices;
+    for (int i = 0; i < elements.size(); i++)
+    {
+        boundVertices.push_back(elements[i]->bound.low);
+        boundVertices.push_back(elements[i]->bound.high);
+    }
+    bound = AABox::FromVectors(&boundVertices[0], boundVertices.size());
 }
 
 bool Union::
 Contains(const Vector &point) const
 {
-	bool result = false;
-	for (int i = 0; i < elements.size(); i++)
-	{
-		result += elements[i]->Contains(point);
-	}
-	result = (result == positive);
-	return result;
+    bool result = false;
+    for (int i = 0; i < elements.size(); i++)
+    {
+        result += elements[i]->Contains(point);
+    }
+    result = (result == positive);
+    return result;
 }
 
 void Union::
 GetParameters(std::vector<float> &parameters, std::vector<int> &structures)
 {
-	// Since Union should be the top level
-	// Structures passed in should be {1, 1, 1, 1}
-	structures[0] = (int)positive;
-	structures[1] = elements.size();
-	for (int i = 0; i < elements.size(); i++)
-	{
-		elements[i]->GetParameters(parameters, structures);
-	}
+    // Since Union should be the top level
+    // Structures passed in should be {1, 1, 1, 1}
+    structures[0] = (int)positive;
+    structures[1] = elements.size();
+    for (int i = 0; i < elements.size(); i++)
+    {
+        elements[i]->GetParameters(parameters, structures);
+    }
 }
 
 void Union::
 AddElement(const std::shared_ptr<Shape> &element)
 {
-	CSG::AddElement(element);
-	// update bound
-	std::vector<Vector> boundVertices({ bound.low, bound.high, element->bound.low, element->bound.high });
-	bound = AABox::FromVectors(&boundVertices[0], 4);
+    CSG::AddElement(element);
+    // update bound
+    std::vector<Vector> boundVertices({ bound.low, bound.high, element->bound.low, element->bound.high });
+    bound = AABox::FromVectors(&boundVertices[0], 4);
 }
 /*
 Union::
@@ -117,7 +117,7 @@ transform(const Transform &t)
 */
 
 Intersection::
-Intersection(const Color *color = nullptr, bool positive = true) :
+Intersection(const Color *color, bool positive) :
 CSG(color, positive)
 {
 }
@@ -132,49 +132,49 @@ CSG(elements, color, positive)
 
 Intersection::
 Intersection(const std::shared_ptr<Shape> &element,
-						 const Color *color,
-						 bool positive) :
+             const Color *color,
+             bool positive) :
 CSG(std::vector<std::shared_ptr<Shape>>(1, element), color, positive)
 {
-	bound = element->bound;
+    bound = element->bound;
 }
 
 bool Intersection::
 Contains(const Vector &point) const
 {
-	bool result = true;
-	for (int i = 0; i < elements.size(); i++)
-	{
-		result *= elements[i]->Contains(point);
-	}
-	result = (result == positive);
-	return result;
+    bool result = true;
+    for (int i = 0; i < elements.size(); i++)
+    {
+        result *= elements[i]->Contains(point);
+    }
+    result = (result == positive);
+    return result;
 }
 
 void Intersection::
 GetParameters(std::vector<float> &parameters, std::vector<int> &structures)
 {
-	// Since Union should be the 2nd top level
-	if (structures.size() == 4) {
-		// It's the first Intersection under a Union
-		// Assume Intersection size is always at least 1
-		structures[2] = (int)positive;
-		structures[3] = elements.size();
-	}
-	else
-	{
-		structures.push_back((int)positive);
-		structures.push_back(elements.size());
-	}
-	for (int i = 0; i < elements.size(); i++)
-	{
-		elements[i]->GetParameters(parameters, structures);
-	}
+    // Since Union should be the 2nd top level
+    if (structures.size() == 4) {
+        // It's the first Intersection under a Union
+        // Assume Intersection size is always at least 1
+        structures[2] = (int)positive;
+        structures[3] = elements.size();
+    }
+    else
+    {
+        structures.push_back((int)positive);
+        structures.push_back(elements.size());
+    }
+    for (int i = 0; i < elements.size(); i++)
+    {
+        elements[i]->GetParameters(parameters, structures);
+    }
 }
 
 void Intersection::
 AddElement(const std::shared_ptr<Shape> &element)
 {
-	CSG::AddElement(element);
-	bound = bound.Intersection(element->bound);
+    CSG::AddElement(element);
+    bound = bound.Intersection(element->bound);
 }
