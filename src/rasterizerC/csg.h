@@ -31,15 +31,16 @@ An Intersection of Primitives
 class Union : public CSG
 {
 public:
-  Union(const Color *color = nullptr, bool positive = true);
-  Union(const std::vector<std::shared_ptr<Shape>> &,
-        const Color *color = nullptr,
-        bool positive = true);
-  Union(const Union &&);
-  bool Contains(const Vector &) const;
-  void GetParameters(std::vector<float> &, std::vector<int> &);
-  std::shared_ptr<Shape> TransformPointer(const Transform &);
+    Union(const Color *color = nullptr, bool positive = true);
+    Union(const std::vector<std::shared_ptr<Shape>> &,
+          const Color *color = nullptr,
+          bool positive = true);
+    Union(const Union &&);
+    bool Contains(const Vector &) const;
+    void GetParameters(std::vector<float> &, std::vector<int> &);
+    std::shared_ptr<Shape> TransformPointer(const Transform &);
 	void AddElement(const std::shared_ptr<Shape> &);
+    void CalculateBound(float);
 };
 
 class Intersection : public CSG
@@ -65,6 +66,7 @@ public:
     void GetParameters(std::vector<float> &, std::vector<int> &);
     std::shared_ptr<Shape> TransformPointer(const Transform &);
     void AddElement(const std::shared_ptr<Shape> &);
+    void CalculateBound(float);
 };
 
 

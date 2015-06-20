@@ -28,6 +28,8 @@ public:
     void Draw(PPMImage &, int);
     virtual void GetParameters(std::vector<float> &, std::vector<int> &) = 0;
     virtual std::shared_ptr<Shape> TransformPointer(const Transform &) = 0;
+    // recompute bound of shape, used only by CSG
+    virtual void CalculateBound(float) = 0;
     // TODO: transform return true caller (derived) class obj
     //template <class Shape_drv> // derived class of Shape
     //virtual Shape_drv transform(const Transform &transform) const = 0;

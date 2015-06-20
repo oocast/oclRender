@@ -107,6 +107,7 @@ Draw(PPMImage & image, int superSampling)
 
     int w=image.width;
     int h=image.height;
+    CalculateBound((float)h/w);
 ///*
     int ib=(int) (bound.low.y*w);
     int jb=(int) (bound.low.x*w);

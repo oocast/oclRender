@@ -22,6 +22,7 @@ public:
     void Intersections(const Vector &, const Vector &, Vector *) const;
     //float signed_distance_bound(const Vector &p) const;
     void GetParameters(std::vector<float> &, std::vector<int> &);
+    void CalculateBound(float){}
 private:
     void CalculateExtremum();
 };

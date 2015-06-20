@@ -22,6 +22,7 @@ public:
     ConvexPoly & Transformation(const Transform &);
     std::shared_ptr<Shape> TransformPointer(const Transform &);
     void GetParameters(std::vector<float> &, std::vector<int> &);
+    void CalculateBound(float){}
 private:
     void CalculateExtremum();
 };

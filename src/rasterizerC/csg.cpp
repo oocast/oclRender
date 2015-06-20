@@ -1,4 +1,5 @@
 #include <cmath>
+#include <iostream>
 #include "csg.h"
 
 CSG::
@@ -79,6 +80,33 @@ AddElement(const std::shared_ptr<Shape> &element)
     // update bound
     std::vector<Vector> boundVertices({ bound.low, bound.high, element->bound.low, element->bound.high });
     bound = AABox::FromVectors(&boundVertices[0], 4);
+}
+
+void Union::
+CalculateBound(float aspectRatio)
+{
+    // aspectratio = height / width = coordinates of height
+    if (elements.empty()) return;
+    for (int i = 0; i < elements.size(); i++)
+    {
+        elements[i]->CalculateBound(aspectRatio);
+    }
+
+    bound = elements[0]->bound;
+    for (int i = 0; i < elements.size(); i++)
+    {
+        if (elements[i]->positive)
+        {
+            std::vector<Vector> boundVertices({ bound.low, bound.high, elements[i]->bound.low, elements[i]->bound.high });
+            bound = AABox::FromVectors(&boundVertices[0], 4);
+        }
+        else
+        {
+            bound = AABox(Vector(), Vector(1.0F, aspectRatio));
+            // reaching the maximum size
+            return;
+        }
+    }
 }
 /*
 Union::
@@ -186,4 +214,29 @@ AddElement(const std::shared_ptr<Shape> &element)
 {
     CSG::AddElement(element);
     bound = bound.Intersection(element->bound);
+}
+
+void Intersection::
+CalculateBound(float aspectRatio)
+{
+    if (elements.empty()) return;
+    bound = elements[0]->bound;
+    bool allNegative = true;
+    for (int i = 0; i < elements.size(); i++)
+    {
+        if (elements[i]->positive)
+        {
+            allNegative = false;
+            bound = bound.Intersection(elements[i]->bound);
+        }
+        else
+        {
+            bound = bound.Intersection(AABox(Vector(), Vector(0.0L, aspectRatio)));
+        }
+    }
+    if (allNegative)
+    {
+        std::cerr << "WARNING: all primitives in intersection are negative\n"
+                  << "probably losing bound information\n";
+    }
 }
