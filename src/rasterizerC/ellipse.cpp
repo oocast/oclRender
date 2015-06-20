@@ -2,13 +2,8 @@
 
 #include "ellipse.h"
 
-Ellipse::
-Ellipse(float a, float b, float c,
-        float d, float e, float f,
-        const Color *colorInputPointer,
-        bool positive) :
-Shape(colorInputPointer, positive), a(a), b(b), c(c),
-d(d), e(e), f(f)
+inline void Ellipse::
+CalculateExtremum()
 {
     if (c*c - 4*a*b >= 0)
         throw std::invalid_argument("Not an ellipse");
@@ -30,6 +25,17 @@ d(d), e(e), f(f)
         throw std::logic_error("Internal error, center not inside ellipse");
 }
 
+Ellipse::
+Ellipse(float a, float b, float c,
+        float d, float e, float f,
+        const Color *colorInputPointer,
+        bool positive) :
+Shape(colorInputPointer, positive), a(a), b(b), c(c),
+d(d), e(e), f(f)
+{
+    CalculateExtremum();
+}
+
 //Ellipse::Ellipse(const Ellipse &&ellipse){}
 
 float Ellipse::
@@ -44,7 +50,7 @@ Contains(const Vector &point) const
 {
     return Value(point) < 0;
 }
-
+/*
 Ellipse Ellipse::
 Transformation(const Transform & xform)
 {
@@ -64,12 +70,42 @@ Transformation(const Transform & xform)
          d*m02 + e*m12 + f;
     return Ellipse(aa, bb, cc, dd, ee, ff, &shapeColor);
 }
+*/
+
+Ellipse & Ellipse::
+Transformation(const Transform & xform)
+{
+    Transform i(xform.Inverse());
+    float aa, bb, cc, dd, ee, ff;
+    float m00, m01, m02, m10, m11, m12;
+    m00 = i.m[0][0]; m01 = i.m[0][1]; m02 = i.m[0][2];
+    m10 = i.m[1][0]; m11 = i.m[1][1]; m12 = i.m[1][2];
+    aa = a*m00*m00 + b*m10*m10 + c*m00*m10;
+    bb = a*m01*m01 + b*m11*m11 + c*m01*m11;
+    cc = 2*a*m00*m01 + 2*b*m10*m11 + c*(m00*m11 + m01*m10);
+    dd = 2*a*m00*m02 + 2*b*m10*m12 +
+         c*(m00*m12 + m02*m10) + d*m00 + e*m10;
+    ee = 2*a*m01*m02 + 2*b*m11*m12 +
+         c*(m01*m12 + m02*m11) + d*m01 + e*m11;
+    ff = a*m02*m02 + b*m12*m12 + c*m02*m12 +
+         d*m02 + e*m12 + f;
+    a=aa;
+    b=bb;
+    c=cc;
+    d=dd;
+    e=ee;
+    f=ff;
+    CalculateExtremum();
+    return *this;
+}
 
 std::shared_ptr<Shape> Ellipse::
 TransformPointer(const Transform &xform)
 {
-    std::shared_ptr<Shape> result(new Ellipse(Transformation(xform)));
-    return result;
+    //Ellipse * Ztemp=new Ellipse(*this);
+    //temp->Transformation(xform);
+    //std::shared_ptr<Shape> result=(std::shared_ptr<Shape>) temp;
+    return (std::shared_ptr<Shape>) this;//result;
 }
 
 void Ellipse::
@@ -160,7 +196,8 @@ GetParameters(std::vector<float> &parameters, std::vector<int> & structures)
 Ellipse 
 Circle(const Vector &center, float radius, const Color * inputColorPointer)
 {
-    return Ellipse(1.0, 1.0, 0.0, 0.0, 0.0, -1.0, inputColorPointer).Transformation(
-                   Scale(radius, radius)).Transformation(
-                   Translate(center.x, center.y));
+    Ellipse circle(1.0, 1.0, 0.0, 0.0, 0.0, -1.0, inputColorPointer);
+    circle.Transformation(Scale(radius, radius));
+    circle.Transformation(Translate(center.x, center.y));
+    return circle;
 }

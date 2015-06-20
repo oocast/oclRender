@@ -15,11 +15,14 @@ public:
     Ellipse(const Ellipse &&);
     float Value(const Vector &) const;
     bool Contains(const Vector &) const;
-    Ellipse Transformation(const Transform &);
+    //Ellipse Transformation(const Transform &);
+    Ellipse & Transformation(const Transform &);
     std::shared_ptr<Shape> TransformPointer(const Transform &);
     void Intersections(const Vector &, const Vector &, Vector *) const;
     //float signed_distance_bound(const Vector &p) const;
     void GetParameters(std::vector<float> &, std::vector<int> &);
+private:
+    void CalculateExtremum();
 };
 
 Ellipse Circle(const Vector &, float , const Color *inputColorPointer = nullptr);

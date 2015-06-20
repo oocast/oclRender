@@ -17,9 +17,12 @@ public:
     ConvexPoly(ConvexPoly &&);
     //float signed_distance_bound(const Vector &p) const;
     bool Contains(const Vector &) const;
-    ConvexPoly Transformation(const Transform &);
+    //ConvexPoly Transformation(const Transform &);
+    ConvexPoly & Transformation(const Transform &);
     std::shared_ptr<Shape> TransformPointer(const Transform &);
     void GetParameters(std::vector<float> &, std::vector<int> &);
+private:
+    void CalculateExtremum();
 };
 
 ConvexPoly Triangle(const std::vector<Vector> &, const Color * inputColorPointer = nullptr);

@@ -2,14 +2,21 @@
 
 #include "poly.h"
 
+inline void ConvexPoly::
+CalculateExtremum()
+{
+    bound = AABox::FromVectors(&vertices[0], vertices.size());
+    halfPlanes.clear();
+    for (size_t i = 0; i < vertices.size(); i++)
+        halfPlanes.push_back(HalfPlane(vertices[i], vertices[(i+1) % vertices.size()]));
+}
+
 ConvexPoly::
 ConvexPoly(const std::vector<Vector> & points, const Color * inputColorPointer,
            bool positive):
 Shape(inputColorPointer, positive), vertices(points)
 {
-    bound = AABox::FromVectors(&vertices[0], vertices.size());
-    for (size_t i = 0; i < vertices.size(); i++)
-        halfPlanes.push_back(HalfPlane(vertices[i], vertices[(i+1) % vertices.size()]));
+    CalculateExtremum();
 }
 
 /*
@@ -62,7 +69,7 @@ Contains(const Vector & point) const
     }
     return true;
 }
-
+/*
 ConvexPoly ConvexPoly::
 Transformation(const Transform & xform)
 {
@@ -71,12 +78,23 @@ Transformation(const Transform & xform)
         xformedVertices.push_back(xform * vertices[i]);
     return ConvexPoly(xformedVertices, &shapeColor);
 }
+*/
+ConvexPoly & ConvexPoly::
+Transformation(const Transform & xform)
+{
+    //std::vector<Vector> xformedVertices;
+    for (size_t i = 0; i < vertices.size(); i++)
+        //xformedVertices.push_back(xform * vertices[i]);
+        vertices[i]=xform*vertices[i];
+    CalculateExtremum();
+    return *this;
+}
 
 std::shared_ptr<Shape> ConvexPoly::
 TransformPointer(const Transform & xform)
 {
-    std::shared_ptr<Shape> result(new ConvexPoly(Transformation(xform)));
-    return result;
+    //std::shared_ptr<Shape> result(new ConvexPoly(Transformation(xform)));
+    return (std::shared_ptr<Shape>) this;//result;
 }
 
 void ConvexPoly::

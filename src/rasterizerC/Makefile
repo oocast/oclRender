@@ -2,8 +2,8 @@ CC = g++
 CFLAGS = -g -Wall -std=c++11 -l OpenCL
 
 BINS = test_render
-HDRS = color.h ellipse.h geometry.h image.h oclrender.h poly.h scene.h shape.h cl_helper.h
-SRCS = color.cpp ellipse.cpp geometry.cpp image.cpp poly.cpp scene.cpp shape.cpp cl_helper.cpp test_render.cpp
+HDRS = color.h ellipse.h geometry.h image.h oclrender.h poly.h scene.h shape.h cl_helper.h csg.h
+SRCS = color.cpp ellipse.cpp geometry.cpp image.cpp poly.cpp scene.cpp shape.cpp cl_helper.cpp csg.cpp test_render.cpp
 DOBJ = libcl.so
 OBJS = $(SRCS:.cpp=.o) 
 
