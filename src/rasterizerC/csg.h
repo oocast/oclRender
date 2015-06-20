@@ -40,7 +40,7 @@ public:
     // move constructor
     Union(const Union &&);
     // copy constructor
-    Union(const Union &);
+    //Union(const Union &);
     bool Contains(const Vector &) const;
     void GetParameters(std::vector<float> &, std::vector<int> &);
     std::shared_ptr<Shape> TransformPointer(const Transform &);
@@ -68,7 +68,7 @@ public:
     // move constructor
     Intersection(const Intersection &&);
     // copy constructor
-    Intersection(const Intersection &);
+    //Intersection(const Intersection &);
     bool Contains(const Vector &) const;
     void GetParameters(std::vector<float> &, std::vector<int> &);
     std::shared_ptr<Shape> TransformPointer(const Transform &);

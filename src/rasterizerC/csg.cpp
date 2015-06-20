@@ -48,12 +48,14 @@ CSG(elements, color, positive)
     bound = AABox::FromVectors(&boundVertices[0], boundVertices.size());
 }
 
+/*
 Union::
 Union(const Union &otherUnion):
 CSG(otherUnion.elements, &otherUnion.shapeColor, otherUnion.positive)
 {
     bound = otherUnion.bound;
 }
+*/
 
 bool Union::
 Contains(const Vector &point) const
@@ -194,6 +196,15 @@ CSG(std::vector<std::shared_ptr<Shape>>(1, std::shared_ptr<Shape>(element)), col
 	bound = element->bound;
 }
 
+/*
+Intersection::
+Intersection(const Intersection &otherIntersection) :
+CSG(otherIntersection.elements, &otherIntersection.shapeColor, otherIntersection.positive)
+{
+    bound = otherIntersection.bound;
+}
+*/
+
 bool Intersection::
 Contains(const Vector &point) const
 {
@@ -204,13 +215,6 @@ Contains(const Vector &point) const
     }
     result = (result == positive);
     return result;
-}
-
-Intersection::
-Intersection(const Intersection &otherIntersection) :
-CSG(otherIntersection.elements, &otherIntersection.shapeColor, otherIntersection.positive)
-{
-    bound = otherIntersection.bound;
 }
 
 void Intersection::
