@@ -45,26 +45,26 @@ public:
 class Intersection : public CSG
 {
 public:
-	// default
-  Intersection(const Color *color = nullptr,
-               bool positive = true);
-	// list constructor
-  Intersection(const std::vector<std::shared_ptr<Shape>> &,
-               const Color *color = nullptr,
-               bool positive = true);
-	// single element constructor
+    // default
+    Intersection(const Color *color = nullptr,
+                 bool positive = true);
+    // list constructor
+    Intersection(const std::vector<std::shared_ptr<Shape>> &,
+                 const Color *color = nullptr,
+                 bool positive = true);
+    // single element constructor
 	Intersection(const std::shared_ptr<Shape> &,
-							 const Color *color = nullptr,
-							 bool positive = true);
+                 const Color *color = nullptr,
+                 bool positive = true);
 	Intersection(Shape*,
-							 const Color *color = nullptr,
-							 bool positive = true);
-	// move constructor
-  Intersection(const Intersection &&);
-  bool Contains(const Vector &) const;
-  void GetParameters(std::vector<float> &, std::vector<int> &);
-  std::shared_ptr<Shape> TransformPointer(const Transform &);
-	void AddElement(const std::shared_ptr<Shape> &);
+                 const Color *color = nullptr,
+                 bool positive = true);
+    // move constructor
+    Intersection(const Intersection &&);
+    bool Contains(const Vector &) const;
+    void GetParameters(std::vector<float> &, std::vector<int> &);
+    std::shared_ptr<Shape> TransformPointer(const Transform &);
+    void AddElement(const std::shared_ptr<Shape> &);
 };
 
 

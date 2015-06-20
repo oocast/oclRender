@@ -141,8 +141,8 @@ CSG(std::vector<std::shared_ptr<Shape>>(1, element), color, positive)
 
 Intersection::
 Intersection(Shape* element,
-						 const Color *color = nullptr,
-						 bool positive = true):
+             const Color *color = nullptr,
+             bool positive = true):
 CSG(std::vector<std::shared_ptr<Shape>>(1, std::shared_ptr<Shape>(element)), color, positive)
 {
 	bound = element->bound;
