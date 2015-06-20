@@ -30,6 +30,14 @@ Shape(&poly.color), vs(poly.vs), half_planes(poly.half_planes)
 }
 */
 
+ConvexPoly::
+ConvexPoly(const ConvexPoly &poly) :
+Shape(&poly.shapeColor, poly.positive), 
+vertices(poly.vertices), halfPlanes(poly.halfPlanes)
+{
+    bound = poly.bound;
+}
+
 /*
 float ConvexPoly::
 signed_distance_bound(const Vector &p) const

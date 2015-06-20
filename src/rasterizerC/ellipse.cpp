@@ -36,7 +36,14 @@ d(d), e(e), f(f)
     CalculateExtremum();
 }
 
-//Ellipse::Ellipse(const Ellipse &&ellipse){}
+Ellipse::
+Ellipse(const Ellipse &ellipse) :
+Shape(&ellipse.shapeColor, ellipse.positive),
+a(ellipse.a), b(ellipse.b), c(ellipse.c),
+d(ellipse.d), e(ellipse.e), f(ellipse.f)
+{
+    CalculateExtremum();
+}
 
 float Ellipse::
 Value(const Vector & point) const
