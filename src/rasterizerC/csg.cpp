@@ -73,6 +73,17 @@ GetParameters(std::vector<float> &parameters, std::vector<int> &structures)
     }
 }
 
+std::shared_ptr<Shape> Union::
+TransformPointer(const Transform &xform)
+{
+    CSG* result = new Union(*this);
+    for (int i = 0; i < elements.size(); i++)
+    {
+        result->AddElement(elements[i]->TransformPointer(xform));
+    }
+    return std::shared_ptr<Shape>(result);
+}
+
 void Union::
 AddElement(const std::shared_ptr<Shape> &element)
 {
@@ -207,6 +218,17 @@ GetParameters(std::vector<float> &parameters, std::vector<int> &structures)
     {
         elements[i]->GetParameters(parameters, structures);
     }
+}
+
+std::shared_ptr<Shape> Intersection::
+TransformPointer(const Transform &xform)
+{
+    CSG* result = new Intersection(*this);
+    for (int i = 0; i < elements.size(); i++)
+    {
+        result->AddElement(elements[i]->TransformPointer(xform));
+    }
+    return std::shared_ptr<Shape>(result);
 }
 
 void Intersection::
