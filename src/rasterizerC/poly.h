@@ -15,6 +15,7 @@ public:
 							 const Color * inputColorPointer = nullptr,
 							 bool positive = true);
     ConvexPoly(ConvexPoly &&);
+    ConvexPoly(const ConvexPoly &);
     //float signed_distance_bound(const Vector &p) const;
     bool Contains(const Vector &) const;
     //ConvexPoly Transformation(const Transform &);

@@ -93,8 +93,10 @@ Transformation(const Transform & xform)
 std::shared_ptr<Shape> ConvexPoly::
 TransformPointer(const Transform & xform)
 {
-    //std::shared_ptr<Shape> result(new ConvexPoly(Transformation(xform)));
-    return (std::shared_ptr<Shape>) this;//result;
+    ConvexPoly *temp = new ConvexPoly(*this);
+    temp->Transformation(xform);
+    std::shared_ptr<Shape> result(temp);
+    return (std::shared_ptr<Shape>) result;
 }
 
 void ConvexPoly::

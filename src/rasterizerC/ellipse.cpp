@@ -102,10 +102,10 @@ Transformation(const Transform & xform)
 std::shared_ptr<Shape> Ellipse::
 TransformPointer(const Transform &xform)
 {
-    //Ellipse * Ztemp=new Ellipse(*this);
-    //temp->Transformation(xform);
-    //std::shared_ptr<Shape> result=(std::shared_ptr<Shape>) temp;
-    return (std::shared_ptr<Shape>) this;//result;
+    Ellipse * temp = new Ellipse(*this);
+    temp->Transformation(xform);
+    std::shared_ptr<Shape> result(temp);
+    return (std::shared_ptr<Shape>) result;
 }
 
 void Ellipse::
