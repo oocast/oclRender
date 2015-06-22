@@ -1,12 +1,14 @@
 #include "oclrender.h"
 
+#include<iostream>
+
 const float PI=3.14159f;
 
 using namespace std;
-void TestPicture()
+void TestPicture(char * outName)
 {
     fstream f, fbg;
-    f.open("test_picture.ppm", fstream::out | fstream::binary);
+    f.open(outName, fstream::out | fstream::binary);
     fbg.open("../../pic/50608556_p0.ppm", fstream::in | fstream::binary);
     if (!fbg.is_open())
         exit(1);
@@ -14,7 +16,7 @@ void TestPicture()
     PPMImage bg(fbg);
     fbg.close();
     Scene scene;
-
+/*
     // add shapes
     Color lsColor;
     InitColor(&lsColor, 1.0F, 0.0F, 0.0F, 1.0F);
@@ -52,15 +54,62 @@ void TestPicture()
     //ConvexPoly tri2(Triangle({ Vector(0.5, 0.5), Vector(0.5, 0.75), Vector(0.25, 0.5) }, &green));
     //scene.Add(new ConvexPoly(tri1));
     //scene.Add(new ConvexPoly(tri2));
-
-    char fileName[]="shapedraw2.cl";
-    char kernelName[]="ShapeDraw";
-
-    CLInit(fileName, kernelName);
+*/
+    int numUnion, positive, numIntersect, numEle, id;
+    Color color;
+    std::cin>>numUnion;
+    std::shared_ptr<Shape> sp;
+    for (int i=0; i<numUnion; i++)
+    {
+        std::cin>>color.rgb[0]>>color.rgb[1]>>color.rgb[2]>>color.a;
+        std::cin>>positive>>numIntersect;
+        Union * up=new Union(&color, positive);
+        for (int j=0; j<numIntersect; j++)
+        {
+            //std::cin>>color.rgb[0]>>color.rgb[1]>>color.rgb[2]>>color.a;
+            std::cin>>positive>>numEle;
+            Intersection * ip=new Intersection(NULL, positive);
+            for (int k=0; k<numEle; k++)
+            {
+                //std::cin>>color.rgb[0]>>color.rgb[1]>>color.rgb[2]>>color.a;
+                std::cin>>positive>>id;
+                if (id==0)
+                {
+                    float a, b, c, d, e, f;
+                    std::cin>>a>>b>>c>>d>>e>>f;
+                    Ellipse * ep=new Ellipse(a, b, c, d, e, f, NULL, positive);
+                    sp=(std::shared_ptr<Shape>) ep;
+                }
+                else
+                {
+                    Vector vt;
+                    vector<Vector> vv;
+                    for (int l=0; l<id; l++)
+                    {
+                        std::cin>>vt.x>>vt.y;
+                        vv.push_back(vt);
+                    }
+                    ConvexPoly * cp=new ConvexPoly(vv, NULL, positive);
+                    sp=(std::shared_ptr<Shape>) cp;
+                }
+                ip->AddElement(sp);
+            }
+            sp=(std::shared_ptr<Shape>) ip;
+            up->AddElement(sp);
+        }
+        //sp=(std::shared_ptr<Shape>) up;
+        scene.Add(up);
+    }
+/*
+    for (int i=0; i<10; i++)
+    {
+        for (int j=0; j<10; j++)
+        {
+            Translate(0.05+0.1*i, 0.05+0.1*j);
+*/            
 
     scene.Draw(bg);
 
-    CLRelease();
     //image.write_ppm(f, &bg);
     bg.WritePPM(f);
     f.close();
@@ -69,6 +118,16 @@ void TestPicture()
 
 int main()
 {
-    TestPicture();
+    char outName[]="./result/case000";
+    int n;
+    std::cin>>n;
+    for (int i=0; i<n; i++)
+    {
+        outName[15]=48+i%10;
+        outName[14]=48+(i/10)%10;
+        outName[13]=48+i/100;
+        std::cout<<"Case: "<<i<<" : "<<std::flush;
+        TestPicture(outName);
+    }
     return 0;
 }
