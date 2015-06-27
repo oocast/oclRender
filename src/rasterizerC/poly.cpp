@@ -73,9 +73,9 @@ Contains(const Vector & point) const
     {
         plane = &halfPlanes[i];
         if (plane->SignedDistance(point) < 0)
-            return false;
+            return !positive;
     }
-    return true;
+    return positive;
 }
 /*
 ConvexPoly ConvexPoly::
@@ -103,8 +103,8 @@ TransformPointer(const Transform & xform)
 {
     ConvexPoly *temp = new ConvexPoly(*this);
     temp->Transformation(xform);
-    std::shared_ptr<Shape> result(temp);
-    return (std::shared_ptr<Shape>) result;
+    //std::shared_ptr<Shape> result(temp);
+    return (std::shared_ptr<Shape>) temp;
 }
 
 void ConvexPoly::

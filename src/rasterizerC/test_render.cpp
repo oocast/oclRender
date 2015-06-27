@@ -95,7 +95,7 @@ void TestPicture(char * outName)
                 ip->AddElement(sp);
             }
             sp=(std::shared_ptr<Shape>) ip;
-            up->AddElement(sp);
+            up->AddElement(sp->TransformPointer(Translate(0.5, 0.5))->TransformPointer(Rotate(PI/8)));
         }
         //sp=(std::shared_ptr<Shape>) up;
         scene.Add(up);

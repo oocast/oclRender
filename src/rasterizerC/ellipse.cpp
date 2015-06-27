@@ -55,7 +55,7 @@ Value(const Vector & point) const
 bool Ellipse::
 Contains(const Vector &point) const
 {
-    return Value(point) < 0;
+    return ((Value(point) < 0)==positive);
 }
 /*
 Ellipse Ellipse::
@@ -111,8 +111,8 @@ TransformPointer(const Transform &xform)
 {
     Ellipse * temp = new Ellipse(*this);
     temp->Transformation(xform);
-    std::shared_ptr<Shape> result(temp);
-    return (std::shared_ptr<Shape>) result;
+    //std::shared_ptr<Shape> result(temp);
+    return (std::shared_ptr<Shape>) temp;
 }
 
 void Ellipse::

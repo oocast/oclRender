@@ -162,12 +162,12 @@ Draw(PPMImage & image, int superSampling)
             Vector corner = Vector((float)x / r, (float)y / r);
             float coverage = 0.0;
             for (size_t i = 0; i < jitterSize; i++) {
-                if (contains(corner + jitter[i])) {
+                if (Contains(corner + jitter[i])) {
                     coverage += 1.0;
                 }
             }
-            Color fainted = faint_Color(&color, coverage / jitterSize);
-            draw_Color(&image.pixels[y * image.width + x], &fainted);
+            Color fainted = FaintColor(&shapeColor, coverage / jitterSize);
+            DrawColor(&image.pixels[y * image.width + x], &fainted);
             x++;
         }
     }
