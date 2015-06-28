@@ -27,10 +27,10 @@ private:
     void CalculateExtremum();
 };
 
-ConvexPoly Triangle(const std::vector<Vector> &, const Color * inputColorPointer = nullptr);
+ConvexPoly Triangle(const std::vector<Vector> &, const Color * inputColorPointer = nullptr, bool positive = true);
 
-ConvexPoly Rectangle(const Vector &, const Vector &, const Color * color = nullptr);
+ConvexPoly Rectangle(const Vector &, const Vector &, const Color * color = nullptr, bool positive = true);
 
-ConvexPoly LineSegment(const Vector &, const Vector &, float, const Color * inputColorPointer = nullptr);
+ConvexPoly LineSegment(const Vector &, const Vector &, float, const Color * inputColorPointer = nullptr, bool positive = true);
 
 #endif //__POLY_H__

@@ -27,5 +27,5 @@ private:
     void CalculateExtremum();
 };
 
-Ellipse Circle(const Vector &, float , const Color *inputColorPointer = nullptr);
+Ellipse Circle(const Vector &, float , const Color *inputColorPointer = nullptr, bool positive = true);
 #endif //__ELLIPSE_H__

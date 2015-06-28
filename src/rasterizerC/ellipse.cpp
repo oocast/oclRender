@@ -201,9 +201,9 @@ GetParameters(std::vector<float> &parameters, std::vector<int> & structures)
 }
 
 Ellipse 
-Circle(const Vector &center, float radius, const Color * inputColorPointer)
+Circle(const Vector &center, float radius, const Color * inputColorPointer, bool positive)
 {
-    Ellipse circle(1.0, 1.0, 0.0, 0.0, 0.0, -1.0, inputColorPointer);
+    Ellipse circle(1.0, 1.0, 0.0, 0.0, 0.0, -1.0, inputColorPointer, positive);
     circle.Transformation(Scale(radius, radius));
     circle.Transformation(Translate(center.x, center.y));
     return circle;

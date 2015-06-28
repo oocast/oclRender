@@ -123,26 +123,26 @@ GetParameters(std::vector<float> & parameters, std::vector<int> & structures)
 
 
 ConvexPoly 
-Triangle(const std::vector<Vector> &vertices, const Color * inputColorPointer)
+Triangle(const std::vector<Vector> &vertices, const Color * inputColorPointer, bool positive)
 {
-    return ConvexPoly(vertices, inputColorPointer);
+    return ConvexPoly(vertices, inputColorPointer, positive);
 }
 
 ConvexPoly
 Rectangle(const Vector &vertex1, const Vector &vertex2, 
-const Color * inputColorPointer)
+          const Color * inputColorPointer, bool positive)
 {
     std::vector<Vector> vertices;
     vertices.push_back(Vector(fmin(vertex1.x, vertex2.x), fmin(vertex1.y, vertex2.y)));
     vertices.push_back(Vector(fmax(vertex1.x, vertex2.x), fmin(vertex1.y, vertex2.y)));
     vertices.push_back(Vector(fmax(vertex1.x, vertex2.x), fmax(vertex1.y, vertex2.y)));
     vertices.push_back(Vector(fmin(vertex1.x, vertex2.x), fmax(vertex1.y, vertex2.y)));
-    return ConvexPoly(vertices, inputColorPointer);
+    return ConvexPoly(vertices, inputColorPointer, positive);
 }
 
 ConvexPoly
-LineSegment(const Vector &vertex1, const Vector &vertex2, 
-            float thickness, const Color *inputColorPointer)
+LineSegment(const Vector &vertex1, const Vector &vertex2, float thickness, 
+            const Color *inputColorPointer, bool positive)
 {
     Vector d = vertex2 - vertex1;
     float tmp = d.x;
@@ -154,5 +154,5 @@ LineSegment(const Vector &vertex1, const Vector &vertex2,
     vertices.push_back(vertex1 - d);
     vertices.push_back(vertex2 - d);
     vertices.push_back(vertex2 + d);
-    return ConvexPoly(vertices, inputColorPointer);
+    return ConvexPoly(vertices, inputColorPointer, positive);
 }
