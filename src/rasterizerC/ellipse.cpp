@@ -37,6 +37,22 @@ d(d), e(e), f(f)
 }
 
 Ellipse::
+Ellipse(const Vector &boundVertex1, const Vector &boundVertex2,
+        const Color *colorInputPointer, bool positive) :
+Shape(colorInputPointer, positive)
+{
+    Vector center = (boundVertex1 + boundVertex2) * 0.5F;
+    Vector halfSize = boundVertex1.Max(boundVertex2) - center;
+    a = halfSize.y * halfSize.y;
+    b = halfSize.x * halfSize.x;
+    c = 0.0F;
+    d = -2.0 * center.x * a;
+    e = -2.0 * center.y * b;
+    f = a * center.x * center.x + b * center.y * center.y - a * b;
+    CalculateExtremum();
+}
+
+Ellipse::
 Ellipse(const Ellipse &ellipse) :
 Shape(&ellipse.shapeColor, ellipse.positive),
 a(ellipse.a), b(ellipse.b), c(ellipse.c),
