@@ -18,5 +18,7 @@ std::shared_ptr<Shape> Ring(float halfWidth = 1.0F, float halfHeight = 1.0F,
 std::shared_ptr<Shape> Ring(const Vector &, const Vector &, float,
                             const Color * inputColorPointer = nullptr);
 std::shared_ptr<Shape> Star();
-std::shared_ptr<Shape> Arrow();
+std::shared_ptr<Shape> Arrow(const Vector &, const Vector &,
+                             int, const Color * inputColorPointer = nullptr,
+                             float lengthRatio = 0.5F, float widthRatio = 0.5F);
 #endif //__INTERFACE_H__
