@@ -1,10 +1,163 @@
 #include "oclrender.h"
 
 #include<iostream>
+#include<cmath>
 
 const float PI=3.14159f;
 
 using namespace std;
+
+void TestStarUnions(char * outName)
+{
+    fstream f, fbg;
+    f.open(outName, fstream::out | fstream::binary);
+    fbg.open("../../pic/50608556_p0.ppm", fstream::in | fstream::binary);
+    if (!fbg.is_open())
+        exit(1);
+    //PPMImage image(512, InitColor(0.0, 0.0, 0.0, 1.0));
+    PPMImage bg(fbg);
+    fbg.close();
+    Scene scene;
+
+    Color color;
+    InitColor(&color, 1, 0, 0, 1);
+    std::vector<Vector> vv1, vv2, vv3, vv4;
+    std::shared_ptr<Shape> sp;
+
+    vv1.push_back(Vector(sin(0)*0.05, cos(0)*0.05));
+    vv1.push_back(Vector(sin(PI*6/5)*0.05, cos(PI*6/5)*0.05));
+    vv1.push_back(Vector(sin(PI*4/5)*0.05, cos(PI*4/5)*0.05));
+    vv2.push_back(Vector(sin(PI/5)*0.05*sin(PI/10)/cos(PI/5), cos(PI/5)*0.05*sin(PI/10)/cos(PI/5)));
+    vv2.push_back(Vector(sin(PI*3/5)*0.05*sin(PI/10)/cos(PI/5), cos(PI*3/5)*0.05*sin(PI/10)/cos(PI/5)));
+    vv2.push_back(Vector(sin(PI*2/5)*0.05, cos(PI*2/5)*0.05));
+    vv3.push_back(Vector(sin(PI*7/5)*0.05*sin(PI/10)/cos(PI/5), cos(PI*7/5)*0.05*sin(PI/10)/cos(PI/5)));
+    vv3.push_back(Vector(sin(PI*9/5)*0.05*sin(PI/10)/cos(PI/5), cos(PI*9/5)*0.05*sin(PI/10)/cos(PI/5)));
+    vv3.push_back(Vector(sin(PI*8/5)*0.05, cos(PI*8/5)*0.05));
+    vv4.push_back(Vector(sin(PI)*0.05*sin(PI/10)/cos(PI/5), cos(PI)*0.05*sin(PI/10)/cos(PI/5)));
+    vv4.push_back(Vector(sin(PI*6/5)*0.05, cos(PI*6/5)*0.05));
+    vv4.push_back(Vector(sin(PI*4/5)*0.05, cos(PI*4/5)*0.05));
+    
+    ConvexPoly * cp1=new ConvexPoly(vv1, NULL, 1);
+    ConvexPoly * cp2=new ConvexPoly(vv2, NULL, 1);
+    ConvexPoly * cp3=new ConvexPoly(vv3, NULL, 1);
+    ConvexPoly * cp4=new ConvexPoly(vv4, NULL, 0);
+
+    Intersection * ip1=new Intersection(NULL, 1);
+    Intersection * ip2=new Intersection(NULL, 1);
+    Intersection * ip3=new Intersection(NULL, 1);
+    sp=(std::shared_ptr<Shape>) cp1;
+    ip1->AddElement(sp);
+    sp=(std::shared_ptr<Shape>) cp2;
+    ip2->AddElement(sp);
+    sp=(std::shared_ptr<Shape>) cp3;
+    ip3->AddElement(sp);
+    sp=(std::shared_ptr<Shape>) cp4;
+    ip1->AddElement(sp);
+
+    Union * up=new Union(&color, 1);
+
+    sp=(std::shared_ptr<Shape>) ip1;
+    up->AddElement(sp);
+    sp=(std::shared_ptr<Shape>) ip2;
+    up->AddElement(sp);
+    sp=(std::shared_ptr<Shape>) ip3;
+    up->AddElement(sp);
+
+    for (int i=0; i<10; i++)
+        for (int j=0; j<10; j++)
+            scene.Add(up->TransformPointer(Rotate(PI/10*(i+j)))->TransformPointer(Translate(0.05+i*0.1, 0.05+j*0.1)));
+
+    scene.Draw(bg);
+
+    //image.write_ppm(f, &bg);
+    bg.WritePPM(f);
+    f.close();
+}
+
+void TestStarIntersects(char * outName)
+{
+    fstream f, fbg;
+    f.open(outName, fstream::out | fstream::binary);
+    fbg.open("../../pic/50608556_p0.ppm", fstream::in | fstream::binary);
+    if (!fbg.is_open())
+        exit(1);
+    //PPMImage image(512, InitColor(0.0, 0.0, 0.0, 1.0));
+    PPMImage bg(fbg);
+    fbg.close();
+    Scene scene;
+
+    Color color;
+    InitColor(&color, 1, 0, 0, 1);
+    std::vector<Vector> vv1, vv2, vv3, vv4;
+    std::shared_ptr<Shape> sp;
+
+    vv1.push_back(Vector(sin(0)*0.05, cos(0)*0.05));
+    vv1.push_back(Vector(sin(PI*6/5)*0.05, cos(PI*6/5)*0.05));
+    vv1.push_back(Vector(sin(PI*4/5)*0.05, cos(PI*4/5)*0.05));
+    vv2.push_back(Vector(sin(PI/5)*0.05*sin(PI/10)/cos(PI/5), cos(PI/5)*0.05*sin(PI/10)/cos(PI/5)));
+    vv2.push_back(Vector(sin(PI*3/5)*0.05*sin(PI/10)/cos(PI/5), cos(PI*3/5)*0.05*sin(PI/10)/cos(PI/5)));
+    vv2.push_back(Vector(sin(PI*2/5)*0.05, cos(PI*2/5)*0.05));
+    vv3.push_back(Vector(sin(PI*7/5)*0.05*sin(PI/10)/cos(PI/5), cos(PI*7/5)*0.05*sin(PI/10)/cos(PI/5)));
+    vv3.push_back(Vector(sin(PI*9/5)*0.05*sin(PI/10)/cos(PI/5), cos(PI*9/5)*0.05*sin(PI/10)/cos(PI/5)));
+    vv3.push_back(Vector(sin(PI*8/5)*0.05, cos(PI*8/5)*0.05));
+    vv4.push_back(Vector(sin(PI)*0.05*sin(PI/10)/cos(PI/5), cos(PI)*0.05*sin(PI/10)/cos(PI/5)));
+    vv4.push_back(Vector(sin(PI*6/5)*0.05, cos(PI*6/5)*0.05));
+    vv4.push_back(Vector(sin(PI*4/5)*0.05, cos(PI*4/5)*0.05));
+    
+    ConvexPoly * cp1=new ConvexPoly(vv1, NULL, 1);
+    ConvexPoly * cp2=new ConvexPoly(vv2, NULL, 1);
+    ConvexPoly * cp3=new ConvexPoly(vv3, NULL, 1);
+    ConvexPoly * cp4=new ConvexPoly(vv4, NULL, 0);
+    
+    //cp1->Transformation(Translate(0.5, 0.5));
+    //cp2->Transformation(Translate(0.5, 0.5));
+    //cp3->Transformation(Translate(0.5, 0.5));
+    //cp4->Transformation(Translate(0.5, 0.5));
+
+    Intersection * ip1=new Intersection(NULL, 1);
+    Intersection * ip2=new Intersection(NULL, 1);
+    Intersection * ip3=new Intersection(NULL, 1);
+    sp=(std::shared_ptr<Shape>) cp1;
+    ip1->AddElement(sp);
+    sp=(std::shared_ptr<Shape>) cp2;
+    ip2->AddElement(sp);
+    sp=(std::shared_ptr<Shape>) cp3;
+    ip3->AddElement(sp);
+    sp=(std::shared_ptr<Shape>) cp4;
+    ip1->AddElement(sp);
+
+    Union * up=new Union(&color, 1);
+/*
+    sp=(std::shared_ptr<Shape>) ip1;
+    up->AddElement(sp);
+    sp=(std::shared_ptr<Shape>) ip2;
+    up->AddElement(sp);
+    sp=(std::shared_ptr<Shape>) ip3;
+    up->AddElement(sp);
+
+    for (int i=0; i<10; i++)
+        for (int j=0; j<10; j++)
+            scene.Add(up->TransformPointer(Rotate(PI/10*(i+j)))->TransformPointer(Translate(0.05+i*0.1, 0.05+j*0.1)));
+*/
+    for (int i=0; i<10; i++)
+        for (int j=0; j<10; j++)
+        {
+            //sp=(std::shared_ptr<Shape>) ip1;
+            up->AddElement(ip1->TransformPointer(Rotate(PI/10*(i+j)))->TransformPointer(Translate(0.05+i*0.1, 0.05+j*0.1)));
+            //sp=(std::shared_ptr<Shape>) ip2;
+            up->AddElement(ip2->TransformPointer(Rotate(PI/10*(i+j)))->TransformPointer(Translate(0.05+i*0.1, 0.05+j*0.1)));
+            //sp=(std::shared_ptr<Shape>) ip3;
+            up->AddElement(ip3->TransformPointer(Rotate(PI/10*(i+j)))->TransformPointer(Translate(0.05+i*0.1, 0.05+j*0.1)));
+        }
+    scene.Add(up);
+    //scene.Add(up->TransformPointer(Translate(0.5, 0.5)));
+    scene.Draw(bg);
+
+    //image.write_ppm(f, &bg);
+    bg.WritePPM(f);
+    f.close();
+}
+
 void TestPicture(char * outName)
 {
     fstream f, fbg;
@@ -95,7 +248,7 @@ void TestPicture(char * outName)
                 ip->AddElement(sp);
             }
             sp=(std::shared_ptr<Shape>) ip;
-            up->AddElement(sp->TransformPointer(Translate(0.5, 0.5))->TransformPointer(Rotate(PI/8)));
+            up->AddElement(sp);//->TransformPointer(Translate(0.5, 0.5))->TransformPointer(Rotate(PI/8)));
         }
         //sp=(std::shared_ptr<Shape>) up;
         scene.Add(up);
@@ -121,7 +274,12 @@ int main()
     char outName[]="./result/case000";
     int n;
     std::cin>>n;
-    for (int i=0; i<n; i++)
+    std::cout<<"Case: 0 : "<<std::flush;
+    TestStarUnions(outName);
+    outName[15]=49;
+    std::cout<<"Case: 1 : "<<std::flush;
+    TestStarIntersects(outName);
+    for (int i=2; i<=n+1; i++)
     {
         outName[15]=48+i%10;
         outName[14]=48+(i/10)%10;

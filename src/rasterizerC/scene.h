@@ -12,6 +12,7 @@ public:
 public:
 	Scene(){}
     void Add(Shape *);
+    void Add(std::shared_ptr<Shape>);
     virtual void Draw(PPMImage &, int superSampling = 6);
 };
 

@@ -12,6 +12,12 @@ Add(Shape * node)
 }
 
 void Scene::
+Add(std::shared_ptr<Shape> node)
+{
+    nodes.push_back(node);
+}
+
+void Scene::
 Draw(PPMImage & image, int superSampling)
 {
     char fileName[]="shapedraw2.cl";

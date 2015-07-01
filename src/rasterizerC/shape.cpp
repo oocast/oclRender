@@ -98,17 +98,17 @@ Draw(PPMImage & image, int superSampling)
             jitter[x * superSampling + y] = Vector(((float)x + distri(gen)) / superSampling / r,
                 ((float)y + distri(gen)) / superSampling / r);
 
-    std::vector<float> fv;
-    std::vector<int> iv;
-    for (int i=0; i<4; i++) iv.push_back(1);
-    GetParameters(fv, iv);
-
     size_t jitterSize = jitter.size();
 
     int w=image.width;
     int h=image.height;
     CalculateBound((float)h/w);
 ///*
+    std::vector<float> fv;
+    std::vector<int> iv;
+    for (int i=0; i<4; i++) iv.push_back(1);
+    GetParameters(fv, iv);
+
     int ib=(int) (bound.low.y*w);
     int jb=(int) (bound.low.x*w);
     int ie=ceil(bound.high.y*w);

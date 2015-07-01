@@ -271,7 +271,7 @@ CalculateBound(float aspectRatio)
         }
         else
         {
-            bound = bound.Intersection(AABox(Vector(), Vector(0.0L, aspectRatio)));
+            bound = bound.Intersection(AABox(Vector(), Vector(1.0L, aspectRatio)));
         }
     }
     if (allNegative)
