@@ -123,3 +123,25 @@ Arrow(const Vector &boundVertex1, const Vector &boundVertex2,
     u->AddElement(in2);
     return u;
 }
+
+std::shared_ptr<CSG> BrushInit(const Vector &vertex1, const Vector &vertex2, float thickness,
+                               Vector &endVertex, const Color * inputColorPointer = nullptr)
+{
+    std::shared_ptr<Shape> seg(new ConvexPoly(LineSegment(vertex1, vertex2, thickness)));
+    std::shared_ptr<CSG> u(new Union(inputColorPointer, true));
+    std::shared_ptr<CSG> in(new Intersection(nullptr, true));
+    endVertex = vertex2;
+    in->AddElement(seg);
+    u->AddElement(in);
+    return u;
+}
+std::shared_ptr<CSG> BrushAppend(const Vector &vertex, std::shared_ptr<CSG> prevBrush,
+                                 float thickness, Vector &endVertex)
+{
+    std::shared_ptr<CSG> in(new Intersection(nullptr, true));
+    std::shared_ptr<Shape> seg(new ConvexPoly(LineSegment(endVertex, vertex, thickness)));
+    endVertex = vertex;
+    in->AddElement(seg);
+    prevBrush->AddElement(in);
+    return prevBrush;
+}
