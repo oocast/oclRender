@@ -20,7 +20,7 @@ Add(std::shared_ptr<Shape> node)
 void Scene::
 Draw(PPMImage & image, int superSampling)
 {
-    char fileName[]="shapedraw2.cl";
+    char fileName[]="shapedraw2_yuyv.cl";
     char kernelName[]="ShapeDraw";
 
     CLInit(fileName, kernelName);
@@ -47,5 +47,5 @@ Draw(PPMImage & image, int superSampling)
         ns+=1000000000;
         s--;
     }
-    std::cout<<"Total running time "<<s<<" s "<<ns<<" ns."<<std::endl; 
+    std::cout<<"Total running time "<<s<<" s "<<ns<<" ns."<<std::endl;
 }

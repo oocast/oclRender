@@ -12,6 +12,7 @@ void TestStarUnions(char * outName)
     fstream f, fbg;
     f.open(outName, fstream::out | fstream::binary);
     fbg.open("../../pic/50608556_p0.ppm", fstream::in | fstream::binary);
+    //fbg.open("../../pic/abc.ppm", fstream::in | fstream::binary);
     if (!fbg.is_open())
         exit(1);
     //PPMImage image(512, InitColor(0.0, 0.0, 0.0, 1.0));
@@ -79,6 +80,7 @@ void TestStarIntersects(char * outName)
     fstream f, fbg;
     f.open(outName, fstream::out | fstream::binary);
     fbg.open("../../pic/50608556_p0.ppm", fstream::in | fstream::binary);
+    //fbg.open("../../pic/abc.ppm", fstream::in | fstream::binary);
     if (!fbg.is_open())
         exit(1);
     //PPMImage image(512, InitColor(0.0, 0.0, 0.0, 1.0));
@@ -158,11 +160,58 @@ void TestStarIntersects(char * outName)
     f.close();
 }
 
+void TestMassive(char * outName)
+{
+    fstream f, fbg;
+    f.open(outName, fstream::out | fstream::binary);
+    fbg.open("../../pic/50608556_p0.ppm", fstream::in | fstream::binary);
+    //fbg.open("../../pic/abc.ppm", fstream::in | fstream::binary);
+    if (!fbg.is_open())
+        exit(1);
+    //PPMImage image(512, InitColor(0.0, 0.0, 0.0, 1.0));
+    PPMImage bg(fbg);
+    fbg.close();
+    Scene scene;
+
+    Color color;
+    InitColor(&color, 1, 0, 0, 1);
+    std::vector<Vector> vv;
+    std::shared_ptr<Shape> sp;
+
+    vv.push_back(Vector(0.04, 0.04));
+    vv.push_back(Vector(0.06, 0.04));
+    vv.push_back(Vector(0.06, 0.06));
+    vv.push_back(Vector(0.04, 0.06));
+
+    ConvexPoly * cp=new ConvexPoly(vv, NULL, 1);
+
+    Intersection * ip=new Intersection(NULL, 1);
+
+    sp=(std::shared_ptr<Shape>) cp;
+    ip->AddElement(sp);
+
+    Union * up=new Union(&color, 1);
+
+    sp=(std::shared_ptr<Shape>) ip;
+    for (int i=0; i<100; i++)
+        up->AddElement(ip->TransformPointer(Translate(0.005*i, 0.005*i)));
+
+//    for (int i=0; i<50000; i++)
+        //scene.Add(up->TransformPointer(Translate(0, 0)));
+    scene.Add(up);
+
+    scene.Draw(bg);
+
+    //image.write_ppm(f, &bg);
+    bg.WritePPM(f);
+    f.close();
+}
 void TestPicture(char * outName)
 {
     fstream f, fbg;
     f.open(outName, fstream::out | fstream::binary);
     fbg.open("../../pic/50608556_p0.ppm", fstream::in | fstream::binary);
+    //fbg.open("../../pic/abc.ppm", fstream::in | fstream::binary);
     if (!fbg.is_open())
         exit(1);
     //PPMImage image(512, InitColor(0.0, 0.0, 0.0, 1.0));
@@ -252,14 +301,7 @@ void TestPicture(char * outName)
         }
         //sp=(std::shared_ptr<Shape>) up;
         scene.Add(up);
-    }
-/*
-    for (int i=0; i<10; i++)
-    {
-        for (int j=0; j<10; j++)
-        {
-            Translate(0.05+0.1*i, 0.05+0.1*j);
-*/            
+    }         
 
     scene.Draw(bg);
 
@@ -279,7 +321,10 @@ int main()
     outName[15]=49;
     std::cout<<"Case: 1 : "<<std::flush;
     TestStarIntersects(outName);
-    for (int i=2; i<=n+1; i++)
+    outName[15]=50;
+    std::cout<<"Case: 2 : "<<std::flush;
+    TestMassive(outName);
+    for (int i=3; i<=n+2; i++)
     {
         outName[15]=48+i%10;
         outName[14]=48+(i/10)%10;

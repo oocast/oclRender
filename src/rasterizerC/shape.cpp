@@ -5,9 +5,12 @@
 #include "cl_helper.h"
 
 #include <iostream>
-
+/* for packed rgb/yuv
 const int HSIZE=16;
 const int WSIZE=32;
+*/
+const int HSIZE=32;
+const int WSIZE=16;
 
 cl_mem memObj[4];
 cl_kernel kernel;
@@ -85,7 +88,7 @@ draw(PPMImage &image, int superSampling)
 */
 
 void Shape::
-Draw(PPMImage & image, int superSampling)
+DrawRGB(PPMImage & image, int superSampling)
 {
     if (!bound.Overlaps(image.Bounds()))
         return;
@@ -172,4 +175,77 @@ Draw(PPMImage & image, int superSampling)
         }
     }
 */
+}
+
+void Shape::
+DrawYUYV(PPMImage & image, int superSampling)
+{
+    if (!bound.Overlaps(image.Bounds()))
+        return;
+    float r = (float)image.width;
+    std::vector<Vector> jitter(superSampling*superSampling, Vector());
+    std::default_random_engine gen;
+    std::uniform_real_distribution<float> distri(0.0, 1.0);
+    for (int x = 0; x < superSampling; x++)
+        for (int y = 0; y < superSampling; y++)
+            jitter[x * superSampling + y] = Vector(((float)x + distri(gen)) / superSampling / r,
+                ((float)y + distri(gen)) / superSampling / r);
+
+    size_t jitterSize = jitter.size();
+
+    int w=image.width;
+    int h=image.height;
+    CalculateBound((float)h/w);
+
+    std::vector<float> fv;
+    std::vector<int> iv;
+    for (int i=0; i<4; i++) iv.push_back(1);
+    GetParameters(fv, iv);
+
+    int ib=(int) (bound.low.y*w);
+    int jb=(int) (bound.low.x*w/2);
+    int ie=ceil(bound.high.y*w);
+    int je=ceil(bound.high.x*w/2);
+    if (ie<=0) return;
+    if (je<=0) return;
+    if (ib<0) ib=0;
+    if (jb<0) jb=0;
+
+    memObj[1]=clCreateBuffer(context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, fv.size()*sizeof(float), &fv[0], NULL);
+    memObj[2]=clCreateBuffer(context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, 2*jitterSize*sizeof(float), &jitter[0], NULL);
+    memObj[3]=clCreateBuffer(context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, iv.size()*sizeof(int), &iv[0], NULL);
+
+    err=clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *) &memObj[0]);
+    err=clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *) &memObj[1]);
+    err=clSetKernelArg(kernel, 2, sizeof(cl_mem), (void *) &memObj[2]);
+    err=clSetKernelArg(kernel, 3, sizeof(cl_mem), (void *) &memObj[3]);
+    err=clSetKernelArg(kernel, 4, sizeof(int), (void *) &jitterSize);
+    err=clSetKernelArg(kernel, 5, sizeof(int), (void *) &w);
+    err=clSetKernelArg(kernel, 6, sizeof(int), (void *) &h);
+    err=clSetKernelArg(kernel, 7, sizeof(float), (void *) &shapeColor.rgb[0]);
+    err=clSetKernelArg(kernel, 8, sizeof(float), (void *) &shapeColor.rgb[1]);
+    err=clSetKernelArg(kernel, 9, sizeof(float), (void *) &shapeColor.rgb[2]);
+    //err=clSetKernelArg(kernel, 10, sizeof(float), (void *) &shapeColor.a);
+    err=clSetKernelArg(kernel, 10, sizeof(int), (void *) &ib);
+    err=clSetKernelArg(kernel, 11, sizeof(int), (void *) &jb);
+
+    size_t globals[2];
+    size_t locals[2];
+
+    globals[0]=ceil((ie-ib)*1.0f/HSIZE)*HSIZE;
+    globals[1]=ceil((je-jb)*1.0f/WSIZE)*WSIZE;
+    locals[0]=HSIZE;
+    locals[1]=WSIZE;
+    
+    err=clEnqueueNDRangeKernel(cmdQueue, kernel, 2, NULL, globals, locals, 0, NULL, NULL);
+
+    err=clReleaseMemObject(memObj[1]);
+    err=clReleaseMemObject(memObj[2]);
+    err=clReleaseMemObject(memObj[3]);
+}
+
+void Shape::
+Draw(PPMImage & image, int superSampling)
+{
+    DrawYUYV(image, superSampling);
 }
