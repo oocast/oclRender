@@ -1,26 +1,25 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "renderarea.h"
+#include "myshape.h"
 #include <QWidget>
 #include <QPushButton>
-
-QT_BEGIN_NAMESPACE
-class QComboBox;
-class QLabel;
-class QSpinBox;
-QT_END_NAMESPACE
-class RenderArea;
+#include <QComboBox>
+#include <QSpinBox>
+#include <QLabel>
 
 class Window : public QWidget
 {
     Q_OBJECT
 
 public:
-    Window();
+    Window(RenderArea *renderArea);
 
 private slots:
     void shapeChanged();
     void penChanged();
+    void colorChanged();
     void undo();
     void redo();
 
@@ -30,10 +29,13 @@ private:
     QLabel *shapeLabel;
     QSpinBox *penWidthSpinBox;
     QLabel *penWidthLabel;
-    QComboBox *colorComboBox;
+    QPushButton *colorButton;
     QLabel *colorLabel;
     QPushButton *backButton;
     QPushButton *forwardButton;
+    
 };
 
+
 #endif // WINDOW_H
+

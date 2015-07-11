@@ -1,0 +1,7 @@
+1.install QT from: www.qt.io/download-open-source
+
+2.install wmctrl: sudo apt-get install wmctrl
+
+3.execute QT Creator at /opt/Qt/Tools/QtCreator/bin/qtcreator
+
+4.import the project and run
