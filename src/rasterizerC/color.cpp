@@ -119,6 +119,30 @@ FaintColor(const Color * color, float k)
     return result;
 }
 
+void 
+ToYUV(Color * color)
+{
+    float y, u, v;
+    y = 0.299 * color->rgb[0] + 0.587 * color->rgb[1] + 0.114 * color->rgb[2];
+    u = 0.492 * (color->rgb[2] - y);
+    v = 0.877 * (color->rgb[0] - y);
+    color->rgb[0] = y;
+    color->rgb[1] = u;
+    color->rgb[2] = v;
+}
+
+void 
+ToRGB(Color * color)
+{
+    float r, g, b;
+    r = color->rgb[0] + 1.140 * color->rgb[2];
+    g = color->rgb[0] - 0.395 * color->rgb[1] - 0.581 * color->rgb[2];
+    b = color->rgb[0] + 2.032 * color->rgb[1];
+    color->rgb[0] = r;
+    color->rgb[1] = g;
+    color->rgb[2] = b;
+}
+
 unsigned char *
 AsPPM(const Color * color, unsigned char * rgbBuff)
 {
