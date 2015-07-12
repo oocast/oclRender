@@ -13,7 +13,15 @@ public:
 	Scene(){}
     void Add(Shape *);
     void Add(std::shared_ptr<Shape>);
+    // Delete last element
+    void Delete();
+    // Draw on picture, execute once
     virtual void Draw(PPMImage &, int superSampling = 6);
+    // Draw on camera frame, execute repeatedly
+    void Draw(unsigned int, unsigned int, int, int superSampling = 6);
+    // Draw untill certain shape in scene, used by demo
+    void Draw(unsigned int, unsigned int, size_t, int, int superSampling = 6);
+    
 };
 
 #endif //__SCENE_H__

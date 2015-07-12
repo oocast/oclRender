@@ -14,6 +14,7 @@ extern cl_program program;
 
 void CLInit(char *, char *);
 void CLRelease();
+void CLReleaseCam();
 void CLReadImageBuff(cl_mem &, PPMImage &);
 void CLWriteImageBuff(cl_mem &, PPMImage &);
 

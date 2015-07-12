@@ -41,6 +41,20 @@ void CLRelease()
     err=clReleaseContext(context);
 }
 
+void CLReleaseCam()
+{
+    err = clFlush(cmdQueue);
+    err = clFinish(cmdQueue);
+    err = clReleaseKernel(kernel);
+    err = clReleaseProgram(program);
+    
+    // don't bother release it because it is not used
+    //err = clReleaseMemObject(memObj[0]);
+    
+    err = clReleaseCommandQueue(cmdQueue);
+    err = clReleaseContext(context);
+}
+
 void CLReadImageBuff(cl_mem & memObj, PPMImage & image)
 {
     int size = image.pixels.size()*sizeof(Color);

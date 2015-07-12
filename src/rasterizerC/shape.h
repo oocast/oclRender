@@ -26,6 +26,8 @@ public:
     virtual bool Contains(const Vector &) const = 0;
     //virtual float signed_distance_bound(const Vector &p) const = 0;
     void Draw(PPMImage &, int);
+    // draw shape on camera frame
+    void Draw(unsigned int, unsigned int, int, int);
     virtual void GetParameters(std::vector<float> &, std::vector<int> &) = 0;
     virtual std::shared_ptr<Shape> TransformPointer(const Transform &) = 0;
     // recompute bound of shape, used only by CSG

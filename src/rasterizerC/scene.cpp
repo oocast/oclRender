@@ -18,6 +18,12 @@ Add(std::shared_ptr<Shape> node)
 }
 
 void Scene::
+Delete()
+{
+    nodes.pop_back();
+}
+
+void Scene::
 Draw(PPMImage & image, int superSampling)
 {
     char fileName[]="shapedraw2_yuyv.cl";
@@ -48,4 +54,19 @@ Draw(PPMImage & image, int superSampling)
         s--;
     }
     std::cout<<"Total running time "<<s<<" s "<<ns<<" ns."<<std::endl;
+}
+
+void Scene::
+Draw(unsigned int height, unsigned int width, size_t untill, int index, int superSampling)
+{
+    untill = (untill < nodes.size()) ? untill : nodes.size();
+    for (size_t i = 0; i < untill; i++)
+        nodes[i]->Draw(height, width, index, superSampling);
+}
+
+void Scene::
+Draw(unsigned int height, unsigned int width, int index, int superSampling)
+{
+    for (size_t i = 0; i < nodes.size(); i++)
+        nodes[i]->Draw(height, width, index, superSampling);
 }
