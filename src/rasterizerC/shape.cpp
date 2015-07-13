@@ -286,6 +286,7 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     //if (je <= 0) return;
     if (ib<0) ib = 0;
     if (jb<0) jb = 0;
+    //std::cout<<ib<<" "<<ie<<" "<<jb<<" "<<je<<std::endl;
 
     memObj[1] = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, fv.size()*sizeof(float), &fv[0], NULL);
     memObj[2] = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, 2 * jitterSize*sizeof(float), &jitter[0], NULL);
@@ -312,6 +313,8 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     globals[1] = ceil((je - jb)*1.0f / WSIZE)*WSIZE;
     locals[0] = HSIZE;
     locals[1] = WSIZE;
+
+    //std::cout<<globals[0]<<" "<<globals[1]<<" "<<w<<" "<<h<<std::endl;
 
     err = clEnqueueNDRangeKernel(cmdQueue, kernel, 2, NULL, globals, locals, 0, NULL, NULL);
 
