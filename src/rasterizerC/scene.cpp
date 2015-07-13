@@ -26,7 +26,7 @@ Delete()
 void Scene::
 Draw(PPMImage & image, int superSampling)
 {
-    char fileName[]="shapedraw2_yuyv.cl";
+    char fileName[]="shapedraw2.cl";
     char kernelName[]="ShapeDraw";
 
     CLInit(fileName, kernelName);
@@ -57,10 +57,10 @@ Draw(PPMImage & image, int superSampling)
 }
 
 void Scene::
-Draw(unsigned int height, unsigned int width, size_t untill, int index, int superSampling)
+Draw(unsigned int height, unsigned int width, size_t until, int index, int superSampling)
 {
-    untill = (untill < nodes.size()) ? untill : nodes.size();
-    for (size_t i = 0; i < untill; i++)
+    until = (until < nodes.size()) ? until : nodes.size();
+    for (size_t i = 0; i < until; i++)
         nodes[i]->Draw(height, width, index, superSampling);
 }
 

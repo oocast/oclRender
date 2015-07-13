@@ -2,6 +2,8 @@
 
 #include"cl_helper.h"
 
+    cl_platform_id platform_id=NULL;
+
 void CLInit(char * fileName, char * kernelName)
 {
     std::ifstream iFile;
@@ -13,7 +15,7 @@ void CLInit(char * fileName, char * kernelName)
     iFile.read(source, length);
     iFile.close();
 
-    cl_platform_id platform_id=NULL;
+
     cl_device_id device_id=NULL;
     cl_uint ret_num_devices;
     cl_uint ret_num_platforms;

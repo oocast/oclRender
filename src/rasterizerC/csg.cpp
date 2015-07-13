@@ -40,7 +40,7 @@ Union(const std::vector<std::shared_ptr<Shape>> &elements,
 CSG(elements, color, positive)
 {
     std::vector<Vector> boundVertices;
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         boundVertices.push_back(elements[i]->bound.low);
         boundVertices.push_back(elements[i]->bound.high);
@@ -61,7 +61,7 @@ bool Union::
 Contains(const Vector &point) const
 {
     bool result = false;
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         result += elements[i]->Contains(point);
     }
@@ -76,7 +76,7 @@ GetParameters(std::vector<float> &parameters, std::vector<int> &structures)
     // Structures passed in should be {1, 1, 1, 1}
     structures[0] = (int)positive;
     structures[1] = elements.size();
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         elements[i]->GetParameters(parameters, structures);
     }
@@ -86,7 +86,7 @@ std::shared_ptr<Shape> Union::
 TransformPointer(const Transform &xform)
 {
     CSG* result = new Union(&this->shapeColor, this->positive);
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         result->AddElement(elements[i]->TransformPointer(xform));
     }
@@ -107,13 +107,13 @@ CalculateBound(float aspectRatio)
 {
     // aspectratio = height / width = coordinates of height
     if (elements.empty()) return;
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         elements[i]->CalculateBound(aspectRatio);
     }
 
     bound = elements[0]->bound;
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         if (elements[i]->positive)
         {
@@ -209,7 +209,7 @@ bool Intersection::
 Contains(const Vector &point) const
 {
     bool result = true;
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         result *= elements[i]->Contains(point);
     }
@@ -232,7 +232,7 @@ GetParameters(std::vector<float> &parameters, std::vector<int> &structures)
         structures.push_back((int)positive);
         structures.push_back(elements.size());
     }
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         elements[i]->GetParameters(parameters, structures);
     }
@@ -242,7 +242,7 @@ std::shared_ptr<Shape> Intersection::
 TransformPointer(const Transform &xform)
 {
     CSG* result = new Intersection(&this->shapeColor, this->positive);
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         result->AddElement(elements[i]->TransformPointer(xform));
     }
@@ -262,7 +262,7 @@ CalculateBound(float aspectRatio)
     if (elements.empty()) return;
     bound = elements[0]->bound;
     bool allNegative = true;
-    for (int i = 0; i < elements.size(); i++)
+    for (unsigned int i = 0; i < elements.size(); i++)
     {
         if (elements[i]->positive)
         {

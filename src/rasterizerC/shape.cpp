@@ -12,7 +12,7 @@ const int WSIZE=32;
 const int HSIZE=32;
 const int WSIZE=16;
 
-extern cl_mem *import_buf;
+//cl_mem * importBuf;
 cl_mem memObj[4];
 cl_kernel kernel;
 cl_command_queue cmdQueue;
@@ -24,10 +24,10 @@ Shape::
 Shape(const Color * colorInputPointer, bool positive):
 positive(positive)
 {
-	if (colorInputPointer != nullptr)
-		shapeColor = *colorInputPointer;
-  else
-    shapeColor = Color();
+    if (colorInputPointer != nullptr)
+        shapeColor = *colorInputPointer;
+    else
+        shapeColor = Color();
 }
 
 /*
@@ -153,6 +153,7 @@ DrawRGB(PPMImage & image, int superSampling)
     err=clReleaseMemObject(memObj[1]);
     err=clReleaseMemObject(memObj[2]);
     err=clReleaseMemObject(memObj[3]);
+    err=clFinish(cmdQueue);
 //*/
 /*
     int l_x, l_y, h_x, h_y;
@@ -243,19 +244,20 @@ DrawYUYV(PPMImage & image, int superSampling)
     err=clReleaseMemObject(memObj[1]);
     err=clReleaseMemObject(memObj[2]);
     err=clReleaseMemObject(memObj[3]);
+    err=clFinish(cmdQueue);
 }
 
 void Shape::
 Draw(PPMImage & image, int superSampling)
 {
-    DrawYUYV(image, superSampling);
+    DrawRGB(image, superSampling);
 }
 
 void Shape::
 Draw(unsigned int height, unsigned int width, int index, int superSampling)
 {
-    if (!bound.Overlaps(AABox(Vector(), Vector(1,1))));
-        return;
+    //if (!bound.Overlaps(AABox(Vector(), Vector(1,1))));
+     //   return;
     float r = (float)width;
     std::vector<Vector> jitter(superSampling*superSampling, Vector());
     std::default_random_engine gen;
@@ -263,7 +265,7 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     for (int x = 0; x < superSampling; x++)
         for (int y = 0; y < superSampling; y++)
             jitter[x * superSampling + y] = Vector(((float)x + distri(gen)) / superSampling / r,
-            ((float)y + distri(gen)) / superSampling / r);
+                ((float)y + distri(gen)) / superSampling / r);
 
     size_t jitterSize = jitter.size();
 
@@ -280,8 +282,8 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     int jb = (int)(bound.low.x*w / 2);
     int ie = ceil(bound.high.y*w);
     int je = ceil(bound.high.x*w / 2);
-    if (ie <= 0) return;
-    if (je <= 0) return;
+    //if (ie <= 0) return;
+    //if (je <= 0) return;
     if (ib<0) ib = 0;
     if (jb<0) jb = 0;
 
@@ -289,19 +291,19 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     memObj[2] = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, 2 * jitterSize*sizeof(float), &jitter[0], NULL);
     memObj[3] = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, iv.size()*sizeof(int), &iv[0], NULL);
 
-    err = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *)&import_buf[index]);
-    err = clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *)&memObj[1]);
-    err = clSetKernelArg(kernel, 2, sizeof(cl_mem), (void *)&memObj[2]);
-    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), (void *)&memObj[3]);
-    err = clSetKernelArg(kernel, 4, sizeof(int), (void *)&jitterSize);
-    err = clSetKernelArg(kernel, 5, sizeof(int), (void *)&w);
-    err = clSetKernelArg(kernel, 6, sizeof(int), (void *)&h);
-    err = clSetKernelArg(kernel, 7, sizeof(float), (void *)&shapeColor.rgb[0]);
-    err = clSetKernelArg(kernel, 8, sizeof(float), (void *)&shapeColor.rgb[1]);
-    err = clSetKernelArg(kernel, 9, sizeof(float), (void *)&shapeColor.rgb[2]);
+    err = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *) &importBuf[index]);
+    err = clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *) &memObj[1]);
+    err = clSetKernelArg(kernel, 2, sizeof(cl_mem), (void *) &memObj[2]);
+    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), (void *) &memObj[3]);
+    err = clSetKernelArg(kernel, 4, sizeof(int), (void *) &jitterSize);
+    err = clSetKernelArg(kernel, 5, sizeof(int), (void *) &w);
+    err = clSetKernelArg(kernel, 6, sizeof(int), (void *) &h);
+    err = clSetKernelArg(kernel, 7, sizeof(float), (void *) &shapeColor.rgb[0]);
+    err = clSetKernelArg(kernel, 8, sizeof(float), (void *) &shapeColor.rgb[1]);
+    err = clSetKernelArg(kernel, 9, sizeof(float), (void *) &shapeColor.rgb[2]);
     //err=clSetKernelArg(kernel, 10, sizeof(float), (void *) &shapeColor.a);
-    err = clSetKernelArg(kernel, 10, sizeof(int), (void *)&ib);
-    err = clSetKernelArg(kernel, 11, sizeof(int), (void *)&jb);
+    err = clSetKernelArg(kernel, 10, sizeof(int), (void *) &ib);
+    err = clSetKernelArg(kernel, 11, sizeof(int), (void *) &jb);
 
     size_t globals[2];
     size_t locals[2];
@@ -316,4 +318,5 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     err = clReleaseMemObject(memObj[1]);
     err = clReleaseMemObject(memObj[2]);
     err = clReleaseMemObject(memObj[3]);
+    err = clFinish(cmdQueue);
 }

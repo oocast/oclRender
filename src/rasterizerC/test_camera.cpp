@@ -74,16 +74,21 @@
     exit(1);                                  \
     }
 
+const float PI=3.1415927f;
+
 VADisplay	va_dpy;
 cl_int cl_status;
 VAStatus va_status;
 VASurfaceID nv12_surface_id;
 VAImage nv12_image;
+//cl_platform_id platform;
+cl_platform_id platform_ID;
+
 
 int dev_fd;
 uint64_t image_size;
 unsigned int pitch;
-cl_mem *import_buf = NULL;
+cl_mem *importBuf = NULL;
 typedef cl_int(OCLGETMEMOBJECTFD)(cl_context, cl_mem, int *);
 OCLGETMEMOBJECTFD *oclGetMemObjectFd = NULL;
 
@@ -95,7 +100,7 @@ struct v4l2_options{
     unsigned int buffer_num;
     unsigned int do_list;
 } vo;
-int *import_buf_fd = NULL;
+int *importBuf_fd = NULL;
 
 static const char short_options[] = "d:r:b:lh";
 
@@ -334,7 +339,7 @@ static void InitVaOcl(){
     CLInit(fileName, kernelName);
 
 #ifdef CL_VERSION_1_2
-    oclGetMemObjectFd = (OCLGETMEMOBJECTFD *)clGetExtensionFunctionAddressForPlatform(platform, "clGetMemObjectFdIntel");
+    oclGetMemObjectFd = (OCLGETMEMOBJECTFD *)clGetExtensionFunctionAddressForPlatform(platform_ID, "clGetMemObjectFdIntel");
 #else
     oclGetMemObjectFd = (OCLGETMEMOBJECTFD *)clGetExtensionFunctionAddress("clGetMemObjectFdIntel");
 #endif
@@ -347,18 +352,18 @@ static void InitVaOcl(){
 
 static void CreateDmasharingBuffers()
 {
-    if (import_buf_fd == NULL)
-        import_buf_fd = new int[vo.buffer_num];
-    if (import_buf == NULL){
-        import_buf = new cl_mem[vo.buffer_num];
+    if (importBuf_fd == NULL)
+        importBuf_fd = new int[vo.buffer_num];
+    if (importBuf == NULL){
+        importBuf = new cl_mem[vo.buffer_num];
     }
 
     for (unsigned int i = 0; i < vo.buffer_num; ++i){
-        import_buf[i] = clCreateBuffer(context, CL_MEM_READ_WRITE, image_size, NULL, &cl_status);
+        importBuf[i] = clCreateBuffer(context, CL_MEM_READ_WRITE, image_size, NULL, &cl_status);
         CHECK_CLSTATUS(cl_status, "clCreateBuffer");
 
         //get cl buffer object's fd
-        cl_status = oclGetMemObjectFd(context, import_buf[i], &import_buf_fd[i]);
+        cl_status = oclGetMemObjectFd(context, importBuf[i], &importBuf_fd[i]);
         CHECK_CLSTATUS(cl_status, "clGetMemObjectFdIntel");
     }
 }
@@ -394,7 +399,7 @@ static void StartCapturing(){
         buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
         buf.memory = V4L2_MEMORY_DMABUF;
         buf.index = i;
-        buf.m.fd = import_buf_fd[i];
+        buf.m.fd = importBuf_fd[i];
         ret = ioctl(dev_fd, VIDIOC_QBUF, &buf);
         CHECK_V4L2ERROR(ret, "VIDIOC_QBUF");
     }
@@ -406,7 +411,7 @@ static void StartCapturing(){
 
 void ProcessFrame(int index, Scene *scene)
 {
-    //process import_buf[index] by ocl
+    //process importBuf[index] by ocl
     scene->Draw(vo.height, vo.width, index);
 }
 
@@ -432,7 +437,7 @@ void ShowFrame(int index)
     sa_eb.offsets[0] = 0;
     sa_eb.num_buffers = 1;
     sa_eb.buffers = new unsigned long[sa_eb.num_buffers];
-    sa_eb.buffers[0] = import_buf_fd[index];
+    sa_eb.buffers[0] = importBuf_fd[index];
     sa_eb.flags = 0;
     sa[1].value.value.p = &sa_eb;
     va_status = vaCreateSurfaces(va_dpy, VA_RT_FORMAT_YUV422,
@@ -512,7 +517,7 @@ static void MainLoop(Scene* scene){
         //Then queue this buffer(buf.index) by QBUF
         buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
         buf.memory = V4L2_MEMORY_DMABUF;
-        buf.m.fd = import_buf_fd[index];
+        buf.m.fd = importBuf_fd[index];
         buf.index = index;
 
         ret = ioctl(dev_fd, VIDIOC_QBUF, &buf);
@@ -536,23 +541,31 @@ TestCameraRender()
     Scene scene;
 
     Color color;
-    InitColor(&color, 0.8, 0, 0.8, 1);
+    InitColor(&color, 0.8, 0.8, 0.8, 1);
     ToYUV(&color);
-    ConvexPoly *cp = new ConvexPoly(Rectangle(Vector(0.04, 0.04), Vector(0.06, 0.06)));
-    Intersection *ip = new Intersection();
-    Union *up = new Union(&color, true);
+    //ConvexPoly *cp = new ConvexPoly(Rectangle(Vector(0.04, 0.04), Vector(0.06, 0.06)));
+    std::vector<Vector> vv;
     std::shared_ptr<Shape> sp;
-    sp = (std::shared_ptr<Shape>)cp;
+
+    vv.push_back(Vector(0, 0.02));
+    vv.push_back(Vector(-0.02, 0));
+    vv.push_back(Vector(0, -0.02));
+    vv.push_back(Vector(0.02, 0));
+
+    ConvexPoly * cp=new ConvexPoly(vv, NULL, 1);
+
+    Intersection * ip=new Intersection(NULL, 1);
+
+    sp=(std::shared_ptr<Shape>) cp;
     ip->AddElement(sp);
-    sp = (std::shared_ptr<Shape>)ip;
+
+    Union * up=new Union(&color, 1);
+
+    sp=(std::shared_ptr<Shape>) ip;
     up->AddElement(sp);
     for (int i = 0; i < 5; i++)
-    {
         for (int j = 0; j < 5; j++)
-        {
-            scene.Add(up->TransformPointer(Translate(0.05 + i * 0.2, 0.05 + j * 0.2)));
-        }
-    }
+            scene.Add(up->TransformPointer(Rotate(PI/2/25*(i*5+j)))->TransformPointer(Translate(0.05 + i * 0.2, 0.05 + j * 0.2)));
 
     StartCapturing();
     MainLoop(&scene);
@@ -570,19 +583,19 @@ static void ReleaseVaOcl(){
 
     int ret;
     for (unsigned int i = 0; i < vo.buffer_num; ++i) {
-        ret = close(import_buf_fd[i]);
+        ret = close(importBuf_fd[i]);
         if (ret) {
-            fprintf(stderr, "Failed to close import_buf[%u]'s fd: %s\n", i, strerror(errno));
+            fprintf(stderr, "Failed to close importBuf[%u]'s fd: %s\n", i, strerror(errno));
         }
-        cl_status = clReleaseMemObject(import_buf[i]);
+        cl_status = clReleaseMemObject(importBuf[i]);
         CHECK_CLSTATUS(cl_status, "clReleaseMemObject");
     }
     CLReleaseCam();
 }
 
 static void ReleaseDevice(void){
-    delete[] import_buf_fd;
-    delete[] import_buf;
+    delete[] importBuf_fd;
+    delete[] importBuf;
     int ret = close(dev_fd);
     if (ret) {
         fprintf(stderr, "Failed to close %s: %s\n",
