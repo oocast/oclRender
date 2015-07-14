@@ -212,6 +212,8 @@ GetParameters(std::vector<float> &parameters, std::vector<int> & structures)
     parameters.push_back(d);
     parameters.push_back(e);
     parameters.push_back(f);
+    parameters.push_back(0);
+    parameters.push_back(0);
     structures.push_back(positive);
     structures.push_back(0);
 }

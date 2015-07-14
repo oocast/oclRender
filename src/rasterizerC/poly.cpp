@@ -115,6 +115,7 @@ GetParameters(std::vector<float> & parameters, std::vector<int> & structures)
         parameters.push_back(it->ab.x); // a
         parameters.push_back(it->ab.y); // b
         parameters.push_back(it->c);
+        parameters.push_back(0);
     }
     structures.push_back(positive);
     structures.push_back(vertices.size());

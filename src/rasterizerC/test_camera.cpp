@@ -39,6 +39,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <time.h>
+#include <iostream>
 
 #include <inttypes.h>
 #include <ctype.h>
@@ -438,7 +439,7 @@ static void StartCapturing()
 void ProcessFrame(int index, Scene *scene)
 {
     //process importBuf[index] by ocl
-    scene->Draw(vo.height, vo.width, index);
+    scene->Draw(vo.height, vo.width, index, 6);
 }
 
 void ShowFrame(int index)
@@ -501,6 +502,7 @@ static void MainLoop(Scene* scene)
     int ret;
     struct v4l2_buffer buf;
     int index;
+    unsigned int st=0, nst=0;
 
     while (frame_count < 1000) 
     {
@@ -540,8 +542,11 @@ static void MainLoop(Scene* scene)
         CHECK_V4L2ERROR(ret, "VIDIOC_DQBUF");
         index = buf.index;
 
+        timespec StartTime, EndTime;
         //process by ocl and show on screen by libva
+        clock_gettime(CLOCK_REALTIME, &StartTime);
         ProcessFrame(index, scene);
+        clock_gettime(CLOCK_REALTIME, &EndTime);
         ShowFrame(index);
 
         //Then queue this buffer(buf.index) by QBUF
@@ -552,7 +557,25 @@ static void MainLoop(Scene* scene)
 
         ret = ioctl(dev_fd, VIDIOC_QBUF, &buf);
         CHECK_V4L2ERROR(ret, "VIDIOC_QBUF");
+        unsigned int s, ns;
+        s=EndTime.tv_sec-StartTime.tv_sec;
+        ns=EndTime.tv_nsec-StartTime.tv_nsec;
+        if (ns<0)
+        {
+            ns+=1000000000;
+            s--;
+        }
+        st+=s;
+        nst+=ns;
+        if (nst>1000000000)
+        {
+            nst-=1000000000;
+            st++;
+        }
+        std::cout<<"Total running time "<<s<<" s "<<ns<<" ns."<<std::endl;
+        std::cout<<"Total running time "<<st<<" s "<<nst<<" ns."<<std::endl;
     }
+    std::cout<<"Total running time "<<st<<" s "<<nst<<" ns."<<std::endl;
 }
 
 static void StopCapturing()
