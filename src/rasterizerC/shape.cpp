@@ -256,8 +256,8 @@ Draw(PPMImage & image, int superSampling)
 void Shape::
 Draw(unsigned int height, unsigned int width, int index, int superSampling)
 {
-    //if (!bound.Overlaps(AABox(Vector(), Vector(1,1))));
-     //   return;
+    if (!bound.Overlaps(AABox(Vector(), Vector(1, height*1.0f/width))))
+        return;
     float r = (float)width;
     std::vector<Vector> jitter(superSampling*superSampling, Vector());
     std::default_random_engine gen;
@@ -286,7 +286,9 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     //if (je <= 0) return;
     if (ib<0) ib = 0;
     if (jb<0) jb = 0;
-    //std::cout<<ib<<" "<<ie<<" "<<jb<<" "<<je<<std::endl;
+    unsigned char Y=floor(shapeColor.rgb[0]*256);
+    unsigned char U=floor(shapeColor.rgb[1]*256);
+    unsigned char V=floor(shapeColor.rgb[2]*256);
 
     memObj[1] = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, fv.size()*sizeof(float), &fv[0], NULL);
     memObj[2] = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, 2 * jitterSize*sizeof(float), &jitter[0], NULL);
@@ -299,9 +301,9 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     err = clSetKernelArg(kernel, 4, sizeof(int), (void *) &jitterSize);
     err = clSetKernelArg(kernel, 5, sizeof(int), (void *) &w);
     err = clSetKernelArg(kernel, 6, sizeof(int), (void *) &h);
-    err = clSetKernelArg(kernel, 7, sizeof(float), (void *) &shapeColor.rgb[0]);
-    err = clSetKernelArg(kernel, 8, sizeof(float), (void *) &shapeColor.rgb[1]);
-    err = clSetKernelArg(kernel, 9, sizeof(float), (void *) &shapeColor.rgb[2]);
+    err = clSetKernelArg(kernel, 7, sizeof(unsigned char), (void *) &Y);
+    err = clSetKernelArg(kernel, 8, sizeof(unsigned char), (void *) &U);
+    err = clSetKernelArg(kernel, 9, sizeof(unsigned char), (void *) &V);
     //err=clSetKernelArg(kernel, 10, sizeof(float), (void *) &shapeColor.a);
     err = clSetKernelArg(kernel, 10, sizeof(int), (void *) &ib);
     err = clSetKernelArg(kernel, 11, sizeof(int), (void *) &jb);
@@ -313,8 +315,6 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     globals[1] = ceil((je - jb)*1.0f / WSIZE)*WSIZE;
     locals[0] = HSIZE;
     locals[1] = WSIZE;
-
-    //std::cout<<globals[0]<<" "<<globals[1]<<" "<<w<<" "<<h<<std::endl;
 
     err = clEnqueueNDRangeKernel(cmdQueue, kernel, 2, NULL, globals, locals, 0, NULL, NULL);
 

@@ -124,8 +124,11 @@ ToYUV(Color * color)
 {
     float y, u, v;
     y = 0.299 * color->rgb[0] + 0.587 * color->rgb[1] + 0.114 * color->rgb[2];
-    u = 0.492 * (color->rgb[2] - y);
-    v = 0.877 * (color->rgb[0] - y);
+    //u = 0.492 * (color->rgb[2] - y)+0.5;
+    //v = 0.877 * (color->rgb[0] - y)+0.5;
+    u = - 0.1678 * color->rgb[0] - 0.3313 * color->rgb[1] + 0.5 * color->rgb[2] + 0.5;
+    v = 0.5 * color->rgb[0] - 0.4187 * color->rgb[1] - 0.0813 * color->rgb[2] + 0.5;
+    
     color->rgb[0] = y;
     color->rgb[1] = u;
     color->rgb[2] = v;

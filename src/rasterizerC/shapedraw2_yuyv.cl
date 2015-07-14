@@ -63,9 +63,9 @@ __kernel void ShapeDraw(__global uchar * image,
                         int w,
                         int h,
 //                        float4 color;
-                        float Y,
-                        float U,
-                        float V,
+                        uchar Y,
+                        uchar U,
+                        uchar V,
 //                        float a,
 //                        int id,
                         int ib,
@@ -99,10 +99,10 @@ __kernel void ShapeDraw(__global uchar * image,
     uchar4 pix=vload4((i*w/2+j), image);
     float ft1=1.0f-count1;
     float ft2=1.0f-count2;
-    pix.x=pix.x*ft1+Y*256*count1;
-    pix.y=(pix.y*(ft1+ft2)+U*256*(count1+count2))/2;
-    pix.z=pix.z*ft2+Y*256*count2;
-    pix.w=(pix.w*(ft1+ft2)+V*256*(count1+count2))/2;
+    pix.x=pix.x*ft1+Y*count1;
+    pix.y=(pix.y*(ft1+ft2)+U*(count1+count2))/2;
+    pix.z=pix.z*ft2+Y*count2;
+    pix.w=(pix.w*(ft1+ft2)+V*(count1+count2))/2;
     vstore4(pix, ((i*w/2)+j), image);
 }
             

@@ -93,7 +93,8 @@ typedef cl_int(OCLGETMEMOBJECTFD)(cl_context, cl_mem, int *);
 OCLGETMEMOBJECTFD *oclGetMemObjectFd = NULL;
 
 int frame_count = 0;
-struct v4l2_options{
+struct v4l2_options
+{
     const char *dev_name;
     unsigned int width, height;
     unsigned int spec_res;
@@ -105,7 +106,8 @@ int *importBuf_fd = NULL;
 static const char short_options[] = "d:r:b:lh";
 
 static const struct option
-long_options[] = {
+long_options[] = 
+{
     { "device", required_argument, NULL, 'd' },
     { "help", no_argument, NULL, 'h' },
     { "resolution", required_argument, NULL, 'r' },
@@ -130,13 +132,15 @@ static void usage(FILE *fp, int argc, char **argv)
         argv[0]);
 }
 
-static void list_resolution(){
+static void list_resolution()
+{
     int ret;
     struct v4l2_capability cap;
     struct v4l2_frmsizeenum frm_sz;
 
     dev_fd = open(vo.dev_name, O_RDWR | O_NONBLOCK, 0);
-    if (dev_fd < 0) {
+    if (dev_fd < 0) 
+    {
         fprintf(stderr, "Can not open %s: %s\n",
             vo.dev_name, strerror(errno));
         exit(1);
@@ -146,11 +150,13 @@ static void list_resolution(){
     ret = ioctl(dev_fd, VIDIOC_QUERYCAP, &cap);
     CHECK_V4L2ERROR(ret, "VIDIOC_QUERYCAP");
 
-    if (!(cap.capabilities & V4L2_CAP_VIDEO_CAPTURE)){
+    if (!(cap.capabilities & V4L2_CAP_VIDEO_CAPTURE))
+    {
         fprintf(stderr, "The device is not video capture device\n");
         exit(1);
     }
-    if (!(cap.capabilities & V4L2_CAP_STREAMING)){
+    if (!(cap.capabilities & V4L2_CAP_STREAMING))
+    {
         fprintf(stderr, "The device does not support streaming i/o\n");
         exit(1);
     }
@@ -159,16 +165,20 @@ static void list_resolution(){
     frm_sz.pixel_format = V4L2_PIX_FMT_YUYV;
     frm_sz.index = 0;
     bool extra_info = true;
-    while (ioctl(dev_fd, VIDIOC_ENUM_FRAMESIZES, &frm_sz) == 0) {
-        if (frm_sz.type == V4L2_FRMSIZE_TYPE_DISCRETE) {
-            if (extra_info){
+    while (ioctl(dev_fd, VIDIOC_ENUM_FRAMESIZES, &frm_sz) == 0) 
+    {
+        if (frm_sz.type == V4L2_FRMSIZE_TYPE_DISCRETE) 
+        {
+            if (extra_info)
+            {
                 printf("(width, height) = \n");
                 extra_info = false;
             }
             printf("(%d, %d)", frm_sz.discrete.width, frm_sz.discrete.height);
             printf("\n");
         }
-        else if (frm_sz.type == V4L2_FRMSIZE_TYPE_STEPWISE) {
+        else if (frm_sz.type == V4L2_FRMSIZE_TYPE_STEPWISE) 
+        {
             printf("(width, height) from (%d, %d) to (%d, %d) with step (%d, %d)",
                 frm_sz.stepwise.min_width,
                 frm_sz.stepwise.min_height,
@@ -182,7 +192,8 @@ static void list_resolution(){
     }
 
     ret = close(dev_fd);
-    if (ret) {
+    if (ret) 
+    {
         fprintf(stderr, "Failed to close %s: %s\n",
             vo.dev_name, strerror(errno));
         exit(1);
@@ -199,7 +210,8 @@ static void AnalyseArgs(int argc, char *argv[])
     vo.do_list = 0;
 
     int c, idx;
-    for (;;) {
+    for (;;) 
+    {
 
         c = getopt_long(argc, argv,
             short_options, long_options, &idx);
@@ -207,7 +219,8 @@ static void AnalyseArgs(int argc, char *argv[])
         if (-1 == c)
             break;
 
-        switch (c) {
+        switch (c) 
+        {
         case 0:
             break;
 
@@ -239,17 +252,20 @@ static void AnalyseArgs(int argc, char *argv[])
         }
     }
 
-    if (!vo.dev_name){
+    if (!vo.dev_name)
+    {
         printf("Haven't specified device, use default device: %s\n",
             VIDEO_NODE_DEFAULT);
     }
     if (!vo.dev_name)
         vo.dev_name = VIDEO_NODE_DEFAULT;
-    if (vo.do_list){
+    if (vo.do_list)
+    {
         list_resolution();
         exit(0);
     }
-    if (!vo.spec_res){
+    if (!vo.spec_res)
+    {
         printf("Haven't specified resolution, use default resolution: (width,height) = (%d, %d)\n",
             WIDTH_DEFAULT, HEIGHT_DEFAULT);
         vo.width = WIDTH_DEFAULT;
@@ -258,14 +274,15 @@ static void AnalyseArgs(int argc, char *argv[])
     return;
 }
 
-static void InitDevice(){
-
+static void InitDevice()
+{
     int ret;
     struct v4l2_capability cap;
     struct v4l2_format format;
 
     dev_fd = open(vo.dev_name, O_RDWR | O_NONBLOCK, 0);
-    if (dev_fd < 0) {
+    if (dev_fd < 0) 
+    {
         fprintf(stderr, "Can not open %s: %s\n",
             vo.dev_name, strerror(errno));
         exit(1);
@@ -274,7 +291,8 @@ static void InitDevice(){
     memset(&cap, 0, sizeof(cap));
     ret = ioctl(dev_fd, VIDIOC_QUERYCAP, &cap);
     CHECK_V4L2ERROR(ret, "VIDIOC_QUERYCAP");
-    if (!(cap.capabilities & V4L2_CAP_STREAMING)){
+    if (!(cap.capabilities & V4L2_CAP_STREAMING))
+    {
         fprintf(stderr, "The device does not support streaming i/o\n");
         exit(1);
     }
@@ -291,11 +309,13 @@ static void InitDevice(){
 
     ret = ioctl(dev_fd, VIDIOC_G_FMT, &format);
     CHECK_V4L2ERROR(ret, "VIDIOC_G_FMT");
-    if (format.fmt.pix.pixelformat != V4L2_PIX_FMT_YUYV){
+    if (format.fmt.pix.pixelformat != V4L2_PIX_FMT_YUYV)
+    {
         fprintf(stderr, "V4L2_PIX_FMT_YUYV format is not supported by %s\n", vo.dev_name);
         exit(1);
     }
-    if (format.fmt.pix.width != vo.width || format.fmt.pix.height != vo.height){
+    if (format.fmt.pix.width != vo.width || format.fmt.pix.height != vo.height)
+    {
         fprintf(stderr, "This resolution is not supported, please go through supported resolution by command './main -l'\n");
         exit(1);
     }
@@ -305,7 +325,8 @@ static void InitDevice(){
     pitch = format.fmt.pix.bytesperline;
 }
 
-static void InitVaOcl(){
+static void InitVaOcl()
+{
     int major_ver, minor_ver;
 
     printf("\n***********************libva info: ***********************\n");
@@ -343,7 +364,8 @@ static void InitVaOcl(){
 #else
     oclGetMemObjectFd = (OCLGETMEMOBJECTFD *)clGetExtensionFunctionAddress("clGetMemObjectFdIntel");
 #endif
-    if (!oclGetMemObjectFd){
+    if (!oclGetMemObjectFd)
+    {
         fprintf(stderr, "Failed to get extension clGetMemObjectFdIntel\n");
         exit(1);
     }
@@ -354,11 +376,11 @@ static void CreateDmasharingBuffers()
 {
     if (importBuf_fd == NULL)
         importBuf_fd = new int[vo.buffer_num];
-    if (importBuf == NULL){
+    if (importBuf == NULL)
         importBuf = new cl_mem[vo.buffer_num];
-    }
 
-    for (unsigned int i = 0; i < vo.buffer_num; ++i){
+    for (unsigned int i = 0; i < vo.buffer_num; ++i)
+    {
         importBuf[i] = clCreateBuffer(context, CL_MEM_READ_WRITE, image_size, NULL, &cl_status);
         CHECK_CLSTATUS(cl_status, "clCreateBuffer");
 
@@ -368,7 +390,8 @@ static void CreateDmasharingBuffers()
     }
 }
 
-static void InitDmabuf(void){
+static void InitDmabuf(void)
+{
     int ret;
     struct v4l2_requestbuffers reqbuf;
 
@@ -378,7 +401,8 @@ static void InitDmabuf(void){
     reqbuf.count = vo.buffer_num;
 
     ret = ioctl(dev_fd, VIDIOC_REQBUFS, &reqbuf);
-    if (ret == -1 && errno == EINVAL){
+    if (ret == -1 && errno == EINVAL)
+    {
         fprintf(stderr, "Video capturing or DMABUF streaming is not supported\n");
         exit(1);
     }
@@ -390,9 +414,11 @@ static void InitDmabuf(void){
 
 }
 
-static void StartCapturing(){
+static void StartCapturing()
+{
     int ret;
-    for (unsigned int i = 0; i < vo.buffer_num; ++i) {
+    for (unsigned int i = 0; i < vo.buffer_num; ++i) 
+    {
         struct v4l2_buffer buf;
 
         memset(&buf, 0, sizeof(buf));
@@ -470,12 +496,14 @@ void ShowFrame(int index)
     return;
 }
 
-static void MainLoop(Scene* scene){
+static void MainLoop(Scene* scene)
+{
     int ret;
     struct v4l2_buffer buf;
     int index;
 
-    while (frame_count < 1000) {
+    while (frame_count < 1000) 
+    {
         frame_count++;
         printf("******************Frame %d\n", frame_count);
         fd_set fds;
@@ -492,13 +520,15 @@ static void MainLoop(Scene* scene){
 
         r = select(dev_fd + 1, &fds, NULL, NULL, &tv);
 
-        if (-1 == r) {
+        if (-1 == r) 
+        {
             if (EINTR == errno)
                 continue;
             perror("select");
         }
 
-        if (r == 0){
+        if (r == 0)
+        {
             fprintf(stderr, "Select timeout\n");
             exit(1);
         }
@@ -541,7 +571,7 @@ TestCameraRender()
     Scene scene;
 
     Color color;
-    InitColor(&color, 0.8, 0.8, 0.8, 1);
+    InitColor(&color, 255/256.0, 255/256.0, 255/256.0, 1);
     ToYUV(&color);
     //ConvexPoly *cp = new ConvexPoly(Rectangle(Vector(0.04, 0.04), Vector(0.06, 0.06)));
     std::vector<Vector> vv;
@@ -572,7 +602,8 @@ TestCameraRender()
     StopCapturing();
 }
 
-static void ReleaseVaOcl(){
+static void ReleaseVaOcl()
+{
     va_status = vaDestroySurfaces(va_dpy, &nv12_surface_id, 1);
     CHECK_VASTATUS(va_status, "vaDestroySurfaces");
     va_status = vaDestroyImage(va_dpy, nv12_image.image_id);
@@ -584,20 +615,21 @@ static void ReleaseVaOcl(){
     int ret;
     for (unsigned int i = 0; i < vo.buffer_num; ++i) {
         ret = close(importBuf_fd[i]);
-        if (ret) {
+        if (ret)
             fprintf(stderr, "Failed to close importBuf[%u]'s fd: %s\n", i, strerror(errno));
-        }
         cl_status = clReleaseMemObject(importBuf[i]);
         CHECK_CLSTATUS(cl_status, "clReleaseMemObject");
     }
     CLReleaseCam();
 }
 
-static void ReleaseDevice(void){
+static void ReleaseDevice(void)
+{
     delete[] importBuf_fd;
     delete[] importBuf;
     int ret = close(dev_fd);
-    if (ret) {
+    if (ret) 
+    {
         fprintf(stderr, "Failed to close %s: %s\n",
             vo.dev_name, strerror(errno));
         exit(1);
