@@ -26,6 +26,7 @@ public:
     //float signed_distance_bound(const Vector &p) const;
     void GetParameters(std::vector<float> &, std::vector<int> &);
     void CalculateBound(float){}
+    std::shared_ptr<Shape> AccessElement(size_t){ return nullptr; }
 private:
     void CalculateExtremum();
 };

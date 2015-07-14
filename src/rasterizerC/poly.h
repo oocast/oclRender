@@ -23,6 +23,7 @@ public:
     std::shared_ptr<Shape> TransformPointer(const Transform &);
     void GetParameters(std::vector<float> &, std::vector<int> &);
     void CalculateBound(float){}
+    std::shared_ptr<Shape> AccessElement(size_t){ return nullptr; }
 private:
     void CalculateExtremum();
 };

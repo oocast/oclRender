@@ -35,6 +35,7 @@ public:
     // TODO: transform return true caller (derived) class obj
     //template <class Shape_drv> // derived class of Shape
     //virtual Shape_drv transform(const Transform &transform) const = 0;
+    virtual std::shared_ptr<Shape> AccessElement(size_t) = 0;
 private:
     void DrawRGB(PPMImage &, int);
     void DrawYUYV(PPMImage &, int);

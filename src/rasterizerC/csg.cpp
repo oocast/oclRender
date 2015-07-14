@@ -27,6 +27,12 @@ AddElement(const std::shared_ptr<Shape> &element)
     }
 }
 
+std::shared_ptr<Shape> CSG::
+AccessElement(size_t index)
+{
+    return elements[index];
+}
+
 Union::
 Union(const Color *color, bool positive):
 CSG(color, positive)
