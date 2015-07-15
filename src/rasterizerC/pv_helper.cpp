@@ -83,7 +83,7 @@ CreateSightMarks(Scene & scene)
 // Rotate and Shrink 
 void RotateSightMarks(Scene & scene)
 {
-    Transform rot = Rotate(2 * PI / LOCK_FRAME_COUNT);
+    Transform rot = Rotate((2.0 / 3.0) * PI / LOCK_FRAME_COUNT);
     Transform sca = Scale(SCALE, SCALE);
     for (size_t i = 0; i < targetList.size(); i++)
     {
