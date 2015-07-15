@@ -49,6 +49,7 @@
 
 #include "va_display.h"
 #include "oclrender.h"
+#include "interface.h"
 
 #define BUFFER_NUM_DEFAULT 5
 #define VIDEO_NODE_DEFAULT "/dev/video0"
@@ -597,28 +598,39 @@ TestCameraRender()
     InitColor(&color, 255/256.0, 255/256.0, 255/256.0, 1);
     ToYUV(&color);
     //ConvexPoly *cp = new ConvexPoly(Rectangle(Vector(0.04, 0.04), Vector(0.06, 0.06)));
-    std::vector<Vector> vv;
+    std::vector<Vector> vv1, vv2;
     std::shared_ptr<Shape> sp;
 
-    vv.push_back(Vector(0, 0.02));
-    vv.push_back(Vector(-0.02, 0));
-    vv.push_back(Vector(0, -0.02));
-    vv.push_back(Vector(0.02, 0));
+    vv1.push_back(Vector(0, 0.02));
+    vv1.push_back(Vector(-0.02, 0));
+    vv1.push_back(Vector(0, -0.02));
+    vv1.push_back(Vector(0.02, 0));
+    vv2.push_back(Vector(0.3, 0.3));
+    vv2.push_back(Vector(0.7, 0.3));
+    vv2.push_back(Vector(0.3, 0.7));
 
-    ConvexPoly * cp=new ConvexPoly(vv, NULL, 1);
+    ConvexPoly * cp=new ConvexPoly(vv1, NULL, 1);
 
     Intersection * ip=new Intersection(NULL, 1);
 
     sp=(std::shared_ptr<Shape>) cp;
     ip->AddElement(sp);
 
-    Union * up=new Union(&color, 1);
+    Union * up1=new Union(&color, 1);
 
     sp=(std::shared_ptr<Shape>) ip;
-    up->AddElement(sp);
+    up1->AddElement(sp);
     for (int i = 0; i < 5; i++)
         for (int j = 0; j < 5; j++)
-            scene.Add(up->TransformPointer(Rotate(PI/2/25*(i*5+j)))->TransformPointer(Translate(0.05 + i * 0.2, 0.05 + j * 0.2)));
+            //scene.Add(up1->TransformPointer(Rotate(PI/2/25*(i*5+j)))->TransformPointer(Translate(0.05 + i * 0.2, 0.05 + j * 0.2)));
+
+    sp=(std::shared_ptr<Shape>)BezierCurve(vv2, 0.05);
+
+    Union * up2=new Union(&color, 1);
+
+    up2->AddElement(sp);
+
+    scene.Add(up2);
 
     StartCapturing();
     MainLoop(&scene);

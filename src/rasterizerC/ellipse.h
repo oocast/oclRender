@@ -27,6 +27,7 @@ public:
     void GetParameters(std::vector<float> &, std::vector<int> &);
     void CalculateBound(float){}
     std::shared_ptr<Shape> AccessElement(size_t){ return nullptr; }
+    Vector AccessCenter() {return center;}
 private:
     void CalculateExtremum();
 };

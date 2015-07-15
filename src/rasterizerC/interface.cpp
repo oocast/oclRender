@@ -1,3 +1,6 @@
+#include <cmath>
+#include <iostream>
+
 #include "interface.h"
 
 std::shared_ptr<Shape> 
@@ -125,7 +128,7 @@ Arrow(const Vector &boundVertex1, const Vector &boundVertex2,
 }
 
 std::shared_ptr<CSG> BrushInit(const Vector &vertex1, const Vector &vertex2, float thickness,
-                               Vector &endVertex, const Color * inputColorPointer = nullptr)
+                               Vector &endVertex, const Color * inputColorPointer)
 {
     std::shared_ptr<Shape> seg(new ConvexPoly(LineSegment(vertex1, vertex2, thickness)));
     std::shared_ptr<CSG> u(new Union(inputColorPointer, true));
@@ -135,6 +138,7 @@ std::shared_ptr<CSG> BrushInit(const Vector &vertex1, const Vector &vertex2, flo
     u->AddElement(in);
     return u;
 }
+
 std::shared_ptr<CSG> BrushAppend(const Vector &vertex, std::shared_ptr<CSG> prevBrush,
                                  float thickness, Vector &endVertex)
 {
@@ -144,4 +148,91 @@ std::shared_ptr<CSG> BrushAppend(const Vector &vertex, std::shared_ptr<CSG> prev
     in->AddElement(seg);
     prevBrush->AddElement(in);
     return prevBrush;
+}
+
+std::shared_ptr<CSG> BezierCurve(const Vector & v1, const Vector & v2, const Vector & v3, const float delta)
+{
+    std::vector<Vector> vv;
+
+    vv.push_back(v1);
+    vv.push_back(v2);
+    vv.push_back(v3);
+
+    return BezierCurve(vv, delta);
+}
+
+std::shared_ptr<CSG> BezierCurve(const std::vector<Vector> & vv, const float delta)
+{
+    const Vector & v1=vv[0];
+    const Vector & v2=vv[1];
+    const Vector & v3=vv[2];
+    float x0, x1, x2, y0, y1, y2, z0, z1, z2, a, b, c, d, e, f;
+    x0=v1.x;
+    x1=v2.x-v1.x;
+    x2=v3.x-2*v2.x+v1.x;
+    y0=v1.y;
+    y1=v2.y-v1.y;
+    y2=v3.y-2*v2.y+v1.y;
+    z0=x1*y2-x2*y1;
+    z1=x0*y2-x2*y0;
+    z2=x0*y1-x1*y0;
+    a=y2*y2;
+    b=-x2*y2;
+    c=x2*x2;
+    d=-y2*z1+2*y1*z0;
+    e=x2*z1-2*x1*z0;
+    f=z1*z1-4*z2*z0;
+    std::cout<<a<<" "<<b<<" "<<c<<" "<<d<<" "<<e<<" "<<f<<std::endl;
+    std::shared_ptr<CSG> res=EllipseRing(a, c, 2*b, 2*d, 2*e, f, delta);
+    
+    std::shared_ptr<Shape> sp;
+
+    ConvexPoly * cp=new ConvexPoly(vv, NULL, 1);
+
+    sp=(std::shared_ptr<Shape>) cp;
+
+    res->AddElement(sp);
+    return res;
+}
+
+std::shared_ptr<CSG> EllipseRing(const float a, const float b, const float c, const float d, 
+                                 const float e, const float f, const float delta)
+{
+    std::shared_ptr<Shape> sp;
+    std::shared_ptr<CSG> res;
+
+    Ellipse * ep1=new Ellipse(a, b, c, d, e, f, NULL, 1);
+    std::cout<<"a"<<std::endl;
+    
+    Intersection * ip=new Intersection(NULL, 1);
+
+    sp=(std::shared_ptr<Shape>) ep1;
+    ip->AddElement(sp);
+
+    Vector center=ep1->AccessCenter();
+    float xc=center.x;
+    float yc=center.y;
+    float ft=a*xc*xc+b*yc*yc+c*xc*yc-f;
+    float invSquareSemiMajAxis=(a+b-sqrt((a-b)*(a-b)+c*c))/2/ft;
+    float invSquareSemiMinAxis=(a+b+sqrt((a-b)*(a-b)+c*c))/2/ft;
+    float squareCos=-ft*(a*invSquareSemiMajAxis-b*invSquareSemiMinAxis)/(a+b)/sqrt((a-b)*(a-b)+c*c);
+    float squareSin=1-squareCos;
+    float squareSemiMajAxis1=1/invSquareSemiMajAxis+delta*delta-2*delta*sqrt(1/invSquareSemiMajAxis);
+    float squareSemiMinAxis1=1/invSquareSemiMinAxis+delta*delta-2*delta*sqrt(1/invSquareSemiMinAxis);
+    float A=squareSemiMajAxis1*squareSin+squareSemiMinAxis1*squareCos;
+    float B=squareSemiMajAxis1*squareCos+squareSemiMinAxis1*squareSin;
+    float C=2*(squareSemiMinAxis1-squareSemiMajAxis1)*sqrt(squareSin*squareCos);
+    float D=-2*A*xc-C*yc;
+    float E=-2*B*yc-C*xc;
+    float F=A*xc*xc+B*yc*yc+C*xc*yc-squareSemiMajAxis1*squareSemiMinAxis1;
+
+    std::cout<<squareSemiMajAxis1<<" "<<squareSemiMinAxis1<<std::endl;
+
+    Ellipse * ep2=new Ellipse(A, B, C, D, E, F, NULL, 0);
+
+    sp=(std::shared_ptr<Shape>) ep2;
+    ip->AddElement(sp);    
+
+    res=(std::shared_ptr<CSG>) ip;
+    return res;
 }

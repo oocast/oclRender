@@ -26,4 +26,8 @@ std::shared_ptr<Shape> Arrow(const Vector &, const Vector &,
 std::shared_ptr<CSG> BrushInit(const Vector &, const Vector &, float,
                                Vector &, const Color * inputColorPointer = nullptr);
 std::shared_ptr<CSG> BrushAppend(const Vector &, std::shared_ptr<CSG>, float, Vector &);
+
+std::shared_ptr<CSG> BezierCurve(const Vector &, const Vector &, const Vector &, const float);
+std::shared_ptr<CSG> BezierCurve(const std::vector<Vector> &, const float);
+std::shared_ptr<CSG> EllipseRing(const float, const float, const float, const float, const float, const float, const float);
 #endif //__INTERFACE_H__
