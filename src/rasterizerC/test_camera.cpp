@@ -799,7 +799,8 @@ int main(int argc, char *argv[])
     InitVaOcl();
     InitDmabuf();
 
-    TestCameraRender();
+    //TestCameraRender();
+    RenderPV();
 
     ReleaseVaOcl();
     ReleaseDevice();
