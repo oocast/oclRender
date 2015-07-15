@@ -3,6 +3,7 @@
 const float PI = 3.14159f;
 const float LOCK_FRAME_COUNT = 15.0f;
 const float SCALE = 0.8577f;
+const float FINAL_RADIUS = 0.03f;
 
 // (circle Int circle) U lineseg U lineseg U lineseg
 std::shared_ptr<CSG> 
@@ -12,7 +13,7 @@ SightMark(const Vector & center, bool lock, Color * InputColorPointer)
     float seglength;
     if (lock)
     {
-        seglength = radius = 0.03;
+        seglength = radius = FINAL_RADIUS;
     }
     else
     {
@@ -38,9 +39,32 @@ SightMark(const Vector & center, bool lock, Color * InputColorPointer)
 }
 
 void 
+AddAllTargets(std::ifstream &tl)
+{
+    while (!tl.eof())
+    {
+        float x, y;
+        tl >> x >> y;
+        AddTarget(x, y);
+    }
+}
+
+void 
 AddTarget(float x, float y)
 {
     targetList.push_back(Vector(x, y));
+}
+
+void 
+CreateTargets(Scene &scene)
+{
+    Color color;
+    InitColor(0.7, 1, 0, 1);
+    ToYUV(&color);
+    for (size_t i = 0; i < targetList.size(); i++)
+    {
+        scene.Add(new Ellipse(Circle(targetList[i], FINAL_RADIUS - 0.01f, &color)));
+    }
 }
 
 void 

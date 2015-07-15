@@ -40,6 +40,7 @@
 #include <sys/time.h>
 #include <time.h>
 #include <iostream>
+#include <fstream>
 
 #include <inttypes.h>
 #include <ctype.h>
@@ -50,6 +51,7 @@
 #include "va_display.h"
 #include "oclrender.h"
 #include "interface.h"
+#include "pv_helper.h"
 
 #define BUFFER_NUM_DEFAULT 5
 #define VIDEO_NODE_DEFAULT "/dev/video0"
@@ -579,6 +581,97 @@ static void MainLoop(Scene* scene)
     std::cout<<"Total running time "<<st<<" s "<<nst<<" ns."<<std::endl;
 }
 
+static void
+MainLoopPV(Scene &targetScene, Scene &markScene)
+{
+    int ret;
+    struct v4l2_buffer buf;
+    int index;
+    unsigned int st = 0, nst = 0;
+
+    while (frame_count < 1000)
+    {
+        frame_count++;
+        printf("******************Frame %d\n", frame_count);
+        fd_set fds;
+        struct timeval tv;
+        int r;
+
+        FD_ZERO(&fds);
+        FD_SET(dev_fd, &fds);
+
+        /* Timeout. */
+        tv.tv_sec = 2;
+        tv.tv_usec = 0;
+
+
+        r = select(dev_fd + 1, &fds, NULL, NULL, &tv);
+
+        if (-1 == r)
+        {
+            if (EINTR == errno)
+                continue;
+            perror("select");
+        }
+
+        if (r == 0)
+        {
+            fprintf(stderr, "Select timeout\n");
+            exit(1);
+        }
+
+        memset(&buf, 0, sizeof(buf));
+        buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+        buf.memory = V4L2_MEMORY_DMABUF;
+        ret = ioctl(dev_fd, VIDIOC_DQBUF, &buf);
+        CHECK_V4L2ERROR(ret, "VIDIOC_DQBUF");
+        index = buf.index;
+
+        timespec StartTime, EndTime;
+        //process by ocl and show on screen by libva
+        clock_gettime(CLOCK_REALTIME, &StartTime);
+        if (frame_count < 16)
+        {
+            RotateSightMarks(markScene);
+        }
+        else if (frame_count == 16)
+        {
+            LockSightMarks(markScene);
+        }
+        ProcessFrame(index, &targetScene);
+        ProcessFrame(index, &markScene);
+        clock_gettime(CLOCK_REALTIME, &EndTime);
+        ShowFrame(index);
+
+        //Then queue this buffer(buf.index) by QBUF
+        buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+        buf.memory = V4L2_MEMORY_DMABUF;
+        buf.m.fd = importBuf_fd[index];
+        buf.index = index;
+
+        ret = ioctl(dev_fd, VIDIOC_QBUF, &buf);
+        CHECK_V4L2ERROR(ret, "VIDIOC_QBUF");
+        unsigned int s, ns;
+        s = EndTime.tv_sec - StartTime.tv_sec;
+        ns = EndTime.tv_nsec - StartTime.tv_nsec;
+        if (ns<0)
+        {
+            ns += 1000000000;
+            s--;
+        }
+        st += s;
+        nst += ns;
+        if (nst>1000000000)
+        {
+            nst -= 1000000000;
+            st++;
+        }
+        std::cout << "Total running time " << s << " s " << ns << " ns." << std::endl;
+        std::cout << "Total running time " << st << " s " << nst << " ns." << std::endl;
+    }
+    std::cout << "Total running time " << st << " s " << nst << " ns." << std::endl;
+}
+
 static void StopCapturing()
 {
     int ret;
@@ -642,6 +735,25 @@ TestCameraRender()
 
     StartCapturing();
     MainLoop(&scene);
+    StopCapturing();
+}
+
+void
+RenderPV()
+{
+    std::ifstream ftl;
+    ftl.open("./targetlist");
+    if (!ftl.is_open())
+        exit(1);
+    AddAllTargets(ftl);
+    ftl.close();
+
+    Scene targetScene, markScene;
+    CreateTargets(targetScene);
+    CreateSightMarks(markScene);
+
+    StartCapturing();
+    MainLoopPV(targetScene, markScene);
     StopCapturing();
 }
 

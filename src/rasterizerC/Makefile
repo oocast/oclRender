@@ -5,9 +5,9 @@ VAFLAG = -D HAVE_VA_X11
 
 BINS = test_camera
 HDRV = va_display.h sysdeps.h
-HDRS = color.h ellipse.h geometry.h image.h oclrender.h poly.h scene.h shape.h cl_helper.h csg.h interface.h
+HDRS = color.h ellipse.h geometry.h image.h oclrender.h poly.h scene.h shape.h cl_helper.h pv_helper.h csg.h interface.h
 SRCV = va_display.c va_display_x11.c
-SRCS = color.cpp ellipse.cpp geometry.cpp image.cpp poly.cpp scene.cpp shape.cpp cl_helper.cpp csg.cpp interface.cpp test_camera.cpp 
+SRCS = color.cpp ellipse.cpp geometry.cpp image.cpp poly.cpp scene.cpp shape.cpp cl_helper.cpp pv_helper.cpp csg.cpp interface.cpp test_camera.cpp 
 DOBJ = libcl.so libva.so.1.3700.0 libva-x11.so.1.3700.0 libX11.so.6.3.0
 OBJV = $(SRCV:.c=.o)
 #Oaaa = va_display.o
