@@ -9,7 +9,7 @@
 std::shared_ptr<Shape> Frame(const Vector &, const Vector &, float, 
                              const Color * inputColorPointer = nullptr);
 // Create a horizontal ellipse ring
-std::shared_ptr<Shape> Ring(float halfWidth = 1.0F, float halfHeight = 1.0F, 
+std::shared_ptr<CSG> Ring(float halfWidth = 1.0F, float halfHeight = 1.0F, 
                             float centerX = 0.0F, float centerY = 0.0F, 
                             float thickness = 0.01F, 
                             const Color * inputColorPointer = nullptr);

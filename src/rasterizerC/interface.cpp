@@ -22,7 +22,7 @@ Frame(const Vector &vertex1, const Vector &vertex2, float thickness,
     return u;
 }
 
-std::shared_ptr<Shape> 
+std::shared_ptr<CSG> 
 Ring(float halfWidth, float halfHeight, float centerX, 
      float centerY, float thickness,
      const Color * inputColorPointer)
