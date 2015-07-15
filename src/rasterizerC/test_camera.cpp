@@ -608,6 +608,7 @@ TestCameraRender()
     vv2.push_back(Vector(0.3, 0.3));
     vv2.push_back(Vector(0.7, 0.3));
     vv2.push_back(Vector(0.3, 0.7));
+    //vv2.push_back(Vector(0.3, 0.7));
 
     ConvexPoly * cp=new ConvexPoly(vv1, NULL, 1);
 
@@ -622,15 +623,22 @@ TestCameraRender()
     up1->AddElement(sp);
     for (int i = 0; i < 5; i++)
         for (int j = 0; j < 5; j++)
-            //scene.Add(up1->TransformPointer(Rotate(PI/2/25*(i*5+j)))->TransformPointer(Translate(0.05 + i * 0.2, 0.05 + j * 0.2)));
+            scene.Add(up1->TransformPointer(Rotate(PI/2/25*(i*5+j)))->TransformPointer(Translate(0.05 + i * 0.2, 0.05 + j * 0.2)));
 
-    sp=(std::shared_ptr<Shape>)BezierCurve(vv2, 0.05);
+    sp=(std::shared_ptr<Shape>)BezierCurve(vv2, 0.02);
 
     Union * up2=new Union(&color, 1);
 
     up2->AddElement(sp);
 
+    sp=(std::shared_ptr<CSG>)EllipseRing(1, 2, 0, -0.8, -1.4, 0.3, 0.02);
+    
+    Union * up3=new Union(&color, 1);
+    
+    up2->AddElement(sp);
+
     scene.Add(up2);
+    scene.Add(up3);
 
     StartCapturing();
     MainLoop(&scene);

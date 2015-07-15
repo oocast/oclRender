@@ -5,24 +5,28 @@
 inline void Ellipse::
 CalculateExtremum()
 {
-    if (c*c - 4*a*b >= 0)
-        throw std::invalid_argument("Not an ellipse");
+    if (c*c - 4*a*b < 0)
+    {
+        //throw std::invalid_argument("Not an ellipse");
 
-    gradient = Transform(2*a, c, d, c, 2*b, e);
-    center = gradient.Inverse() * Vector(0.0, 0.0);
-    float x[2], y[2];
-    Quadratic(b-c*c/(4*a), e-c*d/(2*a), f-d*d/(4*a), y);
-    Quadratic(a-c*c/(4*b), d-c*e/(2*b), f-e*e/(4*b), x);
-    // y bounds: dv/dx(x, y) = 0, v(x,y) = 0
-    Vector boundVectors[4] = {
-        Vector(-(d + c*y[0])/(2*a), y[0]),
-        Vector(-(d + c*y[1])/(2*a), y[1]),
-        Vector(x[0], -(e + c*x[0])/(2*b)),
-        Vector(x[1], -(e + c*x[1])/(2*b))
-    };
-    bound = AABox::FromVectors(boundVectors, 4);
-    if (!Contains(center))
-        throw std::logic_error("Internal error, center not inside ellipse");
+        gradient = Transform(2*a, c, d, c, 2*b, e);
+        center = gradient.Inverse() * Vector(0.0, 0.0);
+        float x[2], y[2];
+        Quadratic(b-c*c/(4*a), e-c*d/(2*a), f-d*d/(4*a), y);
+        Quadratic(a-c*c/(4*b), d-c*e/(2*b), f-e*e/(4*b), x);
+        // y bounds: dv/dx(x, y) = 0, v(x,y) = 0
+        Vector boundVectors[4] = {
+            Vector(-(d + c*y[0])/(2*a), y[0]),
+            Vector(-(d + c*y[1])/(2*a), y[1]),
+            Vector(x[0], -(e + c*x[0])/(2*b)),
+            Vector(x[1], -(e + c*x[1])/(2*b))
+        };
+        bound = AABox::FromVectors(boundVectors, 4);
+        if (!Contains(center));
+            //throw std::logic_error("Internal error, center not inside ellipse");
+    }
+    else //if (c*c==4*a*b)
+        bound=AABox(Vector(), Vector(1, 0.75));
 }
 
 Ellipse::
@@ -209,10 +213,10 @@ GetParameters(std::vector<float> &parameters, std::vector<int> & structures)
     parameters.push_back(a);
     parameters.push_back(b);
     parameters.push_back(c);
+    parameters.push_back(0);
     parameters.push_back(d);
     parameters.push_back(e);
     parameters.push_back(f);
-    parameters.push_back(0);
     parameters.push_back(0);
     structures.push_back(positive);
     structures.push_back(0);

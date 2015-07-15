@@ -30,4 +30,5 @@ std::shared_ptr<CSG> BrushAppend(const Vector &, std::shared_ptr<CSG>, float, Ve
 std::shared_ptr<CSG> BezierCurve(const Vector &, const Vector &, const Vector &, const float);
 std::shared_ptr<CSG> BezierCurve(const std::vector<Vector> &, const float);
 std::shared_ptr<CSG> EllipseRing(const float, const float, const float, const float, const float, const float, const float);
+std::shared_ptr<CSG> ParabolaRing(const float, const float, const float, const float, const float, const float, const float);
 #endif //__INTERFACE_H__

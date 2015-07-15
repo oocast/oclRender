@@ -1,5 +1,4 @@
 #include <cmath>
-#include <iostream>
 
 #include "interface.h"
 
@@ -182,8 +181,8 @@ std::shared_ptr<CSG> BezierCurve(const std::vector<Vector> & vv, const float del
     d=-y2*z1+2*y1*z0;
     e=x2*z1-2*x1*z0;
     f=z1*z1-4*z2*z0;
-    std::cout<<a<<" "<<b<<" "<<c<<" "<<d<<" "<<e<<" "<<f<<std::endl;
-    std::shared_ptr<CSG> res=EllipseRing(a, c, 2*b, 2*d, 2*e, f, delta);
+
+    std::shared_ptr<CSG> res=ParabolaRing(a, c, 2*b, 2*d, 2*e, f, delta);
     
     std::shared_ptr<Shape> sp;
 
@@ -202,7 +201,6 @@ std::shared_ptr<CSG> EllipseRing(const float a, const float b, const float c, co
     std::shared_ptr<CSG> res;
 
     Ellipse * ep1=new Ellipse(a, b, c, d, e, f, NULL, 1);
-    std::cout<<"a"<<std::endl;
     
     Intersection * ip=new Intersection(NULL, 1);
 
@@ -221,14 +219,45 @@ std::shared_ptr<CSG> EllipseRing(const float a, const float b, const float c, co
     float squareSemiMinAxis1=1/invSquareSemiMinAxis+delta*delta-2*delta*sqrt(1/invSquareSemiMinAxis);
     float A=squareSemiMajAxis1*squareSin+squareSemiMinAxis1*squareCos;
     float B=squareSemiMajAxis1*squareCos+squareSemiMinAxis1*squareSin;
-    float C=2*(squareSemiMinAxis1-squareSemiMajAxis1)*sqrt(squareSin*squareCos);
+    float C=2*(squareSemiMinAxis1-squareSemiMajAxis1)*copysign(sqrt(squareSin*squareCos), -c);
     float D=-2*A*xc-C*yc;
     float E=-2*B*yc-C*xc;
     float F=A*xc*xc+B*yc*yc+C*xc*yc-squareSemiMajAxis1*squareSemiMinAxis1;
 
-    std::cout<<squareSemiMajAxis1<<" "<<squareSemiMinAxis1<<std::endl;
-
     Ellipse * ep2=new Ellipse(A, B, C, D, E, F, NULL, 0);
+
+    sp=(std::shared_ptr<Shape>) ep2;
+    ip->AddElement(sp);    
+
+    res=(std::shared_ptr<CSG>) ip;
+    return res;
+}
+
+std::shared_ptr<CSG> ParabolaRing(const float a, const float b, const float c, const float d, 
+                                 const float e, const float f, const float delta)
+{
+    std::shared_ptr<Shape> sp;
+    std::shared_ptr<CSG> res;
+
+    Ellipse * ep1=new Ellipse(a, b, c, d, e, f, NULL, 1);
+    
+    Intersection * ip=new Intersection(NULL, 1);
+
+    sp=(std::shared_ptr<Shape>) ep1;
+    ip->AddElement(sp);
+
+    float sinTheta=sqrt(b/(a+b));
+    float cosTheta=copysign(sqrt(a/(a+b)), c);
+    //float p=(d*sinTheta-e*cosTheta)/2/(a+b);
+    float P=(d*sinTheta-e*cosTheta);
+    //float alpha=(-d*cosTheta-e*sinTheta)/2/(a+b);
+    //float beta=(alpha*alpha-f/(a+b))/2/p;
+    //float xc=alpha*cosTheta+beta*sinTheta;
+    //float yc=alpha*sinTheta-beta*cosTheta;
+    //float F=f+2*delta*fabs(p)*(a+b);
+    float F=f+delta*P;
+
+    Ellipse * ep2=new Ellipse(a, b, c, d, e, F, NULL, 0);
 
     sp=(std::shared_ptr<Shape>) ep2;
     ip->AddElement(sp);    
