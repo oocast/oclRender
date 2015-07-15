@@ -47,7 +47,7 @@ void
 CreateSightMarks(Scene & scene)
 {
     Color color;
-    InitColor(&color, 0.1, 0.8, 0.2, 1);
+    InitColor(&color, 0.1, 1, 0.2, 1);
     ToYUV(&color);
     for (size_t i = 0; i < targetList.size(); i++)
     {
@@ -65,8 +65,19 @@ void RotateSightMarks(Scene & scene)
     {
         Transform xform = Around(targetList[i], rot * sca);
         auto sp = scene.nodes[i]->TransformPointer(xform);
-        scene.nodes[i] = sp;
+        scene.Replace(i, sp);
     }
 }
 // Change all sight marks to lockon mode
-void LockSightMarks(Scene &);
+void 
+LockSightMarks(Scene & scene)
+{
+    Color color;
+    InitColor(&color, 1, 0, 0, 1);
+    ToYUV(&color);
+    for (size_t i = 0; i < targetList.size(); i++)
+    {
+        auto sp = SightMark(targetList[i], true, &color);
+        scene.Replace(i, sp);
+    }
+}

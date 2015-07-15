@@ -13,8 +13,10 @@ public:
 	Scene(){}
     void Add(Shape *);
     void Add(std::shared_ptr<Shape>);
-    // Delete last element
+    // Delete last shape node
     void Delete();
+    // Replace certain shape node
+    void Replace(size_t, std::shared_ptr<Shape>);
     // Draw on picture, execute once
     virtual void Draw(PPMImage &, int superSampling = 6);
     // Draw on camera frame, execute repeatedly

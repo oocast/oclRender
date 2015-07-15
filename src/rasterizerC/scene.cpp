@@ -24,6 +24,14 @@ Delete()
 }
 
 void Scene::
+Replace(size_t index, std::shared_ptr<Shape> successor)
+{
+    if (index >= nodes.size()) 
+        return;
+    nodes[index].swap(successor);
+}
+
+void Scene::
 Draw(PPMImage & image, int superSampling)
 {
     char fileName[]="shapedraw2.cl";
