@@ -630,11 +630,11 @@ MainLoopPV(Scene &targetScene, Scene &markScene)
         timespec StartTime, EndTime;
         //process by ocl and show on screen by libva
         clock_gettime(CLOCK_REALTIME, &StartTime);
-        if (frame_count < 16)
+        if (frame_count < 66 && frame_count>=50)
         {
             RotateSightMarks(markScene);
         }
-        else if (frame_count == 16)
+        else if (frame_count == 66)
         {
             LockSightMarks(markScene);
         }

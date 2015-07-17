@@ -43,10 +43,10 @@ Ring(float halfWidth, float halfHeight, float centerX,
     in->AddElement(outer);
     in->AddElement(inner);
     u->AddElement(in);
-    return u;
+    return (std::shared_ptr<CSG>) u;
 }
 
-std::shared_ptr<Shape> 
+std::shared_ptr<CSG> 
 Ring(const Vector &boundVertex1, const Vector &boundVertex2, float thickness,
      const Color * inputColorPointer)
 {
@@ -66,7 +66,7 @@ Ring(const Vector &boundVertex1, const Vector &boundVertex2, float thickness,
     in->AddElement(outer);
     in->AddElement(inner);
     u->AddElement(in);
-    return u;
+    return (std::shared_ptr<CSG>) u;
 }
 
 std::shared_ptr<Shape> 

@@ -49,7 +49,7 @@ AddAllTargets(std::ifstream &tl)
     }
 }
 
-void 
+inline void 
 AddTarget(float x, float y)
 {
     targetList.push_back(Vector(x, y));
@@ -59,7 +59,7 @@ void
 CreateTargets(Scene &scene)
 {
     Color color;
-    InitColor(0.7, 1, 0, 1);
+    InitColor(0.7, 255/256.0f, 0, 1);
     ToYUV(&color);
     for (size_t i = 0; i < targetList.size(); i++)
     {
@@ -71,7 +71,7 @@ void
 CreateSightMarks(Scene & scene)
 {
     Color color;
-    InitColor(&color, 0.1, 1, 0.2, 1);
+    InitColor(&color, 0.1, 255/256.0f, 0.2, 1);
     ToYUV(&color);
     for (size_t i = 0; i < targetList.size(); i++)
     {
@@ -97,7 +97,7 @@ void
 LockSightMarks(Scene & scene)
 {
     Color color;
-    InitColor(&color, 1, 0, 0, 1);
+    InitColor(&color, 255/256.0f, 0, 0, 1);
     ToYUV(&color);
     for (size_t i = 0; i < targetList.size(); i++)
     {

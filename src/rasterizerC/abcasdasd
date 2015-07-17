@@ -1,0 +1,3011 @@
+Haven't specified device, use default device: /dev/video0
+Haven't specified resolution, use default resolution: (width,height) = (640, 480)
+Input image format: (width, height) = (640, 480), pixel format = YUYV
+
+***********************libva info: ***********************
+
+***********************OpenCL info: ***********************
+
+***********************************************************
+Succeed to create 5 dma buffers 
+******************Frame 1
+Total running time 0 s 66734915 ns.
+Total running time 0 s 66734915 ns.
+******************Frame 2
+Total running time 0 s 69471007 ns.
+Total running time 0 s 136205922 ns.
+******************Frame 3
+Total running time 0 s 64824601 ns.
+Total running time 0 s 201030523 ns.
+******************Frame 4
+Total running time 0 s 71876432 ns.
+Total running time 0 s 272906955 ns.
+******************Frame 5
+Total running time 0 s 67000601 ns.
+Total running time 0 s 339907556 ns.
+******************Frame 6
+Total running time 0 s 45561640 ns.
+Total running time 0 s 385469196 ns.
+******************Frame 7
+Total running time 0 s 28292522 ns.
+Total running time 0 s 413761718 ns.
+******************Frame 8
+Total running time 0 s 21612481 ns.
+Total running time 0 s 435374199 ns.
+******************Frame 9
+Total running time 0 s 15357571 ns.
+Total running time 0 s 450731770 ns.
+******************Frame 10
+Total running time 0 s 8042295 ns.
+Total running time 0 s 458774065 ns.
+******************Frame 11
+Total running time 0 s 3133530 ns.
+Total running time 0 s 461907595 ns.
+******************Frame 12
+Total running time 0 s 2932909 ns.
+Total running time 0 s 464840504 ns.
+******************Frame 13
+Total running time 0 s 2349125 ns.
+Total running time 0 s 467189629 ns.
+******************Frame 14
+Total running time 0 s 1809662 ns.
+Total running time 0 s 468999291 ns.
+******************Frame 15
+Total running time 0 s 2827762 ns.
+Total running time 0 s 471827053 ns.
+******************Frame 16
+Total running time 0 s 1079182 ns.
+Total running time 0 s 472906235 ns.
+******************Frame 17
+Total running time 0 s 1020213 ns.
+Total running time 0 s 473926448 ns.
+******************Frame 18
+Total running time 0 s 1023090 ns.
+Total running time 0 s 474949538 ns.
+******************Frame 19
+Total running time 0 s 1014876 ns.
+Total running time 0 s 475964414 ns.
+******************Frame 20
+Total running time 0 s 1014187 ns.
+Total running time 0 s 476978601 ns.
+******************Frame 21
+Total running time 0 s 1012621 ns.
+Total running time 0 s 477991222 ns.
+******************Frame 22
+Total running time 0 s 1012560 ns.
+Total running time 0 s 479003782 ns.
+******************Frame 23
+Total running time 0 s 1014450 ns.
+Total running time 0 s 480018232 ns.
+******************Frame 24
+Total running time 0 s 1026134 ns.
+Total running time 0 s 481044366 ns.
+******************Frame 25
+Total running time 0 s 1012707 ns.
+Total running time 0 s 482057073 ns.
+******************Frame 26
+Total running time 0 s 1017607 ns.
+Total running time 0 s 483074680 ns.
+******************Frame 27
+Total running time 0 s 1024952 ns.
+Total running time 0 s 484099632 ns.
+******************Frame 28
+Total running time 0 s 1014150 ns.
+Total running time 0 s 485113782 ns.
+******************Frame 29
+Total running time 0 s 1020883 ns.
+Total running time 0 s 486134665 ns.
+******************Frame 30
+Total running time 0 s 1024619 ns.
+Total running time 0 s 487159284 ns.
+******************Frame 31
+Total running time 0 s 1020472 ns.
+Total running time 0 s 488179756 ns.
+******************Frame 32
+Total running time 0 s 1017187 ns.
+Total running time 0 s 489196943 ns.
+******************Frame 33
+Total running time 0 s 1092161 ns.
+Total running time 0 s 490289104 ns.
+******************Frame 34
+Total running time 0 s 1025195 ns.
+Total running time 0 s 491314299 ns.
+******************Frame 35
+Total running time 0 s 1019445 ns.
+Total running time 0 s 492333744 ns.
+******************Frame 36
+Total running time 0 s 1026671 ns.
+Total running time 0 s 493360415 ns.
+******************Frame 37
+Total running time 0 s 1020735 ns.
+Total running time 0 s 494381150 ns.
+******************Frame 38
+Total running time 0 s 1013981 ns.
+Total running time 0 s 495395131 ns.
+******************Frame 39
+Total running time 0 s 1032936 ns.
+Total running time 0 s 496428067 ns.
+******************Frame 40
+Total running time 0 s 1029943 ns.
+Total running time 0 s 497458010 ns.
+******************Frame 41
+Total running time 0 s 1021940 ns.
+Total running time 0 s 498479950 ns.
+******************Frame 42
+Total running time 0 s 1026139 ns.
+Total running time 0 s 499506089 ns.
+******************Frame 43
+Total running time 0 s 1019182 ns.
+Total running time 0 s 500525271 ns.
+******************Frame 44
+Total running time 0 s 1020294 ns.
+Total running time 0 s 501545565 ns.
+******************Frame 45
+Total running time 0 s 1033558 ns.
+Total running time 0 s 502579123 ns.
+******************Frame 46
+Total running time 0 s 1021556 ns.
+Total running time 0 s 503600679 ns.
+******************Frame 47
+Total running time 0 s 1011114 ns.
+Total running time 0 s 504611793 ns.
+******************Frame 48
+Total running time 0 s 1033046 ns.
+Total running time 0 s 505644839 ns.
+******************Frame 49
+Total running time 0 s 1028899 ns.
+Total running time 0 s 506673738 ns.
+******************Frame 50
+Total running time 0 s 1027092 ns.
+Total running time 0 s 507700830 ns.
+******************Frame 51
+Total running time 0 s 1011828 ns.
+Total running time 0 s 508712658 ns.
+******************Frame 52
+Total running time 0 s 1031899 ns.
+Total running time 0 s 509744557 ns.
+******************Frame 53
+Total running time 0 s 1031243 ns.
+Total running time 0 s 510775800 ns.
+******************Frame 54
+Total running time 0 s 1031513 ns.
+Total running time 0 s 511807313 ns.
+******************Frame 55
+Total running time 0 s 1032861 ns.
+Total running time 0 s 512840174 ns.
+******************Frame 56
+Total running time 0 s 1024521 ns.
+Total running time 0 s 513864695 ns.
+******************Frame 57
+Total running time 0 s 1025612 ns.
+Total running time 0 s 514890307 ns.
+******************Frame 58
+Total running time 0 s 1022403 ns.
+Total running time 0 s 515912710 ns.
+******************Frame 59
+Total running time 0 s 1021373 ns.
+Total running time 0 s 516934083 ns.
+******************Frame 60
+Total running time 0 s 1026708 ns.
+Total running time 0 s 517960791 ns.
+******************Frame 61
+Total running time 0 s 1024077 ns.
+Total running time 0 s 518984868 ns.
+******************Frame 62
+Total running time 0 s 1018086 ns.
+Total running time 0 s 520002954 ns.
+******************Frame 63
+Total running time 0 s 1022639 ns.
+Total running time 0 s 521025593 ns.
+******************Frame 64
+Total running time 0 s 1016171 ns.
+Total running time 0 s 522041764 ns.
+******************Frame 65
+Total running time 0 s 1033562 ns.
+Total running time 0 s 523075326 ns.
+******************Frame 66
+Total running time 0 s 1024513 ns.
+Total running time 0 s 524099839 ns.
+******************Frame 67
+Total running time 0 s 1021379 ns.
+Total running time 0 s 525121218 ns.
+******************Frame 68
+Total running time 0 s 1019373 ns.
+Total running time 0 s 526140591 ns.
+******************Frame 69
+Total running time 0 s 1024812 ns.
+Total running time 0 s 527165403 ns.
+******************Frame 70
+Total running time 0 s 1020908 ns.
+Total running time 0 s 528186311 ns.
+******************Frame 71
+Total running time 0 s 1018870 ns.
+Total running time 0 s 529205181 ns.
+******************Frame 72
+Total running time 0 s 1026788 ns.
+Total running time 0 s 530231969 ns.
+******************Frame 73
+Total running time 0 s 1012402 ns.
+Total running time 0 s 531244371 ns.
+******************Frame 74
+Total running time 0 s 1023277 ns.
+Total running time 0 s 532267648 ns.
+******************Frame 75
+Total running time 0 s 1007379 ns.
+Total running time 0 s 533275027 ns.
+******************Frame 76
+Total running time 0 s 1026457 ns.
+Total running time 0 s 534301484 ns.
+******************Frame 77
+Total running time 0 s 1024860 ns.
+Total running time 0 s 535326344 ns.
+******************Frame 78
+Total running time 0 s 1017269 ns.
+Total running time 0 s 536343613 ns.
+******************Frame 79
+Total running time 0 s 1024590 ns.
+Total running time 0 s 537368203 ns.
+******************Frame 80
+Total running time 0 s 1024248 ns.
+Total running time 0 s 538392451 ns.
+******************Frame 81
+Total running time 0 s 1019357 ns.
+Total running time 0 s 539411808 ns.
+******************Frame 82
+Total running time 0 s 1023125 ns.
+Total running time 0 s 540434933 ns.
+******************Frame 83
+Total running time 0 s 1029848 ns.
+Total running time 0 s 541464781 ns.
+******************Frame 84
+Total running time 0 s 1025079 ns.
+Total running time 0 s 542489860 ns.
+******************Frame 85
+Total running time 0 s 1033862 ns.
+Total running time 0 s 543523722 ns.
+******************Frame 86
+Total running time 0 s 1027912 ns.
+Total running time 0 s 544551634 ns.
+******************Frame 87
+Total running time 0 s 1027404 ns.
+Total running time 0 s 545579038 ns.
+******************Frame 88
+Total running time 0 s 1030025 ns.
+Total running time 0 s 546609063 ns.
+******************Frame 89
+Total running time 0 s 1030055 ns.
+Total running time 0 s 547639118 ns.
+******************Frame 90
+Total running time 0 s 1028010 ns.
+Total running time 0 s 548667128 ns.
+******************Frame 91
+Total running time 0 s 1033126 ns.
+Total running time 0 s 549700254 ns.
+******************Frame 92
+Total running time 0 s 1023672 ns.
+Total running time 0 s 550723926 ns.
+******************Frame 93
+Total running time 0 s 1032698 ns.
+Total running time 0 s 551756624 ns.
+******************Frame 94
+Total running time 0 s 1021586 ns.
+Total running time 0 s 552778210 ns.
+******************Frame 95
+Total running time 0 s 1021959 ns.
+Total running time 0 s 553800169 ns.
+******************Frame 96
+Total running time 0 s 1020887 ns.
+Total running time 0 s 554821056 ns.
+******************Frame 97
+Total running time 0 s 1025670 ns.
+Total running time 0 s 555846726 ns.
+******************Frame 98
+Total running time 0 s 1012786 ns.
+Total running time 0 s 556859512 ns.
+******************Frame 99
+Total running time 0 s 1013547 ns.
+Total running time 0 s 557873059 ns.
+******************Frame 100
+Total running time 0 s 1023726 ns.
+Total running time 0 s 558896785 ns.
+******************Frame 101
+Total running time 0 s 1010409 ns.
+Total running time 0 s 559907194 ns.
+******************Frame 102
+Total running time 0 s 1019831 ns.
+Total running time 0 s 560927025 ns.
+******************Frame 103
+Total running time 0 s 1035207 ns.
+Total running time 0 s 561962232 ns.
+******************Frame 104
+Total running time 0 s 1015336 ns.
+Total running time 0 s 562977568 ns.
+******************Frame 105
+Total running time 0 s 1019117 ns.
+Total running time 0 s 563996685 ns.
+******************Frame 106
+Total running time 0 s 1022166 ns.
+Total running time 0 s 565018851 ns.
+******************Frame 107
+Total running time 0 s 1019592 ns.
+Total running time 0 s 566038443 ns.
+******************Frame 108
+Total running time 0 s 1018980 ns.
+Total running time 0 s 567057423 ns.
+******************Frame 109
+Total running time 0 s 1025386 ns.
+Total running time 0 s 568082809 ns.
+******************Frame 110
+Total running time 0 s 1021441 ns.
+Total running time 0 s 569104250 ns.
+******************Frame 111
+Total running time 0 s 1019492 ns.
+Total running time 0 s 570123742 ns.
+******************Frame 112
+Total running time 0 s 1023622 ns.
+Total running time 0 s 571147364 ns.
+******************Frame 113
+Total running time 0 s 1022787 ns.
+Total running time 0 s 572170151 ns.
+******************Frame 114
+Total running time 0 s 1015831 ns.
+Total running time 0 s 573185982 ns.
+******************Frame 115
+Total running time 0 s 1025581 ns.
+Total running time 0 s 574211563 ns.
+******************Frame 116
+Total running time 0 s 1022939 ns.
+Total running time 0 s 575234502 ns.
+******************Frame 117
+Total running time 0 s 1020148 ns.
+Total running time 0 s 576254650 ns.
+******************Frame 118
+Total running time 0 s 1024682 ns.
+Total running time 0 s 577279332 ns.
+******************Frame 119
+Total running time 0 s 1031476 ns.
+Total running time 0 s 578310808 ns.
+******************Frame 120
+Total running time 0 s 1038792 ns.
+Total running time 0 s 579349600 ns.
+******************Frame 121
+Total running time 0 s 1047229 ns.
+Total running time 0 s 580396829 ns.
+******************Frame 122
+Total running time 0 s 1028959 ns.
+Total running time 0 s 581425788 ns.
+******************Frame 123
+Total running time 0 s 1031668 ns.
+Total running time 0 s 582457456 ns.
+******************Frame 124
+Total running time 0 s 1065612 ns.
+Total running time 0 s 583523068 ns.
+******************Frame 125
+Total running time 0 s 1025164 ns.
+Total running time 0 s 584548232 ns.
+******************Frame 126
+Total running time 0 s 1024083 ns.
+Total running time 0 s 585572315 ns.
+******************Frame 127
+Total running time 0 s 1036518 ns.
+Total running time 0 s 586608833 ns.
+******************Frame 128
+Total running time 0 s 1037276 ns.
+Total running time 0 s 587646109 ns.
+******************Frame 129
+Total running time 0 s 1023494 ns.
+Total running time 0 s 588669603 ns.
+******************Frame 130
+Total running time 0 s 1047201 ns.
+Total running time 0 s 589716804 ns.
+******************Frame 131
+Total running time 0 s 1024092 ns.
+Total running time 0 s 590740896 ns.
+******************Frame 132
+Total running time 0 s 1023884 ns.
+Total running time 0 s 591764780 ns.
+******************Frame 133
+Total running time 0 s 1025580 ns.
+Total running time 0 s 592790360 ns.
+******************Frame 134
+Total running time 0 s 1029796 ns.
+Total running time 0 s 593820156 ns.
+******************Frame 135
+Total running time 0 s 1024666 ns.
+Total running time 0 s 594844822 ns.
+******************Frame 136
+Total running time 0 s 1029857 ns.
+Total running time 0 s 595874679 ns.
+******************Frame 137
+Total running time 0 s 1031107 ns.
+Total running time 0 s 596905786 ns.
+******************Frame 138
+Total running time 0 s 1026082 ns.
+Total running time 0 s 597931868 ns.
+******************Frame 139
+Total running time 0 s 1028244 ns.
+Total running time 0 s 598960112 ns.
+******************Frame 140
+Total running time 0 s 1031561 ns.
+Total running time 0 s 599991673 ns.
+******************Frame 141
+Total running time 0 s 1023863 ns.
+Total running time 0 s 601015536 ns.
+******************Frame 142
+Total running time 0 s 1040994 ns.
+Total running time 0 s 602056530 ns.
+******************Frame 143
+Total running time 0 s 1020861 ns.
+Total running time 0 s 603077391 ns.
+******************Frame 144
+Total running time 0 s 1034005 ns.
+Total running time 0 s 604111396 ns.
+******************Frame 145
+Total running time 0 s 1036031 ns.
+Total running time 0 s 605147427 ns.
+******************Frame 146
+Total running time 0 s 1012945 ns.
+Total running time 0 s 606160372 ns.
+******************Frame 147
+Total running time 0 s 1025194 ns.
+Total running time 0 s 607185566 ns.
+******************Frame 148
+Total running time 0 s 1028368 ns.
+Total running time 0 s 608213934 ns.
+******************Frame 149
+Total running time 0 s 1028150 ns.
+Total running time 0 s 609242084 ns.
+******************Frame 150
+Total running time 0 s 1014630 ns.
+Total running time 0 s 610256714 ns.
+******************Frame 151
+Total running time 0 s 1013145 ns.
+Total running time 0 s 611269859 ns.
+******************Frame 152
+Total running time 0 s 1034833 ns.
+Total running time 0 s 612304692 ns.
+******************Frame 153
+Total running time 0 s 1033101 ns.
+Total running time 0 s 613337793 ns.
+******************Frame 154
+Total running time 0 s 1042745 ns.
+Total running time 0 s 614380538 ns.
+******************Frame 155
+Total running time 0 s 1043484 ns.
+Total running time 0 s 615424022 ns.
+******************Frame 156
+Total running time 0 s 1031304 ns.
+Total running time 0 s 616455326 ns.
+******************Frame 157
+Total running time 0 s 1027487 ns.
+Total running time 0 s 617482813 ns.
+******************Frame 158
+Total running time 0 s 1043969 ns.
+Total running time 0 s 618526782 ns.
+******************Frame 159
+Total running time 0 s 1033465 ns.
+Total running time 0 s 619560247 ns.
+******************Frame 160
+Total running time 0 s 1030967 ns.
+Total running time 0 s 620591214 ns.
+******************Frame 161
+Total running time 0 s 1050281 ns.
+Total running time 0 s 621641495 ns.
+******************Frame 162
+Total running time 0 s 1032983 ns.
+Total running time 0 s 622674478 ns.
+******************Frame 163
+Total running time 0 s 1034168 ns.
+Total running time 0 s 623708646 ns.
+******************Frame 164
+Total running time 0 s 1037965 ns.
+Total running time 0 s 624746611 ns.
+******************Frame 165
+Total running time 0 s 1027362 ns.
+Total running time 0 s 625773973 ns.
+******************Frame 166
+Total running time 0 s 1026550 ns.
+Total running time 0 s 626800523 ns.
+******************Frame 167
+Total running time 0 s 1027650 ns.
+Total running time 0 s 627828173 ns.
+******************Frame 168
+Total running time 0 s 1028491 ns.
+Total running time 0 s 628856664 ns.
+******************Frame 169
+Total running time 0 s 1024902 ns.
+Total running time 0 s 629881566 ns.
+******************Frame 170
+Total running time 0 s 1027408 ns.
+Total running time 0 s 630908974 ns.
+******************Frame 171
+Total running time 0 s 1030419 ns.
+Total running time 0 s 631939393 ns.
+******************Frame 172
+Total running time 0 s 1025804 ns.
+Total running time 0 s 632965197 ns.
+******************Frame 173
+Total running time 0 s 1039701 ns.
+Total running time 0 s 634004898 ns.
+******************Frame 174
+Total running time 0 s 1023347 ns.
+Total running time 0 s 635028245 ns.
+******************Frame 175
+Total running time 0 s 1035647 ns.
+Total running time 0 s 636063892 ns.
+******************Frame 176
+Total running time 0 s 1066781 ns.
+Total running time 0 s 637130673 ns.
+******************Frame 177
+Total running time 0 s 1011832 ns.
+Total running time 0 s 638142505 ns.
+******************Frame 178
+Total running time 0 s 1025971 ns.
+Total running time 0 s 639168476 ns.
+******************Frame 179
+Total running time 0 s 1039213 ns.
+Total running time 0 s 640207689 ns.
+******************Frame 180
+Total running time 0 s 1034530 ns.
+Total running time 0 s 641242219 ns.
+******************Frame 181
+Total running time 0 s 1032144 ns.
+Total running time 0 s 642274363 ns.
+******************Frame 182
+Total running time 0 s 1034470 ns.
+Total running time 0 s 643308833 ns.
+******************Frame 183
+Total running time 0 s 1029527 ns.
+Total running time 0 s 644338360 ns.
+******************Frame 184
+Total running time 0 s 1025461 ns.
+Total running time 0 s 645363821 ns.
+******************Frame 185
+Total running time 0 s 1029005 ns.
+Total running time 0 s 646392826 ns.
+******************Frame 186
+Total running time 0 s 1032054 ns.
+Total running time 0 s 647424880 ns.
+******************Frame 187
+Total running time 0 s 1034703 ns.
+Total running time 0 s 648459583 ns.
+******************Frame 188
+Total running time 0 s 1024934 ns.
+Total running time 0 s 649484517 ns.
+******************Frame 189
+Total running time 0 s 1031135 ns.
+Total running time 0 s 650515652 ns.
+******************Frame 190
+Total running time 0 s 1029096 ns.
+Total running time 0 s 651544748 ns.
+******************Frame 191
+Total running time 0 s 1044633 ns.
+Total running time 0 s 652589381 ns.
+******************Frame 192
+Total running time 0 s 1042090 ns.
+Total running time 0 s 653631471 ns.
+******************Frame 193
+Total running time 0 s 1028697 ns.
+Total running time 0 s 654660168 ns.
+******************Frame 194
+Total running time 0 s 1032107 ns.
+Total running time 0 s 655692275 ns.
+******************Frame 195
+Total running time 0 s 1040077 ns.
+Total running time 0 s 656732352 ns.
+******************Frame 196
+Total running time 0 s 1029697 ns.
+Total running time 0 s 657762049 ns.
+******************Frame 197
+Total running time 0 s 1033758 ns.
+Total running time 0 s 658795807 ns.
+******************Frame 198
+Total running time 0 s 1027727 ns.
+Total running time 0 s 659823534 ns.
+******************Frame 199
+Total running time 0 s 1029989 ns.
+Total running time 0 s 660853523 ns.
+******************Frame 200
+Total running time 0 s 1036777 ns.
+Total running time 0 s 661890300 ns.
+******************Frame 201
+Total running time 0 s 1025906 ns.
+Total running time 0 s 662916206 ns.
+******************Frame 202
+Total running time 0 s 1012879 ns.
+Total running time 0 s 663929085 ns.
+******************Frame 203
+Total running time 0 s 1023714 ns.
+Total running time 0 s 664952799 ns.
+******************Frame 204
+Total running time 0 s 1034732 ns.
+Total running time 0 s 665987531 ns.
+******************Frame 205
+Total running time 0 s 1022855 ns.
+Total running time 0 s 667010386 ns.
+******************Frame 206
+Total running time 0 s 1020913 ns.
+Total running time 0 s 668031299 ns.
+******************Frame 207
+Total running time 0 s 1017219 ns.
+Total running time 0 s 669048518 ns.
+******************Frame 208
+Total running time 0 s 1019818 ns.
+Total running time 0 s 670068336 ns.
+******************Frame 209
+Total running time 0 s 1035391 ns.
+Total running time 0 s 671103727 ns.
+******************Frame 210
+Total running time 0 s 1033018 ns.
+Total running time 0 s 672136745 ns.
+******************Frame 211
+Total running time 0 s 1025285 ns.
+Total running time 0 s 673162030 ns.
+******************Frame 212
+Total running time 0 s 1045928 ns.
+Total running time 0 s 674207958 ns.
+******************Frame 213
+Total running time 0 s 1035227 ns.
+Total running time 0 s 675243185 ns.
+******************Frame 214
+Total running time 0 s 1032773 ns.
+Total running time 0 s 676275958 ns.
+******************Frame 215
+Total running time 0 s 1027204 ns.
+Total running time 0 s 677303162 ns.
+******************Frame 216
+Total running time 0 s 1012409 ns.
+Total running time 0 s 678315571 ns.
+******************Frame 217
+Total running time 0 s 1020085 ns.
+Total running time 0 s 679335656 ns.
+******************Frame 218
+Total running time 0 s 1033863 ns.
+Total running time 0 s 680369519 ns.
+******************Frame 219
+Total running time 0 s 1033273 ns.
+Total running time 0 s 681402792 ns.
+******************Frame 220
+Total running time 0 s 1028052 ns.
+Total running time 0 s 682430844 ns.
+******************Frame 221
+Total running time 0 s 1039056 ns.
+Total running time 0 s 683469900 ns.
+******************Frame 222
+Total running time 0 s 1026830 ns.
+Total running time 0 s 684496730 ns.
+******************Frame 223
+Total running time 0 s 1027335 ns.
+Total running time 0 s 685524065 ns.
+******************Frame 224
+Total running time 0 s 1046839 ns.
+Total running time 0 s 686570904 ns.
+******************Frame 225
+Total running time 0 s 1031201 ns.
+Total running time 0 s 687602105 ns.
+******************Frame 226
+Total running time 0 s 1028698 ns.
+Total running time 0 s 688630803 ns.
+******************Frame 227
+Total running time 0 s 1026394 ns.
+Total running time 0 s 689657197 ns.
+******************Frame 228
+Total running time 0 s 1042354 ns.
+Total running time 0 s 690699551 ns.
+******************Frame 229
+Total running time 0 s 1069388 ns.
+Total running time 0 s 691768939 ns.
+******************Frame 230
+Total running time 0 s 1022712 ns.
+Total running time 0 s 692791651 ns.
+******************Frame 231
+Total running time 0 s 1045278 ns.
+Total running time 0 s 693836929 ns.
+******************Frame 232
+Total running time 0 s 1022927 ns.
+Total running time 0 s 694859856 ns.
+******************Frame 233
+Total running time 0 s 1048108 ns.
+Total running time 0 s 695907964 ns.
+******************Frame 234
+Total running time 0 s 1032532 ns.
+Total running time 0 s 696940496 ns.
+******************Frame 235
+Total running time 0 s 1020426 ns.
+Total running time 0 s 697960922 ns.
+******************Frame 236
+Total running time 0 s 1031791 ns.
+Total running time 0 s 698992713 ns.
+******************Frame 237
+Total running time 0 s 1023564 ns.
+Total running time 0 s 700016277 ns.
+******************Frame 238
+Total running time 0 s 1029659 ns.
+Total running time 0 s 701045936 ns.
+******************Frame 239
+Total running time 0 s 1016826 ns.
+Total running time 0 s 702062762 ns.
+******************Frame 240
+Total running time 0 s 1022994 ns.
+Total running time 0 s 703085756 ns.
+******************Frame 241
+Total running time 0 s 1025884 ns.
+Total running time 0 s 704111640 ns.
+******************Frame 242
+Total running time 0 s 1021203 ns.
+Total running time 0 s 705132843 ns.
+******************Frame 243
+Total running time 0 s 1037377 ns.
+Total running time 0 s 706170220 ns.
+******************Frame 244
+Total running time 0 s 1018991 ns.
+Total running time 0 s 707189211 ns.
+******************Frame 245
+Total running time 0 s 1021411 ns.
+Total running time 0 s 708210622 ns.
+******************Frame 246
+Total running time 0 s 1023397 ns.
+Total running time 0 s 709234019 ns.
+******************Frame 247
+Total running time 0 s 1035019 ns.
+Total running time 0 s 710269038 ns.
+******************Frame 248
+Total running time 0 s 1022559 ns.
+Total running time 0 s 711291597 ns.
+******************Frame 249
+Total running time 0 s 1022917 ns.
+Total running time 0 s 712314514 ns.
+******************Frame 250
+Total running time 0 s 1034222 ns.
+Total running time 0 s 713348736 ns.
+******************Frame 251
+Total running time 0 s 1020954 ns.
+Total running time 0 s 714369690 ns.
+******************Frame 252
+Total running time 0 s 1035673 ns.
+Total running time 0 s 715405363 ns.
+******************Frame 253
+Total running time 0 s 1001128 ns.
+Total running time 0 s 716406491 ns.
+******************Frame 254
+Total running time 0 s 1028041 ns.
+Total running time 0 s 717434532 ns.
+******************Frame 255
+Total running time 0 s 1018461 ns.
+Total running time 0 s 718452993 ns.
+******************Frame 256
+Total running time 0 s 1032222 ns.
+Total running time 0 s 719485215 ns.
+******************Frame 257
+Total running time 0 s 1014940 ns.
+Total running time 0 s 720500155 ns.
+******************Frame 258
+Total running time 0 s 1024267 ns.
+Total running time 0 s 721524422 ns.
+******************Frame 259
+Total running time 0 s 1033605 ns.
+Total running time 0 s 722558027 ns.
+******************Frame 260
+Total running time 0 s 1021596 ns.
+Total running time 0 s 723579623 ns.
+******************Frame 261
+Total running time 0 s 1030768 ns.
+Total running time 0 s 724610391 ns.
+******************Frame 262
+Total running time 0 s 1023278 ns.
+Total running time 0 s 725633669 ns.
+******************Frame 263
+Total running time 0 s 1025171 ns.
+Total running time 0 s 726658840 ns.
+******************Frame 264
+Total running time 0 s 1048342 ns.
+Total running time 0 s 727707182 ns.
+******************Frame 265
+Total running time 0 s 1041751 ns.
+Total running time 0 s 728748933 ns.
+******************Frame 266
+Total running time 0 s 1031306 ns.
+Total running time 0 s 729780239 ns.
+******************Frame 267
+Total running time 0 s 1050233 ns.
+Total running time 0 s 730830472 ns.
+******************Frame 268
+Total running time 0 s 1040490 ns.
+Total running time 0 s 731870962 ns.
+******************Frame 269
+Total running time 0 s 1034592 ns.
+Total running time 0 s 732905554 ns.
+******************Frame 270
+Total running time 0 s 1035867 ns.
+Total running time 0 s 733941421 ns.
+******************Frame 271
+Total running time 0 s 1043393 ns.
+Total running time 0 s 734984814 ns.
+******************Frame 272
+Total running time 0 s 1023585 ns.
+Total running time 0 s 736008399 ns.
+******************Frame 273
+Total running time 0 s 1024503 ns.
+Total running time 0 s 737032902 ns.
+******************Frame 274
+Total running time 0 s 1035408 ns.
+Total running time 0 s 738068310 ns.
+******************Frame 275
+Total running time 0 s 1022113 ns.
+Total running time 0 s 739090423 ns.
+******************Frame 276
+Total running time 0 s 1024313 ns.
+Total running time 0 s 740114736 ns.
+******************Frame 277
+Total running time 0 s 1033511 ns.
+Total running time 0 s 741148247 ns.
+******************Frame 278
+Total running time 0 s 1022648 ns.
+Total running time 0 s 742170895 ns.
+******************Frame 279
+Total running time 0 s 1087065 ns.
+Total running time 0 s 743257960 ns.
+******************Frame 280
+Total running time 0 s 1023272 ns.
+Total running time 0 s 744281232 ns.
+******************Frame 281
+Total running time 0 s 1045233 ns.
+Total running time 0 s 745326465 ns.
+******************Frame 282
+Total running time 0 s 1023992 ns.
+Total running time 0 s 746350457 ns.
+******************Frame 283
+Total running time 0 s 1016893 ns.
+Total running time 0 s 747367350 ns.
+******************Frame 284
+Total running time 0 s 1021906 ns.
+Total running time 0 s 748389256 ns.
+******************Frame 285
+Total running time 0 s 1040830 ns.
+Total running time 0 s 749430086 ns.
+******************Frame 286
+Total running time 0 s 1036209 ns.
+Total running time 0 s 750466295 ns.
+******************Frame 287
+Total running time 0 s 1019521 ns.
+Total running time 0 s 751485816 ns.
+******************Frame 288
+Total running time 0 s 1022158 ns.
+Total running time 0 s 752507974 ns.
+******************Frame 289
+Total running time 0 s 1021326 ns.
+Total running time 0 s 753529300 ns.
+******************Frame 290
+Total running time 0 s 1028132 ns.
+Total running time 0 s 754557432 ns.
+******************Frame 291
+Total running time 0 s 1036860 ns.
+Total running time 0 s 755594292 ns.
+******************Frame 292
+Total running time 0 s 1018693 ns.
+Total running time 0 s 756612985 ns.
+******************Frame 293
+Total running time 0 s 1020246 ns.
+Total running time 0 s 757633231 ns.
+******************Frame 294
+Total running time 0 s 1034189 ns.
+Total running time 0 s 758667420 ns.
+******************Frame 295
+Total running time 0 s 1022271 ns.
+Total running time 0 s 759689691 ns.
+******************Frame 296
+Total running time 0 s 1019952 ns.
+Total running time 0 s 760709643 ns.
+******************Frame 297
+Total running time 0 s 1029621 ns.
+Total running time 0 s 761739264 ns.
+******************Frame 298
+Total running time 0 s 1043192 ns.
+Total running time 0 s 762782456 ns.
+******************Frame 299
+Total running time 0 s 1029292 ns.
+Total running time 0 s 763811748 ns.
+******************Frame 300
+Total running time 0 s 1045809 ns.
+Total running time 0 s 764857557 ns.
+******************Frame 301
+Total running time 0 s 1045547 ns.
+Total running time 0 s 765903104 ns.
+******************Frame 302
+Total running time 0 s 1028258 ns.
+Total running time 0 s 766931362 ns.
+******************Frame 303
+Total running time 0 s 1020063 ns.
+Total running time 0 s 767951425 ns.
+******************Frame 304
+Total running time 0 s 1029695 ns.
+Total running time 0 s 768981120 ns.
+******************Frame 305
+Total running time 0 s 1023678 ns.
+Total running time 0 s 770004798 ns.
+******************Frame 306
+Total running time 0 s 1015838 ns.
+Total running time 0 s 771020636 ns.
+******************Frame 307
+Total running time 0 s 1047823 ns.
+Total running time 0 s 772068459 ns.
+******************Frame 308
+Total running time 0 s 1021999 ns.
+Total running time 0 s 773090458 ns.
+******************Frame 309
+Total running time 0 s 1019266 ns.
+Total running time 0 s 774109724 ns.
+******************Frame 310
+Total running time 0 s 1049237 ns.
+Total running time 0 s 775158961 ns.
+******************Frame 311
+Total running time 0 s 1021954 ns.
+Total running time 0 s 776180915 ns.
+******************Frame 312
+Total running time 0 s 1018177 ns.
+Total running time 0 s 777199092 ns.
+******************Frame 313
+Total running time 0 s 1022010 ns.
+Total running time 0 s 778221102 ns.
+******************Frame 314
+Total running time 0 s 1035416 ns.
+Total running time 0 s 779256518 ns.
+******************Frame 315
+Total running time 0 s 1019592 ns.
+Total running time 0 s 780276110 ns.
+******************Frame 316
+Total running time 0 s 1036718 ns.
+Total running time 0 s 781312828 ns.
+******************Frame 317
+Total running time 0 s 1029362 ns.
+Total running time 0 s 782342190 ns.
+******************Frame 318
+Total running time 0 s 1022723 ns.
+Total running time 0 s 783364913 ns.
+******************Frame 319
+Total running time 0 s 1025069 ns.
+Total running time 0 s 784389982 ns.
+******************Frame 320
+Total running time 0 s 1030560 ns.
+Total running time 0 s 785420542 ns.
+******************Frame 321
+Total running time 0 s 1021783 ns.
+Total running time 0 s 786442325 ns.
+******************Frame 322
+Total running time 0 s 1038347 ns.
+Total running time 0 s 787480672 ns.
+******************Frame 323
+Total running time 0 s 1020016 ns.
+Total running time 0 s 788500688 ns.
+******************Frame 324
+Total running time 0 s 1033272 ns.
+Total running time 0 s 789533960 ns.
+******************Frame 325
+Total running time 0 s 1043586 ns.
+Total running time 0 s 790577546 ns.
+******************Frame 326
+Total running time 0 s 1034014 ns.
+Total running time 0 s 791611560 ns.
+******************Frame 327
+Total running time 0 s 1032221 ns.
+Total running time 0 s 792643781 ns.
+******************Frame 328
+Total running time 0 s 1034351 ns.
+Total running time 0 s 793678132 ns.
+******************Frame 329
+Total running time 0 s 1016508 ns.
+Total running time 0 s 794694640 ns.
+******************Frame 330
+Total running time 0 s 1034717 ns.
+Total running time 0 s 795729357 ns.
+******************Frame 331
+Total running time 0 s 1083552 ns.
+Total running time 0 s 796812909 ns.
+******************Frame 332
+Total running time 0 s 1037212 ns.
+Total running time 0 s 797850121 ns.
+******************Frame 333
+Total running time 0 s 1038315 ns.
+Total running time 0 s 798888436 ns.
+******************Frame 334
+Total running time 0 s 1045689 ns.
+Total running time 0 s 799934125 ns.
+******************Frame 335
+Total running time 0 s 1037869 ns.
+Total running time 0 s 800971994 ns.
+******************Frame 336
+Total running time 0 s 1038957 ns.
+Total running time 0 s 802010951 ns.
+******************Frame 337
+Total running time 0 s 1044498 ns.
+Total running time 0 s 803055449 ns.
+******************Frame 338
+Total running time 0 s 1043301 ns.
+Total running time 0 s 804098750 ns.
+******************Frame 339
+Total running time 0 s 1029190 ns.
+Total running time 0 s 805127940 ns.
+******************Frame 340
+Total running time 0 s 1038177 ns.
+Total running time 0 s 806166117 ns.
+******************Frame 341
+Total running time 0 s 1032085 ns.
+Total running time 0 s 807198202 ns.
+******************Frame 342
+Total running time 0 s 1044133 ns.
+Total running time 0 s 808242335 ns.
+******************Frame 343
+Total running time 0 s 1029042 ns.
+Total running time 0 s 809271377 ns.
+******************Frame 344
+Total running time 0 s 1025576 ns.
+Total running time 0 s 810296953 ns.
+******************Frame 345
+Total running time 0 s 1023064 ns.
+Total running time 0 s 811320017 ns.
+******************Frame 346
+Total running time 0 s 1028077 ns.
+Total running time 0 s 812348094 ns.
+******************Frame 347
+Total running time 0 s 1029464 ns.
+Total running time 0 s 813377558 ns.
+******************Frame 348
+Total running time 0 s 1023795 ns.
+Total running time 0 s 814401353 ns.
+******************Frame 349
+Total running time 0 s 1027895 ns.
+Total running time 0 s 815429248 ns.
+******************Frame 350
+Total running time 0 s 1030743 ns.
+Total running time 0 s 816459991 ns.
+******************Frame 351
+Total running time 0 s 1025026 ns.
+Total running time 0 s 817485017 ns.
+******************Frame 352
+Total running time 0 s 1037196 ns.
+Total running time 0 s 818522213 ns.
+******************Frame 353
+Total running time 0 s 1021721 ns.
+Total running time 0 s 819543934 ns.
+******************Frame 354
+Total running time 0 s 1030318 ns.
+Total running time 0 s 820574252 ns.
+******************Frame 355
+Total running time 0 s 1024914 ns.
+Total running time 0 s 821599166 ns.
+******************Frame 356
+Total running time 0 s 1027774 ns.
+Total running time 0 s 822626940 ns.
+******************Frame 357
+Total running time 0 s 1018470 ns.
+Total running time 0 s 823645410 ns.
+******************Frame 358
+Total running time 0 s 1023359 ns.
+Total running time 0 s 824668769 ns.
+******************Frame 359
+Total running time 0 s 1033352 ns.
+Total running time 0 s 825702121 ns.
+******************Frame 360
+Total running time 0 s 1022921 ns.
+Total running time 0 s 826725042 ns.
+******************Frame 361
+Total running time 0 s 1030145 ns.
+Total running time 0 s 827755187 ns.
+******************Frame 362
+Total running time 0 s 1034458 ns.
+Total running time 0 s 828789645 ns.
+******************Frame 363
+Total running time 0 s 1019319 ns.
+Total running time 0 s 829808964 ns.
+******************Frame 364
+Total running time 0 s 1038293 ns.
+Total running time 0 s 830847257 ns.
+******************Frame 365
+Total running time 0 s 1019594 ns.
+Total running time 0 s 831866851 ns.
+******************Frame 366
+Total running time 0 s 1026735 ns.
+Total running time 0 s 832893586 ns.
+******************Frame 367
+Total running time 0 s 1034648 ns.
+Total running time 0 s 833928234 ns.
+******************Frame 368
+Total running time 0 s 1020012 ns.
+Total running time 0 s 834948246 ns.
+******************Frame 369
+Total running time 0 s 1023281 ns.
+Total running time 0 s 835971527 ns.
+******************Frame 370
+Total running time 0 s 1046067 ns.
+Total running time 0 s 837017594 ns.
+******************Frame 371
+Total running time 0 s 1030308 ns.
+Total running time 0 s 838047902 ns.
+******************Frame 372
+Total running time 0 s 1030220 ns.
+Total running time 0 s 839078122 ns.
+******************Frame 373
+Total running time 0 s 1029687 ns.
+Total running time 0 s 840107809 ns.
+******************Frame 374
+Total running time 0 s 1044892 ns.
+Total running time 0 s 841152701 ns.
+******************Frame 375
+Total running time 0 s 1026008 ns.
+Total running time 0 s 842178709 ns.
+******************Frame 376
+Total running time 0 s 1039290 ns.
+Total running time 0 s 843217999 ns.
+******************Frame 377
+Total running time 0 s 1023010 ns.
+Total running time 0 s 844241009 ns.
+******************Frame 378
+Total running time 0 s 1033606 ns.
+Total running time 0 s 845274615 ns.
+******************Frame 379
+Total running time 0 s 1013576 ns.
+Total running time 0 s 846288191 ns.
+******************Frame 380
+Total running time 0 s 1015955 ns.
+Total running time 0 s 847304146 ns.
+******************Frame 381
+Total running time 0 s 1026709 ns.
+Total running time 0 s 848330855 ns.
+******************Frame 382
+Total running time 0 s 1018301 ns.
+Total running time 0 s 849349156 ns.
+******************Frame 383
+Total running time 0 s 1043412 ns.
+Total running time 0 s 850392568 ns.
+******************Frame 384
+Total running time 0 s 1024569 ns.
+Total running time 0 s 851417137 ns.
+******************Frame 385
+Total running time 0 s 1021515 ns.
+Total running time 0 s 852438652 ns.
+******************Frame 386
+Total running time 0 s 1022559 ns.
+Total running time 0 s 853461211 ns.
+******************Frame 387
+Total running time 0 s 1035662 ns.
+Total running time 0 s 854496873 ns.
+******************Frame 388
+Total running time 0 s 1022556 ns.
+Total running time 0 s 855519429 ns.
+******************Frame 389
+Total running time 0 s 1015887 ns.
+Total running time 0 s 856535316 ns.
+******************Frame 390
+Total running time 0 s 1040233 ns.
+Total running time 0 s 857575549 ns.
+******************Frame 391
+Total running time 0 s 1021749 ns.
+Total running time 0 s 858597298 ns.
+******************Frame 392
+Total running time 0 s 1022394 ns.
+Total running time 0 s 859619692 ns.
+******************Frame 393
+Total running time 0 s 1028989 ns.
+Total running time 0 s 860648681 ns.
+******************Frame 394
+Total running time 0 s 1021404 ns.
+Total running time 0 s 861670085 ns.
+******************Frame 395
+Total running time 0 s 1039129 ns.
+Total running time 0 s 862709214 ns.
+******************Frame 396
+Total running time 0 s 1032083 ns.
+Total running time 0 s 863741297 ns.
+******************Frame 397
+Total running time 0 s 1022621 ns.
+Total running time 0 s 864763918 ns.
+******************Frame 398
+Total running time 0 s 1039253 ns.
+Total running time 0 s 865803171 ns.
+******************Frame 399
+Total running time 0 s 1016791 ns.
+Total running time 0 s 866819962 ns.
+******************Frame 400
+Total running time 0 s 1023024 ns.
+Total running time 0 s 867842986 ns.
+******************Frame 401
+Total running time 0 s 1040556 ns.
+Total running time 0 s 868883542 ns.
+******************Frame 402
+Total running time 0 s 1032066 ns.
+Total running time 0 s 869915608 ns.
+******************Frame 403
+Total running time 0 s 1017907 ns.
+Total running time 0 s 870933515 ns.
+******************Frame 404
+Total running time 0 s 1020301 ns.
+Total running time 0 s 871953816 ns.
+******************Frame 405
+Total running time 0 s 1011614 ns.
+Total running time 0 s 872965430 ns.
+******************Frame 406
+Total running time 0 s 1027251 ns.
+Total running time 0 s 873992681 ns.
+******************Frame 407
+Total running time 0 s 1021882 ns.
+Total running time 0 s 875014563 ns.
+******************Frame 408
+Total running time 0 s 1020335 ns.
+Total running time 0 s 876034898 ns.
+******************Frame 409
+Total running time 0 s 1021770 ns.
+Total running time 0 s 877056668 ns.
+******************Frame 410
+Total running time 0 s 1023031 ns.
+Total running time 0 s 878079699 ns.
+******************Frame 411
+Total running time 0 s 1030689 ns.
+Total running time 0 s 879110388 ns.
+******************Frame 412
+Total running time 0 s 1020270 ns.
+Total running time 0 s 880130658 ns.
+******************Frame 413
+Total running time 0 s 1023897 ns.
+Total running time 0 s 881154555 ns.
+******************Frame 414
+Total running time 0 s 1029511 ns.
+Total running time 0 s 882184066 ns.
+******************Frame 415
+Total running time 0 s 1024021 ns.
+Total running time 0 s 883208087 ns.
+******************Frame 416
+Total running time 0 s 1034096 ns.
+Total running time 0 s 884242183 ns.
+******************Frame 417
+Total running time 0 s 1034195 ns.
+Total running time 0 s 885276378 ns.
+******************Frame 418
+Total running time 0 s 1021698 ns.
+Total running time 0 s 886298076 ns.
+******************Frame 419
+Total running time 0 s 1038025 ns.
+Total running time 0 s 887336101 ns.
+******************Frame 420
+Total running time 0 s 1033269 ns.
+Total running time 0 s 888369370 ns.
+******************Frame 421
+Total running time 0 s 1023204 ns.
+Total running time 0 s 889392574 ns.
+******************Frame 422
+Total running time 0 s 1037835 ns.
+Total running time 0 s 890430409 ns.
+******************Frame 423
+Total running time 0 s 1019896 ns.
+Total running time 0 s 891450305 ns.
+******************Frame 424
+Total running time 0 s 1033947 ns.
+Total running time 0 s 892484252 ns.
+******************Frame 425
+Total running time 0 s 1037873 ns.
+Total running time 0 s 893522125 ns.
+******************Frame 426
+Total running time 0 s 1021008 ns.
+Total running time 0 s 894543133 ns.
+******************Frame 427
+Total running time 0 s 1021188 ns.
+Total running time 0 s 895564321 ns.
+******************Frame 428
+Total running time 0 s 1037579 ns.
+Total running time 0 s 896601900 ns.
+******************Frame 429
+Total running time 0 s 1033164 ns.
+Total running time 0 s 897635064 ns.
+******************Frame 430
+Total running time 0 s 1022680 ns.
+Total running time 0 s 898657744 ns.
+******************Frame 431
+Total running time 0 s 1037396 ns.
+Total running time 0 s 899695140 ns.
+******************Frame 432
+Total running time 0 s 1020673 ns.
+Total running time 0 s 900715813 ns.
+******************Frame 433
+Total running time 0 s 1022120 ns.
+Total running time 0 s 901737933 ns.
+******************Frame 434
+Total running time 0 s 1036788 ns.
+Total running time 0 s 902774721 ns.
+******************Frame 435
+Total running time 0 s 1042350 ns.
+Total running time 0 s 903817071 ns.
+******************Frame 436
+Total running time 0 s 1056019 ns.
+Total running time 0 s 904873090 ns.
+******************Frame 437
+Total running time 0 s 1042716 ns.
+Total running time 0 s 905915806 ns.
+******************Frame 438
+Total running time 0 s 1032883 ns.
+Total running time 0 s 906948689 ns.
+******************Frame 439
+Total running time 0 s 1020118 ns.
+Total running time 0 s 907968807 ns.
+******************Frame 440
+Total running time 0 s 1025227 ns.
+Total running time 0 s 908994034 ns.
+******************Frame 441
+Total running time 0 s 1039237 ns.
+Total running time 0 s 910033271 ns.
+******************Frame 442
+Total running time 0 s 1029247 ns.
+Total running time 0 s 911062518 ns.
+******************Frame 443
+Total running time 0 s 1033656 ns.
+Total running time 0 s 912096174 ns.
+******************Frame 444
+Total running time 0 s 1028495 ns.
+Total running time 0 s 913124669 ns.
+******************Frame 445
+Total running time 0 s 1028727 ns.
+Total running time 0 s 914153396 ns.
+******************Frame 446
+Total running time 0 s 1037314 ns.
+Total running time 0 s 915190710 ns.
+******************Frame 447
+Total running time 0 s 1015464 ns.
+Total running time 0 s 916206174 ns.
+******************Frame 448
+Total running time 0 s 1032660 ns.
+Total running time 0 s 917238834 ns.
+******************Frame 449
+Total running time 0 s 1034364 ns.
+Total running time 0 s 918273198 ns.
+******************Frame 450
+Total running time 0 s 1034028 ns.
+Total running time 0 s 919307226 ns.
+******************Frame 451
+Total running time 0 s 1020644 ns.
+Total running time 0 s 920327870 ns.
+******************Frame 452
+Total running time 0 s 1037793 ns.
+Total running time 0 s 921365663 ns.
+******************Frame 453
+Total running time 0 s 1020607 ns.
+Total running time 0 s 922386270 ns.
+******************Frame 454
+Total running time 0 s 1018864 ns.
+Total running time 0 s 923405134 ns.
+******************Frame 455
+Total running time 0 s 1035080 ns.
+Total running time 0 s 924440214 ns.
+******************Frame 456
+Total running time 0 s 1024637 ns.
+Total running time 0 s 925464851 ns.
+******************Frame 457
+Total running time 0 s 1023361 ns.
+Total running time 0 s 926488212 ns.
+******************Frame 458
+Total running time 0 s 1017644 ns.
+Total running time 0 s 927505856 ns.
+******************Frame 459
+Total running time 0 s 1021055 ns.
+Total running time 0 s 928526911 ns.
+******************Frame 460
+Total running time 0 s 1009089 ns.
+Total running time 0 s 929536000 ns.
+******************Frame 461
+Total running time 0 s 1010030 ns.
+Total running time 0 s 930546030 ns.
+******************Frame 462
+Total running time 0 s 1039669 ns.
+Total running time 0 s 931585699 ns.
+******************Frame 463
+Total running time 0 s 1018520 ns.
+Total running time 0 s 932604219 ns.
+******************Frame 464
+Total running time 0 s 1018635 ns.
+Total running time 0 s 933622854 ns.
+******************Frame 465
+Total running time 0 s 1020231 ns.
+Total running time 0 s 934643085 ns.
+******************Frame 466
+Total running time 0 s 1033666 ns.
+Total running time 0 s 935676751 ns.
+******************Frame 467
+Total running time 0 s 1021519 ns.
+Total running time 0 s 936698270 ns.
+******************Frame 468
+Total running time 0 s 1028804 ns.
+Total running time 0 s 937727074 ns.
+******************Frame 469
+Total running time 0 s 1030094 ns.
+Total running time 0 s 938757168 ns.
+******************Frame 470
+Total running time 0 s 1022552 ns.
+Total running time 0 s 939779720 ns.
+******************Frame 471
+Total running time 0 s 1035186 ns.
+Total running time 0 s 940814906 ns.
+******************Frame 472
+Total running time 0 s 1020171 ns.
+Total running time 0 s 941835077 ns.
+******************Frame 473
+Total running time 0 s 1029370 ns.
+Total running time 0 s 942864447 ns.
+******************Frame 474
+Total running time 0 s 1030297 ns.
+Total running time 0 s 943894744 ns.
+******************Frame 475
+Total running time 0 s 1017597 ns.
+Total running time 0 s 944912341 ns.
+******************Frame 476
+Total running time 0 s 1022124 ns.
+Total running time 0 s 945934465 ns.
+******************Frame 477
+Total running time 0 s 1046565 ns.
+Total running time 0 s 946981030 ns.
+******************Frame 478
+Total running time 0 s 1032948 ns.
+Total running time 0 s 948013978 ns.
+******************Frame 479
+Total running time 0 s 1033693 ns.
+Total running time 0 s 949047671 ns.
+******************Frame 480
+Total running time 0 s 1044374 ns.
+Total running time 0 s 950092045 ns.
+******************Frame 481
+Total running time 0 s 1024612 ns.
+Total running time 0 s 951116657 ns.
+******************Frame 482
+Total running time 0 s 1020640 ns.
+Total running time 0 s 952137297 ns.
+******************Frame 483
+Total running time 0 s 1034379 ns.
+Total running time 0 s 953171676 ns.
+******************Frame 484
+Total running time 0 s 1008704 ns.
+Total running time 0 s 954180380 ns.
+******************Frame 485
+Total running time 0 s 1013254 ns.
+Total running time 0 s 955193634 ns.
+******************Frame 486
+Total running time 0 s 1037608 ns.
+Total running time 0 s 956231242 ns.
+******************Frame 487
+Total running time 0 s 1030161 ns.
+Total running time 0 s 957261403 ns.
+******************Frame 488
+Total running time 0 s 1053880 ns.
+Total running time 0 s 958315283 ns.
+******************Frame 489
+Total running time 0 s 1041790 ns.
+Total running time 0 s 959357073 ns.
+******************Frame 490
+Total running time 0 s 1020030 ns.
+Total running time 0 s 960377103 ns.
+******************Frame 491
+Total running time 0 s 1017192 ns.
+Total running time 0 s 961394295 ns.
+******************Frame 492
+Total running time 0 s 1037517 ns.
+Total running time 0 s 962431812 ns.
+******************Frame 493
+Total running time 0 s 1031525 ns.
+Total running time 0 s 963463337 ns.
+******************Frame 494
+Total running time 0 s 1026460 ns.
+Total running time 0 s 964489797 ns.
+******************Frame 495
+Total running time 0 s 1028400 ns.
+Total running time 0 s 965518197 ns.
+******************Frame 496
+Total running time 0 s 1023192 ns.
+Total running time 0 s 966541389 ns.
+******************Frame 497
+Total running time 0 s 1019959 ns.
+Total running time 0 s 967561348 ns.
+******************Frame 498
+Total running time 0 s 1026298 ns.
+Total running time 0 s 968587646 ns.
+******************Frame 499
+Total running time 0 s 1030118 ns.
+Total running time 0 s 969617764 ns.
+******************Frame 500
+Total running time 0 s 1024450 ns.
+Total running time 0 s 970642214 ns.
+******************Frame 501
+Total running time 0 s 1038778 ns.
+Total running time 0 s 971680992 ns.
+******************Frame 502
+Total running time 0 s 1020511 ns.
+Total running time 0 s 972701503 ns.
+******************Frame 503
+Total running time 0 s 1025850 ns.
+Total running time 0 s 973727353 ns.
+******************Frame 504
+Total running time 0 s 1025227 ns.
+Total running time 0 s 974752580 ns.
+******************Frame 505
+Total running time 0 s 1027963 ns.
+Total running time 0 s 975780543 ns.
+******************Frame 506
+Total running time 0 s 1017291 ns.
+Total running time 0 s 976797834 ns.
+******************Frame 507
+Total running time 0 s 1035265 ns.
+Total running time 0 s 977833099 ns.
+******************Frame 508
+Total running time 0 s 1031129 ns.
+Total running time 0 s 978864228 ns.
+******************Frame 509
+Total running time 0 s 1026037 ns.
+Total running time 0 s 979890265 ns.
+******************Frame 510
+Total running time 0 s 1034697 ns.
+Total running time 0 s 980924962 ns.
+******************Frame 511
+Total running time 0 s 1025629 ns.
+Total running time 0 s 981950591 ns.
+******************Frame 512
+Total running time 0 s 1028372 ns.
+Total running time 0 s 982978963 ns.
+******************Frame 513
+Total running time 0 s 1036791 ns.
+Total running time 0 s 984015754 ns.
+******************Frame 514
+Total running time 0 s 1040989 ns.
+Total running time 0 s 985056743 ns.
+******************Frame 515
+Total running time 0 s 1031545 ns.
+Total running time 0 s 986088288 ns.
+******************Frame 516
+Total running time 0 s 1038947 ns.
+Total running time 0 s 987127235 ns.
+******************Frame 517
+Total running time 0 s 1035330 ns.
+Total running time 0 s 988162565 ns.
+******************Frame 518
+Total running time 0 s 1019583 ns.
+Total running time 0 s 989182148 ns.
+******************Frame 519
+Total running time 0 s 1037225 ns.
+Total running time 0 s 990219373 ns.
+******************Frame 520
+Total running time 0 s 1035637 ns.
+Total running time 0 s 991255010 ns.
+******************Frame 521
+Total running time 0 s 1022244 ns.
+Total running time 0 s 992277254 ns.
+******************Frame 522
+Total running time 0 s 1037873 ns.
+Total running time 0 s 993315127 ns.
+******************Frame 523
+Total running time 0 s 1021909 ns.
+Total running time 0 s 994337036 ns.
+******************Frame 524
+Total running time 0 s 1023591 ns.
+Total running time 0 s 995360627 ns.
+******************Frame 525
+Total running time 0 s 1025555 ns.
+Total running time 0 s 996386182 ns.
+******************Frame 526
+Total running time 0 s 1030744 ns.
+Total running time 0 s 997416926 ns.
+******************Frame 527
+Total running time 0 s 1024536 ns.
+Total running time 0 s 998441462 ns.
+******************Frame 528
+Total running time 0 s 1025706 ns.
+Total running time 0 s 999467168 ns.
+******************Frame 529
+Total running time 0 s 1030015 ns.
+Total running time 1 s 497183 ns.
+******************Frame 530
+Total running time 0 s 1023924 ns.
+Total running time 1 s 1521107 ns.
+******************Frame 531
+Total running time 0 s 1021814 ns.
+Total running time 1 s 2542921 ns.
+******************Frame 532
+Total running time 0 s 1033997 ns.
+Total running time 1 s 3576918 ns.
+******************Frame 533
+Total running time 0 s 1024234 ns.
+Total running time 1 s 4601152 ns.
+******************Frame 534
+Total running time 0 s 1017671 ns.
+Total running time 1 s 5618823 ns.
+******************Frame 535
+Total running time 0 s 1040752 ns.
+Total running time 1 s 6659575 ns.
+******************Frame 536
+Total running time 0 s 1018290 ns.
+Total running time 1 s 7677865 ns.
+******************Frame 537
+Total running time 0 s 1015655 ns.
+Total running time 1 s 8693520 ns.
+******************Frame 538
+Total running time 0 s 1025900 ns.
+Total running time 1 s 9719420 ns.
+******************Frame 539
+Total running time 0 s 1035965 ns.
+Total running time 1 s 10755385 ns.
+******************Frame 540
+Total running time 0 s 1051958 ns.
+Total running time 1 s 11807343 ns.
+******************Frame 541
+Total running time 0 s 1029644 ns.
+Total running time 1 s 12836987 ns.
+******************Frame 542
+Total running time 0 s 1029548 ns.
+Total running time 1 s 13866535 ns.
+******************Frame 543
+Total running time 0 s 1023787 ns.
+Total running time 1 s 14890322 ns.
+******************Frame 544
+Total running time 0 s 1035154 ns.
+Total running time 1 s 15925476 ns.
+******************Frame 545
+Total running time 0 s 1028801 ns.
+Total running time 1 s 16954277 ns.
+******************Frame 546
+Total running time 0 s 1026525 ns.
+Total running time 1 s 17980802 ns.
+******************Frame 547
+Total running time 0 s 1027617 ns.
+Total running time 1 s 19008419 ns.
+******************Frame 548
+Total running time 0 s 1027649 ns.
+Total running time 1 s 20036068 ns.
+******************Frame 549
+Total running time 0 s 1028250 ns.
+Total running time 1 s 21064318 ns.
+******************Frame 550
+Total running time 0 s 1041767 ns.
+Total running time 1 s 22106085 ns.
+******************Frame 551
+Total running time 0 s 1031700 ns.
+Total running time 1 s 23137785 ns.
+******************Frame 552
+Total running time 0 s 1026803 ns.
+Total running time 1 s 24164588 ns.
+******************Frame 553
+Total running time 0 s 1027521 ns.
+Total running time 1 s 25192109 ns.
+******************Frame 554
+Total running time 0 s 1032672 ns.
+Total running time 1 s 26224781 ns.
+******************Frame 555
+Total running time 0 s 1027696 ns.
+Total running time 1 s 27252477 ns.
+******************Frame 556
+Total running time 0 s 1040008 ns.
+Total running time 1 s 28292485 ns.
+******************Frame 557
+Total running time 0 s 1026996 ns.
+Total running time 1 s 29319481 ns.
+******************Frame 558
+Total running time 0 s 1031591 ns.
+Total running time 1 s 30351072 ns.
+******************Frame 559
+Total running time 0 s 1039002 ns.
+Total running time 1 s 31390074 ns.
+******************Frame 560
+Total running time 0 s 1033502 ns.
+Total running time 1 s 32423576 ns.
+******************Frame 561
+Total running time 0 s 1031858 ns.
+Total running time 1 s 33455434 ns.
+******************Frame 562
+Total running time 0 s 1041100 ns.
+Total running time 1 s 34496534 ns.
+******************Frame 563
+Total running time 0 s 1024305 ns.
+Total running time 1 s 35520839 ns.
+******************Frame 564
+Total running time 0 s 1028933 ns.
+Total running time 1 s 36549772 ns.
+******************Frame 565
+Total running time 0 s 1035011 ns.
+Total running time 1 s 37584783 ns.
+******************Frame 566
+Total running time 0 s 1029433 ns.
+Total running time 1 s 38614216 ns.
+******************Frame 567
+Total running time 0 s 1039290 ns.
+Total running time 1 s 39653506 ns.
+******************Frame 568
+Total running time 0 s 1033382 ns.
+Total running time 1 s 40686888 ns.
+******************Frame 569
+Total running time 0 s 1032317 ns.
+Total running time 1 s 41719205 ns.
+******************Frame 570
+Total running time 0 s 1051933 ns.
+Total running time 1 s 42771138 ns.
+******************Frame 571
+Total running time 0 s 1039412 ns.
+Total running time 1 s 43810550 ns.
+******************Frame 572
+Total running time 0 s 1022196 ns.
+Total running time 1 s 44832746 ns.
+******************Frame 573
+Total running time 0 s 1030753 ns.
+Total running time 1 s 45863499 ns.
+******************Frame 574
+Total running time 0 s 1037748 ns.
+Total running time 1 s 46901247 ns.
+******************Frame 575
+Total running time 0 s 1026059 ns.
+Total running time 1 s 47927306 ns.
+******************Frame 576
+Total running time 0 s 1020109 ns.
+Total running time 1 s 48947415 ns.
+******************Frame 577
+Total running time 0 s 1035392 ns.
+Total running time 1 s 49982807 ns.
+******************Frame 578
+Total running time 0 s 1019226 ns.
+Total running time 1 s 51002033 ns.
+******************Frame 579
+Total running time 0 s 1032822 ns.
+Total running time 1 s 52034855 ns.
+******************Frame 580
+Total running time 0 s 1044295 ns.
+Total running time 1 s 53079150 ns.
+******************Frame 581
+Total running time 0 s 1025312 ns.
+Total running time 1 s 54104462 ns.
+******************Frame 582
+Total running time 0 s 1033302 ns.
+Total running time 1 s 55137764 ns.
+******************Frame 583
+Total running time 0 s 1025254 ns.
+Total running time 1 s 56163018 ns.
+******************Frame 584
+Total running time 0 s 1037217 ns.
+Total running time 1 s 57200235 ns.
+******************Frame 585
+Total running time 0 s 1030864 ns.
+Total running time 1 s 58231099 ns.
+******************Frame 586
+Total running time 0 s 1038692 ns.
+Total running time 1 s 59269791 ns.
+******************Frame 587
+Total running time 0 s 1032923 ns.
+Total running time 1 s 60302714 ns.
+******************Frame 588
+Total running time 0 s 1021536 ns.
+Total running time 1 s 61324250 ns.
+******************Frame 589
+Total running time 0 s 1029791 ns.
+Total running time 1 s 62354041 ns.
+******************Frame 590
+Total running time 0 s 1030219 ns.
+Total running time 1 s 63384260 ns.
+******************Frame 591
+Total running time 0 s 1025692 ns.
+Total running time 1 s 64409952 ns.
+******************Frame 592
+Total running time 0 s 1038252 ns.
+Total running time 1 s 65448204 ns.
+******************Frame 593
+Total running time 0 s 1021950 ns.
+Total running time 1 s 66470154 ns.
+******************Frame 594
+Total running time 0 s 1042604 ns.
+Total running time 1 s 67512758 ns.
+******************Frame 595
+Total running time 0 s 1030689 ns.
+Total running time 1 s 68543447 ns.
+******************Frame 596
+Total running time 0 s 1033360 ns.
+Total running time 1 s 69576807 ns.
+******************Frame 597
+Total running time 0 s 1024465 ns.
+Total running time 1 s 70601272 ns.
+******************Frame 598
+Total running time 0 s 1026772 ns.
+Total running time 1 s 71628044 ns.
+******************Frame 599
+Total running time 0 s 1021354 ns.
+Total running time 1 s 72649398 ns.
+******************Frame 600
+Total running time 0 s 1026949 ns.
+Total running time 1 s 73676347 ns.
+******************Frame 601
+Total running time 0 s 1029980 ns.
+Total running time 1 s 74706327 ns.
+******************Frame 602
+Total running time 0 s 1030502 ns.
+Total running time 1 s 75736829 ns.
+******************Frame 603
+Total running time 0 s 1025023 ns.
+Total running time 1 s 76761852 ns.
+******************Frame 604
+Total running time 0 s 1027839 ns.
+Total running time 1 s 77789691 ns.
+******************Frame 605
+Total running time 0 s 1034137 ns.
+Total running time 1 s 78823828 ns.
+******************Frame 606
+Total running time 0 s 1022000 ns.
+Total running time 1 s 79845828 ns.
+******************Frame 607
+Total running time 0 s 1032875 ns.
+Total running time 1 s 80878703 ns.
+******************Frame 608
+Total running time 0 s 1034172 ns.
+Total running time 1 s 81912875 ns.
+******************Frame 609
+Total running time 0 s 1024826 ns.
+Total running time 1 s 82937701 ns.
+******************Frame 610
+Total running time 0 s 1042509 ns.
+Total running time 1 s 83980210 ns.
+******************Frame 611
+Total running time 0 s 1039511 ns.
+Total running time 1 s 85019721 ns.
+******************Frame 612
+Total running time 0 s 1025729 ns.
+Total running time 1 s 86045450 ns.
+******************Frame 613
+Total running time 0 s 1019071 ns.
+Total running time 1 s 87064521 ns.
+******************Frame 614
+Total running time 0 s 1025275 ns.
+Total running time 1 s 88089796 ns.
+******************Frame 615
+Total running time 0 s 1031781 ns.
+Total running time 1 s 89121577 ns.
+******************Frame 616
+Total running time 0 s 1021457 ns.
+Total running time 1 s 90143034 ns.
+******************Frame 617
+Total running time 0 s 1024268 ns.
+Total running time 1 s 91167302 ns.
+******************Frame 618
+Total running time 0 s 1016047 ns.
+Total running time 1 s 92183349 ns.
+******************Frame 619
+Total running time 0 s 1030706 ns.
+Total running time 1 s 93214055 ns.
+******************Frame 620
+Total running time 0 s 1033235 ns.
+Total running time 1 s 94247290 ns.
+******************Frame 621
+Total running time 0 s 1035501 ns.
+Total running time 1 s 95282791 ns.
+******************Frame 622
+Total running time 0 s 1032200 ns.
+Total running time 1 s 96314991 ns.
+******************Frame 623
+Total running time 0 s 1037451 ns.
+Total running time 1 s 97352442 ns.
+******************Frame 624
+Total running time 0 s 1029183 ns.
+Total running time 1 s 98381625 ns.
+******************Frame 625
+Total running time 0 s 1023759 ns.
+Total running time 1 s 99405384 ns.
+******************Frame 626
+Total running time 0 s 1038071 ns.
+Total running time 1 s 100443455 ns.
+******************Frame 627
+Total running time 0 s 1035257 ns.
+Total running time 1 s 101478712 ns.
+******************Frame 628
+Total running time 0 s 1021853 ns.
+Total running time 1 s 102500565 ns.
+******************Frame 629
+Total running time 0 s 1024122 ns.
+Total running time 1 s 103524687 ns.
+******************Frame 630
+Total running time 0 s 1033341 ns.
+Total running time 1 s 104558028 ns.
+******************Frame 631
+Total running time 0 s 1024036 ns.
+Total running time 1 s 105582064 ns.
+******************Frame 632
+Total running time 0 s 1038159 ns.
+Total running time 1 s 106620223 ns.
+******************Frame 633
+Total running time 0 s 1018252 ns.
+Total running time 1 s 107638475 ns.
+******************Frame 634
+Total running time 0 s 1034866 ns.
+Total running time 1 s 108673341 ns.
+******************Frame 635
+Total running time 0 s 1028929 ns.
+Total running time 1 s 109702270 ns.
+******************Frame 636
+Total running time 0 s 1030068 ns.
+Total running time 1 s 110732338 ns.
+******************Frame 637
+Total running time 0 s 1026516 ns.
+Total running time 1 s 111758854 ns.
+******************Frame 638
+Total running time 0 s 1035741 ns.
+Total running time 1 s 112794595 ns.
+******************Frame 639
+Total running time 0 s 1017667 ns.
+Total running time 1 s 113812262 ns.
+******************Frame 640
+Total running time 0 s 1016396 ns.
+Total running time 1 s 114828658 ns.
+******************Frame 641
+Total running time 0 s 1037920 ns.
+Total running time 1 s 115866578 ns.
+******************Frame 642
+Total running time 0 s 1021119 ns.
+Total running time 1 s 116887697 ns.
+******************Frame 643
+Total running time 0 s 1021326 ns.
+Total running time 1 s 117909023 ns.
+******************Frame 644
+Total running time 0 s 1025104 ns.
+Total running time 1 s 118934127 ns.
+******************Frame 645
+Total running time 0 s 1029963 ns.
+Total running time 1 s 119964090 ns.
+******************Frame 646
+Total running time 0 s 1029872 ns.
+Total running time 1 s 120993962 ns.
+******************Frame 647
+Total running time 0 s 1027987 ns.
+Total running time 1 s 122021949 ns.
+******************Frame 648
+Total running time 0 s 1031601 ns.
+Total running time 1 s 123053550 ns.
+******************Frame 649
+Total running time 0 s 1025421 ns.
+Total running time 1 s 124078971 ns.
+******************Frame 650
+Total running time 0 s 1028547 ns.
+Total running time 1 s 125107518 ns.
+******************Frame 651
+Total running time 0 s 1039842 ns.
+Total running time 1 s 126147360 ns.
+******************Frame 652
+Total running time 0 s 1024959 ns.
+Total running time 1 s 127172319 ns.
+******************Frame 653
+Total running time 0 s 1028519 ns.
+Total running time 1 s 128200838 ns.
+******************Frame 654
+Total running time 0 s 1027888 ns.
+Total running time 1 s 129228726 ns.
+******************Frame 655
+Total running time 0 s 1033293 ns.
+Total running time 1 s 130262019 ns.
+******************Frame 656
+Total running time 0 s 1046920 ns.
+Total running time 1 s 131308939 ns.
+******************Frame 657
+Total running time 0 s 1034408 ns.
+Total running time 1 s 132343347 ns.
+******************Frame 658
+Total running time 0 s 1031383 ns.
+Total running time 1 s 133374730 ns.
+******************Frame 659
+Total running time 0 s 1048342 ns.
+Total running time 1 s 134423072 ns.
+******************Frame 660
+Total running time 0 s 1019891 ns.
+Total running time 1 s 135442963 ns.
+******************Frame 661
+Total running time 0 s 1021967 ns.
+Total running time 1 s 136464930 ns.
+******************Frame 662
+Total running time 0 s 1022717 ns.
+Total running time 1 s 137487647 ns.
+******************Frame 663
+Total running time 0 s 1029889 ns.
+Total running time 1 s 138517536 ns.
+******************Frame 664
+Total running time 0 s 1027220 ns.
+Total running time 1 s 139544756 ns.
+******************Frame 665
+Total running time 0 s 1040810 ns.
+Total running time 1 s 140585566 ns.
+******************Frame 666
+Total running time 0 s 1025209 ns.
+Total running time 1 s 141610775 ns.
+******************Frame 667
+Total running time 0 s 1018798 ns.
+Total running time 1 s 142629573 ns.
+******************Frame 668
+Total running time 0 s 1036801 ns.
+Total running time 1 s 143666374 ns.
+******************Frame 669
+Total running time 0 s 1022930 ns.
+Total running time 1 s 144689304 ns.
+******************Frame 670
+Total running time 0 s 1021334 ns.
+Total running time 1 s 145710638 ns.
+******************Frame 671
+Total running time 0 s 1039699 ns.
+Total running time 1 s 146750337 ns.
+******************Frame 672
+Total running time 0 s 1016749 ns.
+Total running time 1 s 147767086 ns.
+******************Frame 673
+Total running time 0 s 1023170 ns.
+Total running time 1 s 148790256 ns.
+******************Frame 674
+Total running time 0 s 1029144 ns.
+Total running time 1 s 149819400 ns.
+******************Frame 675
+Total running time 0 s 1030166 ns.
+Total running time 1 s 150849566 ns.
+******************Frame 676
+Total running time 0 s 1024594 ns.
+Total running time 1 s 151874160 ns.
+******************Frame 677
+Total running time 0 s 1029573 ns.
+Total running time 1 s 152903733 ns.
+******************Frame 678
+Total running time 0 s 1028749 ns.
+Total running time 1 s 153932482 ns.
+******************Frame 679
+Total running time 0 s 1022582 ns.
+Total running time 1 s 154955064 ns.
+******************Frame 680
+Total running time 0 s 1029048 ns.
+Total running time 1 s 155984112 ns.
+******************Frame 681
+Total running time 0 s 1035577 ns.
+Total running time 1 s 157019689 ns.
+******************Frame 682
+Total running time 0 s 1025410 ns.
+Total running time 1 s 158045099 ns.
+******************Frame 683
+Total running time 0 s 1018849 ns.
+Total running time 1 s 159063948 ns.
+******************Frame 684
+Total running time 0 s 1023303 ns.
+Total running time 1 s 160087251 ns.
+******************Frame 685
+Total running time 0 s 1032370 ns.
+Total running time 1 s 161119621 ns.
+******************Frame 686
+Total running time 0 s 1026606 ns.
+Total running time 1 s 162146227 ns.
+******************Frame 687
+Total running time 0 s 1036254 ns.
+Total running time 1 s 163182481 ns.
+******************Frame 688
+Total running time 0 s 1022864 ns.
+Total running time 1 s 164205345 ns.
+******************Frame 689
+Total running time 0 s 1016873 ns.
+Total running time 1 s 165222218 ns.
+******************Frame 690
+Total running time 0 s 1052462 ns.
+Total running time 1 s 166274680 ns.
+******************Frame 691
+Total running time 0 s 1025453 ns.
+Total running time 1 s 167300133 ns.
+******************Frame 692
+Total running time 0 s 1019447 ns.
+Total running time 1 s 168319580 ns.
+******************Frame 693
+Total running time 0 s 1031653 ns.
+Total running time 1 s 169351233 ns.
+******************Frame 694
+Total running time 0 s 1043366 ns.
+Total running time 1 s 170394599 ns.
+******************Frame 695
+Total running time 0 s 1023884 ns.
+Total running time 1 s 171418483 ns.
+******************Frame 696
+Total running time 0 s 1034499 ns.
+Total running time 1 s 172452982 ns.
+******************Frame 697
+Total running time 0 s 1030683 ns.
+Total running time 1 s 173483665 ns.
+******************Frame 698
+Total running time 0 s 1036540 ns.
+Total running time 1 s 174520205 ns.
+******************Frame 699
+Total running time 0 s 1038224 ns.
+Total running time 1 s 175558429 ns.
+******************Frame 700
+Total running time 0 s 1020040 ns.
+Total running time 1 s 176578469 ns.
+******************Frame 701
+Total running time 0 s 1034299 ns.
+Total running time 1 s 177612768 ns.
+******************Frame 702
+Total running time 0 s 1032540 ns.
+Total running time 1 s 178645308 ns.
+******************Frame 703
+Total running time 0 s 1016158 ns.
+Total running time 1 s 179661466 ns.
+******************Frame 704
+Total running time 0 s 1017254 ns.
+Total running time 1 s 180678720 ns.
+******************Frame 705
+Total running time 0 s 1019591 ns.
+Total running time 1 s 181698311 ns.
+******************Frame 706
+Total running time 0 s 1034626 ns.
+Total running time 1 s 182732937 ns.
+******************Frame 707
+Total running time 0 s 1020986 ns.
+Total running time 1 s 183753923 ns.
+******************Frame 708
+Total running time 0 s 1023497 ns.
+Total running time 1 s 184777420 ns.
+******************Frame 709
+Total running time 0 s 1027203 ns.
+Total running time 1 s 185804623 ns.
+******************Frame 710
+Total running time 0 s 1022875 ns.
+Total running time 1 s 186827498 ns.
+******************Frame 711
+Total running time 0 s 1039037 ns.
+Total running time 1 s 187866535 ns.
+******************Frame 712
+Total running time 0 s 1015980 ns.
+Total running time 1 s 188882515 ns.
+******************Frame 713
+Total running time 0 s 1014428 ns.
+Total running time 1 s 189896943 ns.
+******************Frame 714
+Total running time 0 s 1033560 ns.
+Total running time 1 s 190930503 ns.
+******************Frame 715
+Total running time 0 s 1021082 ns.
+Total running time 1 s 191951585 ns.
+******************Frame 716
+Total running time 0 s 1020354 ns.
+Total running time 1 s 192971939 ns.
+******************Frame 717
+Total running time 0 s 1044108 ns.
+Total running time 1 s 194016047 ns.
+******************Frame 718
+Total running time 0 s 1014552 ns.
+Total running time 1 s 195030599 ns.
+******************Frame 719
+Total running time 0 s 1015103 ns.
+Total running time 1 s 196045702 ns.
+******************Frame 720
+Total running time 0 s 1032687 ns.
+Total running time 1 s 197078389 ns.
+******************Frame 721
+Total running time 0 s 1017254 ns.
+Total running time 1 s 198095643 ns.
+******************Frame 722
+Total running time 0 s 1026181 ns.
+Total running time 1 s 199121824 ns.
+******************Frame 723
+Total running time 0 s 1017558 ns.
+Total running time 1 s 200139382 ns.
+******************Frame 724
+Total running time 0 s 1034871 ns.
+Total running time 1 s 201174253 ns.
+******************Frame 725
+Total running time 0 s 1024108 ns.
+Total running time 1 s 202198361 ns.
+******************Frame 726
+Total running time 0 s 1035352 ns.
+Total running time 1 s 203233713 ns.
+******************Frame 727
+Total running time 0 s 1043522 ns.
+Total running time 1 s 204277235 ns.
+******************Frame 728
+Total running time 0 s 1030917 ns.
+Total running time 1 s 205308152 ns.
+******************Frame 729
+Total running time 0 s 1045141 ns.
+Total running time 1 s 206353293 ns.
+******************Frame 730
+Total running time 0 s 1029191 ns.
+Total running time 1 s 207382484 ns.
+******************Frame 731
+Total running time 0 s 1018404 ns.
+Total running time 1 s 208400888 ns.
+******************Frame 732
+Total running time 0 s 1038707 ns.
+Total running time 1 s 209439595 ns.
+******************Frame 733
+Total running time 0 s 1019195 ns.
+Total running time 1 s 210458790 ns.
+******************Frame 734
+Total running time 0 s 1030092 ns.
+Total running time 1 s 211488882 ns.
+******************Frame 735
+Total running time 0 s 1021177 ns.
+Total running time 1 s 212510059 ns.
+******************Frame 736
+Total running time 0 s 1028759 ns.
+Total running time 1 s 213538818 ns.
+******************Frame 737
+Total running time 0 s 1026689 ns.
+Total running time 1 s 214565507 ns.
+******************Frame 738
+Total running time 0 s 1022308 ns.
+Total running time 1 s 215587815 ns.
+******************Frame 739
+Total running time 0 s 1031664 ns.
+Total running time 1 s 216619479 ns.
+******************Frame 740
+Total running time 0 s 1026983 ns.
+Total running time 1 s 217646462 ns.
+******************Frame 741
+Total running time 0 s 1038104 ns.
+Total running time 1 s 218684566 ns.
+******************Frame 742
+Total running time 0 s 1022169 ns.
+Total running time 1 s 219706735 ns.
+******************Frame 743
+Total running time 0 s 1023781 ns.
+Total running time 1 s 220730516 ns.
+******************Frame 744
+Total running time 0 s 1035925 ns.
+Total running time 1 s 221766441 ns.
+******************Frame 745
+Total running time 0 s 1032419 ns.
+Total running time 1 s 222798860 ns.
+******************Frame 746
+Total running time 0 s 1036515 ns.
+Total running time 1 s 223835375 ns.
+******************Frame 747
+Total running time 0 s 1037798 ns.
+Total running time 1 s 224873173 ns.
+******************Frame 748
+Total running time 0 s 1031737 ns.
+Total running time 1 s 225904910 ns.
+******************Frame 749
+Total running time 0 s 1029284 ns.
+Total running time 1 s 226934194 ns.
+******************Frame 750
+Total running time 0 s 1036914 ns.
+Total running time 1 s 227971108 ns.
+******************Frame 751
+Total running time 0 s 1032987 ns.
+Total running time 1 s 229004095 ns.
+******************Frame 752
+Total running time 0 s 1026451 ns.
+Total running time 1 s 230030546 ns.
+******************Frame 753
+Total running time 0 s 1038338 ns.
+Total running time 1 s 231068884 ns.
+******************Frame 754
+Total running time 0 s 1034187 ns.
+Total running time 1 s 232103071 ns.
+******************Frame 755
+Total running time 0 s 1027486 ns.
+Total running time 1 s 233130557 ns.
+******************Frame 756
+Total running time 0 s 1039809 ns.
+Total running time 1 s 234170366 ns.
+******************Frame 757
+Total running time 0 s 1030961 ns.
+Total running time 1 s 235201327 ns.
+******************Frame 758
+Total running time 0 s 1041085 ns.
+Total running time 1 s 236242412 ns.
+******************Frame 759
+Total running time 0 s 1027458 ns.
+Total running time 1 s 237269870 ns.
+******************Frame 760
+Total running time 0 s 1034078 ns.
+Total running time 1 s 238303948 ns.
+******************Frame 761
+Total running time 0 s 1032573 ns.
+Total running time 1 s 239336521 ns.
+******************Frame 762
+Total running time 0 s 1038903 ns.
+Total running time 1 s 240375424 ns.
+******************Frame 763
+Total running time 0 s 1034794 ns.
+Total running time 1 s 241410218 ns.
+******************Frame 764
+Total running time 0 s 1038368 ns.
+Total running time 1 s 242448586 ns.
+******************Frame 765
+Total running time 0 s 1038975 ns.
+Total running time 1 s 243487561 ns.
+******************Frame 766
+Total running time 0 s 1035458 ns.
+Total running time 1 s 244523019 ns.
+******************Frame 767
+Total running time 0 s 1020990 ns.
+Total running time 1 s 245544009 ns.
+******************Frame 768
+Total running time 0 s 1024889 ns.
+Total running time 1 s 246568898 ns.
+******************Frame 769
+Total running time 0 s 1037068 ns.
+Total running time 1 s 247605966 ns.
+******************Frame 770
+Total running time 0 s 1028136 ns.
+Total running time 1 s 248634102 ns.
+******************Frame 771
+Total running time 0 s 1018896 ns.
+Total running time 1 s 249652998 ns.
+******************Frame 772
+Total running time 0 s 1051773 ns.
+Total running time 1 s 250704771 ns.
+******************Frame 773
+Total running time 0 s 1028059 ns.
+Total running time 1 s 251732830 ns.
+******************Frame 774
+Total running time 0 s 1028306 ns.
+Total running time 1 s 252761136 ns.
+******************Frame 775
+Total running time 0 s 1033588 ns.
+Total running time 1 s 253794724 ns.
+******************Frame 776
+Total running time 0 s 1024949 ns.
+Total running time 1 s 254819673 ns.
+******************Frame 777
+Total running time 0 s 1034690 ns.
+Total running time 1 s 255854363 ns.
+******************Frame 778
+Total running time 0 s 1031879 ns.
+Total running time 1 s 256886242 ns.
+******************Frame 779
+Total running time 0 s 1020377 ns.
+Total running time 1 s 257906619 ns.
+******************Frame 780
+Total running time 0 s 1029843 ns.
+Total running time 1 s 258936462 ns.
+******************Frame 781
+Total running time 0 s 1038824 ns.
+Total running time 1 s 259975286 ns.
+******************Frame 782
+Total running time 0 s 1017778 ns.
+Total running time 1 s 260993064 ns.
+******************Frame 783
+Total running time 0 s 1029302 ns.
+Total running time 1 s 262022366 ns.
+******************Frame 784
+Total running time 0 s 1035557 ns.
+Total running time 1 s 263057923 ns.
+******************Frame 785
+Total running time 0 s 1008486 ns.
+Total running time 1 s 264066409 ns.
+******************Frame 786
+Total running time 0 s 1032749 ns.
+Total running time 1 s 265099158 ns.
+******************Frame 787
+Total running time 0 s 1037172 ns.
+Total running time 1 s 266136330 ns.
+******************Frame 788
+Total running time 0 s 1028706 ns.
+Total running time 1 s 267165036 ns.
+******************Frame 789
+Total running time 0 s 1016722 ns.
+Total running time 1 s 268181758 ns.
+******************Frame 790
+Total running time 0 s 1037433 ns.
+Total running time 1 s 269219191 ns.
+******************Frame 791
+Total running time 0 s 1019882 ns.
+Total running time 1 s 270239073 ns.
+******************Frame 792
+Total running time 0 s 1032146 ns.
+Total running time 1 s 271271219 ns.
+******************Frame 793
+Total running time 0 s 1044695 ns.
+Total running time 1 s 272315914 ns.
+******************Frame 794
+Total running time 0 s 1024829 ns.
+Total running time 1 s 273340743 ns.
+******************Frame 795
+Total running time 0 s 1023182 ns.
+Total running time 1 s 274363925 ns.
+******************Frame 796
+Total running time 0 s 1031896 ns.
+Total running time 1 s 275395821 ns.
+******************Frame 797
+Total running time 0 s 1037781 ns.
+Total running time 1 s 276433602 ns.
+******************Frame 798
+Total running time 0 s 1037835 ns.
+Total running time 1 s 277471437 ns.
+******************Frame 799
+Total running time 0 s 1044770 ns.
+Total running time 1 s 278516207 ns.
+******************Frame 800
+Total running time 0 s 1043836 ns.
+Total running time 1 s 279560043 ns.
+******************Frame 801
+Total running time 0 s 1042261 ns.
+Total running time 1 s 280602304 ns.
+******************Frame 802
+Total running time 0 s 1041857 ns.
+Total running time 1 s 281644161 ns.
+******************Frame 803
+Total running time 0 s 1032705 ns.
+Total running time 1 s 282676866 ns.
+******************Frame 804
+Total running time 0 s 1032468 ns.
+Total running time 1 s 283709334 ns.
+******************Frame 805
+Total running time 0 s 1045195 ns.
+Total running time 1 s 284754529 ns.
+******************Frame 806
+Total running time 0 s 1032433 ns.
+Total running time 1 s 285786962 ns.
+******************Frame 807
+Total running time 0 s 1028894 ns.
+Total running time 1 s 286815856 ns.
+******************Frame 808
+Total running time 0 s 1039545 ns.
+Total running time 1 s 287855401 ns.
+******************Frame 809
+Total running time 0 s 1031624 ns.
+Total running time 1 s 288887025 ns.
+******************Frame 810
+Total running time 0 s 1023435 ns.
+Total running time 1 s 289910460 ns.
+******************Frame 811
+Total running time 0 s 1036584 ns.
+Total running time 1 s 290947044 ns.
+******************Frame 812
+Total running time 0 s 1021721 ns.
+Total running time 1 s 291968765 ns.
+******************Frame 813
+Total running time 0 s 1022048 ns.
+Total running time 1 s 292990813 ns.
+******************Frame 814
+Total running time 0 s 1027035 ns.
+Total running time 1 s 294017848 ns.
+******************Frame 815
+Total running time 0 s 1031460 ns.
+Total running time 1 s 295049308 ns.
+******************Frame 816
+Total running time 0 s 1029049 ns.
+Total running time 1 s 296078357 ns.
+******************Frame 817
+Total running time 0 s 1033341 ns.
+Total running time 1 s 297111698 ns.
+******************Frame 818
+Total running time 0 s 1032228 ns.
+Total running time 1 s 298143926 ns.
+******************Frame 819
+Total running time 0 s 1022889 ns.
+Total running time 1 s 299166815 ns.
+******************Frame 820
+Total running time 0 s 1038572 ns.
+Total running time 1 s 300205387 ns.
+******************Frame 821
+Total running time 0 s 1016256 ns.
+Total running time 1 s 301221643 ns.
+******************Frame 822
+Total running time 0 s 1024449 ns.
+Total running time 1 s 302246092 ns.
+******************Frame 823
+Total running time 0 s 1035219 ns.
+Total running time 1 s 303281311 ns.
+******************Frame 824
+Total running time 0 s 1029135 ns.
+Total running time 1 s 304310446 ns.
+******************Frame 825
+Total running time 0 s 1021607 ns.
+Total running time 1 s 305332053 ns.
+******************Frame 826
+Total running time 0 s 1024692 ns.
+Total running time 1 s 306356745 ns.
+******************Frame 827
+Total running time 0 s 1030828 ns.
+Total running time 1 s 307387573 ns.
+******************Frame 828
+Total running time 0 s 1025080 ns.
+Total running time 1 s 308412653 ns.
+******************Frame 829
+Total running time 0 s 1036775 ns.
+Total running time 1 s 309449428 ns.
+******************Frame 830
+Total running time 0 s 1032531 ns.
+Total running time 1 s 310481959 ns.
+******************Frame 831
+Total running time 0 s 1025523 ns.
+Total running time 1 s 311507482 ns.
+******************Frame 832
+Total running time 0 s 1038922 ns.
+Total running time 1 s 312546404 ns.
+******************Frame 833
+Total running time 0 s 1030797 ns.
+Total running time 1 s 313577201 ns.
+******************Frame 834
+Total running time 0 s 1037282 ns.
+Total running time 1 s 314614483 ns.
+******************Frame 835
+Total running time 0 s 1026365 ns.
+Total running time 1 s 315640848 ns.
+******************Frame 836
+Total running time 0 s 1037611 ns.
+Total running time 1 s 316678459 ns.
+******************Frame 837
+Total running time 0 s 1041133 ns.
+Total running time 1 s 317719592 ns.
+******************Frame 838
+Total running time 0 s 1021173 ns.
+Total running time 1 s 318740765 ns.
+******************Frame 839
+Total running time 0 s 1038785 ns.
+Total running time 1 s 319779550 ns.
+******************Frame 840
+Total running time 0 s 1034395 ns.
+Total running time 1 s 320813945 ns.
+******************Frame 841
+Total running time 0 s 1022258 ns.
+Total running time 1 s 321836203 ns.
+******************Frame 842
+Total running time 0 s 1036627 ns.
+Total running time 1 s 322872830 ns.
+******************Frame 843
+Total running time 0 s 1035219 ns.
+Total running time 1 s 323908049 ns.
+******************Frame 844
+Total running time 0 s 1029348 ns.
+Total running time 1 s 324937397 ns.
+******************Frame 845
+Total running time 0 s 1039931 ns.
+Total running time 1 s 325977328 ns.
+******************Frame 846
+Total running time 0 s 1025070 ns.
+Total running time 1 s 327002398 ns.
+******************Frame 847
+Total running time 0 s 1027736 ns.
+Total running time 1 s 328030134 ns.
+******************Frame 848
+Total running time 0 s 1034530 ns.
+Total running time 1 s 329064664 ns.
+******************Frame 849
+Total running time 0 s 1029732 ns.
+Total running time 1 s 330094396 ns.
+******************Frame 850
+Total running time 0 s 1021267 ns.
+Total running time 1 s 331115663 ns.
+******************Frame 851
+Total running time 0 s 1037252 ns.
+Total running time 1 s 332152915 ns.
+******************Frame 852
+Total running time 0 s 1026235 ns.
+Total running time 1 s 333179150 ns.
+******************Frame 853
+Total running time 0 s 1022626 ns.
+Total running time 1 s 334201776 ns.
+******************Frame 854
+Total running time 0 s 1025372 ns.
+Total running time 1 s 335227148 ns.
+******************Frame 855
+Total running time 0 s 1036692 ns.
+Total running time 1 s 336263840 ns.
+******************Frame 856
+Total running time 0 s 1022355 ns.
+Total running time 1 s 337286195 ns.
+******************Frame 857
+Total running time 0 s 1040116 ns.
+Total running time 1 s 338326311 ns.
+******************Frame 858
+Total running time 0 s 1030272 ns.
+Total running time 1 s 339356583 ns.
+******************Frame 859
+Total running time 0 s 1029384 ns.
+Total running time 1 s 340385967 ns.
+******************Frame 860
+Total running time 0 s 1026230 ns.
+Total running time 1 s 341412197 ns.
+******************Frame 861
+Total running time 0 s 1024720 ns.
+Total running time 1 s 342436917 ns.
+******************Frame 862
+Total running time 0 s 1025009 ns.
+Total running time 1 s 343461926 ns.
+******************Frame 863
+Total running time 0 s 1029799 ns.
+Total running time 1 s 344491725 ns.
+******************Frame 864
+Total running time 0 s 1041913 ns.
+Total running time 1 s 345533638 ns.
+******************Frame 865
+Total running time 0 s 1023969 ns.
+Total running time 1 s 346557607 ns.
+******************Frame 866
+Total running time 0 s 1026984 ns.
+Total running time 1 s 347584591 ns.
+******************Frame 867
+Total running time 0 s 1027544 ns.
+Total running time 1 s 348612135 ns.
+******************Frame 868
+Total running time 0 s 1038276 ns.
+Total running time 1 s 349650411 ns.
+******************Frame 869
+Total running time 0 s 1035462 ns.
+Total running time 1 s 350685873 ns.
+******************Frame 870
+Total running time 0 s 1049273 ns.
+Total running time 1 s 351735146 ns.
+******************Frame 871
+Total running time 0 s 1044204 ns.
+Total running time 1 s 352779350 ns.
+******************Frame 872
+Total running time 0 s 1072190 ns.
+Total running time 1 s 353851540 ns.
+******************Frame 873
+Total running time 0 s 1014756 ns.
+Total running time 1 s 354866296 ns.
+******************Frame 874
+Total running time 0 s 1026737 ns.
+Total running time 1 s 355893033 ns.
+******************Frame 875
+Total running time 0 s 1029362 ns.
+Total running time 1 s 356922395 ns.
+******************Frame 876
+Total running time 0 s 1032623 ns.
+Total running time 1 s 357955018 ns.
+******************Frame 877
+Total running time 0 s 1020831 ns.
+Total running time 1 s 358975849 ns.
+******************Frame 878
+Total running time 0 s 1045918 ns.
+Total running time 1 s 360021767 ns.
+******************Frame 879
+Total running time 0 s 1031677 ns.
+Total running time 1 s 361053444 ns.
+******************Frame 880
+Total running time 0 s 1026154 ns.
+Total running time 1 s 362079598 ns.
+******************Frame 881
+Total running time 0 s 1029949 ns.
+Total running time 1 s 363109547 ns.
+******************Frame 882
+Total running time 0 s 1030841 ns.
+Total running time 1 s 364140388 ns.
+******************Frame 883
+Total running time 0 s 1025840 ns.
+Total running time 1 s 365166228 ns.
+******************Frame 884
+Total running time 0 s 1035479 ns.
+Total running time 1 s 366201707 ns.
+******************Frame 885
+Total running time 0 s 1025808 ns.
+Total running time 1 s 367227515 ns.
+******************Frame 886
+Total running time 0 s 1035283 ns.
+Total running time 1 s 368262798 ns.
+******************Frame 887
+Total running time 0 s 1018952 ns.
+Total running time 1 s 369281750 ns.
+******************Frame 888
+Total running time 0 s 1029425 ns.
+Total running time 1 s 370311175 ns.
+******************Frame 889
+Total running time 0 s 1027316 ns.
+Total running time 1 s 371338491 ns.
+******************Frame 890
+Total running time 0 s 1027424 ns.
+Total running time 1 s 372365915 ns.
+******************Frame 891
+Total running time 0 s 1030523 ns.
+Total running time 1 s 373396438 ns.
+******************Frame 892
+Total running time 0 s 1027859 ns.
+Total running time 1 s 374424297 ns.
+******************Frame 893
+Total running time 0 s 1028388 ns.
+Total running time 1 s 375452685 ns.
+******************Frame 894
+Total running time 0 s 1030551 ns.
+Total running time 1 s 376483236 ns.
+******************Frame 895
+Total running time 0 s 1027556 ns.
+Total running time 1 s 377510792 ns.
+******************Frame 896
+Total running time 0 s 1037517 ns.
+Total running time 1 s 378548309 ns.
+******************Frame 897
+Total running time 0 s 1016388 ns.
+Total running time 1 s 379564697 ns.
+******************Frame 898
+Total running time 0 s 1011559 ns.
+Total running time 1 s 380576256 ns.
+******************Frame 899
+Total running time 0 s 1025578 ns.
+Total running time 1 s 381601834 ns.
+******************Frame 900
+Total running time 0 s 1037422 ns.
+Total running time 1 s 382639256 ns.
+******************Frame 901
+Total running time 0 s 1025410 ns.
+Total running time 1 s 383664666 ns.
+******************Frame 902
+Total running time 0 s 1027543 ns.
+Total running time 1 s 384692209 ns.
+******************Frame 903
+Total running time 0 s 1034073 ns.
+Total running time 1 s 385726282 ns.
+******************Frame 904
+Total running time 0 s 1032254 ns.
+Total running time 1 s 386758536 ns.
+******************Frame 905
+Total running time 0 s 1042764 ns.
+Total running time 1 s 387801300 ns.
+******************Frame 906
+Total running time 0 s 1031157 ns.
+Total running time 1 s 388832457 ns.
+******************Frame 907
+Total running time 0 s 1051824 ns.
+Total running time 1 s 389884281 ns.
+******************Frame 908
+Total running time 0 s 1046522 ns.
+Total running time 1 s 390930803 ns.
+******************Frame 909
+Total running time 0 s 1028793 ns.
+Total running time 1 s 391959596 ns.
+******************Frame 910
+Total running time 0 s 1027535 ns.
+Total running time 1 s 392987131 ns.
+******************Frame 911
+Total running time 0 s 1020371 ns.
+Total running time 1 s 394007502 ns.
+******************Frame 912
+Total running time 0 s 1037114 ns.
+Total running time 1 s 395044616 ns.
+******************Frame 913
+Total running time 0 s 1030313 ns.
+Total running time 1 s 396074929 ns.
+******************Frame 914
+Total running time 0 s 1024213 ns.
+Total running time 1 s 397099142 ns.
+******************Frame 915
+Total running time 0 s 1040278 ns.
+Total running time 1 s 398139420 ns.
+******************Frame 916
+Total running time 0 s 1026291 ns.
+Total running time 1 s 399165711 ns.
+******************Frame 917
+Total running time 0 s 1037367 ns.
+Total running time 1 s 400203078 ns.
+******************Frame 918
+Total running time 0 s 1026979 ns.
+Total running time 1 s 401230057 ns.
+******************Frame 919
+Total running time 0 s 1032473 ns.
+Total running time 1 s 402262530 ns.
+******************Frame 920
+Total running time 0 s 1024606 ns.
+Total running time 1 s 403287136 ns.
+******************Frame 921
+Total running time 0 s 1040114 ns.
+Total running time 1 s 404327250 ns.
+******************Frame 922
+Total running time 0 s 1019908 ns.
+Total running time 1 s 405347158 ns.
+******************Frame 923
+Total running time 0 s 1022618 ns.
+Total running time 1 s 406369776 ns.
+******************Frame 924
+Total running time 0 s 1062496 ns.
+Total running time 1 s 407432272 ns.
+******************Frame 925
+Total running time 0 s 1022571 ns.
+Total running time 1 s 408454843 ns.
+******************Frame 926
+Total running time 0 s 1017880 ns.
+Total running time 1 s 409472723 ns.
+******************Frame 927
+Total running time 0 s 1035587 ns.
+Total running time 1 s 410508310 ns.
+******************Frame 928
+Total running time 0 s 1021312 ns.
+Total running time 1 s 411529622 ns.
+******************Frame 929
+Total running time 0 s 1020084 ns.
+Total running time 1 s 412549706 ns.
+******************Frame 930
+Total running time 0 s 1038326 ns.
+Total running time 1 s 413588032 ns.
+******************Frame 931
+Total running time 0 s 1018363 ns.
+Total running time 1 s 414606395 ns.
+******************Frame 932
+Total running time 0 s 1020832 ns.
+Total running time 1 s 415627227 ns.
+******************Frame 933
+Total running time 0 s 1026436 ns.
+Total running time 1 s 416653663 ns.
+******************Frame 934
+Total running time 0 s 1035946 ns.
+Total running time 1 s 417689609 ns.
+******************Frame 935
+Total running time 0 s 1024728 ns.
+Total running time 1 s 418714337 ns.
+******************Frame 936
+Total running time 0 s 1044692 ns.
+Total running time 1 s 419759029 ns.
+******************Frame 937
+Total running time 0 s 1017103 ns.
+Total running time 1 s 420776132 ns.
+******************Frame 938
+Total running time 0 s 1031960 ns.
+Total running time 1 s 421808092 ns.
+******************Frame 939
+Total running time 0 s 1038338 ns.
+Total running time 1 s 422846430 ns.
+******************Frame 940
+Total running time 0 s 1032625 ns.
+Total running time 1 s 423879055 ns.
+******************Frame 941
+Total running time 0 s 1024257 ns.
+Total running time 1 s 424903312 ns.
+******************Frame 942
+Total running time 0 s 1045169 ns.
+Total running time 1 s 425948481 ns.
+******************Frame 943
+Total running time 0 s 1030987 ns.
+Total running time 1 s 426979468 ns.
+******************Frame 944
+Total running time 0 s 1021337 ns.
+Total running time 1 s 428000805 ns.
+******************Frame 945
+Total running time 0 s 1024070 ns.
+Total running time 1 s 429024875 ns.
+******************Frame 946
+Total running time 0 s 1030332 ns.
+Total running time 1 s 430055207 ns.
+******************Frame 947
+Total running time 0 s 1025134 ns.
+Total running time 1 s 431080341 ns.
+******************Frame 948
+Total running time 0 s 1026641 ns.
+Total running time 1 s 432106982 ns.
+******************Frame 949
+Total running time 0 s 1015968 ns.
+Total running time 1 s 433122950 ns.
+******************Frame 950
+Total running time 0 s 1024317 ns.
+Total running time 1 s 434147267 ns.
+******************Frame 951
+Total running time 0 s 1038681 ns.
+Total running time 1 s 435185948 ns.
+******************Frame 952
+Total running time 0 s 1022565 ns.
+Total running time 1 s 436208513 ns.
+******************Frame 953
+Total running time 0 s 1020989 ns.
+Total running time 1 s 437229502 ns.
+******************Frame 954
+Total running time 0 s 1032847 ns.
+Total running time 1 s 438262349 ns.
+******************Frame 955
+Total running time 0 s 1022151 ns.
+Total running time 1 s 439284500 ns.
+******************Frame 956
+Total running time 0 s 1020888 ns.
+Total running time 1 s 440305388 ns.
+******************Frame 957
+Total running time 0 s 1035415 ns.
+Total running time 1 s 441340803 ns.
+******************Frame 958
+Total running time 0 s 1022940 ns.
+Total running time 1 s 442363743 ns.
+******************Frame 959
+Total running time 0 s 1020893 ns.
+Total running time 1 s 443384636 ns.
+******************Frame 960
+Total running time 0 s 1025420 ns.
+Total running time 1 s 444410056 ns.
+******************Frame 961
+Total running time 0 s 1030900 ns.
+Total running time 1 s 445440956 ns.
+******************Frame 962
+Total running time 0 s 1026087 ns.
+Total running time 1 s 446467043 ns.
+******************Frame 963
+Total running time 0 s 1022273 ns.
+Total running time 1 s 447489316 ns.
+******************Frame 964
+Total running time 0 s 1028849 ns.
+Total running time 1 s 448518165 ns.
+******************Frame 965
+Total running time 0 s 1028879 ns.
+Total running time 1 s 449547044 ns.
+******************Frame 966
+Total running time 0 s 1042960 ns.
+Total running time 1 s 450590004 ns.
+******************Frame 967
+Total running time 0 s 1022947 ns.
+Total running time 1 s 451612951 ns.
+******************Frame 968
+Total running time 0 s 1034548 ns.
+Total running time 1 s 452647499 ns.
+******************Frame 969
+Total running time 0 s 1023201 ns.
+Total running time 1 s 453670700 ns.
+******************Frame 970
+Total running time 0 s 1027513 ns.
+Total running time 1 s 454698213 ns.
+******************Frame 971
+Total running time 0 s 1033317 ns.
+Total running time 1 s 455731530 ns.
+******************Frame 972
+Total running time 0 s 1024449 ns.
+Total running time 1 s 456755979 ns.
+******************Frame 973
+Total running time 0 s 1021686 ns.
+Total running time 1 s 457777665 ns.
+******************Frame 974
+Total running time 0 s 1022583 ns.
+Total running time 1 s 458800248 ns.
+******************Frame 975
+Total running time 0 s 1034982 ns.
+Total running time 1 s 459835230 ns.
+******************Frame 976
+Total running time 0 s 1030327 ns.
+Total running time 1 s 460865557 ns.
+******************Frame 977
+Total running time 0 s 1024845 ns.
+Total running time 1 s 461890402 ns.
+******************Frame 978
+Total running time 0 s 1033311 ns.
+Total running time 1 s 462923713 ns.
+******************Frame 979
+Total running time 0 s 1031331 ns.
+Total running time 1 s 463955044 ns.
+******************Frame 980
+Total running time 0 s 1025870 ns.
+Total running time 1 s 464980914 ns.
+******************Frame 981
+Total running time 0 s 1038067 ns.
+Total running time 1 s 466018981 ns.
+******************Frame 982
+Total running time 0 s 1020043 ns.
+Total running time 1 s 467039024 ns.
+******************Frame 983
+Total running time 0 s 1030618 ns.
+Total running time 1 s 468069642 ns.
+******************Frame 984
+Total running time 0 s 1021823 ns.
+Total running time 1 s 469091465 ns.
+******************Frame 985
+Total running time 0 s 1024668 ns.
+Total running time 1 s 470116133 ns.
+******************Frame 986
+Total running time 0 s 1028324 ns.
+Total running time 1 s 471144457 ns.
+******************Frame 987
+Total running time 0 s 1022005 ns.
+Total running time 1 s 472166462 ns.
+******************Frame 988
+Total running time 0 s 1020956 ns.
+Total running time 1 s 473187418 ns.
+******************Frame 989
+Total running time 0 s 1023138 ns.
+Total running time 1 s 474210556 ns.
+******************Frame 990
+Total running time 0 s 1028245 ns.
+Total running time 1 s 475238801 ns.
+******************Frame 991
+Total running time 0 s 1038169 ns.
+Total running time 1 s 476276970 ns.
+******************Frame 992
+Total running time 0 s 1025981 ns.
+Total running time 1 s 477302951 ns.
+******************Frame 993
+Total running time 0 s 1029050 ns.
+Total running time 1 s 478332001 ns.
+******************Frame 994
+Total running time 0 s 1037044 ns.
+Total running time 1 s 479369045 ns.
+******************Frame 995
+Total running time 0 s 1023543 ns.
+Total running time 1 s 480392588 ns.
+******************Frame 996
+Total running time 0 s 1034648 ns.
+Total running time 1 s 481427236 ns.
+******************Frame 997
+Total running time 0 s 1035197 ns.
+Total running time 1 s 482462433 ns.
+******************Frame 998
+Total running time 0 s 1015482 ns.
+Total running time 1 s 483477915 ns.
+******************Frame 999
+Total running time 0 s 1032124 ns.
+Total running time 1 s 484510039 ns.
+******************Frame 1000
+Total running time 0 s 1036465 ns.
+Total running time 1 s 485546504 ns.
+Total running time 1 s 485546504 ns.

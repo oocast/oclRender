@@ -15,7 +15,7 @@ std::shared_ptr<CSG> Ring(float halfWidth = 1.0F, float halfHeight = 1.0F,
                             const Color * inputColorPointer = nullptr);
 // Create a horizontal ellipse ring; UI-parameter-friendly
 // TODO: use of template
-std::shared_ptr<Shape> Ring(const Vector &, const Vector &, float,
+std::shared_ptr<CSG> Ring(const Vector &, const Vector &, float,
                             const Color * inputColorPointer = nullptr);
 std::shared_ptr<Shape> Star();
 // the int: direction: 0right, 1up, 2left, 3down
