@@ -5,6 +5,8 @@
 #include<sys/time.h>
 #include<iostream>
 
+
+
 void Scene::
 Add(Shape * node)
 {

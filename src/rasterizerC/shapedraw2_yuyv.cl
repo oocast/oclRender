@@ -65,9 +65,9 @@ __kernel void ShapeDraw(__global uchar4 * image,
     if (k<paraSize) parasLocal[k]=paras[k];
     if (k<36) jitPosLocal[k]=jitPos[k];
     int i=get_global_id(0)+ib;
-    if (i>=h) return;
+    //if (i>=h) return;
     int j=get_global_id(1)+jb;
-    if (j>=w/2) return;
+    //if (j>=w/2) return;
 
     float y=i*1.0f/w;
     float x2=(j*2+1)*1.0f/w;

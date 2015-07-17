@@ -286,6 +286,16 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     //if (je <= 0) return;
     if (ib<0) ib = 0;
     if (jb<0) jb = 0;
+    if (ie>=h)
+    {
+        ie=h;
+        ib=ib/HSIZE*HSIZE;
+    }
+    if (je>=w/2)
+    {
+        je=w/2;
+        jb=jb/WSIZE*WSIZE;
+    }
     unsigned char Y=floor(shapeColor.rgb[0]*256);
     unsigned char U=floor(shapeColor.rgb[1]*256);
     unsigned char V=floor(shapeColor.rgb[2]*256);

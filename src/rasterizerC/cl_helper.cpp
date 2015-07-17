@@ -30,6 +30,7 @@ void CLInit(char * fileName, char * kernelName)
     err=clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
     kernel=clCreateKernel(program, kernelName, &err);
     free(source);
+    std::cout<<fileName<<" "<<kernelName<<std::endl;
 }
 
 void CLRelease()
