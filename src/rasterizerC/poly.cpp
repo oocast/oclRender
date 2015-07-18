@@ -87,7 +87,7 @@ Transformation(const Transform & xform)
     return ConvexPoly(xformedVertices, &shapeColor);
 }
 */
-ConvexPoly & ConvexPoly::
+void ConvexPoly::
 Transformation(const Transform & xform)
 {
     //std::vector<Vector> xformedVertices;
@@ -95,7 +95,7 @@ Transformation(const Transform & xform)
         //xformedVertices.push_back(xform * vertices[i]);
         vertices[i]=xform*vertices[i];
     CalculateExtremum();
-    return *this;
+    return;// (std::shared_ptr<Shape>) this;
 }
 
 std::shared_ptr<Shape> ConvexPoly::

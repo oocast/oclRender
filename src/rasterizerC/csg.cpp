@@ -27,6 +27,16 @@ AddElement(const std::shared_ptr<Shape> &element)
     }
 }
 
+void CSG::
+Transformation(const Transform &xform)
+{
+    for (unsigned int i = 0; i < elements.size(); i++)
+    {
+        elements[i]->Transformation(xform);
+    }
+    return;// (std::shared_ptr<Shape>) this;
+}
+
 std::shared_ptr<Shape> CSG::
 AccessElement(size_t index)
 {

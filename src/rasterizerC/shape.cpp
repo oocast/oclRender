@@ -256,8 +256,6 @@ Draw(PPMImage & image, int superSampling)
 void Shape::
 Draw(unsigned int height, unsigned int width, int index, int superSampling)
 {
-    if (!bound.Overlaps(AABox(Vector(), Vector(1, height*1.0f/width))))
-        return;
     float r = (float)width;
     std::vector<Vector> jitter(superSampling*superSampling, Vector());
     std::default_random_engine gen;
@@ -272,6 +270,8 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     int w = width;
     int h = height;
     CalculateBound((float)h / w);
+    if (!bound.Overlaps(AABox(Vector(), Vector(1, height*1.0f/width))))
+        return;
 
     std::vector<float> fv;
     std::vector<int> iv;
@@ -286,6 +286,17 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     //if (je <= 0) return;
     if (ib<0) ib = 0;
     if (jb<0) jb = 0;
+    if (ie>=h)
+    {
+        ie=h;
+        ib=ib/HSIZE*HSIZE;
+    }
+    if (je>=w/2)
+    {
+        je=w/2;
+        jb=jb/WSIZE*WSIZE;
+    }
+    //std::cout<<ib<<" "<<ie<<" "<<jb<<" "<<je<<std::endl;
     unsigned char Y=floor(shapeColor.rgb[0]*256);
     unsigned char U=floor(shapeColor.rgb[1]*256);
     unsigned char V=floor(shapeColor.rgb[2]*256);

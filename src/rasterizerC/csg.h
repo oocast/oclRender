@@ -16,7 +16,7 @@ public:
         const Color *color = nullptr, 
         bool positive = true);
     //void GetParameters(std::vector<float> &, std::vector<int> &);
-    //std::shared_ptr<Shape> TransformPointer(const Transform &);
+    void Transformation(const Transform &);
     virtual void AddElement(const std::shared_ptr<Shape> &);
     std::shared_ptr<Shape> AccessElement(size_t);
 };

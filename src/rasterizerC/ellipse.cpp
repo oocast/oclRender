@@ -99,7 +99,7 @@ Transformation(const Transform & xform)
 }
 */
 
-Ellipse & Ellipse::
+void Ellipse::
 Transformation(const Transform & xform)
 {
     Transform i(xform.Inverse());
@@ -123,7 +123,7 @@ Transformation(const Transform & xform)
     e=ee;
     f=ff;
     CalculateExtremum();
-    return *this;
+    return;// (std::shared_ptr<Shape>) this;
 }
 
 std::shared_ptr<Shape> Ellipse::

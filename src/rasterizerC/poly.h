@@ -19,7 +19,7 @@ public:
     //float signed_distance_bound(const Vector &p) const;
     bool Contains(const Vector &) const;
     //ConvexPoly Transformation(const Transform &);
-    ConvexPoly & Transformation(const Transform &);
+    void Transformation(const Transform &);
     std::shared_ptr<Shape> TransformPointer(const Transform &);
     void GetParameters(std::vector<float> &, std::vector<int> &);
     void CalculateBound(float){}

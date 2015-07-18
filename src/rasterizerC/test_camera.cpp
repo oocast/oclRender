@@ -51,10 +51,10 @@
 #include "va_display.h"
 #include "oclrender.h"
 #include "interface.h"
-#include "pv_helper.h"
+#include "pv_helper2.h"
 
 #define BUFFER_NUM_DEFAULT 5
-#define VIDEO_NODE_DEFAULT "/dev/video0"
+#define VIDEO_NODE_DEFAULT "/dev/video1"
 #define WIDTH_DEFAULT 640
 #define HEIGHT_DEFAULT 480
 
@@ -439,7 +439,7 @@ static void StartCapturing()
     CHECK_V4L2ERROR(ret, "VIDIOC_STREAMON");
 }
 
-void ProcessFrame(int index, Scene *scene)
+inline void ProcessFrame(int index, Scene *scene)
 {
     //process importBuf[index] by ocl
     scene->Draw(vo.height, vo.width, index, 6);
@@ -582,17 +582,18 @@ static void MainLoop(Scene* scene)
 }
 
 static void
-MainLoopPV(Scene &targetScene, Scene &markScene)
+MainLoopPV(Scene & sceneSightMark, Scene & sceneTargetMark)
 {
     int ret;
     struct v4l2_buffer buf;
     int index;
     unsigned int st = 0, nst = 0;
+    char out[]="0.50 0.10\n0.70 0.40\n0.40 0.70\n0.60 0.70\n0.30 0.40\n";
 
     while (frame_count < 1000)
     {
         frame_count++;
-        printf("******************Frame %d\n", frame_count);
+        //printf("******************Frame %d\n", frame_count);
         fd_set fds;
         struct timeval tv;
         int r;
@@ -630,6 +631,7 @@ MainLoopPV(Scene &targetScene, Scene &markScene)
         timespec StartTime, EndTime;
         //process by ocl and show on screen by libva
         clock_gettime(CLOCK_REALTIME, &StartTime);
+        /*
         if (frame_count < 66 && frame_count>=50)
         {
             RotateSightMarks(markScene);
@@ -638,8 +640,11 @@ MainLoopPV(Scene &targetScene, Scene &markScene)
         {
             LockSightMarks(markScene);
         }
-        ProcessFrame(index, &targetScene);
-        ProcessFrame(index, &markScene);
+        */
+        if (frame_count>=100&&frame_count<150) std::cout<<out[frame_count-100]<<std::flush;
+        MainFunc(sceneSightMark, sceneTargetMark, frame_count);
+        ProcessFrame(index, &sceneTargetMark);
+        ProcessFrame(index, &sceneSightMark);
         clock_gettime(CLOCK_REALTIME, &EndTime);
         ShowFrame(index);
 
@@ -666,10 +671,10 @@ MainLoopPV(Scene &targetScene, Scene &markScene)
             nst -= 1000000000;
             st++;
         }
-        std::cout << "Total running time " << s << " s " << ns << " ns." << std::endl;
-        std::cout << "Total running time " << st << " s " << nst << " ns." << std::endl;
+        //std::cout << "Total running time " << s << " s " << ns << " ns." << std::endl;
+        //std::cout << "Total running time " << st << " s " << nst << " ns." << std::endl;
     }
-    std::cout << "Total running time " << st << " s " << nst << " ns." << std::endl;
+    //std::cout << "Total running time " << st << " s " << nst << " ns." << std::endl;
 }
 
 static void StopCapturing()
@@ -748,12 +753,10 @@ RenderPV()
     AddAllTargets(ftl);
     ftl.close();
 
-    Scene targetScene, markScene;
-    CreateTargets(targetScene);
-    CreateSightMarks(markScene);
+    Scene sceneSightMark, sceneTargetMarks;
 
     StartCapturing();
-    MainLoopPV(targetScene, markScene);
+    MainLoopPV(sceneSightMark, sceneTargetMarks);
     StopCapturing();
 }
 

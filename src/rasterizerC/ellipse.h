@@ -20,7 +20,7 @@ public:
     float Value(const Vector &) const;
     bool Contains(const Vector &) const;
     //Ellipse Transformation(const Transform &);
-    Ellipse & Transformation(const Transform &);
+    void Transformation(const Transform &);
     std::shared_ptr<Shape> TransformPointer(const Transform &);
     void Intersections(const Vector &, const Vector &, Vector *) const;
     //float signed_distance_bound(const Vector &p) const;
