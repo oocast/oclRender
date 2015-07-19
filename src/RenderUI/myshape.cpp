@@ -1,21 +1,23 @@
+
 #include "myshape.h"
 
 using namespace std;
 
-QString shapeNames[5] = {"FreeBrush","StraightLine","HollowRectangle","HollowEllipse","SolidRectangle"};
-int numShapes = 5;
+Scene globalScene;
+QMutex globalMutex;
 
-myLine makeShapeLine(myLine line){
-    int x_min = min(line.startPnt.x(),line.endPnt.x());
-    int x_max = max(line.startPnt.x(),line.endPnt.x());
-    int y_min = min(line.startPnt.y(),line.endPnt.y());
-    int y_max = max(line.startPnt.y(),line.endPnt.y());
-    QPoint p1(x_min,y_max);
-    QPoint p2(x_max,y_min);
-    myLine result;
-    result.startPnt = p1;
-    result.endPnt = p2;
-    return result;
+vector<QString> classNames = {"FreeBrush","StraightLine","HollowRectangle","SolidRectangle","HollowEllipse","SolidEllipse","SolidPolygon","HollowPolygon"};
+
+QPointF getTopLeft(QPointF &p1, QPointF &p2){
+    float x_min = min(p1.x(),p2.x());
+    float y_max = max(p1.y(),p2.y());
+    return QPointF(x_min,y_max);
+}
+
+QPointF getBottomRight(QPointF &p1, QPointF &p2){
+    float x_max = max(p1.x(),p2.x());
+    float y_min = min(p1.y(),p2.y());
+    return QPointF(x_max,y_min);
 }
 
 extern void registerAllClasses(){
@@ -25,4 +27,7 @@ extern void registerAllClasses(){
     qRegisterMetaType<HollowRectangle>();
     qRegisterMetaType<HollowEllipse>();
     qRegisterMetaType<SolidRectangle>();
+    qRegisterMetaType<SolidEllipse>();
+    qRegisterMetaType<SolidPolygon>();
+    qRegisterMetaType<HollowPolygon>();
 }

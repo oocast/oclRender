@@ -15,6 +15,8 @@ class Window : public QWidget
 
 public:
     Window(RenderArea *renderArea);
+    void closeEvent(QCloseEvent *e);
+
 
 private slots:
     void shapeChanged();
@@ -33,9 +35,8 @@ private:
     QLabel *colorLabel;
     QPushButton *backButton;
     QPushButton *forwardButton;
-    
+
 };
 
 
 #endif // WINDOW_H
-

@@ -1,70 +1,109 @@
 #ifndef MYSHAPE_H
 #define MYSHAPE_H
 
+#include <stdio.h>
 #include <QObject>
 #include <QPainter>
+#include <math.h>
+#include <oclrender.h>
+#include <QMutex>
+#include <interface.h>
+#include <QDebug>
+
 
 using namespace std;
 
-struct myLine
-{
-    QPoint startPnt;
-    QPoint endPnt;
-};
-
-extern QString shapeNames[];
-extern int numShapes;
-extern myLine makeShapeLine(myLine line);
+extern QMutex globalMutex;
+extern Scene globalScene;
+extern vector<QString> classNames;
+extern QPointF getTopLeft(QPointF &p1, QPointF &p2);
+extern QPointF getBottomRight(QPointF &p1, QPointF &p2);
 extern void registerAllClasses();
 
 class MyShape
 {
 public:
     QString shapeName;
-    int shapeType;
-    vector<myLine*> linesPtr;
-    myLine line;
+    vector<QPointF> points;
     int lineWidth;
     QColor shapeColor;
-    
+
     MyShape(){
 
     }
-    
-    virtual void draw(QPainter* painter){
-        
+
+    virtual void draw(QPainter* painter, Scene* scene){
+
     }
-    
-    void update(myLine* linePtr){
-        linesPtr.push_back(linePtr);
+
+    bool initialized(){
+        return (points.size() != 0);
     }
-    
-    void update(myLine line){
-        this->line = line;
+
+    virtual void update(QPointF p){
+        points[1] = p;
     }
-    
+
+    virtual void initialize(QPointF p1, QPointF p2) {
+        points.push_back(p1);
+        points.push_back(p2);
+    }
+
+    virtual bool valid(){
+        if(points.size() == 0){
+            return false;
+        }
+        if(points[0] == points[1]){
+            return false;
+        }
+        return true;
+    }
+
 };
 Q_DECLARE_METATYPE(MyShape)
 
 class FreeBrush : public MyShape
 {
 public:
-    
+
     FreeBrush(){
         shapeName = "FreeBrush";
-        shapeType = 1;
     }
-    
-    virtual void draw(QPainter* painter){
+
+    virtual void draw(QPainter* painter, Scene *scene){
         QPen p;
         p.setWidth(lineWidth);
         p.setColor(shapeColor);
         painter->setPen(p);
-        for(int i=0;i<linesPtr.size();i++){
-            myLine* pLinePtr = linesPtr[i];
-            painter->drawLine(pLinePtr->startPnt,pLinePtr->endPnt);
+        
+        int r;
+		int g;
+		int b;
+		int a;
+		shapeColor.getRgb(&r,&g,&b,&a);
+		Color color;
+		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
+		ToYUV(&color);
+        
+        
+        for(int i=0;i<points.size()-1;i++){
+            //painter->drawLine(points[i],points[i+1]);
+            
+            
+
+			std::shared_ptr<Shape> sp=(std::shared_ptr<Shape>)(new ConvexPoly(LineSegment(Vector(points.at(i).x()/640, points.at(i).y()/640), Vector(points.at(i+1).x()/640, points.at(i+1).y()/640), 0.001*lineWidth, &color,true)));
+			scene->Add(sp);
         }
     }
+
+    virtual void update(QPointF p){
+        points.push_back(p);
+    }
+
+    virtual void initialize(QPointF p1, QPointF p2) {
+        points.push_back(p1);
+    }
+
 };
 Q_DECLARE_METATYPE(FreeBrush)
 
@@ -73,15 +112,33 @@ class StraightLine : public MyShape
 public:
     StraightLine(){
         shapeName = "StraightLine";
-        shapeType = 2;
     }
-    
-    virtual void draw(QPainter* painter){
+
+    virtual void draw(QPainter* painter, Scene* scene){
         QPen p;
         p.setWidth(lineWidth);
         p.setColor(shapeColor);
         painter->setPen(p);
-        painter->drawLine(line.startPnt,line.endPnt);
+        //painter->drawLine(points[0],points[1]);
+        
+        float d = pow(points.at(0).x()-points.at(1).x(),2)+pow(points.at(0).y()-points.at(1).y(),2);
+        //qDebug() << d << endl;
+		if(d<=5){
+			return;
+		}
+		
+		int r;
+		int g;
+		int b;
+		int a;
+		shapeColor.getRgb(&r,&g,&b,&a);
+		Color color;
+		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
+		ToYUV(&color);
+		std::shared_ptr<Shape> sp=(std::shared_ptr<Shape>)(new ConvexPoly(LineSegment(Vector(points.at(0).x()/640, points.at(0).y()/640), Vector(points.at(1).x()/640, points.at(1).y()/640), 0.001*lineWidth, &color,true)));
+		scene->Add(sp);
+		
+		
     }
 };
 Q_DECLARE_METATYPE(StraightLine)
@@ -91,18 +148,34 @@ class HollowRectangle : public MyShape
 public:
     HollowRectangle(){
         shapeName = "HollowRectangle";
-        shapeType = 2;
     }
-    
-    virtual void draw(QPainter* painter){
+
+    virtual void draw(QPainter* painter, Scene* scene){
         QPen p;
         p.setWidth(lineWidth);
         p.setColor(shapeColor);
         painter->setPen(p);
-        myLine pLine = makeShapeLine(line);
-        painter->drawRect(QRect(pLine.startPnt,pLine.endPnt));
+        QPointF p1 = getTopLeft(points[0],points[1]);
+        QPointF p2 = getBottomRight(points[0],points[1]);
+        //painter->drawRect(QRect(p1.toPoint(),p2.toPoint()));
+        
+		int r;
+		int g;
+		int b;
+		int a;
+		shapeColor.getRgb(&r,&g,&b,&a);
+		Color color;
+		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
+		ToYUV(&color);
+		
+		std::shared_ptr<Shape> sp = Frame(Vector(p1.x()/640, p1.y()/640), Vector(p2.x()/640, p2.y()/640), 0.001*lineWidth, &color);
+		scene->Add(sp);
+
+		
+
+        
+        
     }
-    
 };
 Q_DECLARE_METATYPE(HollowRectangle)
 
@@ -111,37 +184,251 @@ class HollowEllipse : public MyShape
 public:
     HollowEllipse(){
         shapeName = "HollowEllipse";
-        shapeType = 2;
     }
-    
-    virtual void draw(QPainter* painter){
+
+    virtual void draw(QPainter* painter, Scene* scene){
         QPen p;
         p.setWidth(lineWidth);
         p.setColor(shapeColor);
         painter->setPen(p);
-        myLine pLine = makeShapeLine(line);
-        painter->drawEllipse(QRectF(pLine.startPnt,pLine.endPnt));
+        QPointF p1 = getTopLeft(points[0],points[1]);
+        QPointF p2 = getBottomRight(points[0],points[1]);
+        //painter->drawEllipse(QRectF(p1,p2));
+        
+		int r;
+		int g;
+		int b;
+		int a;
+		shapeColor.getRgb(&r,&g,&b,&a);
+		Color color;
+		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
+		ToYUV(&color);
+		
+		std::shared_ptr<CSG> sp = Ring(Vector(p1.x()/640, p1.y()/640), Vector(p2.x()/640, p2.y()/640), 0.001*lineWidth, &color);
+		scene->Add(sp);
+        
     }
-    
 };
 Q_DECLARE_METATYPE(HollowEllipse)
+
+class SolidEllipse : public MyShape
+{
+public:
+    SolidEllipse(){
+        shapeName = "SolidEllipse";
+    }
+    virtual void draw(QPainter* painter, Scene* scene){
+        QPointF p1 = getTopLeft(points[0],points[1]);
+        QPointF p2 = getBottomRight(points[0],points[1]);
+        QPainterPath tmpPath;
+        tmpPath.addEllipse(QRectF(p1,p2));
+        //painter->fillPath(tmpPath,QBrush(QColor(shapeColor)));
+        
+		int r;
+		int g;
+		int b;
+		int a;
+		shapeColor.getRgb(&r,&g,&b,&a);
+		Color color;
+		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
+		ToYUV(&color);
+		
+		std::shared_ptr<Shape> sp(new Ellipse(Vector(p1.x()/640, p1.y()/640), Vector(p2.x()/640, p2.y()/640), &color));
+		
+		scene->Add(sp);
+        
+
+    }
+};
+Q_DECLARE_METATYPE(SolidEllipse)
+
+
 
 class SolidRectangle : public MyShape
 {
 public:
     SolidRectangle(){
         shapeName = "SolidRectangle";
-        shapeType = 2;
     }
-    
-    virtual void draw(QPainter* painter){
-        myLine pLine = makeShapeLine(line);
-        painter->fillRect(QRect(pLine.startPnt,pLine.endPnt),shapeColor);
+
+    virtual void draw(QPainter* painter, Scene* scene){
+        QPointF p1 = getTopLeft(points[0],points[1]);
+        QPointF p2 = getBottomRight(points[0],points[1]);
+        //painter->fillRect(QRect(p1.toPoint(),p2.toPoint()),shapeColor);
+        
+        
+		int r;
+		int g;
+		int b;
+		int a;
+		shapeColor.getRgb(&r,&g,&b,&a);
+		Color color;
+		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
+		ToYUV(&color);
+		
+		float d1 = pow(points.at(0).x()-points.at(1).x(),2);
+		float d2 = pow(points.at(0).y()-points.at(1).y(),2);
+		
+        //qDebug() << d << endl;
+		if(d1<=5 || d2<=5){
+			return;
+		}
+		
+		
+		std::shared_ptr<Shape> sp=(std::shared_ptr<Shape>)(new ConvexPoly(Rectangle(Vector(points.at(0).x()/640, points.at(0).y()/640), Vector(points.at(1).x()/640, points.at(1).y()/640), &color, true)));
+		scene->Add(sp);
+        
+        
     }
-    
+
 };
 Q_DECLARE_METATYPE(SolidRectangle)
 
+class SolidPolygon : public MyShape
+{
+public:
+
+    bool finished = false;
+
+    SolidPolygon(){
+        shapeName = "SolidPolygon";
+    }
+
+    bool isTooClose(QPointF &p){
+        float dist = pow((points.at(0).x()-p.x()),2)+pow((points.at(0).y()-p.y()),2);
+        if(dist < 30){
+            return true;
+        }
+        return false;
+    }
+
+    virtual void draw(QPainter* painter, Scene* scene){
+
+
+		int r;
+		int g;
+		int b;
+		int a;
+		shapeColor.getRgb(&r,&g,&b,&a);
+		Color color;
+		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
+		ToYUV(&color);
+
+        if(!finished){
+            QPen p;
+            p.setWidth(lineWidth);
+            p.setColor(shapeColor);
+            painter->setPen(p);
+            for(int i=0;i<points.size()-1;i++){
+                //painter->drawLine(points[i],points[i+1]);
+                
+                
+				float d = pow(points.at(i).x()-points.at(i+1).x(),2)+pow(points.at(i).y()-points.at(i+1).y(),2);
+				//qDebug() << d << endl;
+				if(d>5){
+					std::shared_ptr<Shape> sp=(std::shared_ptr<Shape>)(new ConvexPoly(LineSegment(Vector(points.at(i).x()/640, points.at(i).y()/640), Vector(points.at(i+1).x()/640, points.at(i+1).y()/640), 0.001*lineWidth, &color,true)));
+					scene->Add(sp);
+				}
+            }
+        }else{
+            QPolygonF polygon;
+            std::vector<Vector> vertices;
+            
+            
+            for(int i=0;i<points.size();i++){
+                polygon << points[i];
+                vertices.push_back(Vector(((float)points.at(i).x())/640, ((float)points.at(i).y())/640));
+            }
+            QPainterPath tmpPath;
+            tmpPath.addPolygon(polygon);
+            //painter->fillPath(tmpPath,QBrush(QColor(shapeColor)));
+            
+            
+            std::shared_ptr<Shape> sp;
+            ConvexPoly * cp=new ConvexPoly(vertices, NULL, 1);
+    		Intersection * ip=new Intersection(NULL, 1);
+			sp=(std::shared_ptr<Shape>) cp;
+			ip->AddElement(sp);
+    		Union * up1=new Union(&color, 1);
+    		sp=(std::shared_ptr<Shape>) ip;
+    		up1->AddElement(sp);
+			scene->Add(up1);
+            
+        }
+    }
+
+    void updateModify(QPointF p){
+        points[points.size()-1] = p;
+    }
+
+    void updateAdd(QPointF p){
+        points.push_back(p);
+    }
+
+    virtual bool valid(){
+        return false;
+    }
+
+};
+Q_DECLARE_METATYPE(SolidPolygon)
+
+class HollowPolygon : public SolidPolygon
+{
+public:
+    HollowPolygon(){
+        shapeName = "HollowPolygon";
+    }
+
+    virtual void draw(QPainter* painter, Scene* scene){
+        QPen p;
+        p.setWidth(lineWidth);
+        p.setColor(shapeColor);
+        painter->setPen(p);
+        
+        
+		int r;
+		int g;
+		int b;
+		int a;
+		shapeColor.getRgb(&r,&g,&b,&a);
+		Color color;
+		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
+		ToYUV(&color);
+        
+        
+        if(!finished){
+            for(int i=0;i<points.size()-1;i++){
+                //painter->drawLine(points[i],points[i+1]);
+                
+                
+				float d = pow(points.at(i).x()-points.at(i+1).x(),2)+pow(points.at(i).y()-points.at(i+1).y(),2);
+				//qDebug() << d << endl;
+				if(d>5){
+					std::shared_ptr<Shape> sp=(std::shared_ptr<Shape>)(new ConvexPoly(LineSegment(Vector(points.at(i).x()/640, points.at(i).y()/640), Vector(points.at(i+1).x()/640, points.at(i+1).y()/640), 0.001*lineWidth, &color,true)));
+					scene->Add(sp);
+				}
+            }
+        }else{
+            QPolygonF polygon;
+            for(int i=0;i<points.size();i++){
+                polygon << points[i];
+            }
+            //painter->drawPolygon(polygon);
+            
+            for(int i=0;i<points.size()-1;i++){
+				std::shared_ptr<Shape> sp=(std::shared_ptr<Shape>)(new ConvexPoly(LineSegment(Vector(points.at(i).x()/640, points.at(i).y()/640), Vector(points.at(i+1).x()/640, points.at(i+1).y()/640), 0.001*lineWidth, &color,true)));
+				scene->Add(sp);
+				if(i==points.size()-2){
+					std::shared_ptr<Shape> sp=(std::shared_ptr<Shape>)(new ConvexPoly(LineSegment(Vector(points.at(0).x()/640, points.at(0).y()/640), Vector(points.at(i+1).x()/640, points.at(i+1).y()/640), 0.001*lineWidth, &color,true)));
+					scene->Add(sp);
+				}
+            }
+		
+            
+        }
+    }
+};
+Q_DECLARE_METATYPE(HollowPolygon)
+
 
 #endif // MYSHAPE_H
-

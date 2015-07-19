@@ -1,4 +1,3 @@
-
 #include "renderarea.h"
 #include "myshape.h"
 
@@ -8,6 +7,37 @@
 #include <QMouseEvent>
 #include <QColor>
 #include <QApplication>
+#include <QDebug>
+
+
+#include <getopt.h>
+#include <errno.h>
+#include <assert.h>
+#include <fcntl.h>
+#include <linux/videodev2.h>
+#include <poll.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include <sys/ioctl.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/time.h>
+#include <time.h>
+#include <iostream>
+#include <fstream>
+#include <inttypes.h>
+#include <ctype.h>
+#include <va/va.h>
+#include <va/va_drmcommon.h>
+#include "va_display.h"
+#include "oclrender.h"
+#include "interface.h"
+#include "pv_helper.h"
+
 
 MyShape* createShapePtr(QString shapeName){
     int id = QMetaType::type(shapeName.toStdString().c_str());
@@ -17,7 +47,7 @@ MyShape* createShapePtr(QString shapeName){
 
 RenderArea::RenderArea(QWidget *parent)
     : QWidget(parent)
-{    
+{
     curIndex = 0;
     setBackgroundRole(QPalette::Base);
     setAutoFillBackground(true);
@@ -25,75 +55,101 @@ RenderArea::RenderArea(QWidget *parent)
     isPressed = false;
 }
 
+void RenderArea::closeEvent(QCloseEvent *e){
+    //qDebug()<<"close renderArea"<< endl;
+}
+
 void RenderArea::paintEvent(QPaintEvent *p){
 
+	Scene scene;
+
     QPainter painter(this);
-    
     for(int i=0;i<curIndex;i++){
         MyShape* pShapePtr = shapesPtr[i];
-        pShapePtr->draw(&painter);
+        pShapePtr->draw(&painter,&scene);
     }
-
-    if(isPressed){
-        shapePtr->draw(&painter);
+    if(shapePtr->initialized()){
+        shapePtr->draw(&painter,&scene);
+    }
+    
+	if(globalMutex.tryLock()){
+		globalScene = scene;
+    	globalMutex.unlock();
     }
     
 }
-    
+
 void RenderArea::mousePressEvent(QMouseEvent *e){
+
+    if(e->button() == Qt::RightButton){
+        return;
+    }
     setCursor(Qt::PointingHandCursor);
     startPnt = e->pos();
     endPnt = e->pos();
+    
     isPressed = true;
+    if(shapePtr->shapeName == "HollowPolygon" || shapePtr->shapeName == "SolidPolygon"){
+        SolidPolygon* pShapePtr = dynamic_cast<SolidPolygon*>(shapePtr);
+        if(!pShapePtr->initialized()){
+            pShapePtr->initialize(startPnt,endPnt);
+        }else{
+            if(pShapePtr->isTooClose(endPnt)){
+                if(pShapePtr->points.size()<=3){
+                    shapePtr->points.clear();
+                    update();
+                    return;
+                }
+                pShapePtr->points.pop_back();
+                pShapePtr->finished = true;
+                addShape();
+            }else{
+                pShapePtr->updateAdd(endPnt);
+            }
+        }
+        update();
+        return;
+    }
 }
 
 
 void RenderArea::mouseMoveEvent(QMouseEvent *e){
-    if(isPressed){
-        switch (shapePtr->shapeType) {
-        case 1:
-        {
-            endPnt = e->pos();
-            myLine* linePtr = new myLine;
-            linePtr->startPnt = startPnt;
-            linePtr->endPnt = endPnt;
-            shapePtr->update(linePtr);
-            update();
-            startPnt = endPnt;
+
+    if(shapePtr->shapeName == "SolidPolygon" || shapePtr->shapeName == "HollowPolygon"){
+        SolidPolygon* pShapePtr = dynamic_cast<SolidPolygon*>(shapePtr);
+        if(!pShapePtr->initialized()){
+            return;
         }
-            break;
-        case 2:
-        {
-            endPnt = e->pos();
-            myLine line;
-            line.startPnt = startPnt;
-            line.endPnt = endPnt;
-            shapePtr->update(line);
-            update();
+        endPnt = e->pos();
+        if(pShapePtr->isTooClose(endPnt)){
+            pShapePtr->updateModify(pShapePtr->points.at(0));
+        }else{
+            pShapePtr->updateModify(endPnt);
         }
-            break;
-        }
+        update();
+        return;
     }
-    
+    if(isPressed){
+        endPnt = e->pos();
+        if(!shapePtr->initialized()){
+            shapePtr->initialize(startPnt,endPnt);
+        }
+        shapePtr->update(endPnt);
+        update();
+    }
 }
 
 void RenderArea::mouseReleaseEvent(QMouseEvent *e){
+
+    if(e->button() == Qt::RightButton){
+        return;
+    }
     setCursor(Qt::ArrowCursor);
     isPressed = false;
-    
-    if(((shapePtr->shapeType==1)&&(shapePtr->linesPtr.size()>0))
-            ||((shapePtr->shapeType==2)&&(startPnt != endPnt))) {
-        shapesPtr.resize(curIndex);
-        shapesPtr.push_back(shapePtr);
-        curIndex++;
-        QString curName = shapePtr->shapeName;
-        int curWidth = shapePtr->lineWidth;
-        QColor curColor = shapePtr->shapeColor;
-        shapePtr = createShapePtr(curName);
-        shapePtr->lineWidth = curWidth;
-        shapePtr->shapeColor = curColor;
+    if(shapePtr->valid()) {
+        addShape();
     }
-    
+
 }
 
 void RenderArea::undo()
@@ -112,3 +168,18 @@ void RenderArea::redo()
     }
 }
 
+void RenderArea::addShape(){
+    for(int i=curIndex;i<shapesPtr.size();i++){
+        delete shapesPtr[i];
+        shapesPtr[i]=NULL;
+    }
+    shapesPtr.resize(curIndex);
+    shapesPtr.push_back(shapePtr);
+    curIndex++;
+    QString curName = shapePtr->shapeName;
+    int curWidth = shapePtr->lineWidth;
+    QColor curColor = shapePtr->shapeColor;
+    shapePtr = createShapePtr(curName);
+    shapePtr->lineWidth = curWidth;
+    shapePtr->shapeColor = curColor;
+}
