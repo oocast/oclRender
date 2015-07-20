@@ -588,7 +588,7 @@ MainLoopPV(Scene & sceneSightMark, Scene & sceneTargetMark)
     struct v4l2_buffer buf;
     int index;
     unsigned int st = 0, nst = 0;
-    char out[]="0.50 0.10\n0.70 0.40\n0.40 0.70\n0.60 0.70\n0.30 0.40\n";
+    char out[]="0.41 0.30 0.59 0.30 0.43 0.57 0.57 0.57\n0.50 0.15 ";
 
     while (frame_count < 1000)
     {
@@ -642,6 +642,7 @@ MainLoopPV(Scene & sceneSightMark, Scene & sceneTargetMark)
         }
         */
         if (frame_count>=100&&frame_count<150) std::cout<<out[frame_count-100]<<std::flush;
+        if (frame_count==250) std::cout<<std::endl;
         MainFunc(sceneSightMark, sceneTargetMark, frame_count);
         ProcessFrame(index, &sceneTargetMark);
         ProcessFrame(index, &sceneSightMark);
