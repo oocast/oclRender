@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include "poly.h"
+#include <algorithm>
 
 inline void ConvexPoly::
 CalculateExtremum()
@@ -12,9 +13,7 @@ CalculateExtremum()
 		Vector v1 = vertices[1] - vertices[0];
 		Vector v2 = vertices[2] - vertices[1];
 		if (v1.x * v2.y - v1.y * v2.x < 0 ) {
-			for (int i = 0; i < vertices.size(); i++)
-				halfPlanes.push_back(HalfPlane(vertices[(-i) % vertices.size()], vertices[(-i-1) % vertices.size()]));
-			return;
+			reverse(vertices.begin(),vertices.end());
 		}
 	}
 	

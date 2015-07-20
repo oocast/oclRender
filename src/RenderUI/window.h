@@ -27,14 +27,12 @@ private slots:
 
 private:
     RenderArea *renderArea;
-    QComboBox *shapeComboBox;
-    QLabel *shapeLabel;
+    QButtonGroup *shapeButtonGroup;
     QSpinBox *penWidthSpinBox;
-    QLabel *penWidthLabel;
     QPushButton *colorButton;
-    QLabel *colorLabel;
     QPushButton *backButton;
     QPushButton *forwardButton;
+    
 
 };
 

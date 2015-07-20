@@ -25,28 +25,32 @@ Window::Window(RenderArea *ra)
 {
     renderArea = ra;
 
-    shapeComboBox = new QComboBox;
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+	shapeButtonGroup = new QButtonGroup;
 
     for(int i=0;i<classNames.size();i++){
-        QString pName = classNames[i];
-        shapeComboBox->addItem(pName);
+    	QRadioButton *qrb = new QRadioButton;
+    	if(i == 0){
+    		qrb -> setChecked(true);
+    	}
+    	QString pName = classNames[i];
+    	qrb->setText(pName);
+    	shapeButtonGroup->addButton(qrb);
+    	shapeButtonGroup->setId(qrb,i);
+    	mainLayout->addWidget(qrb);
+    	connect(qrb, SIGNAL(clicked()),this, SLOT(shapeChanged()));
     }
-    shapeLabel = new QLabel(tr("&Shape:"));
-    shapeLabel->setBuddy(shapeComboBox);
-
+    shapeButtonGroup->setExclusive(true);
+    
 
     penWidthSpinBox = new QSpinBox;
     penWidthSpinBox->setRange(1, 20);
     penWidthSpinBox->setValue(5);
-    penWidthLabel = new QLabel(tr("Pen &Width:"));
-    penWidthLabel->setBuddy(penWidthSpinBox);
 
 
     colorButton = new QPushButton;
     setColor(colorButton,defaultColor);
 
-    colorLabel = new QLabel(tr("&Color:"));
-    colorLabel->setBuddy(colorButton);
 
     backButton = new QPushButton;
     backButton->setText("Undo");
@@ -54,23 +58,16 @@ Window::Window(RenderArea *ra)
     forwardButton = new QPushButton;
     forwardButton->setText("Redo");
 
-    connect(shapeComboBox, SIGNAL(activated(int)),this, SLOT(shapeChanged()));
     connect(penWidthSpinBox, SIGNAL(valueChanged(int)),this, SLOT(penChanged()));
     connect(colorButton, SIGNAL(clicked()),this, SLOT(colorChanged()));
     connect(backButton, SIGNAL(clicked()),this, SLOT(undo()));
     connect(forwardButton, SIGNAL(clicked()),this, SLOT(redo()));
 
-    QGridLayout *mainLayout = new QGridLayout;
 
-    mainLayout->setColumnStretch(3, 3);
-    mainLayout->addWidget(shapeLabel, 2, 0, Qt::AlignRight);
-    mainLayout->addWidget(shapeComboBox, 2, 1);
-    mainLayout->addWidget(penWidthLabel, 3, 0, Qt::AlignRight);
-    mainLayout->addWidget(penWidthSpinBox, 3, 1);
-    mainLayout->addWidget(colorLabel, 4, 0, Qt::AlignRight);
-    mainLayout->addWidget(colorButton,4,1);
-    mainLayout->addWidget(backButton,2,2);
-    mainLayout->addWidget(forwardButton,3,2);
+    mainLayout->addWidget(penWidthSpinBox);
+    mainLayout->addWidget(colorButton);
+    mainLayout->addWidget(backButton);
+    mainLayout->addWidget(forwardButton);
     setLayout(mainLayout);
     shapeChanged();
     penChanged();
@@ -80,7 +77,7 @@ Window::Window(RenderArea *ra)
 
 void Window::shapeChanged()
 {
-    int curIndex = shapeComboBox->currentIndex();
+    int curIndex = shapeButtonGroup->checkedId();
     QString curShape = classNames[curIndex];
     int id = QMetaType::type(curShape.toStdString().c_str());
     MyShape* shapePtr = (MyShape*) QMetaType::create(id);
