@@ -295,7 +295,7 @@ public:
         }else{
             QPolygonF polygon;
             std::vector<Vector> vertices;
-            
+
             
             for(int i=0;i<points.size();i++){
                 polygon << points[i];

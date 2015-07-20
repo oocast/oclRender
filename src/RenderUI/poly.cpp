@@ -7,8 +7,19 @@ CalculateExtremum()
 {
     bound = AABox::FromVectors(&vertices[0], vertices.size());
     halfPlanes.clear();
-    for (size_t i = 0; i < vertices.size(); i++)
-        halfPlanes.push_back(HalfPlane(vertices[i], vertices[(i+1) % vertices.size()]));
+    
+	if(vertices.size() >= 3){
+		Vector v1 = vertices[1] - vertices[0];
+		Vector v2 = vertices[2] - vertices[1];
+		if (v1.x * v2.y - v1.y * v2.x < 0 ) {
+			for (int i = 0; i < vertices.size(); i++)
+				halfPlanes.push_back(HalfPlane(vertices[(-i) % vertices.size()], vertices[(-i-1) % vertices.size()]));
+			return;
+		}
+	}
+	
+	for (size_t i = 0; i < vertices.size(); i++)
+		halfPlanes.push_back(HalfPlane(vertices[i], vertices[(i+1) % vertices.size()]));
 }
 
 ConvexPoly::
@@ -16,6 +27,8 @@ ConvexPoly(const std::vector<Vector> & points, const Color * inputColorPointer,
            bool positive):
 Shape(inputColorPointer, positive), vertices(points)
 {
+
+
     CalculateExtremum();
 }
 

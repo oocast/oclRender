@@ -37,7 +37,7 @@ Window::Window(RenderArea *ra)
 
     penWidthSpinBox = new QSpinBox;
     penWidthSpinBox->setRange(1, 20);
-    penWidthSpinBox->setRange(5, 20);
+    penWidthSpinBox->setValue(5);
     penWidthLabel = new QLabel(tr("Pen &Width:"));
     penWidthLabel->setBuddy(penWidthSpinBox);
 
