@@ -426,9 +426,15 @@ void ProcessFrame(int index, Scene *scene)
 {
     //process importBuf[index] by ocl
     
-    globalMutex.lock();
-    scene->Draw(vo.height, vo.width, index, 6);
-    globalMutex.unlock();
+    
+    if(globalMutex.tryLock()){
+        scene->Draw(vo.height, vo.width, index, 6);
+    	globalMutex.unlock();
+    }else{
+    	printf("skip drawing\n");
+    }
+    
+
 }
 
 void ShowFrame(int index)
@@ -564,7 +570,7 @@ static void MainLoop(Scene* scene)
         std::cout<<"Total running time "<<s<<" s "<<ns<<" ns."<<std::endl;
         std::cout<<"Total running time "<<st<<" s "<<nst<<" ns."<<std::endl;
     }
-    std::cout<<"Total running time "<<st<<" s "<<nst<<" ns."<<std::endl;
+    //std::cout<<"Total running time "<<st<<" s "<<nst<<" ns."<<std::endl;
 }
 
 static void

@@ -27,10 +27,21 @@ public:
     vector<QPointF> points;
     int lineWidth;
     QColor shapeColor;
+    Color color;
 
     MyShape(){
 
     }
+    
+	void setColor(Color *colorPtr){
+        int r;
+		int g;
+		int b;
+		int a;
+		shapeColor.getRgb(&r,&g,&b,&a);
+		InitColor(colorPtr, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, ((float)a)/256.0);
+		ToYUV(colorPtr);
+	}
 
     virtual void draw(QPainter* painter, Scene* scene){
 
@@ -76,15 +87,7 @@ public:
         p.setColor(shapeColor);
         painter->setPen(p);
         
-        int r;
-		int g;
-		int b;
-		int a;
-		shapeColor.getRgb(&r,&g,&b,&a);
-		Color color;
-		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
-		ToYUV(&color);
-        
+        setColor(&color);
         
         for(int i=0;i<points.size()-1;i++){
             //painter->drawLine(points[i],points[i+1]);
@@ -127,14 +130,8 @@ public:
 			return;
 		}
 		
-		int r;
-		int g;
-		int b;
-		int a;
-		shapeColor.getRgb(&r,&g,&b,&a);
-		Color color;
-		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
-		ToYUV(&color);
+		setColor(&color);
+		
 		std::shared_ptr<Shape> sp=(std::shared_ptr<Shape>)(new ConvexPoly(LineSegment(Vector(points.at(0).x()/640, points.at(0).y()/640), Vector(points.at(1).x()/640, points.at(1).y()/640), 0.001*lineWidth, &color,true)));
 		scene->Add(sp);
 		
@@ -159,14 +156,7 @@ public:
         QPointF p2 = getBottomRight(points[0],points[1]);
         //painter->drawRect(QRect(p1.toPoint(),p2.toPoint()));
         
-		int r;
-		int g;
-		int b;
-		int a;
-		shapeColor.getRgb(&r,&g,&b,&a);
-		Color color;
-		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
-		ToYUV(&color);
+		setColor(&color);
 		
 		std::shared_ptr<Shape> sp = Frame(Vector(p1.x()/640, p1.y()/640), Vector(p2.x()/640, p2.y()/640), 0.001*lineWidth, &color);
 		scene->Add(sp);
@@ -195,14 +185,7 @@ public:
         QPointF p2 = getBottomRight(points[0],points[1]);
         //painter->drawEllipse(QRectF(p1,p2));
         
-		int r;
-		int g;
-		int b;
-		int a;
-		shapeColor.getRgb(&r,&g,&b,&a);
-		Color color;
-		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
-		ToYUV(&color);
+		setColor(&color);
 		
 		std::shared_ptr<CSG> sp = Ring(Vector(p1.x()/640, p1.y()/640), Vector(p2.x()/640, p2.y()/640), 0.001*lineWidth, &color);
 		scene->Add(sp);
@@ -224,14 +207,7 @@ public:
         tmpPath.addEllipse(QRectF(p1,p2));
         //painter->fillPath(tmpPath,QBrush(QColor(shapeColor)));
         
-		int r;
-		int g;
-		int b;
-		int a;
-		shapeColor.getRgb(&r,&g,&b,&a);
-		Color color;
-		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
-		ToYUV(&color);
+		setColor(&color);
 		
 		std::shared_ptr<Shape> sp(new Ellipse(Vector(p1.x()/640, p1.y()/640), Vector(p2.x()/640, p2.y()/640), &color));
 		
@@ -257,14 +233,7 @@ public:
         //painter->fillRect(QRect(p1.toPoint(),p2.toPoint()),shapeColor);
         
         
-		int r;
-		int g;
-		int b;
-		int a;
-		shapeColor.getRgb(&r,&g,&b,&a);
-		Color color;
-		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
-		ToYUV(&color);
+		setColor(&color);
 		
 		float d1 = pow(points.at(0).x()-points.at(1).x(),2);
 		float d2 = pow(points.at(0).y()-points.at(1).y(),2);
@@ -296,7 +265,7 @@ public:
 
     bool isTooClose(QPointF &p){
         float dist = pow((points.at(0).x()-p.x()),2)+pow((points.at(0).y()-p.y()),2);
-        if(dist < 30){
+        if(dist < 50){
             return true;
         }
         return false;
@@ -305,14 +274,7 @@ public:
     virtual void draw(QPainter* painter, Scene* scene){
 
 
-		int r;
-		int g;
-		int b;
-		int a;
-		shapeColor.getRgb(&r,&g,&b,&a);
-		Color color;
-		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
-		ToYUV(&color);
+		setColor(&color);
 
         if(!finished){
             QPen p;
@@ -344,15 +306,8 @@ public:
             //painter->fillPath(tmpPath,QBrush(QColor(shapeColor)));
             
             
-            std::shared_ptr<Shape> sp;
-            ConvexPoly * cp=new ConvexPoly(vertices, NULL, 1);
-    		Intersection * ip=new Intersection(NULL, 1);
-			sp=(std::shared_ptr<Shape>) cp;
-			ip->AddElement(sp);
-    		Union * up1=new Union(&color, 1);
-    		sp=(std::shared_ptr<Shape>) ip;
-    		up1->AddElement(sp);
-			scene->Add(up1);
+            std::shared_ptr<Shape> sp(new ConvexPoly(vertices, &color,true));
+			scene->Add(sp);
             
         }
     }
@@ -386,14 +341,7 @@ public:
         painter->setPen(p);
         
         
-		int r;
-		int g;
-		int b;
-		int a;
-		shapeColor.getRgb(&r,&g,&b,&a);
-		Color color;
-		InitColor(&color, ((float)r)/256.0, ((float)g)/256.0, ((float)b)/256.0, 1);
-		ToYUV(&color);
+		setColor(&color);
         
         
         if(!finished){

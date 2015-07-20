@@ -6,7 +6,7 @@ using namespace std;
 Scene globalScene;
 QMutex globalMutex;
 
-vector<QString> classNames = {"FreeBrush","StraightLine","HollowRectangle","SolidRectangle","HollowEllipse","SolidEllipse","SolidPolygon","HollowPolygon"};
+vector<QString> classNames = {"StraightLine","SolidRectangle","HollowRectangle","SolidEllipse","HollowEllipse","SolidPolygon","HollowPolygon","FreeBrush"};
 
 QPointF getTopLeft(QPointF &p1, QPointF &p2){
     float x_min = min(p1.x(),p2.x());

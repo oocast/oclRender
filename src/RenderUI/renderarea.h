@@ -26,6 +26,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *e);
     void closeEvent(QCloseEvent *e);
     void addShape();
+    void forceUpdate();
 
 public slots:
     void undo();

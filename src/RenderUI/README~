@@ -1,4 +1,0 @@
-1. download and install QT: http://www.qt.io/download-open-source/
-2. install wmctrl: sudo apt-get install wmctrl
-3. put "RenderUI" in the same folder where "Qt" locates
-4. make and run

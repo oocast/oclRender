@@ -8,6 +8,7 @@
 #include <QColor>
 #include <QApplication>
 #include <QDebug>
+#include <QThread>
 
 
 #include <getopt.h>
@@ -59,6 +60,24 @@ void RenderArea::closeEvent(QCloseEvent *e){
     //qDebug()<<"close renderArea"<< endl;
 }
 
+class SettingThread : public QThread{
+
+public:
+	Scene scene;
+
+	SettingThread(Scene &scene){
+		this->scene = scene;
+	}
+	
+	virtual void run(){
+		globalMutex.lock();
+		globalScene = scene;
+		globalMutex.unlock();
+	}
+
+};
+
+
 void RenderArea::paintEvent(QPaintEvent *p){
 
 	Scene scene;
@@ -71,12 +90,9 @@ void RenderArea::paintEvent(QPaintEvent *p){
     if(shapePtr->initialized()){
         shapePtr->draw(&painter,&scene);
     }
-    
-	if(globalMutex.tryLock()){
-		globalScene = scene;
-    	globalMutex.unlock();
-    }
-    
+
+	SettingThread *t = new SettingThread(scene);
+	t->start();
 }
 
 void RenderArea::mousePressEvent(QMouseEvent *e){
@@ -148,6 +164,7 @@ void RenderArea::mouseReleaseEvent(QMouseEvent *e){
     isPressed = false;
     if(shapePtr->valid()) {
         addShape();
+        update();
     }
 
 }
