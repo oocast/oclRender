@@ -97,14 +97,29 @@ void RenderArea::paintEvent(QPaintEvent *p){
 
 void RenderArea::mousePressEvent(QMouseEvent *e){
 
-    if(e->button() == Qt::RightButton){
-        return;
-    }
+
     setCursor(Qt::PointingHandCursor);
     startPnt = e->pos();
     endPnt = e->pos();
     
+	if(e->button() == Qt::RightButton){
+    	if(shapePtr->shapeName == "HollowPolygon" || shapePtr->shapeName == "SolidPolygon"){
+    		SolidPolygon* pShapePtr = dynamic_cast<SolidPolygon*>(shapePtr);
+    		pShapePtr->points.clear();
+    		update();
+    	}
+        return;
+    }
+    
     isPressed = true;
+        if(shapePtr->shapeName == "BezierPath"){
+        if(shapePtr->points.size()<=2){
+            shapePtr->points.push_back(startPnt);
+        }else{
+            addShape();
+        }
+        return;
+    }
     if(shapePtr->shapeName == "HollowPolygon" || shapePtr->shapeName == "SolidPolygon"){
         SolidPolygon* pShapePtr = dynamic_cast<SolidPolygon*>(shapePtr);
         if(!pShapePtr->initialized()){
@@ -130,7 +145,20 @@ void RenderArea::mousePressEvent(QMouseEvent *e){
 
 
 void RenderArea::mouseMoveEvent(QMouseEvent *e){
-
+    if(shapePtr->shapeName == "BezierPath"){
+        if(!shapePtr->initialized()){
+            return;
+        }
+        endPnt = e->pos();
+        if(shapePtr->points.size()==1){
+            shapePtr->points.push_back(endPnt);
+        }else{ if(shapePtr->points.size()==2){}
+            shapePtr->points.pop_back();
+            shapePtr->points.push_back(endPnt);
+        }
+        update();
+        return;
+    }
     if(shapePtr->shapeName == "SolidPolygon" || shapePtr->shapeName == "HollowPolygon"){
         SolidPolygon* pShapePtr = dynamic_cast<SolidPolygon*>(shapePtr);
         if(!pShapePtr->initialized()){

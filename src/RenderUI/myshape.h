@@ -378,5 +378,62 @@ public:
 };
 Q_DECLARE_METATYPE(HollowPolygon)
 
+class BezierPath : public SolidPolygon
+{
+public:
+    BezierPath(){
+        shapeName = "BezierPath";
+    }
+    
+    virtual void draw(QPainter* painter, Scene* scene){
+        
+        if(points.size()<=1){
+            return;
+        }
+        QPen p;
+        p.setWidth(lineWidth);
+        p.setColor(shapeColor);
+        painter->setPen(p);
+        
+        
+        setColor(&color);
+        
+        if(points.size()==2){
+            //painter->drawLine(points[0],points[1]);
+            
+            
+            float d = pow(points.at(0).x()-points.at(1).x(),2)+pow(points.at(0).y()-points.at(1).y(),2);
+
+			if(d>5){
+				std::shared_ptr<Shape> sp=(std::shared_ptr<Shape>)(new ConvexPoly(LineSegment(Vector(points.at(0).x()/640, points.at(0).y()/640), Vector(points.at(1).x()/640, points.at(1).y()/640), 0.001*lineWidth, &color,true)));
+				scene->Add(sp);
+			}
+			
+			
+			
+            return;
+        }
+        /*
+        QPainterPath path(points[0]);
+        path.cubicTo(points[0],points[1],points[2]);
+        painter->drawPath(path);
+        */
+        
+        std::shared_ptr<CSG> sp = BezierCurve(Vector(points.at(0).x()/640, points.at(0).y()/640), Vector(points.at(1).x()/640, points.at(1).y()/640),Vector(points.at(2).x()/640, points.at(2).y()/640), 0.001*lineWidth);
+        
+		scene->Add(sp);
+		
+		
+    }
+    
+    virtual bool valid(){
+        return false;
+    }
+    
+
+};
+Q_DECLARE_METATYPE(BezierPath)
+
+
 
 #endif // MYSHAPE_H

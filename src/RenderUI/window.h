@@ -5,9 +5,8 @@
 #include "myshape.h"
 #include <QWidget>
 #include <QPushButton>
-#include <QComboBox>
 #include <QSpinBox>
-#include <QLabel>
+#include <QColorDialog>
 
 class Window : public QWidget
 {
@@ -29,9 +28,9 @@ private:
     RenderArea *renderArea;
     QButtonGroup *shapeButtonGroup;
     QSpinBox *penWidthSpinBox;
-    QPushButton *colorButton;
     QPushButton *backButton;
     QPushButton *forwardButton;
+    QColorDialog *colorDialog;
     
 
 };

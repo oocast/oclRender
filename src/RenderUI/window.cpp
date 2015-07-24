@@ -26,6 +26,13 @@ Window::Window(RenderArea *ra)
     renderArea = ra;
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
+    
+    colorDialog = new QColorDialog();
+    colorDialog->setWindowFlags(Qt::Widget);
+    colorDialog->setOptions(QColorDialog::NoButtons);//|QColorDialog::ShowAlphaChannel);
+    colorDialog->setCurrentColor(defaultColor);
+    
+    
 	shapeButtonGroup = new QButtonGroup;
 
     for(int i=0;i<classNames.size();i++){
@@ -34,7 +41,16 @@ Window::Window(RenderArea *ra)
     		qrb -> setChecked(true);
     	}
     	QString pName = classNames[i];
-    	qrb->setText(pName);
+    	
+		QString curSS="";
+        curSS.append("QRadioButton::indicator::checked { image: url(./image/");
+        curSS.append(pName);
+        curSS.append("_checked.png);}QRadioButton::indicator::unchecked {image: url(./image/");
+        curSS.append(pName);
+        curSS.append("_unchecked.png);}");
+        qrb->setStyleSheet(curSS);
+        
+    	
     	shapeButtonGroup->addButton(qrb);
     	shapeButtonGroup->setId(qrb,i);
     	mainLayout->addWidget(qrb);
@@ -48,9 +64,6 @@ Window::Window(RenderArea *ra)
     penWidthSpinBox->setValue(5);
 
 
-    colorButton = new QPushButton;
-    setColor(colorButton,defaultColor);
-
 
     backButton = new QPushButton;
     backButton->setText("Undo");
@@ -59,15 +72,15 @@ Window::Window(RenderArea *ra)
     forwardButton->setText("Redo");
 
     connect(penWidthSpinBox, SIGNAL(valueChanged(int)),this, SLOT(penChanged()));
-    connect(colorButton, SIGNAL(clicked()),this, SLOT(colorChanged()));
+    connect(colorDialog, SIGNAL(currentColorChanged(QColor)),this, SLOT(colorChanged()));
     connect(backButton, SIGNAL(clicked()),this, SLOT(undo()));
     connect(forwardButton, SIGNAL(clicked()),this, SLOT(redo()));
 
 
     mainLayout->addWidget(penWidthSpinBox);
-    mainLayout->addWidget(colorButton);
     mainLayout->addWidget(backButton);
     mainLayout->addWidget(forwardButton);
+    mainLayout->addWidget(colorDialog);
     setLayout(mainLayout);
     shapeChanged();
     penChanged();
@@ -98,11 +111,9 @@ void Window::penChanged()
 
 void Window::colorChanged()
 {
-    QColor pColor = renderArea->shapePtr->shapeColor;
-    QColor color = QColorDialog::getColor(pColor, this);
+    QColor color = colorDialog->currentColor();
     if(color.isValid()){
         renderArea->shapePtr->shapeColor = color;
-        setColor(colorButton,color);
     }
 
 }
