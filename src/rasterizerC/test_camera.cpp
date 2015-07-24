@@ -42,10 +42,10 @@ TestCameraRender()
     std::vector<Vector> vv1, vv2;
     std::shared_ptr<Shape> sp;
 
-    vv1.push_back(Vector(0, 0.02));
-    vv1.push_back(Vector(-0.02, 0));
-    vv1.push_back(Vector(0, -0.02));
-    vv1.push_back(Vector(0.02, 0));
+    vv1.push_back(Vector(0, 0.05));
+    vv1.push_back(Vector(-0.05, 0));
+    vv1.push_back(Vector(0, -0.05));
+    vv1.push_back(Vector(0.05, 0));
     vv2.push_back(Vector(0.3, 0.3));
     vv2.push_back(Vector(0.7, 0.3));
     vv2.push_back(Vector(0.3, 0.7));
@@ -62,9 +62,9 @@ TestCameraRender()
 
     sp=(std::shared_ptr<Shape>) ip;
     up1->AddElement(sp);
-    for (int i = 0; i < 5; i++)
-        for (int j = 0; j < 5; j++)
-            scene.Add(up1->TransformPointer(Rotate(PI/2/25*(i*5+j)))->TransformPointer(Translate(0.05 + i * 0.2, 0.05 + j * 0.2)));
+    for (int i = 0; i < 10; i++)
+        for (int j = 0; j < 10; j++)
+            scene.Add(up1->TransformPointer(Rotate(PI/2/25*(i*5+j)))->TransformPointer(Translate(0.05 + i * 0.1, 0.05 + j * 0.1)));
 
     sp=(std::shared_ptr<Shape>)BezierCurve(vv2, 0.02);
 

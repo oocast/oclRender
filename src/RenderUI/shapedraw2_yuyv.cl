@@ -49,7 +49,7 @@ __kernel void ShapeDraw(__global uchar4 * image,
                         uchar Y,
                         uchar U,
                         uchar V,
-//                        float a,
+                        float a,
                         int ib,
                         int jb,
                         __local int2 * strucLocal,
@@ -87,8 +87,8 @@ __kernel void ShapeDraw(__global uchar4 * image,
         count1+=result/2;
         count2+=result%2;
     }
-    count1=count1/36.0f;
-    count2=count2/36.0f;
+    count1=count1*a/36.0f;
+    count2=count2*a/36.0f;
 
     int it=(i*w/2+j);
     uchar4 pix=image[it];

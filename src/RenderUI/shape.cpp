@@ -316,13 +316,13 @@ Draw(unsigned int height, unsigned int width, int index, int superSampling)
     err = clSetKernelArg(kernel, 6, sizeof(unsigned char), (void *) &Y);
     err = clSetKernelArg(kernel, 7, sizeof(unsigned char), (void *) &U);
     err = clSetKernelArg(kernel, 8, sizeof(unsigned char), (void *) &V);
-    //err=clSetKernelArg(kernel, 10, sizeof(float), (void *) &shapeColor.a);
-    err = clSetKernelArg(kernel, 9, sizeof(int), (void *) &ib);
-    err = clSetKernelArg(kernel, 10, sizeof(int), (void *) &jb);
-    err = clSetKernelArg(kernel, 11, iv.size()*sizeof(int), NULL);
-    err = clSetKernelArg(kernel, 12, fv.size()*sizeof(float), NULL);
-    err = clSetKernelArg(kernel, 13, sizeof(int), (void *) &strucSize);
-    err = clSetKernelArg(kernel, 14, sizeof(int), (void *) &paraSize);
+    err = clSetKernelArg(kernel, 9, sizeof(float), (void *) &shapeColor.a);
+    err = clSetKernelArg(kernel, 10, sizeof(int), (void *) &ib);
+    err = clSetKernelArg(kernel, 11, sizeof(int), (void *) &jb);
+    err = clSetKernelArg(kernel, 12, iv.size()*sizeof(int), NULL);
+    err = clSetKernelArg(kernel, 13, fv.size()*sizeof(float), NULL);
+    err = clSetKernelArg(kernel, 14, sizeof(int), (void *) &strucSize);
+    err = clSetKernelArg(kernel, 15, sizeof(int), (void *) &paraSize);
 
     size_t globals[2];
     size_t locals[2];
