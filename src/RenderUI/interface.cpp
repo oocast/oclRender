@@ -271,7 +271,7 @@ std::shared_ptr<CSG> ParabolaRing(const float a, const float b, const float c, c
     //float xc=alpha*cosTheta+beta*sinTheta;
     //float yc=alpha*sinTheta-beta*cosTheta;
     //float F=f+2*delta*fabs(p)*(a+b);
-    float F=f+delta*P;
+    float F=f+delta*fabs(P);
 
     Ellipse * ep2=new Ellipse(a, b, c, d, e, F, NULL, 0);
 

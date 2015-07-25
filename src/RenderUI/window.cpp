@@ -29,7 +29,7 @@ Window::Window(RenderArea *ra)
     
     colorDialog = new QColorDialog();
     colorDialog->setWindowFlags(Qt::Widget);
-    colorDialog->setOptions(QColorDialog::NoButtons);//|QColorDialog::ShowAlphaChannel);
+    colorDialog->setOptions(QColorDialog::NoButtons|QColorDialog::ShowAlphaChannel);
     colorDialog->setCurrentColor(defaultColor);
     
     

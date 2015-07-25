@@ -378,7 +378,7 @@ public:
 };
 Q_DECLARE_METATYPE(HollowPolygon)
 
-class BezierPath : public SolidPolygon
+class BezierPath : public MyShape
 {
 public:
     BezierPath(){
@@ -420,8 +420,9 @@ public:
         */
         
         std::shared_ptr<CSG> sp = BezierCurve(Vector(points.at(0).x()/640, points.at(0).y()/640), Vector(points.at(1).x()/640, points.at(1).y()/640),Vector(points.at(2).x()/640, points.at(2).y()/640), 0.001*lineWidth);
-        
-		scene->Add(sp);
+        Union *up = new Union(&color,1);
+        up->AddElement(sp);
+		scene->Add(up);
 		
 		
     }

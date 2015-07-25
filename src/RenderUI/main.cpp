@@ -765,11 +765,10 @@ int main(int argc, char *argv[])
     CameraThread *t = new CameraThread;
     t->start();
     
-/*
 
+/*
     QProcess *proc;
     proc = new QProcess();
-    //proc->execute("xdg-open ../RenderUI/testopen");
     QThread::sleep(3);
     proc->execute("wmctrl -r testopen -e 1,400,100,500,400");
 */
