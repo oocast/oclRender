@@ -255,10 +255,12 @@ std::shared_ptr<CSG> ParabolaRing(const float a, const float b, const float c, c
     std::shared_ptr<Shape> sp;
     std::shared_ptr<CSG> res;
 
+    Intersection * ip=new Intersection(NULL, 1);
+    res=(std::shared_ptr<CSG>) ip;
+    if (a+b==0) return res;
+
     Ellipse * ep1=new Ellipse(a, b, c, d, e, f, NULL, 1);
     
-    Intersection * ip=new Intersection(NULL, 1);
-
     sp=(std::shared_ptr<Shape>) ep1;
     ip->AddElement(sp);
 
@@ -278,6 +280,5 @@ std::shared_ptr<CSG> ParabolaRing(const float a, const float b, const float c, c
     sp=(std::shared_ptr<Shape>) ep2;
     ip->AddElement(sp);    
 
-    res=(std::shared_ptr<CSG>) ip;
     return res;
 }
