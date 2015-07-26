@@ -152,9 +152,11 @@ void RenderArea::mouseMoveEvent(QMouseEvent *e){
         endPnt = e->pos();
         if(shapePtr->points.size()==1){
             shapePtr->points.push_back(endPnt);
-        }else{ if(shapePtr->points.size()==2){}
+        }else if(shapePtr->points.size()==2){
             shapePtr->points.pop_back();
             shapePtr->points.push_back(endPnt);
+        }else{
+            shapePtr->points.at(1)=endPnt;
         }
         update();
         return;
